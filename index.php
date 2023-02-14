@@ -1,5 +1,1 @@
-<?php 
-
-echo "start from here...";
-
-?>
+<?php echo "hello php"; ?>
