@@ -18,7 +18,7 @@
                   <form class="row g-3 needs-validation" novalidate>
 
                   <div class="col-12">
-                        <label for="yourCurrentPassword" class="form-label">New password</label>
+                        <label for="yourCurrentPassword" class="form-label">Current password</label>
                         <div class="input-group has-validation">
                             <input class="form-control current_password" type="password" name="current_password" id="yourNewPassword" value="secret!" required>
                             <span class="input-group-text">
