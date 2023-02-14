@@ -19,17 +19,23 @@
                   <form class="row g-3 needs-validation" novalidate>
 
                     <div class="col-12">
-                      <label for="yourUsername" class="form-label">Student/Faculty No.</label>
+                      <label for="yourUsername" class="form-label">Email address</label>
                       <div class="input-group has-validation">
-                        <input type="text" name="username" class="form-control" id="yourUsername" required>
-                        <div class="invalid-feedback">Please enter your username.</div>
+                        <input type="email" name="username" class="form-control" id="yourUsername" required>
+                        <span class="input-group-text">
+                                <i class="ri-account-circle-fill" id="toggleCurrentPassword" style="cursor: pointer"></i>
+                            </span>
                       </div>
                     </div>
 
                     <div class="col-12">
-                      <label for="yourPassword" class="form-label">Password</label>
-                      <input type="password" name="password" class="form-control" id="yourPassword" required>
-                      <div class="invalid-feedback">Please enter your password!</div>
+                        <label for="yourConfirmPassword" class="form-label">Password</label>
+                        <div class="input-group has-validation">
+                            <input class="form-control confirm_password" type="password" name="confirm_password" id="yourConfirmPassword" value="secret!" required>
+                            <span class="input-group-text">
+                                <i class="bi bi-eye-slash-fill" id="toggleConfirmPassword" style="cursor: pointer"></i>
+                            </span>
+                        </div>
                     </div>
 
                     <div class="col-12">
@@ -39,7 +45,7 @@
                     </div>
 
                     <div class="col-12">
-                      <button class="btn btn-secondary w-100" type="submit">Login</button>
+                      <button class="btn btn-primary w-100" type="submit">Login</button>
                     </div>
                   </form>
                 </div>

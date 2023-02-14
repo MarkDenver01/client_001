@@ -48,7 +48,7 @@
                     </div>
 
                     <div class="col-6">
-                        <button class="btn btn-secondary w-100" type="submit">Change Password</button>
+                        <button class="btn btn-primary w-100" type="submit">Change Password</button>
                     </div>
                     <div class="col-6">
                         <button class="btn btn-danger w-100" type="submit">Back</button>
