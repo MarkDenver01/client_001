@@ -1,12 +1,5 @@
-IndexIgnore * # prevent directory listing
-
-Order deny,allow
-Allow from *
-
-# ------------------------------------------
-# Rewrite so that php extentions are not shown
-RewriteEngine on
-
+Options +MultiViews
+RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME}\.php -f
-RewriteRule ^(.*)$ $1.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
