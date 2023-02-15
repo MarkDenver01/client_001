@@ -1,5 +1,7 @@
 Options +MultiViews
 RewriteEngine On
+ErrorDocument 404 http://localhost/client_001/not_found
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
