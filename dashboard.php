@@ -1,274 +1,274 @@
 <?php include('./header.php'); ?>
-  <!-- ======= Header ======= -->
-  <header id="header" class="header fixed-top d-flex align-items-center">
+<!-- ======= Header ======= -->
+<header id="header" class="header fixed-top d-flex align-items-center">
 
-    <div class="d-flex align-items-center justify-content-between">
-      <a href="#" class="logo d-flex align-items-center">
+  <div class="d-flex align-items-center justify-content-between">
+    <a href="#" class="logo d-flex align-items-center">
       <lottie-player src="./assets/json/book.json" background="transparent"  speed="1"  style="width: 60px; height: 60px;" loop autoplay></lottie-player>
-        <span class="d-none d-lg-block">CESLICAM Portal</span>
-      </a>
-      <i class="bi bi-list toggle-sidebar-btn"></i>
-    </div><!-- End Logo -->
+      <span class="d-none d-lg-block">CESLICAM Portal</span>
+    </a>
+    <i class="bi bi-list toggle-sidebar-btn"></i>
+  </div><!-- End Logo -->
 
 
 
-    <nav class="header-nav ms-auto">
-      <ul class="d-flex align-items-center">
+  <nav class="header-nav ms-auto">
+    <ul class="d-flex align-items-center">
 
-        <li class="nav-item d-block d-lg-none">
-          <a class="nav-link nav-icon search-bar-toggle " href="#">
-            <i class="bi bi-search"></i>
-          </a>
-        </li><!-- End Search Icon-->
+      <li class="nav-item d-block d-lg-none">
+        <a class="nav-link nav-icon search-bar-toggle " href="#">
+          <i class="bi bi-search"></i>
+        </a>
+      </li><!-- End Search Icon-->
 
-        <li class="nav-item dropdown">
+      <li class="nav-item dropdown">
 
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <i class="bi bi-bell"></i>
-            <span class="badge bg-primary badge-number">4</span>
-          </a><!-- End Notification Icon -->
+        <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+          <i class="bi bi-bell"></i>
+          <span class="badge bg-primary badge-number">4</span>
+        </a><!-- End Notification Icon -->
 
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
-            <li class="dropdown-header">
-              You have 4 new notifications
-              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+          <li class="dropdown-header">
+            You have 4 new notifications
+            <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+          </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
 
-            <li class="notification-item">
-              <i class="bi bi-exclamation-circle text-warning"></i>
+          <li class="notification-item">
+            <i class="bi bi-exclamation-circle text-warning"></i>
+            <div>
+              <h4>Lorem Ipsum</h4>
+              <p>Quae dolorem earum veritatis oditseno</p>
+              <p>30 min. ago</p>
+            </div>
+          </li>
+
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+
+          <li class="notification-item">
+            <i class="bi bi-x-circle text-danger"></i>
+            <div>
+              <h4>Atque rerum nesciunt</h4>
+              <p>Quae dolorem earum veritatis oditseno</p>
+              <p>1 hr. ago</p>
+            </div>
+          </li>
+
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+
+          <li class="notification-item">
+            <i class="bi bi-check-circle text-success"></i>
+            <div>
+              <h4>Sit rerum fuga</h4>
+              <p>Quae dolorem earum veritatis oditseno</p>
+              <p>2 hrs. ago</p>
+            </div>
+          </li>
+
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+
+          <li class="notification-item">
+            <i class="bi bi-info-circle text-primary"></i>
+            <div>
+              <h4>Dicta reprehenderit</h4>
+              <p>Quae dolorem earum veritatis oditseno</p>
+              <p>4 hrs. ago</p>
+            </div>
+          </li>
+
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li class="dropdown-footer">
+            <a href="#">Show all notifications</a>
+          </li>
+
+        </ul><!-- End Notification Dropdown Items -->
+
+      </li><!-- End Notification Nav -->
+
+      <li class="nav-item dropdown">
+
+        <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+          <i class="bi bi-chat-left-text"></i>
+          <span class="badge bg-success badge-number">3</span>
+        </a><!-- End Messages Icon -->
+
+        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
+          <li class="dropdown-header">
+            You have 3 new messages
+            <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+          </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+
+          <li class="message-item">
+            <a href="#">
+              <img src="assets/img/user.png" alt="" class="rounded-circle">
               <div>
-                <h4>Lorem Ipsum</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>30 min. ago</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-x-circle text-danger"></i>
-              <div>
-                <h4>Atque rerum nesciunt</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>1 hr. ago</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-check-circle text-success"></i>
-              <div>
-                <h4>Sit rerum fuga</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
-                <p>2 hrs. ago</p>
-              </div>
-            </li>
-
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-
-            <li class="notification-item">
-              <i class="bi bi-info-circle text-primary"></i>
-              <div>
-                <h4>Dicta reprehenderit</h4>
-                <p>Quae dolorem earum veritatis oditseno</p>
+                <h4>Maria</h4>
+                <p>Not yet available...</p>
                 <p>4 hrs. ago</p>
               </div>
-            </li>
+            </a>
+          </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
 
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li class="dropdown-footer">
-              <a href="#">Show all notifications</a>
-            </li>
+          <li class="message-item">
+            <a href="#">
+              <img src="assets/img/user.png" alt="" class="rounded-circle">
+              <div>
+                <h4>Anna</h4>
+                <p>Not yet available...</p>
+                <p>6 hrs. ago</p>
+              </div>
+            </a>
+          </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
 
-          </ul><!-- End Notification Dropdown Items -->
+          <li class="message-item">
+            <a href="#">
+              <img src="assets/img/user.png" alt="" class="rounded-circle">
+              <div>
+                <h4>David</h4>
+                <p>Not yet available...</p>
+                <p>8 hrs. ago</p>
+              </div>
+            </a>
+          </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
 
-        </li><!-- End Notification Nav -->
+          <li class="dropdown-footer">
+            <a href="#">Show all messages</a>
+          </li>
 
-        <li class="nav-item dropdown">
+        </ul><!-- End Messages Dropdown Items -->
 
-          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-            <i class="bi bi-chat-left-text"></i>
-            <span class="badge bg-success badge-number">3</span>
-          </a><!-- End Messages Icon -->
+      </li><!-- End Messages Nav -->
 
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-            <li class="dropdown-header">
-              You have 3 new messages
-              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+      <li class="nav-item dropdown pe-3">
 
-            <li class="message-item">
-              <a href="#">
-                <img src="assets/img/user.png" alt="" class="rounded-circle">
-                <div>
-                  <h4>Maria</h4>
-                  <p>Not yet available...</p>
-                  <p>4 hrs. ago</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+        <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+          <img src="assets/img/profile.png" alt="Profile" class="rounded-circle">
+          <span class="d-none d-md-block dropdown-toggle ps-2">Mica</span>
+        </a><!-- End Profile Iamge Icon -->
 
-            <li class="message-item">
-              <a href="#">
-                <img src="assets/img/user.png" alt="" class="rounded-circle">
-                <div>
-                  <h4>Anna</h4>
-                  <p>Not yet available...</p>
-                  <p>6 hrs. ago</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+          <li class="dropdown-header">
+            <h6>Mica Unigo</h6>
+            <span>Web Designer</span>
+          </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
 
-            <li class="message-item">
-              <a href="#">
-                <img src="assets/img/user.png" alt="" class="rounded-circle">
-                <div>
-                  <h4>David</h4>
-                  <p>Not yet available...</p>
-                  <p>8 hrs. ago</p>
-                </div>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+          <li>
+            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+              <i class="bi bi-person"></i>
+              <span>My Profile</span>
+            </a>
+          </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
 
-            <li class="dropdown-footer">
-              <a href="#">Show all messages</a>
-            </li>
+          <li>
+            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+              <i class="bi bi-gear"></i>
+              <span>Account Settings</span>
+            </a>
+          </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
 
-          </ul><!-- End Messages Dropdown Items -->
+          <li>
+            <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
+              <i class="bi bi-question-circle"></i>
+              <span>Need Help?</span>
+            </a>
+          </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
 
-        </li><!-- End Messages Nav -->
+          <li>
+            <a class="dropdown-item d-flex align-items-center" href="#">
+              <i class="bi bi-box-arrow-right"></i>
+              <span>Sign Out</span>
+            </a>
+          </li>
 
-        <li class="nav-item dropdown pe-3">
+        </ul><!-- End Profile Dropdown Items -->
+      </li><!-- End Profile Nav -->
 
-          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="assets/img/profile.png" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">Mica</span>
-          </a><!-- End Profile Iamge Icon -->
+    </ul>
+  </nav><!-- End Icons Navigation -->
 
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-            <li class="dropdown-header">
-              <h6>Mica Unigo</h6>
-              <span>Web Designer</span>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+</header><!-- End Header -->
 
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                <i class="bi bi-person"></i>
-                <span>My Profile</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
 
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                <i class="bi bi-gear"></i>
-                <span>Account Settings</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+  <ul class="sidebar-nav" id="sidebar-nav">
 
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
-                <i class="bi bi-question-circle"></i>
-                <span>Need Help?</span>
-              </a>
-            </li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
+    <li class="nav-item">
+      <a class="nav-link " href="index.html">
+        <i class="bi bi-grid"></i>
+        <span>Dashboard</span>
+      </a>
+    </li><!-- End Dashboard Nav -->
 
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
-                <i class="bi bi-box-arrow-right"></i>
-                <span>Sign Out</span>
-              </a>
-            </li>
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="index.html">
+        <i class="bi bi-person"></i>
+        <span>Profiling</span>
+      </a>
+    </li><!-- End Dashboard Nav -->
 
-          </ul><!-- End Profile Dropdown Items -->
-        </li><!-- End Profile Nav -->
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="index.html">
+        <i class="ri-service-fill"></i>
+        <span>Counseling Services</span>
+      </a>
+    </li><!-- End Dashboard Nav -->
 
-      </ul>
-    </nav><!-- End Icons Navigation -->
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="index.html">
+        <i class="bi bi-people"></i>
+        <span>Visit Logs</span>
+      </a>
+    </li><!-- End Dashboard Nav -->
 
-  </header><!-- End Header -->
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="index.html">
+        <i class="ri-folder-2-fill"></i>
+        <span>Files and Documents</span>
+      </a>
+    </li><!-- End Dashboard Nav -->
 
-  <!-- ======= Sidebar ======= -->
-  <aside id="sidebar" class="sidebar">
-
-    <ul class="sidebar-nav" id="sidebar-nav">
-
-      <li class="nav-item">
-        <a class="nav-link " href="index.html">
-          <i class="bi bi-grid"></i>
-          <span>Dashboard</span>
-        </a>
-      </li><!-- End Dashboard Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="index.html">
-          <i class="bi bi-person"></i>
-          <span>Profiling</span>
-        </a>
-      </li><!-- End Dashboard Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="index.html">
-          <i class="ri-service-fill"></i>
-          <span>Counseling Services</span>
-        </a>
-      </li><!-- End Dashboard Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="index.html">
-          <i class="bi bi-people"></i>
-          <span>Visit Logs</span>
-        </a>
-      </li><!-- End Dashboard Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="index.html">
-          <i class="ri-folder-2-fill"></i>
-          <span>Files and Documents</span>
-        </a>
-      </li><!-- End Dashboard Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="index.html">
-          <i class="ri-book-2-fill"></i>
-          <span>Reports</span>
-        </a>
-      </li><!-- End Dashboard Nav -->
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="index.html">
+        <i class="ri-book-2-fill"></i>
+        <span>Reports</span>
+      </a>
+    </li><!-- End Dashboard Nav -->
 
   </aside><!-- End Sidebar-->
 
@@ -401,79 +401,79 @@
             <!-- Number of visits Card -->
             <div class="col-xxl-6 col-md-6">
 
-<div class="card info-card customers-card">
+              <div class="card info-card customers-card">
 
-  <div class="filter">
-    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-      <li class="dropdown-header text-start">
-        <h6>Filter</h6>
-      </li>
+                <div class="filter">
+                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                    <li class="dropdown-header text-start">
+                      <h6>Filter</h6>
+                    </li>
 
-      <li><a class="dropdown-item" href="#">Today</a></li>
-      <li><a class="dropdown-item" href="#">This Month</a></li>
-      <li><a class="dropdown-item" href="#">This Year</a></li>
-    </ul>
-  </div>
+                    <li><a class="dropdown-item" href="#">Today</a></li>
+                    <li><a class="dropdown-item" href="#">This Month</a></li>
+                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                  </ul>
+                </div>
 
-  <div class="card-body">
-    <h5 class="card-title">Number <span>| of Visits</span></h5>
+                <div class="card-body">
+                  <h5 class="card-title">Number <span>| of Visits</span></h5>
 
-    <div class="d-flex align-items-center">
-      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-        <i class="bi bi-people"></i>
-      </div>
-      <div class="ps-3">
-        <h6>144</h6>
-        <span class="text-danger small pt-1 fw-bold">5%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="bi bi-people"></i>
+                    </div>
+                    <div class="ps-3">
+                      <h6>144</h6>
+                      <span class="text-danger small pt-1 fw-bold">5%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
 
-      </div>
-    </div>
+                    </div>
+                  </div>
 
-  </div>
-</div>
+                </div>
+              </div>
 
-</div><!-- End number of visits Card -->
+            </div><!-- End number of visits Card -->
 
             <!-- Number of visits Card -->
             <div class="col-xxl-6 col-md-6">
 
-<div class="card info-card customers-card">
+              <div class="card info-card customers-card">
 
-  <div class="filter">
-    <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-      <li class="dropdown-header text-start">
-        <h6>Filter</h6>
-      </li>
+                <div class="filter">
+                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                    <li class="dropdown-header text-start">
+                      <h6>Filter</h6>
+                    </li>
 
-      <li><a class="dropdown-item" href="#">Today</a></li>
-      <li><a class="dropdown-item" href="#">This Month</a></li>
-      <li><a class="dropdown-item" href="#">This Year</a></li>
-    </ul>
-  </div>
+                    <li><a class="dropdown-item" href="#">Today</a></li>
+                    <li><a class="dropdown-item" href="#">This Month</a></li>
+                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                  </ul>
+                </div>
 
-  <div class="card-body">
-    <h5 class="card-title">Signed <span>| clearance</span></h5>
+                <div class="card-body">
+                  <h5 class="card-title">Signed <span>| clearance</span></h5>
 
-    <div class="d-flex align-items-center">
-      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-        <i class="ri-health-book-fill"></i>
-      </div>
-      <div class="ps-3">
-        <h6>44</h6>
-        <span class="text-danger small pt-1 fw-bold">5%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="ri-health-book-fill"></i>
+                    </div>
+                    <div class="ps-3">
+                      <h6>44</h6>
+                      <span class="text-danger small pt-1 fw-bold">5%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
 
-      </div>
-    </div>
+                    </div>
+                  </div>
 
-  </div>
-</div>
+                </div>
+              </div>
 
-</div><!-- End number of visits Card -->
+            </div><!-- End number of visits Card -->
 
-<!-- Reports -->
-<div class="col-12">
+            <!-- Reports -->
+            <div class="col-12">
               <div class="card">
 
                 <div class="filter">

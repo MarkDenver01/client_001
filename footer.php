@@ -16,17 +16,17 @@
     $(document).ready(function() {
       // new
       $("#togglePassword").click(function (e) {
-      e.preventDefault();
-      var newPassword = $(this).parent().parent().find(".new_password").attr("type");
-      if(newPassword == "password"){
-        $(this).removeClass("bi-eye-slash-fill");
-        $(this).addClass("bi-eye-fill");
-        $(this).parent().parent().find(".new_password").attr("type","text");
-      }else if(newPassword == "text"){
-        $(this).removeClass("bi-eye-fill");
-        $(this).addClass("bi-eye-slash-fill");
-        $(this).parent().parent().find(".new_password").attr("type","password");
-      }});
+        e.preventDefault();
+        var newPassword = $(this).parent().parent().find(".new_password").attr("type");
+        if(newPassword == "password"){
+          $(this).removeClass("bi-eye-slash-fill");
+          $(this).addClass("bi-eye-fill");
+          $(this).parent().parent().find(".new_password").attr("type","text");
+        }else if(newPassword == "text"){
+          $(this).removeClass("bi-eye-fill");
+          $(this).addClass("bi-eye-slash-fill");
+          $(this).parent().parent().find(".new_password").attr("type","password");
+        }});
 
       // confirm
       $("#toggleConfirmPassword").click(function (e) {
@@ -43,7 +43,7 @@
         }});
 
         // current
-        $("#toggleCurrentPassword").click(function (e) {
+      $("#toggleCurrentPassword").click(function (e) {
         e.preventDefault();
         var currentPassword = $(this).parent().parent().find(".current_password").attr("type");
         if(currentPassword == "password") {
