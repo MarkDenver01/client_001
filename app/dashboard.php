@@ -1,4 +1,4 @@
-<?php include('./header.php'); ?>
+<?php include('../header.php'); ?>
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
 
@@ -245,7 +245,7 @@
     <li class="nav-item">
       <a class="nav-link collapsed" href="index.html">
         <i class="ri-service-fill"></i>
-        <span>Counseling Services</span>
+        <span>Test Services</span>
       </a>
     </li><!-- End Dashboard Nav -->
 
@@ -632,4 +632,4 @@
     </section>
 
   </main>
-  <?php include('./footer.php'); ?>
+  <?php include('../footer.php'); ?>

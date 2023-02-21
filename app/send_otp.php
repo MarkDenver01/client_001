@@ -1,4 +1,4 @@
-<?php include('./header.php'); ?>
+<?php include('../header.php'); ?>
 <main style="background-image:url('./images/background_3.jpg');">
   <div class="container">
 
@@ -52,4 +52,4 @@
   </div>
 </main><!-- End #main -->
 
-<?php include('./footer.php'); ?>
+<?php include('../footer.php'); ?>
