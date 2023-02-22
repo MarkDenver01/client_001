@@ -1,5 +1,13 @@
 # client_001
+Changelogs (02-23-2023)
+- Change Counselor Services to Test Services
+- Add site installation (web & db config)
+- Add registration account for admin
+- improved UIs (css, js, html)
+- Re-organize folder for installation and app
+- Create db configuration (including .env file)
 
+----------------------------------------------------------------------------------------
 Bootstrap template: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
 
 Programmer: Denver | Project created: feb-2023
