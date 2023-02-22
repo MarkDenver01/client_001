@@ -31,8 +31,8 @@
                     </form>
                 </div>
             </div>
-            <div class="card-footer text-end">
-                <button class="btn btn-primary" type="submit" form="installation-form">Save and Proceed to Next</button>
+            <div class="card-footer text-center">
+                <button class="btn btn-primary w-50" type="submit" form="installation-form">Next</button>
             </div>
         </div>
     </div>

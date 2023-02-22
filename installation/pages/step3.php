@@ -21,7 +21,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $create_db = $conn->query("CREATE DATABASE `{$_POST['DB_NAME']}`");
             if($create_db){
                 $conn->select_db($_POST['DB_NAME']);
-                include_once('./defaults/db.php');
+                include_once('./default/db.php');
                 if(isset($db_sql)){
                     foreach($db_sql as $sql){
                         $conn->query($sql);
@@ -80,8 +80,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                     </form>
                 </div>
             </div>
-            <div class="card-footer text-end">
-                <button class="btn btn-primary" type="submit" form="installation-form">Save and Proceed to Next</button>
+            <div class="card-footer text-center">
+                <button class="btn btn-primary w-50" type="submit" form="installation-form">Next</button>
             </div>
         </div>
     </div>

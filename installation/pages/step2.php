@@ -20,8 +20,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                     <p>Please fill all the required fields below.</p>
                     <form id="installation-form" action="" method="POST">
                         <div class="mb-3">
-                            <label for="SITE_NAME">Site Name <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control rounded-0" id="SITE_NAME" name="SITE_NAME" required="required">
+                            <label for="SITE_PORTAL">Site Portal <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control rounded-0" id="SITE_PORTAL" name="SITE_PORTAL" required="required">
                         </div>
                         
                         <div class="mb-3">
@@ -41,8 +41,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                     </form>
                 </div>
             </div>
-            <div class="card-footer text-end">
-                <button class="btn btn-primary" type="submit" form="installation-form">Save and Proceed to Next</button>
+            <div class="card-footer text-center">
+                <button class="btn btn-primary w-50" type="submit" form="installation-form">Next</button>
             </div>
         </div>
     </div>

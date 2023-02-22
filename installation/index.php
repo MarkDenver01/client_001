@@ -1,12 +1,18 @@
 <?php 
     error_reporting(-1);
     require_once('./../lib/class.environment.php');
+    session_start();
+    require_once('../lib/class.environment.php');
+    if($_ENV['SITE_INSTALLATION_COMPLETED'] == true){
+      header('location:../app/dashboard');
+      exit;
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <?php include_once('header.php') ?>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-success bg-gradient">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary bg-gradient">
     <div class="container">
         <a class="navbar-brand" href="./">Site Installation</a>
     </div>
