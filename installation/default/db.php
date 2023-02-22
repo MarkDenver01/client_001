@@ -12,7 +12,8 @@ $db_sql[] = "CREATE TABLE `users` (
     `year` int(32) NOT NULL,
     `email_address` varchar(255) NOT NULL,
     `password` varchar(255) NOT NULL,
-    `user_types` varchar(255) NOT NUll
+    `user_types` varchar(255) NOT NUll,
+    `is_logged_in` int(32) NOT NULL
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
 
 $db_sql[] = "ALTER TABLE `users`

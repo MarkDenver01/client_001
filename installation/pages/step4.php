@@ -19,7 +19,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $password = password_hash($password, PASSWORD_DEFAULT);
             $name = $conn->real_escape_string($name);
             $email = $conn->real_escape_string($email);
-            $sql = "INSERT INTO `users` (`name`, `email_address`, `password`, `user_types`) VALUES ('{$name}', '{$email}', '{$password}','Admin')";
+            $sql = "INSERT INTO `users` (`name`, `email_address`, `password`, `user_types`,`is_logged_in`) VALUES ('{$name}', '{$email}', '{$password}','Admin','1')";
             $insert = $conn->query($sql);
             if(!$insert){
                 $error = "Admin user details has failed to create. Error: ". $conn->error;
