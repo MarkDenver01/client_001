@@ -11,8 +11,10 @@ $db_sql[] = "CREATE TABLE `users` (
     `course` varchar(255) NOT NULL,
     `year` int(32) NOT NULL,
     `email_address` varchar(255) NOT NULL,
-    `password` varchar(255) NOT NULL
-  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci";
+    `password` varchar(255) NOT NULL,
+    `user_types` varchar(255) NOT NUll,
+    `is_logged_in` int(32) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
 
 $db_sql[] = "ALTER TABLE `users`
   ADD PRIMARY KEY (`id`)";

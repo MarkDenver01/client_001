@@ -19,8 +19,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $password = password_hash($password, PASSWORD_DEFAULT);
             $name = $conn->real_escape_string($name);
             $email = $conn->real_escape_string($email);
-            $username = $conn->real_escape_string($username);
-            $sql = "INSERT INTO `users` (`name`, `username`, `email`, `password`) VALUES ('{$name}', '{$username}', '{$email}', '{$password}')";
+            $sql = "INSERT INTO `users` (`name`, `email_address`, `password`, `user_types`,`is_logged_in`) VALUES ('{$name}', '{$email}', '{$password}','Admin','1')";
             $insert = $conn->query($sql);
             if(!$insert){
                 $error = "Admin user details has failed to create. Error: ". $conn->error;
@@ -61,10 +60,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                             <input type="text" class="form-control rounded-0" id="name" value="<?= isset($_POST['name']) ? $_POST['name'] : "" ?>" name="name" required="required">
                         </div>
                         <div class="mb-3">
-                            <label for="username">Username <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control rounded-0" id="username" value="<?= isset($_POST['username']) ? $_POST['username'] : "" ?>" name="username" required="required">
-                        </div>
-                        <div class="mb-3">
                             <label for="email">Email <span class="text-danger">*</span></label>
                             <input type="text" class="form-control rounded-0" id="email" value="<?= isset($_POST['email']) ? $_POST['email'] : "" ?>" name="email" required="required">
                         </div>
@@ -80,8 +75,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                     </form>
                 </div>
             </div>
-            <div class="card-footer text-end">
-                <button class="btn btn-primary" type="submit" form="installation-form">Save and Proceed to Next</button>
+            <div class="card-footer text-center">
+                <button class="btn btn-primary w-50" type="submit" form="installation-form">Proceed</button>
             </div>
         </div>
     </div>
