@@ -171,7 +171,7 @@
         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
           <li class="dropdown-header">
             <h6>Mica Unigo</h6>
-            <span>Web Designer</span>
+            <span>Web Developer</span>
           </li>
           <li>
             <hr class="dropdown-divider">
