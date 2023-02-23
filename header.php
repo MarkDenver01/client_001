@@ -1,10 +1,10 @@
-<?php 
-  session_start();
-  require_once('../lib/class.environment.php');
-  if($_ENV['SITE_INSTALLATION_COMPLETED'] == false){
-    header('location:../installation');
-    exit;
-  }
+<?php
+session_start();
+require_once('../lib/class.environment.php');
+if($_ENV['SITE_INSTALLATION_COMPLETED'] == false){
+  header('location:../installation');
+  exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
