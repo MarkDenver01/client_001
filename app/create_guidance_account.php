@@ -23,11 +23,8 @@
         </div>
         <div class="modal-body">
 
-
           <!-- Floating Labels Form -->
           <form class="row g-3">
-
-
             <div class="col-md-12">
               <section class="section profile">
                 <div class="row">

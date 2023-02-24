@@ -11,7 +11,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     if ($conn->connect_error) {
       $error = 'Unable to connect to the database.';
     }
-    
+
     if(!$conn){
       $error = "Given Database Credentials is incorrect";
     }else{
@@ -19,7 +19,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
       $password = password_hash($password, PASSWORD_DEFAULT);
       $name = $conn->real_escape_string($name);
       $email = $conn->real_escape_string($email);
-      $sql = "INSERT INTO `users` (`name`, `email_address`, `password`, `user_types`,`is_logged_in`) VALUES ('{$name}', '{$email}', '{$password}','Admin','1')";
+      $sql = "INSERT INTO `user_account` (`name`, `email_address`, `password`, `user_types`,`is_logged_in`) VALUES ('{$name}', '{$email}', '{$password}','Admin','1')";
       $insert = $conn->query($sql);
       if(!$insert){
         $error = "Admin user details has failed to create. Error: ". $conn->error;
