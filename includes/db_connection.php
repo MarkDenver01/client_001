@@ -1,6 +1,6 @@
-<?php require_once(LIB_PATH_INC.DS."config.env.php"); ?>
+<?php require_once(LIB_PATH_INC."config_env.php"); ?>
 <?php
-class DbConnection {
+class db_connection {
 private $con;
 public $query_id;
 
@@ -81,6 +81,6 @@ public function while_loop($loop) {
   }
   return $results;
 }
-
-$db = new DbConnection();
+}
+$db = new db_connection();
 ?>
