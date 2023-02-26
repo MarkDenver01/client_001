@@ -1,15 +1,13 @@
-<?php include_once 'db_connection.php'; ?>
 <?php
 
 function sec_session_start() {
   $session_name = 'sec_session_id'; // set a custome session name
   $secure = SECURE;
-
   $http_only = true; // stops js being able to access to session id
 
 
   // force sessions to only use cookies
-  if (ini_set('session.use_only_cookies', 1) === FALSE) {
+  if (ini_set('session.use_only_cookies', true) === FALSE) {
     header("Location: ../error.php?err=Could not initiate a safe session (ini_set)");
     exit();
   }

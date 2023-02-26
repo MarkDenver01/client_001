@@ -1,4 +1,5 @@
 <?php include('../header.php'); ?>
+<?php include_once('../includes/load.php'); ?>
 <main style="background-image:url('./images/background_3.jpg');">
   <div class="container">
 
