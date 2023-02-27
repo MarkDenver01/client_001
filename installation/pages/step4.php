@@ -19,9 +19,17 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
       $password = password_hash($password, PASSWORD_DEFAULT);
       $name = $conn->real_escape_string($name);
       $email = $conn->real_escape_string($email);
-      $sql = "INSERT INTO `user_account` (`name`, `email_address`, `password`, `user_types`,`is_logged_in`) VALUES ('{$name}', '{$email}', '{$password}','Admin','1')";
-      $insert = $conn->query($sql);
-      if(!$insert){
+      $last_login = date("d F Y, h:i:s A");
+      $default_image = "./app/assets/img/profile.png";
+      $sql_1 = "INSERT INTO `user_account` (`name`, `email_address`, `password`, `user_level`, `image`, `status`, `last_login`)
+       VALUES ('{$name}', '{$email}', '{$password}','1','{$default_image}','1','{$last_login}')";
+      $insert_1 = $conn->query($sql_1);
+
+      $sql_2 = "INSERT INTO `user_groups` (`user_types`, `user_level`, `user_status`)
+      VALUES('Admin','1','1')";
+      $insert_2 = $conn->query($sql_2);
+
+      if(!$insert_1 && !$insert_2){
         $error = "Admin user details has failed to create. Error: ". $conn->error;
       }else{
         $conn->close();

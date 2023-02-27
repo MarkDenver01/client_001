@@ -11,4 +11,5 @@ define("LIB_PATH_INC", SITE_ROOT.DS);
 require_once(LIB_PATH_INC.'config_env.php');
 require_once(LIB_PATH_INC.'db_connection.php');
 require_once(LIB_PATH_INC.'functions.php');
+require_once(LIB_PATH_INC.'session.php');
 ?>

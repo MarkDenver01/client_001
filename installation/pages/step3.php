@@ -22,14 +22,28 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
       if($create_db){
         $conn->select_db($_POST['DB_NAME']);
         include_once('./default/db.php');
-        if(isset($db_sql)){
-          foreach($db_sql as $sql){
+
+        // db sql 1
+        if(isset($db_sql_1)){
+          foreach($db_sql_1 as $sql){
             $conn->query($sql);
             if($conn->error){
               die($conn->error);
             }
           }
         }
+
+        // db sql 2
+        if (isset($db_sql_2)) {
+          foreach ($db_sql_2 as $sql) {
+            $conn->query($sql);
+            if ($conn->error) {
+               die($conn->error);
+            }
+          }
+        }
+
+
         $update_env_vars = $__DotEnvironment->update_env_variables($_POST);
         if($update_env_vars){
           echo "<script>location.href = './?step=4'</script>";
