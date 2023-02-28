@@ -1,5 +1,5 @@
 <?php
-  $errors = array();
+$errors = array();
 
 /** remove escapes special characters in a string for use in sql statement **/
 function real_escape($str) {

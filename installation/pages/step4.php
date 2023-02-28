@@ -25,8 +25,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
        VALUES ('{$name}', '{$email}', '{$password}','1','{$default_image}','1','{$last_login}')";
       $insert_1 = $conn->query($sql_1);
 
-      $sql_2 = "INSERT INTO `user_groups` (`user_types`, `user_level`, `user_status`)
-      VALUES('Admin','1','1')";
+      $sql_2 = "INSERT INTO `user_groups` (`email_address`, `user_types`, `user_level`, `user_status`)
+      VALUES('{$email}', 'Admin','1','1')";
       $insert_2 = $conn->query($sql_2);
 
       if(!$insert_1 && !$insert_2){

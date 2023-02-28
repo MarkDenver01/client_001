@@ -231,12 +231,12 @@
       </a>
       <ul id="forms-nav" class="nav-content collapsed" data-bs-parent="#sidebar-nav">
         <li>
-          <a href="./create_student_account">
+          <a href="./view_student_account">
             <i class="bi bi-circle"></i><span>Student account</span>
           </a>
         </li>
         <li>
-          <a href="./create_guidance_account">
+          <a href="./view_guidance_account">
             <i class="bi bi-circle"></i><span>Guidance account</span>
           </a>
         </li>

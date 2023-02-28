@@ -1,10 +1,11 @@
 <?php include('../header.php'); ?>
+<?php include('../includes/load.php'); ?>
+<?php onClickButton("button_create", "./register_student_account"); ?>
 <?php include('../start_menu_bar.php'); ?>
-<?php include('./modal/update_student_account.php'); ?>
-<?php include('./modal/register_student_account.php'); ?>
+
+
 
 <main id="main" class="main">
-
   <div class="pagetitle">
     <h1>Student Information</h1>
     <nav>
@@ -24,11 +25,11 @@
           <h5 class="card-title">View Student & Account information</h5>
 
           <!-- General Form Elements -->
-          <form class="row g-3">
+          <form class="row g-3" method="POST" action="">
             <div class="col-md-6">
               <label for="yourUsername" class="form-label">Search email address</label>
               <div class="input-group has-validation">
-                <input type="email" name="username" class="form-control" id="yourUsername" required>
+                <input type="text" name="username" class="form-control" id="yourUsername">
                 <hr/>
                 <span class="input-group-text">
                   <i class="bx bx-search-alt-2" id="toggleCurrentPassword" style="cursor: pointer"></i>
@@ -137,7 +138,7 @@
             </div>
 
             <div class="text-center">
-              <button type="button" class="btn btn-success w-25" data-bs-toggle="modal" data-bs-target="#insert_student">Create new account</button>
+              <button type="submit" name="button_create" class="btn btn-success w-25" data-bs-toggle="modal" data-bs-target="#insert_student" >Create new account</button>
             </div>
           </form><!-- End floating Labels Form -->
           <!-- End General Form Elements -->

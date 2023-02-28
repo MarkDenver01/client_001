@@ -12,4 +12,6 @@ require_once(LIB_PATH_INC.'config_env.php');
 require_once(LIB_PATH_INC.'db_connection.php');
 require_once(LIB_PATH_INC.'functions.php');
 require_once(LIB_PATH_INC.'session.php');
+require_once(LIB_PATH_INC.'sql.php');
+require_once(LIB_PATH_INC.'action.php');
 ?>

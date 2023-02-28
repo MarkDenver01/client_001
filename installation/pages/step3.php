@@ -23,7 +23,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $conn->select_db($_POST['DB_NAME']);
         include_once('./default/db.php');
 
-        // db sql 1
+        // user account
         if(isset($db_sql_1)){
           foreach($db_sql_1 as $sql){
             $conn->query($sql);
@@ -33,12 +33,22 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
           }
         }
 
-        // db sql 2
+        // user groups
         if (isset($db_sql_2)) {
           foreach ($db_sql_2 as $sql) {
             $conn->query($sql);
             if ($conn->error) {
                die($conn->error);
+            }
+          }
+        }
+
+        // student info
+        if (isset($db_sql_3)) {
+          foreach ($db_sql_3 as $sql) {
+            $conn->query($sql);
+            if ($conn->error) {
+              die($conn->error);
             }
           }
         }

@@ -1,6 +1,4 @@
 <?php
-  session_start();
-
   class session {
     private $msg;
     private $user_is_logged_in = false;
@@ -30,10 +28,26 @@
       }
     }
 
-    public function logout() {
+    function logout() {
       unset($_SESSION['email_address']);
     }
-    
+
+    function isUserLoggedIn() {
+      return $this->user_is_logged_in;
+    }
+
+    function login($user_id) {
+      $_SESION['user_id'] = $user_id;
+    }
+
+    function userLoginStatus() {
+      if (isset($_SESSION['user_id'])) {
+        $this->user_is_logged_in = true;
+      } else {
+        $this->user_is_logged_in = false;
+      }
+    }
+
   }
 
   $session = new session();

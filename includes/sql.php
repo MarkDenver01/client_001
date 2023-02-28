@@ -1,4 +1,4 @@
-<?php require_once('includes/load.php'); ?>
+<?php require_once('../includes/load.php'); ?>
 <?php
  function find_all($table) {
    global $db;
@@ -63,10 +63,10 @@
    static $current_user;
    global $db;
    if (!$current_user) {
-        if (isset($_SESSION['email_address']))
+        if (isset($_SESSION['email_address'])) {
            $email_address = intval($_SESSION['email_address']);
            $current_user = find_by_id('user_account', $email_address);
-        endif;
+        }
    }
    return $current_user;
  }
@@ -78,9 +78,30 @@
    return ($db->num_rows($result) === 0 ? true : false);
  }
 
+ function find_group_name($user_level) {
+   global $db;
+   $sql = "SELECT `user_types` FROM `user_groups` WHERE `user_types` = '{$db->escape($user_level)}' LIMIT 1";
+   $result  = $db->query($sql);
+   return ($db->num_rows($result) === 0 ? true : false);
+ }
+
  function page_require_level($require_level) {
    global $session;
    $current_user = current_user();
+   $login_level = find_by_group_level($current_user['user_level']);
+   // if user not login
+   if (!$session->isUserLoggedIn(true)) {
+        $session->msg('d', 'Please login...');
+        redirect('index', false);
+   } elseif($login_level['user_status'] === '0') {
+        $session->msg('d', 'You have logged in successfully!');
+        redirect('dashboard', false);
+   } elseif($current_user['user_level'] <= (int)$require_level) {
+        return true;
+   } else {
+        $session->msg('d', 'You have no access on this page');
+        redirect('dashboard', false);
+   }
  }
 
 ?>

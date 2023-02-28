@@ -1,9 +1,10 @@
-<?php include('../include/load.php'); ?>
 <?php
-  
+  if (isset($_POST['button_register'])) {
+    echo "asdfsdfsdfsd";
+  }
 ?>
 <!-- view account -->
-<div class="modal fade" id="insert_student" tabindex="-1">
+<div class="modal fade" id="insert_student" tabindex="-1" >
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">
@@ -14,7 +15,7 @@
 
 
         <!-- Floating Labels Form -->
-        <form class="row g-3">
+        <form class="row g-3" method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
           <div class="col-md-12">
             <section class="section profile">
               <div class="row">
@@ -127,10 +128,9 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <input type="button" name="btnRegister" class="btn btn-primary" value="Register"></input>
+        <button type="buton" name="button_register" class="btn btn-primary" >Register</button>
       </div>
     </form><!-- End floating Labels Form -->
   </div>
 </div>
 </div>
-<!-- end account-->
