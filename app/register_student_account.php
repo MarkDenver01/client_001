@@ -1,42 +1,23 @@
 <?php include('../header.php'); ?>
 <?php include('../includes/load.php'); ?>
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
     // button back
     onClickButton("button_back", "./view_student_account");
     // upload image & save account info
-    if (isButtonReadyClick("button_save")) {
-      $target_directory = "http://localhost/client_001/app/assets/img/";
-      $target_file = $target_directory . basename($_FILES["image_path"]["name"]);
-      $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
-      $uploadOk = 1;
-      // check image file is a actual image for fake image
-      if (isButtonReadyClick("button_save")) {
-        $check = getimagesize($_FILES["image_path"]["tmp_name"]);
-      }
-
-      if ($check) {
-        $uploadOk = 1;
-      } else {
-        $uploadOk = 0;
-      }
-
-      // check if file is already exist
-      if (file_exists($target_file)) {
-        $uploadOk = 0;
-      }
-
-      if ($_FILES["image_path"]["size"] > 500000) {
-        $uploadOk = 0;
-      }
-
-      if ($uploadOk === 1) {
-        if (move_uploaded_file($_FILES["image_path"]["tmp_name"], $target_file)) {
-          $file = $_FILES["image_path"]["name"];
-          echo '<div class="alert alert-success">SAVED!! </div>';
-        }
-      } else {
-        echo '<div class="alert alert-danger">SAVED!! </div>';
-      }
+    if (isset($_POST["button_save"])) {
+      addStudentAccount("button_save",
+        "image_path",
+        "full_name",
+        "email_address",
+        "course",
+        "student-year",
+        "gender",
+        "age",
+        "birth_date",
+        "present_address"
+      );
     }
 ?>
 <?php include('../start_menu_bar.php'); ?>
@@ -86,7 +67,7 @@
                     <div class="row mb-3">
                       <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Full Name</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="fullName" type="text" class="form-control" id="fullName">
+                        <input name="full_name" type="text" class="form-control" id="fullName">
                       </div>
                     </div>
 
@@ -94,13 +75,6 @@
                       <label for="email_address" class="col-md-4 col-lg-3 col-form-label">Email address</label>
                       <div class="col-md-8 col-lg-9">
                         <input name="email_address" type="email" class="form-control" id="email_address">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="password" class="col-md-4 col-lg-3 col-form-label">Password</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="password" type="password" class="form-control" id="password">
                       </div>
                     </div>
 
@@ -114,8 +88,8 @@
                     <div class="row mb-3">
                       <label for="year" class="col-md-4 col-lg-3 col-form-label">Year</label>
                       <div class="col-md-4 col-lg-4">
-                        <select id="inputState" class="form-select">
-                          <option selected>1st Year</option>
+                        <select name="student-year" id="inputState" class="form-select">
+                          <option selected>Select year</option>
                           <option value="1st Year">1st Year</option>
                           <option value="2nd Year">2nd Year</option>
                           <option value="3rd Year">3rd Year</option>
@@ -126,9 +100,9 @@
 
                     <div class="row mb-3">
                       <label for="gender" class="col-md-4 col-lg-3 col-form-label">Gender</label>
-                      <div class="col-md-4 col-lg-2">
-                        <select id="inputState" class="form-select">
-                          <option selected>Male</option>
+                      <div class="col-md-4 col-lg-4">
+                        <select name="gender" id="inputState" class="form-select">
+                          <option selected>Select Gender</option>
                           <option value="Male">Male</option>
                           <option value="Female">Female</option>
                         </select>

@@ -1,0 +1,11 @@
+table: user_account
+email address: lhanavillanueva@gmail.com
+isUserAccountEmailExist: false
+table: student_info
+email address: lhanavillanueva@gmail.com
+isStudentEmailExist: false
+table: user_account
+email address: lhanavillanueva@gmail.com
+table: student_info
+email address: lhanavillanueva@gmail.com
+create student account: success

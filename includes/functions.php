@@ -1,17 +1,9 @@
 <?php
 $errors = array();
-
-/** remove escapes special characters in a string for use in sql statement **/
-function real_escape($str) {
-  global $con;
-  $escape = mysqli_real_escape_string($con, trim($str));
-  return $escape;
-}
-
 /** remove html characters **/
 function remove_junk($str) {
   $str = nl2br($str);
-  $str = htmlspecialchars(strip_tags($str, ENT_QOUTES));
+  $str = htmlspecialchars(strip_tags($str, ENT_QUOTES));
   return $str;
 }
 
@@ -26,8 +18,8 @@ function first_character($str) {
 function validate_fields($var) {
   global $errors;
   foreach ($var as $field) {
-    $val = remove_junk($_POST[$field]);
-    if (isset($val) && val == '') {
+    $value = remove_junk($_POST[$field]);
+    if (isset($value) && $value == '') {
       $errors = $field ." can't be blank";
       return $errors;
     }
@@ -89,4 +81,24 @@ function read_data($str) {
   }
 }
 
+/** real escape string **/
+function real_escape($data) {
+  global $con;
+  return mysqli_real_escape_string($con, trim($data));
+}
+
+/** log file **/
+function debug_mode($log_msg) {
+  $is_debugging = true; // set true to enable debugging, otherwise false
+  if($is_debugging) {
+    $log_filename = "log";
+    if (!file_exists($log_filename)) {
+        // create directory/folder uploads.
+        mkdir($log_filename, 0777, true);
+    }
+    $log_file_data = $log_filename.'/log_' . date('d-m-Y') . '.log';
+    // if you don't add `FILE_APPEND`, the file will be erased each time you add a log
+    file_put_contents($log_file_data, $log_msg . "\n", FILE_APPEND);
+  }
+}
 ?>

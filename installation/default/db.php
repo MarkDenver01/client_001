@@ -45,6 +45,7 @@ $db_sql_3[] = "DROP TABLE IF EXISTS `student_info`";
 
 $db_sql_3[] = "CREATE TABLE `student_info` (
   `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
   `email_address` varchar(255) NOT NULL,
   `course` varchar(255) NOT NULL,
   `year` varchar(255) NOT NULL,

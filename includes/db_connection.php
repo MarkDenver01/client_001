@@ -4,7 +4,7 @@ class db_connection {
 private $con;
 public $query_id;
 
-public function __constructor() {
+public function __construct() {
   $this->connectDb();
 }
 

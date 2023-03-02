@@ -2,7 +2,7 @@
 <?php
  function find_all($table) {
    global $db;
-   if (tableExist($table)) {
+   if (table_exist($table)) {
      return find_by_sql("SELECT * FROM ".$db->escape($table));
    }
  }
@@ -26,11 +26,11 @@
    return $return_set;
  }
 
- function find_by_id($table, $id) {
+ function find_by_id($table, $email_address) {
    global $db;
-   $id = (int) $id;
-    if(tableExist($table)) {
-      $sql = $db->query("SELECT * FROM {$db->escape($table)} WHERE id='{$db->escape($id)}' LIMIT 1");
+   debug_mode("table: " .$table. "\nemail address: " .$email_address);
+    if(table_exist($table)) {
+      $sql = $db->query("SELECT * FROM {$db->escape($table)} WHERE `email_address`='{$db->escape($email_address)}' LIMIT 1");
       if($result = $db->fetch_assoc($sql)) {
         return $result;
       } else {
@@ -41,7 +41,7 @@
 
  function delete_by_id($table, $id) {
    global $db;
-   if(tableExist($table)) {
+   if(table_exist($table)) {
      $sql = "DELETE FROM ".$db->escape($table);
      $sql .= " WHERE id=" .$db->escape($id);
      $sql .= " LIMIT 1";
@@ -52,7 +52,7 @@
 
  function count_by_id($table) {
    global $db;
-   if(tableExist($table)) {
+   if(table_exist($table)) {
      $sql = "SELECT count(id) as total FROM ".$db->escape($table);
      $result = $db->query($sql);
       return ($db->fetch_assoc($result));
