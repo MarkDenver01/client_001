@@ -1,4 +1,3 @@
-<?php require_once('../lib/class.environment.php'); ?>
 <?php include('../header.php'); ?>
 <?php include('../start_menu_bar.php'); ?>
 
