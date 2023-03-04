@@ -1,6 +1,6 @@
 <?php  include_once 'functions.php'; ?>
 <?php
-  sec_session_start();
+  session_start();
 
   // unset all session values
   $_SESSION = array();
@@ -17,6 +17,5 @@
 
    // destroy session
    session_destroy();
-   header('location: ../app/index')
-   exit();
+   header('location: ../app/login')
 ?>

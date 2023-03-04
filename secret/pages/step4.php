@@ -16,13 +16,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
       $error = "Given Database Credentials is incorrect";
     }else{
       // $insert_sql
-      $password = password_hash($password, PASSWORD_DEFAULT);
+      $encrypted_pasword = sha1($password);
       $name = $conn->real_escape_string($name);
       $email = $conn->real_escape_string($email);
       $last_login = date("d F Y, h:i:s A");
       $default_image = "./app/assets/img/profile.png";
-      $sql_1 = "INSERT INTO `user_account` (`name`, `email_address`, `password`, `user_level`, `image`, `status`, `last_login`)
-       VALUES ('{$name}', '{$email}', '{$password}','1','{$default_image}','1','{$last_login}')";
+      $sql_1 = "INSERT INTO `user_account` (`name`, `email_address`, `password`, `user_level`, `image`, `status`, `is_logged_in`, `last_login`)
+       VALUES ('{$name}', '{$email}', '{$encrypted_pasword}','1','{$default_image}','1','1','{$last_login}')";
       $insert_1 = $conn->query($sql_1);
 
       $sql_2 = "INSERT INTO `user_groups` (`email_address`, `user_types`, `user_level`, `user_status`)
@@ -34,6 +34,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
       }else{
         $conn->close();
         $update_env_vars = $__DotEnvironment->update_env_variables(['SITE_INSTALLATION_COMPLETED' => 'true']);
+        $extra = $__DotEnvironment->update_env_variables(['SUPER_USER' => 'true']); // optional
         if($update_env_vars){
           echo "<script>location.href = './?step=installation_complete'</script>";
           exit;

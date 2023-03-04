@@ -36,9 +36,9 @@ public function query($sql) {
     $this->query_id = $this->con->query($sql);
   }
   if (!$this->query_id) {
-    die("Error on this query: <pre> " .$sql. "</pre>");
-    return $this->query_id;
+      die("Error on this query: <pre> " .$sql. "</pre>");
   }
+  return $this->query_id;
 }
 
 /** function for query helper **/

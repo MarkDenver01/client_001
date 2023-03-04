@@ -1,10 +1,13 @@
+<?php require_once('../lib/class.environment.php'); ?>
+<?php include_once('../includes/load.php'); ?>
+<?php $current_user = current_user(); ?>
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
 
   <div class="d-flex align-items-center justify-content-between">
     <a href="#" class="logo d-flex align-items-center">
       <lottie-player src="./assets/json/book.json" background="transparent"  speed="1"  style="width: 60px; height: 60px;" loop autoplay></lottie-player>
-      <span class="d-none d-lg-block"><?= $_ENV['SITE_PORTAL'] ?></span>
+      <span class="d-none d-lg-block"><?= $_ENV['SITE_PORTAL']; ?></span>
     </a>
     <i class="bi bi-list toggle-sidebar-btn"></i>
   </div><!-- End Logo -->
@@ -170,21 +173,37 @@
 
         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
           <li class="dropdown-header">
-            <h6>Mica Unigo</h6>
-            <span>Web Developer</span>
+            <h6><?php echo $current_user['name']; ?> </h6>
+            <span>
+              <?php
+                switch ($current_user['user_level']) {
+                  case '1':
+                     echo 'Administrator';
+                     break;
+                  case '2':
+                    echo 'Guidance Counselor';
+                    break;
+                  case '3':
+                     echo 'Student';
+                     break;
+                  default:
+                    break;
+                  }
+              ?>
+            </span>
           </li>
           <li>
             <hr class="dropdown-divider">
           </li>
 
           <li>
-            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-              <i class="bi bi-person"></i>
+            <a class='dropdown-item d-flex align-items-center' href='users-profile.html'>
+              <i class='bi bi-person'></i>
               <span>My Profile</span>
             </a>
           </li>
           <li>
-            <hr class="dropdown-divider">
+            <hr class='dropdown-divider'>
           </li>
 
           <li>
@@ -198,7 +217,7 @@
           </li>
 
           <li>
-            <a class="dropdown-item d-flex align-items-center" href="#">
+            <a class="dropdown-item d-flex align-items-center" href="../includes/logout">
               <i class="bi bi-box-arrow-right"></i>
               <span>Sign Out</span>
             </a>
@@ -243,54 +262,85 @@
       </ul>
     </li><!-- End Dashboard Nav -->
 
-    <li class="nav-item">
-      <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-        <i class="ri-service-fill"></i>
-        <span>Test Services</span><i class="bi bi-chevron-down ms-auto"></i>
+<?php
+  if($current_user['user_level'] === '2') {
+echo "
+    <li class='nav-item'>
+      <a class='nav-link collapsed' data-bs-target='#tables-nav' data-bs-toggle='collapse' href='#'>
+        <i class='ri-service-fill'></i>
+        <span>Test Services</span><i class='bi bi-chevron-down ms-auto'></i>
       </a>
-      <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+      <ul id='tables-nav' class='nav-content collapse ' data-bs-parent='#sidebar-nav'>
         <li>
-          <a href="#">
-            <i class="bi bi-circle"></i><span>First Year</span>
+          <a href='#'>
+            <i class='bi bi-circle'></i><span>First Year</span>
           </a>
         </li>
         <li>
-          <a href="#">
-            <i class="bi bi-circle"></i><span>Second Year</span>
+          <a href='#'>
+            <i class='bi bi-circle'></i><span>Second Year</span>
           </a>
         </li>
         <li>
-          <a href="#">
-            <i class="bi bi-circle"></i><span>Third Year</span>
+          <a href='#''>
+            <i class='bi bi-circle'></i><span>Third Year</span>
           </a>
         </li>
         <li>
-          <a href="#">
-            <i class="bi bi-circle"></i><span>Fourth Year</span>
+          <a href='#'>
+            <i class='bi bi-circle'></i><span>Fourth Year</span>
           </a>
         </li>
       </ul>
-    </li><!-- End Dashboard Nav -->
-
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="index.html">
-        <i class="bi bi-people"></i>
+    </li><!-- End Dashboard Nav -->";
+  }
+?>
+<?php
+  if ($current_user['user_level'] === '2') {
+  echo "
+    <li class='nav-item'>
+      <a class='nav-link collapsed' href='#'>
+        <i class='bi bi-people'></i>
         <span>Scheduling</span>
       </a>
-    </li><!-- End Dashboard Nav -->
-
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="index.html">
-        <i class="ri-folder-2-fill"></i>
+    </li><!-- End Dashboard Nav -->";
+  }
+?>
+<?php
+  if ($current_user['user_level'] === '2') {
+   echo "
+    <li class='nav-item'>
+      <a class='nav-link collapsed' href='#'>
+        <i class='ri-folder-2-fill'></i>
         <span>Files and Documents</span>
       </a>
     </li><!-- End Dashboard Nav -->
-
-    <li class="nav-item">
-      <a class="nav-link collapsed" href="index.html">
-        <i class="ri-book-2-fill"></i>
+    ";
+  }
+?>
+<?php
+  if($current_user['user_level'] === '2') {
+   echo "
+    <li class='nav-item'>
+      <a class='nav-link collapsed' href='#'>
+        <i class='ri-book-2-fill'></i>
         <span>Generated Reports</span>
       </a>
     </li><!-- End Dashboard Nav -->
+    ";
+  }
+?>
+<?php
+  if($current_user['user_level'] === '1') {
+   echo "
+    <li class='nav-item'>
+      <a class='nav-link collapsed' href='#'>
+        <i class='ri-artboard-line'></i>
+        <span>Announcement</span>
+      </a>
+    </li><!-- End Dashboard Nav -->
+    ";
+  }
+?>
 
   </aside><!-- End Sidebar-->

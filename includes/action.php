@@ -90,51 +90,59 @@ function addStudentAccount($button_name,
     }
 }
 
-function insertUserAccount($full_name, $email_address, $password, $file_path_name) {
-  global $db;
+function login($email_address, $password) {
+  global $session;
+  $req_fields = array($email_address, $password);
+  validate_fields($req_fields);
+  $email_address = remove_junk($_POST[$email_address]);
+  $password = remove_junk($_POST[$password]);
 
-  $sql = "INSERT IGNORE INTO `user_account`(
-    `name`,`email_address`,`password`,`user_level`,`image`,`status`)";
-  $sql .= " VALUES ";
-  $sql .= "(
-    '{$full_name}',
-    '{$email_address}',
-    '{$password}',
-    '3',
-    '{$file_path_name}',
-    '0')";
-  $db->query($sql);
+  if(empty($errors)) {
+    $is_check_user = authentication($email_address, $password);
+
+    if ($is_check_user) {
+      // create session with id
+      $session->login($is_check_user['id']);
+      // update signi in time
+      update_last_login($is_check_user['id']);
+      // redirect user to respective pages by user level
+      if ($is_check_user['status'] === '1') {
+        if ( $is_check_user['user_level'] === '1'
+          || $is_check_user['user_level'] === '2'
+          || $is_check_user['user_level'] === '3') {
+          redirect('dashboard', false);
+        } else {
+          $session->message("d", "Sorry cannot find your account. Please contact the administrator.");
+          redirect('login', false);
+        }
+      } else {
+        redirect('change_password', false);
+      }
+    } else {
+        $session->message("d", "Username or password is incorrect.");
+        redirect('login', false);
+    }
+  } else {
+    $session->message("d", $errors);
+    redirect('login', false);
+  }
 }
 
-function insertStudentAccount($full_name, $email_address, $course,
-    $year, $gender, $age, $birth_date, $present_address) {
-    global $db;
-
-      $sql = "INSERT IGNORE INTO `student_info`(`name`,`email_address`,`course`
-        ,`student_year`,`gender`,`age`
-        ,`birth_date`,`present_address`)";
-      $sql .= " VALUES ";
-      $sql .= "(
-        '{$full_name}',
-        '{$email_address}',
-        '{$course}',
-        '{$year}',
-        '{$gender}',
-        '{$age}',
-        '{$birth_date}',
-        '{$present_address}'
-        )";
-      $db->query($sql);
+function page_require_level($required_level) {
+  global $session;
+  $current_user = current_user();
+  $login_level = find_group_level($current_user['user_level']);
+  if (!$session->is_user_logging_in(true)) {
+    $session->message('d', 'Please login...');
+    redirect('index.php', false);
+  } else if($login_level['user_status'] === '0') {
+    $session->message('d','This level user has been band.');
+    redirect('dashboard.php', false);
+  } elseif ($current_user['user_level'] <= (int) $required_level) {
+    return true;
+  } else {
+    $session->message('d', 'Sorry. You dont have permission to view the page');
+    redirect('dashboard.php', false);
+  }
 }
-
-function isUserAccountEmailExist($email_address) {
-  $user_account_mail = find_by_id('user_account', $_POST[$email_address]);
-  return ($user_account_mail ? true : false);
-}
-
-function isStudentEmailExist($email_address) {
-  $student_info_mail = find_by_id('student_info', $_POST[$email_address]);
-  return ($student_info_mail ? true : false);
-}
-
 ?>

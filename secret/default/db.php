@@ -12,6 +12,7 @@ $db_sql_1[] = "CREATE TABLE `user_account` (
   `user_level` int(11) NOT NUll,
   `image` varchar(255) NOT NULL,
   `status` int(11) NOT NULL,
+  `is_logged_in` int(11) NOT NULL,
   `last_login` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
 

@@ -1,3 +1,4 @@
+<?php require_once('../lib/class.environment.php'); ?>
 <?php include('../header.php'); ?>
 <main style="background-image:url('./images/background_3.jpg');">
   <div class="container">

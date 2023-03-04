@@ -1,9 +1,8 @@
 <?php include('../header.php'); ?>
 <?php include('../includes/load.php'); ?>
+
 <?php onClickButton("button_create", "./register_student_account"); ?>
 <?php include('../start_menu_bar.php'); ?>
-
-
 
 <main id="main" class="main">
   <div class="pagetitle">

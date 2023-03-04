@@ -1,46 +1,23 @@
+<?php session_start(); ?>
 <?php
   class session {
-    private $msg;
+    public $msg;
     private $user_is_logged_in = false;
 
-    function __constructor() {
-      $this->flash_msg();
-      $this->userLoginSetup();
+    function __construct() {
+      $this->message_status();
+      $this->user_log_check();
     }
 
-    private function flash_msg() {
-      if (isset($_SESSION['msg'])) {
-        $this->msg = $_SESSION['msg'];
-        unset($_SESSION['msg']);
-      } else {
-        $this->msg;
-      }
-    }
-
-    public function msg($type = '', $msg = '') {
-      if (!empty($msg)) {
-        if(strlen(trim($type)) == 1) {
-          $type = str_replace(array('d','i','w','s'), array('danger', 'info', 'warning', 'success'), $type);
-        }
-        $_SESSION['msg'][$type] = $msg;
-      } else {
-        return $this->msg;
-      }
-    }
-
-    function logout() {
-      unset($_SESSION['email_address']);
-    }
-
-    function isUserLoggedIn() {
+    public function is_user_logging_in() {
       return $this->user_is_logged_in;
     }
 
-    function login($user_id) {
-      $_SESION['user_id'] = $user_id;
+    public function login($user_id) {
+      $_SESSION['user_id'] = $user_id;
     }
 
-    function userLoginStatus() {
+    public function user_log_check() {
       if (isset($_SESSION['user_id'])) {
         $this->user_is_logged_in = true;
       } else {
@@ -48,9 +25,34 @@
       }
     }
 
+    public function logout() {
+      unset($_SESSION['user_id']);
+    }
+
+    public function message($type = '', $msg = '') {
+      if (!empty($msg)) {
+        if (strlen(trim($type)) == 1) {
+            $type = str_replace(
+              array('d', 'i', 'w', 's'),
+              array('danger', 'info', 'warning', 'success'),
+            $type);
+        }
+        $_SESSION['msg'][$type] = $msg;
+      } else {
+        return $this->msg;
+      }
+    }
+
+    private function message_status() {
+      if (isset($_SESSION['msg'])) {
+        $this->msg = $_SESSION['msg'];
+        unset($_SESSION['msg']);
+      } else {
+        $this->msg;
+      }
+    }
   }
 
   $session = new session();
-  $msg = $session->msg();
-
+  $msg = $session->message();
 ?>

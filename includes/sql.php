@@ -1,4 +1,7 @@
-<?php require_once('../includes/load.php'); ?>
+<?php
+  error_reporting(E_ALL);
+  ini_set('display_errors', '1');
+?>
 <?php
  function find_all($table) {
    global $db;
@@ -26,19 +29,6 @@
    return $return_set;
  }
 
- function find_by_id($table, $email_address) {
-   global $db;
-   debug_mode("table: " .$table. "\nemail address: " .$email_address);
-    if(table_exist($table)) {
-      $sql = $db->query("SELECT * FROM {$db->escape($table)} WHERE `email_address`='{$db->escape($email_address)}' LIMIT 1");
-      if($result = $db->fetch_assoc($sql)) {
-        return $result;
-      } else {
-        return null;
-      }
-    }
- }
-
  function delete_by_id($table, $id) {
    global $db;
    if(table_exist($table)) {
@@ -59,18 +49,6 @@
    }
  }
 
- function current_user() {
-   static $current_user;
-   global $db;
-   if (!$current_user) {
-        if (isset($_SESSION['email_address'])) {
-           $email_address = intval($_SESSION['email_address']);
-           $current_user = find_by_id('user_account', $email_address);
-        }
-   }
-   return $current_user;
- }
-
  function find_group_level($level) {
    global $db;
    $sql = "SELECT `user_level` FROM `user_groups` WHERE `user_level` = '{$db->escape($level)}' LIMIT 1";
@@ -85,23 +63,92 @@
    return ($db->num_rows($result) === 0 ? true : false);
  }
 
- function page_require_level($require_level) {
-   global $session;
-   $current_user = current_user();
-   $login_level = find_by_group_level($current_user['user_level']);
-   // if user not login
-   if (!$session->isUserLoggedIn(true)) {
-        $session->msg('d', 'Please login...');
-        redirect('index', false);
-   } elseif($login_level['user_status'] === '0') {
-        $session->msg('d', 'You have logged in successfully!');
-        redirect('dashboard', false);
-   } elseif($current_user['user_level'] <= (int)$require_level) {
-        return true;
-   } else {
-        $session->msg('d', 'You have no access on this page');
-        redirect('dashboard', false);
+ function current_user() {
+   static $current_user;
+   global $db;
+   if (!$current_user) {
+        if (isset($_SESSION['user_id'])) {
+           $user_id = intval($_SESSION['user_id']);
+           $current_user = find_by_id('user_account', $user_id);
+        }
    }
+   return $current_user;
+ }
+
+ function find_by_id($table, $id) {
+   global $db;
+   $id = (int)$id;
+   if(table_exist($table)) {
+     $sql = $db->query("SELECT * FROM {$db->escape($table)} WHERE id='{$db->escape($id)} LIMIT 1'");
+     if ($result = $db->fetch_assoc($sql)) {
+       return $result;
+     } else {
+       return null;
+     }
+   }
+ }
+
+ function insertUserAccount($full_name, $email_address, $password, $file_path_name) {
+   global $db;
+
+   $sql = "INSERT IGNORE INTO `user_account`(
+     `name`,`email_address`,`password`,`user_level`,`image`,`status`)";
+   $sql .= " VALUES ";
+   $sql .= "(
+     '{$full_name}',
+     '{$email_address}',
+     '{$password}',
+     '3',
+     '{$file_path_name}',
+     '0')";
+   $db->query($sql);
+ }
+
+ function insertStudentAccount($full_name, $email_address, $course,
+     $year, $gender, $age, $birth_date, $present_address) {
+     global $db;
+
+       $sql = "INSERT IGNORE INTO `student_info`(`name`,`email_address`,`course`
+         ,`student_year`,`gender`,`age`
+         ,`birth_date`,`present_address`)";
+       $sql .= " VALUES ";
+       $sql .= "(
+         '{$full_name}',
+         '{$email_address}',
+         '{$course}',
+         '{$year}',
+         '{$gender}',
+         '{$age}',
+         '{$birth_date}',
+         '{$present_address}'
+         )";
+       $db->query($sql);
+ }
+
+ function authentication($email_address = '', $password = '') {
+   global $db;
+   $email_address = $db->escape($email_address);
+   $password = $db->escape($password);
+   $sql = sprintf("SELECT * FROM `user_account` WHERE `email_address` =
+     '%s' LIMIT 1", $email_address);
+   // $sql = "SELECT * FROM `user_account` WHERE `email_address` = '{$email_address}' LIMIT 1";
+   $result = $db->query($sql);
+   if ($db->num_rows($result)) {
+     $command = $db->fetch_assoc($result);
+     $password_post = sha1($password);
+     if ($password_post === $command['password']) {
+       return $command;
+     }
+   }
+   return false;
+ }
+
+ function update_last_login($user_id) {
+   global $db;
+   $date = make_date();
+   $sql = "UPDATE `user_account` SET `last_login` = '{$date}' WHERE `id` = '{$user_id}' LIMIT 1";
+   $result = $db->query($sql);
+   return ($result && $db->affected_rows() === 1 ? true : false);
  }
 
 ?>
