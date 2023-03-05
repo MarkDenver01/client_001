@@ -1,9 +1,17 @@
+<?php
+  error_reporting(E_ALL);
+  ini_set('display_errors', '1');
+?>
+<?php require_once('../lib/class.environment.php'); ?>
+<?php
+  if ($_ENV['SITE_INSTALLATION_COMPLETED'] == false) {
+    redirect('../maintenace');
+  }
+?>
 <?php include('../header.php'); ?>
 <?php include('../includes/load.php'); ?>
-
 <?php onClickButton("button_create", "./register_student_account"); ?>
 <?php include('../start_menu_bar.php'); ?>
-
 <main id="main" class="main">
   <div class="pagetitle">
     <h1>Student Information</h1>
@@ -15,8 +23,7 @@
     </nav>
   </div><!-- End Page Title -->
 
-<section class="section dashboard">
-  <div class="row">
+<section class="section">
     <div class="row">
       <!-- start create account -->
       <div class="card">
@@ -25,107 +32,41 @@
 
           <!-- General Form Elements -->
           <form class="row g-3" method="POST" action="">
-            <div class="col-md-6">
-              <label for="yourUsername" class="form-label">Search email address</label>
-              <div class="input-group has-validation">
-                <input type="text" name="username" class="form-control" id="yourUsername">
-                <hr/>
-                <span class="input-group-text">
-                  <i class="bx bx-search-alt-2" id="toggleCurrentPassword" style="cursor: pointer"></i>
-                </span>
-              </div>
-            </div>
-            <div class="col-md-6">
-            </div>
             <div class="col-md-12">
               <div class="card">
                 <div class="card-body">
                   <!-- Table with hoverable rows -->
-                  <table class="table table-hover">
+                  <table class="table table-sm table-hover datatable">
                     <thead>
                       <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Age</th>
-                        <th scope="col">Gender</th>
-                        <th scope="col">Birthday</th>
-                        <th scope="col">Address</th>
-                        <th scope="col">Year</th>
-                        <th scope="col">Course</th>
-                        <th scope="col">Action</th>
+                        <th scope="col" class="text-center" style="width: 15%;">Name</th>
+                        <th scope="col" class="text-center" style="width: 50px;">Age</th>
+                        <th scope="col" class="text-center" style="width: 50px;">Gender</th>
+                        <th scope="col" class="text-center" style="width: 15%;">Birthday</th>
+                        <th scope="col" class="text-center" style="width: 15%;">Address</th>
+                        <th scope="col" class="text-center" style="width: 15%;">Year</th>
+                        <th scope="col" class="text-center" style="width: 15%;">Course</th>
+                        <th scope="col" class="text-center" style="width: 15%;">Action</th>
                       </tr>
                     </thead>
                     <tbody>
+                      <?php $students = find_all_data("student_info"); ?>
+                      <?php foreach($students as $student): ?>
                       <tr>
-                        <th scope="row">1</th>
-                        <td>Denver Gregorio</td>
-                        <td>31</td>
-                        <td>Male</td>
-                        <td>1991-12-31</td>
-                        <td>Tanauan City, Batangas</td>
-                        <td>4th Year</td>
-                        <td>B.S. Information Technology</td>
-                        <td>
+                        <th scope="row" class="text-center" style="width: 15%;"><?php echo remove_junk($student['name']); ?></th>
+                        <td class="text-center" style="width: 5%;"><?php echo remove_junk($student['age']); ?></td>
+                        <td class="text-center" style="width: 5%;"><?php echo remove_junk($student['gender']); ?></td>
+                        <td class="text-center" style="width: 10%;"><?php echo remove_junk($student['birth_date']); ?></td>
+                        <td class="text-center" style="width: 20%;"><?php echo remove_junk($student['present_address']); ?></td>
+                        <td class="text-center" style="width: 10%;"><?php echo remove_junk($student['student_year']); ?></td>
+                        <td class="text-center" style="width: 15%;"><?php echo remove_junk($student['course']); ?></td>
+                        <td class="text-center" style="width: 15%;">
+                          <br/>
                           <button type="button" class="btn btn-primary rounded-pill btn-sm" data-bs-toggle="modal" data-bs-target="#update_account">Update</button>
-                          <button type="button" class="btn btn-danger rounded-pill btn-sm">Delete</button>
+                          <a href="../includes/delete_student?email_address=<?php echo secure::encrypt(remove_junk($student['email_address'])); ?>" type="button" class="btn btn-danger rounded-pill btn-sm">Delete</button>
                         </td>
                       </tr>
-                      <tr>
-                        <th scope="row">2</th>
-                        <td>Denver Gregorio</td>
-                        <td>31</td>
-                        <td>Male</td>
-                        <td>1991-12-31</td>
-                        <td>Tanauan City, Batangas</td>
-                        <td>4th Year</td>
-                        <td>B.S. Information Technology</td>
-                        <td>
-                          <button type="button" class="btn btn-primary rounded-pill btn-sm">Update</button>
-                          <button type="button" class="btn btn-danger rounded-pill btn-sm">Delete</button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <th scope="row">3</th>
-                        <td>Denver Gregorio</td>
-                        <td>31</td>
-                        <td>Male</td>
-                        <td>1991-12-31</td>
-                        <td>Tanauan City, Batangas</td>
-                        <td>4th Year</td>
-                        <td>B.S. Information Technology</td>
-                        <td>
-                          <button type="button" class="btn btn-primary rounded-pill btn-sm">Update</button>
-                          <button type="button" class="btn btn-danger rounded-pill btn-sm">Delete</button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <th scope="row">4</th>
-                        <td>Denver Gregorio</td>
-                        <td>31</td>
-                        <td>Male</td>
-                        <td>1991-12-31</td>
-                        <td>Tanauan City, Batangas</td>
-                        <td>4th Year</td>
-                        <td>B.S. Information Technology</td>
-                        <td>
-                          <button type="button" class="btn btn-primary rounded-pill btn-sm">Update</button>
-                          <button type="button" class="btn btn-danger rounded-pill btn-sm">Delete</button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <th scope="row">5</th>
-                        <td>Denver Gregorio</td>
-                        <td>31</td>
-                        <td>Male</td>
-                        <td>1991-12-31</td>
-                        <td>Tanauan City, Batangas</td>
-                        <td>4th Year</td>
-                        <td>B.S. Information Technology</td>
-                        <td>
-                          <button type="button" class="btn btn-primary rounded-pill btn-sm">Update</button>
-                          <button type="button" class="btn btn-danger rounded-pill btn-sm">Delete</button>
-                        </td>
-                      </tr>
+                      <?php endforeach; ?>
                     </tbody>
                   </table>
                   <!-- End Table with hoverable rows -->
@@ -146,5 +87,5 @@
       </div>
       <!-- end create account -->
     </div>
-
+</section>
 <?php include('../footer.php'); ?>

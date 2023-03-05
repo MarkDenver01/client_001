@@ -1,8 +1,17 @@
+<?php require_once('../lib/class.environment.php'); ?>
+<?php
+  if ($_ENV['SITE_INSTALLATION_COMPLETED'] == false) {
+    redirect('../maintenance');
+  }
+?>
+<?php
+  error_reporting(E_ALL);
+  ini_set('display_errors', '1');
+?>
 <?php include('../header.php'); ?>
 <?php include('../includes/load.php'); ?>
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
+
     // button back
     onClickButton("button_back", "./view_student_account");
     // upload image & save account info
@@ -62,7 +71,8 @@ ini_set('display_errors', '1');
               </ul>
                 <br/>
                 <div class="tab-content pt-2" id="profile-edit">
-
+                  <?php echo display_message($msg); ?>
+                  <br/>
                   <!-- Profile Edit Form -->
                     <div class="row mb-3">
                       <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Full Name</label>

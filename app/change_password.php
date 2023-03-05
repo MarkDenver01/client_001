@@ -1,4 +1,9 @@
 <?php require_once('../lib/class.environment.php'); ?>
+<?php
+  if ($_ENV['SITE_INSTALLATION_COMPLETED'] == false) {
+    header('location:../maintenance');
+  }
+?>
 <?php include('../header.php'); ?>
 <main style="background-image:url('./images/background_3.jpg');">
   <div class="container">

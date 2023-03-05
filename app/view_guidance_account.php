@@ -1,4 +1,11 @@
+<?php require_once('../lib/class.environment.php'); ?>
+<?php
+  if ($_ENV['SITE_INSTALLATION_COMPLETED'] == false) {
+    redirect('../maintenance');
+  }
+?>
 <?php include('../header.php'); ?>
+<?php include('../includes/load.php'); ?>
 <?php include('../start_menu_bar.php'); ?>
 
 <main id="main" class="main">

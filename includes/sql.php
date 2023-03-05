@@ -3,13 +3,6 @@
   ini_set('display_errors', '1');
 ?>
 <?php
- function find_all($table) {
-   global $db;
-   if (table_exist($table)) {
-     return find_by_sql("SELECT * FROM ".$db->escape($table));
-   }
- }
-
  function table_exist($table) {
    global $db;
    $tableExist = $db->query('SHOW TABLES FROM ' .DB_NAME. ' LIKE "'.$db->escape($table). '"');
@@ -26,7 +19,13 @@
    global $db;
    $result = $db->query($sql);
    $result_set = $db->while_loop($result);
-   return $return_set;
+   return $result_set;
+ }
+
+ function find_all_data($table) {
+   global $db;
+   $sql = "SELECT * FROM " .$db->escape($table). " ORDER BY `id` DESC";
+   return find_by_sql($sql);
  }
 
  function delete_by_id($table, $id) {
@@ -34,6 +33,17 @@
    if(table_exist($table)) {
      $sql = "DELETE FROM ".$db->escape($table);
      $sql .= " WHERE id=" .$db->escape($id);
+     $sql .= " LIMIT 1";
+     $db->query($sql);
+     return ($db->affected_rows() === 1) ? true : false;
+   }
+ }
+
+ function delete_by_email($table, $email_address) {
+   global $db;
+   if(table_exist($table)) {
+     $sql = "DELETE FROM " .$table;
+     $sql .= " WHERE email_address=" .$email_address;
      $sql .= " LIMIT 1";
      $db->query($sql);
      return ($db->affected_rows() === 1) ? true : false;
@@ -79,7 +89,19 @@
    global $db;
    $id = (int)$id;
    if(table_exist($table)) {
-     $sql = $db->query("SELECT * FROM {$db->escape($table)} WHERE id='{$db->escape($id)} LIMIT 1'");
+     $sql = $db->query("SELECT * FROM {$db->escape($table)} WHERE `id`='{$db->escape($id)} LIMIT 1'");
+     if ($result = $db->fetch_assoc($sql)) {
+       return $result;
+     } else {
+       return null;
+     }
+   }
+ }
+
+ function find_by_field($table, $field, $value) {
+   global $db;
+   if (table_exist($table)) {
+     $sql = $db->query("SELECT * FROm {$db->escape($table)} WHERE {$db->escape($field)} = '{$value}' LIMIT 1");
      if ($result = $db->fetch_assoc($sql)) {
        return $result;
      } else {
@@ -90,14 +112,14 @@
 
  function insertUserAccount($full_name, $email_address, $password, $file_path_name) {
    global $db;
-
-   $sql = "INSERT IGNORE INTO `user_account`(
+   $encrypt_password = sha1($password);
+   $sql = "INSERT INTO `user_account`(
      `name`,`email_address`,`password`,`user_level`,`image`,`status`)";
    $sql .= " VALUES ";
    $sql .= "(
      '{$full_name}',
      '{$email_address}',
-     '{$password}',
+     '{$encrypt_password}',
      '3',
      '{$file_path_name}',
      '0')";
@@ -108,7 +130,7 @@
      $year, $gender, $age, $birth_date, $present_address) {
      global $db;
 
-       $sql = "INSERT IGNORE INTO `student_info`(`name`,`email_address`,`course`
+       $sql = "INSERT INTO `student_info`(`name`,`email_address`,`course`
          ,`student_year`,`gender`,`age`
          ,`birth_date`,`present_address`)";
        $sql .= " VALUES ";
@@ -122,7 +144,7 @@
          '{$birth_date}',
          '{$present_address}'
          )";
-       $db->query($sql);
+         $db->query($sql);
  }
 
  function authentication($email_address = '', $password = '') {
@@ -151,4 +173,10 @@
    return ($result && $db->affected_rows() === 1 ? true : false);
  }
 
+ function update_last_login_status($user_id, $is_logged_in) {
+   global $db;
+   $sql = "UPDATE `user_account` SET `is_logged_in` ='{$is_logged_in}' LIMIT 1";
+   $result = $db->query($sql);
+   return ($result && $db->affected_rows() === 1 ? true : false);
+ }
 ?>

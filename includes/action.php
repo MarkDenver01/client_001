@@ -1,3 +1,4 @@
+<?php require_once('../lib/class.environment.php'); ?>
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
@@ -18,6 +19,7 @@ function addStudentAccount($button_name,
                            $age,
                            $birth_date,
                            $present_address) {
+    global $session;
     $req_fields = array(
       $full_name,
       $email_address,
@@ -42,23 +44,24 @@ function addStudentAccount($button_name,
         $upload_status = 1;
       } else {
         $upload_status = 0;
+        $session->message("d", "Sorry, we cannot allow to upload the image due to over sizing.");
       }
     }
 
     // check if file already exists
     if(file_exists($target_file)) {
       $update_status = 0;
+      $session->message("d", "Sorry, but the image is already exist in the storage.");
     }
 
     // check file size
     if ($_FILES[$file_path_name]["size"] > 500000) {
       $upload_status = 0;
+        $session->message("d", "Sorry, but the image file size is over 5mb");
     } else {
-      debug_mode("isUserAccountEmailExist: " .(isUserAccountEmailExist($email_address) ? "true" : "false"));
-      debug_mode("isStudentEmailExist: " .(isStudentEmailExist($email_address) ? "true" : "false"));
-      if (isUserAccountEmailExist($email_address) || isStudentEmailExist($email_address)) {
-        echo '<script type="text/javascript">alert("Account is already exist!");
-        window.location="../app/register_student_account";</script>';
+      if (find_by_field("user_account","email_address", remove_junk($_POST[$email_address]))
+      || find_by_field("student_info","email_address", remove_junk($_POST[$email_address]))) {
+        $session->message("d", "Account is already existing.");
       } else {
         if (move_uploaded_file($_FILES[$file_path_name]["tmp_name"], $target_file)) {
           $file = $_FILES[$file_path_name]["name"];
@@ -80,10 +83,9 @@ function addStudentAccount($button_name,
                 remove_junk($_POST[$birth_date]),
                 remove_junk($_POST[$present_address])
             );
-
-            debug_mode("create student account: success");
-            echo '<script type="text/javascript">alert("Student account has been registered!");
-            window.location="../app/view_student_account";</script>';
+            redirect('view_student_account', false);
+          } else {
+            $session->message("d", $errors);
           }
         }
       }
@@ -105,12 +107,18 @@ function login($email_address, $password) {
       $session->login($is_check_user['id']);
       // update signi in time
       update_last_login($is_check_user['id']);
+      // update logged in status
+      update_last_login_status($is_check_user['id'], '1');
       // redirect user to respective pages by user level
       if ($is_check_user['status'] === '1') {
         if ( $is_check_user['user_level'] === '1'
           || $is_check_user['user_level'] === '2'
           || $is_check_user['user_level'] === '3') {
-          redirect('dashboard', false);
+          if ($is_check_user['is_logged_in'] === '1') {
+            redirect('dashboard', false);
+          } else {
+            redirect('login', false);
+          }
         } else {
           $session->message("d", "Sorry cannot find your account. Please contact the administrator.");
           redirect('login', false);
@@ -128,21 +136,38 @@ function login($email_address, $password) {
   }
 }
 
-function page_require_level($required_level) {
-  global $session;
-  $current_user = current_user();
-  $login_level = find_group_level($current_user['user_level']);
-  if (!$session->is_user_logging_in(true)) {
-    $session->message('d', 'Please login...');
-    redirect('index.php', false);
-  } else if($login_level['user_status'] === '0') {
-    $session->message('d','This level user has been band.');
-    redirect('dashboard.php', false);
-  } elseif ($current_user['user_level'] <= (int) $required_level) {
-    return true;
+function user_level_checker() {
+  if (empty($errors)) {
+    $current_user = current_user();
+    echo $current_user;
+    if ($current_user['is_logged_in'] === '0') {
+      redirect('login', false);
+    } else {
+      if ($current_user['user_level'] === '2') { // admin user level
+        redirect('login', false);
+      }
+    }
   } else {
-    $session->message('d', 'Sorry. You dont have permission to view the page');
-    redirect('dashboard.php', false);
+    redirect('login', false);
   }
 }
+
+function check_user_level() {
+  $current_user = current_user();
+  if ($current_user['user_level'] === NULL) {
+    redirect ('login', false);
+  } else {
+
+    if ($current_user['user_level'] === '2' || $current_user['user_level'] === '3') {
+        echo $current_user['user_level'];
+      redirect('dashboard', false);
+    } elseif ($current_user['userl_level'] === '1') {
+        echo $current_user['user_level'];
+    } else {
+     redirect ('login', false);
+    }
+  }
+}
+
+
 ?>

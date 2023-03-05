@@ -49,8 +49,8 @@ $db_sql_3[] = "CREATE TABLE `student_info` (
   `name` varchar(255) NOT NULL,
   `email_address` varchar(255) NOT NULL,
   `course` varchar(255) NOT NULL,
-  `year` varchar(255) NOT NULL,
-  `gender` int(11),
+  `student_year` varchar(255) NOT NULL,
+  `gender` varchar(120) NOT NULL,
   `age` int(32),
   `birth_date` varchar(255),
   `present_address` varchar(255)

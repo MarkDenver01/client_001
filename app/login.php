@@ -1,4 +1,3 @@
-<?php ob_start(); ?>
 <?php include('../header.php'); ?>
 <?php include_once('../includes/load.php'); ?>
 <?php if($session->is_user_logging_in()) redirect('dashboard', false); ?>
