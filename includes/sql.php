@@ -179,7 +179,7 @@
 
  function update_last_login_status($user_id, $is_logged_in) {
    global $db;
-   $sql = "UPDATE `user_account` SET `is_logged_in` ='{$is_logged_in}' LIMIT 1";
+   $sql = "UPDATE `user_account` SET `is_logged_in` ='{$is_logged_in}' WHERE `id` ='{$user_id}' LIMIT 1";
    $result = $db->query($sql);
    return ($result && $db->affected_rows() === 1 ? true : false);
  }

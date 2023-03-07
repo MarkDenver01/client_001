@@ -223,114 +223,15 @@
 
 <!-- ======= Sidebar ======= -->
 <aside id="sidebar" class="sidebar">
-
   <ul class="sidebar-nav" id="sidebar-nav">
-
-    <li class="nav-item">
-      <a class="nav-link " href="./dashboard">
-        <i class="bi bi-grid"></i>
-        <span>Dashboard</span>
-      </a>
-    </li><!-- End Dashboard Nav -->
-
-    <li class="nav-item">
-      <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-person"></i>
-        <span>Profiling</span><i class="bi bi-chevron-down ms-auto"></i>
-      </a>
-      <ul id="forms-nav" class="nav-content collapsed" data-bs-parent="#sidebar-nav">
-        <li>
-          <a href="./view_student_account">
-            <i class="bi bi-circle"></i><span>Student account</span>
-          </a>
-        </li>
-        <li>
-          <a href="./view_guidance_account">
-            <i class="bi bi-circle"></i><span>Guidance account</span>
-          </a>
-        </li>
-      </ul>
-    </li><!-- End Dashboard Nav -->
-
-<?php
-  if($current_user['user_level'] === '2') {
-echo "
-    <li class='nav-item'>
-      <a class='nav-link collapsed' data-bs-target='#tables-nav' data-bs-toggle='collapse' href='#'>
-        <i class='ri-service-fill'></i>
-        <span>Test Services</span><i class='bi bi-chevron-down ms-auto'></i>
-      </a>
-      <ul id='tables-nav' class='nav-content collapse ' data-bs-parent='#sidebar-nav'>
-        <li>
-          <a href='#'>
-            <i class='bi bi-circle'></i><span>First Year</span>
-          </a>
-        </li>
-        <li>
-          <a href='#'>
-            <i class='bi bi-circle'></i><span>Second Year</span>
-          </a>
-        </li>
-        <li>
-          <a href='#''>
-            <i class='bi bi-circle'></i><span>Third Year</span>
-          </a>
-        </li>
-        <li>
-          <a href='#'>
-            <i class='bi bi-circle'></i><span>Fourth Year</span>
-          </a>
-        </li>
-      </ul>
-    </li><!-- End Dashboard Nav -->";
-  }
-?>
-<?php
-  if ($current_user['user_level'] === '2') {
-  echo "
-    <li class='nav-item'>
-      <a class='nav-link collapsed' href='#'>
-        <i class='bi bi-people'></i>
-        <span>Scheduling</span>
-      </a>
-    </li><!-- End Dashboard Nav -->";
-  }
-?>
-<?php
-  if ($current_user['user_level'] === '2') {
-   echo "
-    <li class='nav-item'>
-      <a class='nav-link collapsed' href='#'>
-        <i class='ri-folder-2-fill'></i>
-        <span>Files and Documents</span>
-      </a>
-    </li><!-- End Dashboard Nav -->
-    ";
-  }
-?>
-<?php
-  if($current_user['user_level'] === '2') {
-   echo "
-    <li class='nav-item'>
-      <a class='nav-link collapsed' href='#'>
-        <i class='ri-book-2-fill'></i>
-        <span>Generated Reports</span>
-      </a>
-    </li><!-- End Dashboard Nav -->
-    ";
-  }
-?>
-<?php
-  if($current_user['user_level'] === '1') {
-   echo "
-    <li class='nav-item'>
-      <a class='nav-link collapsed' href='#'>
-        <i class='ri-artboard-line'></i>
-        <span>Announcement</span>
-      </a>
-    </li><!-- End Dashboard Nav -->
-    ";
-  }
-?>
-
-  </aside><!-- End Sidebar-->
+    <?php
+      if ($current_user['user_level'] === '1') {
+        include_once('admin_menu.php');
+      } elseif ($current_user['user_level'] === '2') {
+        include_once('guidance_menu.php');
+      } elseif ($current_user['user_level'] === '3') {
+        include_once('student_menu.php');
+      }
+    ?>
+  </ul>
+</aside><!-- End Sidebar-->

@@ -32,7 +32,7 @@ function addStudentAccount($button_name,
     );
     validate_fields($req_fields); // check if fields are not empty
 
-    $target_dir = ".\uploads\users\ ";
+    $target_dir = "C:\wamp64\www\client_001\uploads\users";
     $target_file = $target_dir . basename($_FILES[$file_path_name]["name"]);
     $upload_status = 1;
     $image_file_type = pathinfo($target_file, PATHINFO_EXTENSION);
@@ -103,27 +103,25 @@ function login($email_address, $password) {
     $is_check_user = authentication($email_address, $password);
 
     if ($is_check_user) {
-      // create session with id
-      $session->login($is_check_user['id']);
-      // update signi in time
-      update_last_login($is_check_user['id']);
-      // update logged in status
-      update_last_login_status($is_check_user['id'], '1');
       // redirect user to respective pages by user level
       if ($is_check_user['status'] === '1') {
         if ( $is_check_user['user_level'] === '1'
           || $is_check_user['user_level'] === '2'
           || $is_check_user['user_level'] === '3') {
-          if ($is_check_user['is_logged_in'] === '1') {
+            // create session with id
+            $session->login($is_check_user['id']);
+
+            // update signi in time
+            update_last_login($is_check_user['id']);
+
+            // update logged in status
+            update_last_login_status($is_check_user['id'], '1');
             redirect('dashboard', false);
-          } else {
-            redirect('login', false);
-          }
         } else {
           $session->message("d", "Sorry cannot find your account. Please contact the administrator.");
           redirect('login', false);
         }
-      } else {
+      } elseif($is_check_user['status'] === '0') {
         redirect('change_password', false);
       }
     } else {
