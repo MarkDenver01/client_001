@@ -1,8 +1,4 @@
 <?php
-  error_reporting(E_ALL);
-  ini_set('display_errors', '1');
-?>
-<?php
  function table_exist($table) {
    global $db;
    $tableExist = $db->query('SHOW TABLES FROM ' .DB_NAME. ' LIKE "'.$db->escape($table). '"');
@@ -28,6 +24,15 @@
    return find_by_sql($sql);
  }
 
+ function find_by_student() {
+   global $db;
+   $sql = "SELECT s.id, s.name, s.course, s.student_year, s.gender, s.age, s.birth_date, s.present_address, s.email_address, a.password AS studentInfo,";
+   $sql .= " a.user_level, a.image, a.status, a.is_logged_in AS studentAccount FROM ";
+   $sql .= " student_info s LEFT JOIN user_account a ";
+   $sql .= " ON s.email_address = a.email_address ORDER BY s.id DESC";
+   return find_by_sql($sql);
+ }
+
  function delete_by_id($table, $id) {
    global $db;
    if(table_exist($table)) {
@@ -42,9 +47,8 @@
  function delete_by_email($table, $email_address) {
    global $db;
    if(table_exist($table)) {
-     $sql = "DELETE FROM " .$table;
-     $sql .= " WHERE email_address=" .$email_address;
-     $sql .= " LIMIT 1";
+     $sql = "DELETE FROM ".$db->escape($table);
+     $sql .= " WHERE email_address='" .$db->escape($email_address). "' LIMIT 1";
      $db->query($sql);
      return ($db->affected_rows() === 1) ? true : false;
    }

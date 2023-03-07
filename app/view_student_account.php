@@ -12,6 +12,7 @@
 <?php include('../includes/load.php'); ?>
 <?php onClickButton("button_create", "./register_student_account"); ?>
 <?php include('../start_menu_bar.php'); ?>
+
 <main id="main" class="main">
   <div class="pagetitle">
     <h1>Student Information</h1>
@@ -22,6 +23,7 @@
       </ol>
     </nav>
   </div><!-- End Page Title -->
+
 
 <section class="section">
     <div class="row">
@@ -50,10 +52,11 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <?php $students = find_all_data("student_info"); ?>
+                      <?php $students = find_by_student(); ?>
                       <?php foreach($students as $student): ?>
                       <tr>
-                        <th scope="row" class="text-center" style="width: 15%;"><?php echo remove_junk($student['name']); ?></th>
+                        <td id="<?php echo remove_junk($student['id']); ?>" scope="row" class="text-center" style="width: 5%;" hidden>
+                        <th data-target="name" scope="row" class="text-center" style="width: 15%;"><?php echo remove_junk($student['name']); ?></th>
                         <td class="text-center" style="width: 5%;"><?php echo remove_junk($student['age']); ?></td>
                         <td class="text-center" style="width: 5%;"><?php echo remove_junk($student['gender']); ?></td>
                         <td class="text-center" style="width: 10%;"><?php echo remove_junk($student['birth_date']); ?></td>
@@ -62,14 +65,16 @@
                         <td class="text-center" style="width: 15%;"><?php echo remove_junk($student['course']); ?></td>
                         <td class="text-center" style="width: 15%;">
                           <br/>
-                          <button type="button" class="btn btn-primary rounded-pill btn-sm" data-bs-toggle="modal" data-bs-target="#update_account">Update</button>
+                          <button type="button" name="button_edit" class="btn btn-primary rounded-pill btn-sm w-50"  data-bs-toggle="modal" data-bs-target="#ExtralargeModal<?php echo $student['id']; ?>"><span></span>Edit</button>
                           <a href="../includes/delete_student?email_address=<?php echo secure::encrypt(remove_junk($student['email_address'])); ?>" type="button" class="btn btn-danger rounded-pill btn-sm">Delete</button>
                         </td>
                       </tr>
+                      <?php include('./update_student_account.php'); ?>
                       <?php endforeach; ?>
                     </tbody>
                   </table>
                   <!-- End Table with hoverable rows -->
+
 
                 </div>
               </div>

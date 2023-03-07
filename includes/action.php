@@ -32,7 +32,7 @@ function addStudentAccount($button_name,
     );
     validate_fields($req_fields); // check if fields are not empty
 
-    $target_dir = "C:\wamp64\www\client_001\uploads\users";
+    $target_dir = ".\uploads\users\ ";
     $target_file = $target_dir . basename($_FILES[$file_path_name]["name"]);
     $upload_status = 1;
     $image_file_type = pathinfo($target_file, PATHINFO_EXTENSION);
@@ -135,6 +135,7 @@ function login($email_address, $password) {
     redirect('login', false);
   }
 }
+
 
 function user_level_checker() {
   if (empty($errors)) {
