@@ -1,9 +1,24 @@
+<?php
+if (isset($_POST["button_update"])) {
+    update_user_account(
+      "image_path",
+      "full_name",
+      "email_address",
+      "course",
+      "student_year",
+      "gender",
+      "age",
+      "birth_date",
+      "present_address"
+    );
+}
+?>
 <!-- view account -->
 <div class="modal fade" id="ExtralargeModal<?php echo $student['id']; ?>" aria-hidden="true" tabindex="-1">
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Stundet Information</h5>
+        <h5 class="modal-title">Student Information</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -21,14 +36,14 @@
                         $image_file_data = "";
                         if ($check_image != NUll) {
 
-                          $image_file_data = "./uploads/users".$check_image;
+                          $image_file_data = "./uploads/".$check_image;
                         } else {
                           $image_file_data = "./assets/img/profile.png";
                         }
                       ?>
-                      <img src="<?php echo $image_file_data; ?>" alt="Profile" class="rounded-circle">
+                      <img  src="<?php echo $image_file_data; ?>" alt="Profile" class="rounded-circle">
                     </br>
-                    <input type="file" class="form-control btn btn-primary rounded-pill btn-sm"></input>
+                    <input name="image_path" type="file" class="form-control btn btn-primary rounded-pill btn-sm" value="<?php echo $image_file_data; ?>"></input>
                   </div>
                 </div>
 
@@ -51,14 +66,14 @@
                         <div class="row mb-3">
                           <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Full Name</label>
                           <div class="col-md-8 col-lg-9">
-                            <input name="name" type="text" class="form-control" id="fullName" value="<?php echo $student['name']; ?>">
+                            <input name="full_name" type="text" class="form-control" id="fullName" value="<?php echo $student['name']; ?>">
                           </div>
                         </div>
 
                         <div class="row mb-3">
                           <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Email</label>
                           <div class="col-md-8 col-lg-9">
-                            <input name="email" type="email" class="form-control" id="fullName" value="<?php echo $student['email_address']; ?>" disabled>
+                            <input name="email_address" type="email" class="form-control" id="fullName" value="<?php echo $student['email_address']; ?>" >
                           </div>
                         </div>
 
@@ -95,9 +110,16 @@
                         </div>
 
                         <div class="row mb-3">
+                          <label for="birth_date" class="col-md-4 col-lg-3 col-form-label">Birth date</label>
+                          <div class="col-md-8 col-lg-9">
+                            <input name="birth_date" type="date" class="form-control" id="birth_date" value="<?php echo $student['birth_date']; ?>">
+                          </div>
+                        </div>
+
+                        <div class="row mb-3">
                           <label for="about" class="col-md-4 col-lg-3 col-form-label">Present Address</label>
                           <div class="col-md-8 col-lg-9">
-                            <textarea name="address" class="form-control" id="about" style="height: 100px"><?php echo $student['present_address']; ?></textarea>
+                            <textarea name="present_address" class="form-control" id="about" style="height: 100px"><?php echo $student['present_address']; ?></textarea>
                           </div>
                         </div>
 
@@ -117,7 +139,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <input type="button" name="submit" class="btn btn-primary" value="Edit Account"></input>
+        <input type="submit" name="button_update" class="btn btn-primary" value="Update Account"></input>
       </div>
     </form><!-- End floating Labels Form -->
   </div>

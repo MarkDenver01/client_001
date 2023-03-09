@@ -169,6 +169,32 @@
    return false;
  }
 
+ function updateUsertAccount($full_name, $email_address, $file_path_name) {
+   global $db;
+   $sql = "UPDATE `user_account` SET
+   `name` ='{$full_name}',
+   `image` ='{$file_path_name}' WHERE `email_address`='{$email_address}'";
+   $result = $db->query($sql);
+   return ($result && $db->affected_rows() === 1 ? true : false);
+ }
+
+ function updateStudentInfo($full_name, $email_address, $course,
+     $year, $gender, $age, $birth_date, $present_address) {
+     global $db;
+
+     $sql = "UPDATE `student_info` SET
+      `name`='{$full_name}',
+      `email_address`='{$email_address}',
+      `course` ='{$course}',
+      `student_year` ='{$year}',
+      `gender` ='{$gender}',
+      `age` ='{$age}',
+      `birth_date` ='{$birth_date}',
+      `present_address` ='{$present_address}' WHERE `email_address` ='{$email_address}'";
+      $result = $db->query($sql);
+      return ($result && $db->affected_rows() === 1 ? true : false);
+ }
+
  function update_last_login($user_id) {
    global $db;
    $date = make_date();

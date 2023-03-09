@@ -134,6 +134,41 @@ function login($email_address, $password) {
   }
 }
 
+function update_user_account(
+  $file_path_name,
+  $full_name,
+  $email_address,
+  $course,
+  $year,
+  $gender,
+  $age,
+  $birth_date,
+  $present_address
+) {
+  $is_student_account = updateUsertAccount(
+    remove_junk($_POST[$full_name]),
+    remove_junk($_POST[$email_address]),
+    remove_junk($_POST[$file_path_name])
+  );
+
+  $is_user_account = updateStudentInfo(
+    remove_junk($_POST[$full_name]),
+    remove_junk($_POST[$email_address]),
+    remove_junk($_POST[$course]),
+    remove_junk($_POST[$year]),
+    remove_junk($_POST[$gender]),
+    remove_junk($_POST[$age]),
+    remove_junk($_POST[$birth_date]),
+    remove_junk($_POST[$present_address])
+  );
+
+  if ($is_student_account && $is_user_account) {
+    redirect('../app/view_student_account', false);
+  } else {
+    redirect('../app/update_student_account', false);
+  }
+}
+
 
 function user_level_checker() {
   if (empty($errors)) {

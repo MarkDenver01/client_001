@@ -9,6 +9,7 @@
   }
 ?>
 <?php include('../header.php'); ?>
+<?php header("Refresh: 15"); ?>
 <?php include('../includes/load.php'); ?>
 <?php onClickButton("button_create", "./register_student_account"); ?>
 <?php include('../start_menu_bar.php'); ?>
