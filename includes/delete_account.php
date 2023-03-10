@@ -3,8 +3,6 @@
   $email_address = secure::decrypt($_GET['email_address']);
 
   $check_user_level = current_user_account("user_account", $email_address);
-  echo $email_address;
-  echo $check_user_level['user_level'];
 
   if ($check_user_level['user_level'] == 2) {
     echo "Guidance";
