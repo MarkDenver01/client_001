@@ -151,14 +151,13 @@
 
  function insertUserAccount($full_name, $email_address, $password, $level, $file_path_name) {
    global $db;
-   $encrypt_password = sha1($password);
    $sql = "INSERT INTO `user_account`(
      `name`,`email_address`,`password`,`user_level`,`image`,`status`)";
    $sql .= " VALUES ";
    $sql .= "(
      '{$full_name}',
      '{$email_address}',
-     '{$encrypt_password}',
+     '{$password}',
      '{$level}',
      '{$file_path_name}',
      '0')";
@@ -209,12 +208,11 @@
    $password = $db->escape($password);
    $sql = sprintf("SELECT * FROM `user_account` WHERE `email_address` =
      '%s' LIMIT 1", $email_address);
-   // $sql = "SELECT * FROM `user_account` WHERE `email_address` = '{$email_address}' LIMIT 1";
    $result = $db->query($sql);
    if ($db->num_rows($result)) {
      $command = $db->fetch_assoc($result);
      $password_post = sha1($password);
-     if ($password_post === $command['password']) {
+     if ($password_post == $command['password']) {
        return $command;
      }
    }
@@ -246,6 +244,21 @@
       $result = $db->query($sql);
       return ($result && $db->affected_rows() === 1 ? true : false);
  }
+
+ function updateGuidanceInfo($full_name, $email_address, $gender,
+    $age, $birth_date, $present_address) {
+      global $db;
+
+      $sql = "UPDATE `guidance_info` SET
+      `name`='{$full_name}',
+      `email_address` ='{$email_address}',
+      `gender` ='{$gender}',
+      `age` ='{$age}',
+      `birth_date` ='{$birth_date}',
+      `present_address` ='{$present_address}' WHERE `email_address` ='{$email_address}'";
+      $result = $db->query($sql);
+      return ($result && $db->affected_rows() === 1 ? true : false);
+  }
 
  function update_last_login($user_id) {
    global $db;

@@ -1,13 +1,13 @@
     <li class="nav-item">
       <a class="nav-link " href="./dashboard">
-        <i class="bi bi-grid"></i>
+        <i class="ri-dashboard-fill"></i>
         <span>Dashboard</span>
       </a>
     </li><!-- End Dashboard Nav -->
 
     <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-person"></i>
+        <i class="ri-map-pin-user-fill"></i>
         <span>Manage Accounts</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
       <ul id="forms-nav" class="nav-content collapsed" data-bs-parent="#sidebar-nav">

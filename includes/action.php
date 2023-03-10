@@ -199,7 +199,7 @@ function login($email_address, $password) {
             redirect('dashboard', false);
         } else {
           $session->message("d", "Sorry cannot find your account. Please contact the administrator.");
-          redirect('login', false);
+          //redirect('login', false);
         }
       } elseif($is_check_user['status'] === '0') {
         redirect('change_password', false);
@@ -214,7 +214,38 @@ function login($email_address, $password) {
   }
 }
 
-function update_user_account(
+function update_guidance_account(
+  $file_path_name,
+  $full_name,
+  $email_address,
+  $gender,
+  $age,
+  $birth_date,
+  $present_address
+) {
+  $is_user_account = updateUsertAccount(
+    remove_junk($_POST[$full_name]),
+    remove_junk($_POST[$email_address]),
+    remove_junk($_POST[$file_path_name])
+  );
+
+  $is_guidance_info = updateGuidanceInfo(
+    remove_junk($_POST[$full_name]),
+    remove_junk($_POST[$email_address]),
+    remove_junk($_POST[$gender]),
+    remove_junk($_POST[$age]),
+    remove_junk($_POST[$birth_date]),
+    remove_junk($_POST[$present_address])
+  );
+
+  if ($is_user_account && $is_guidance_info) {
+    redirect('../app/view_guidance_account', false);
+  } else {
+    redirect('../app/view_guidance_account', false);
+  }
+}
+
+function update_student_account(
   $file_path_name,
   $full_name,
   $email_address,
