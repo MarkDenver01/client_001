@@ -10,9 +10,9 @@
             <div class="card mb-3">
 
               <div class="card-body">
-
-                <h5 class="card-title">OTP Verification</h5>
                 
+                <h5 class="card-title">OTP Verification</h5>
+
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                   <p>We've e-mailed you a 6 digit code. Please check your e-mail and enter the OTP here to complete the verification</p>
                   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -36,7 +36,7 @@
                   <div class="col-8">
                     <h6><b>1/3</b> attempts - 125 seconds remaining</h6>
                   </div>
-                  
+
                   <div class="12">
                     <h6>Didn't receive the OPT? <a href="#" class="link-danger">Resend</a></h6>
                   </div>

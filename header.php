@@ -1,20 +1,12 @@
-<?php 
-  session_start();
-  require_once('../lib/class.environment.php');
-  if($_ENV['SITE_INSTALLATION_COMPLETED'] == false){
-    header('location:../installation');
-    exit;
-  }
-?>
+<?php require_once('../lib/class.environment.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
   <title>
-    <?= $_ENV['SITE_TITLE'] ?>
+    <?= $_ENV['SITE_TITLE']; ?>
   </title>
   <meta content="" name="description">
   <meta content="" name="keywords">
@@ -51,5 +43,4 @@
   <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 </head>
-
 <body>
