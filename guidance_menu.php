@@ -36,6 +36,13 @@
 
     <li class="nav-item">
       <a class="nav-link " href="#">
+        <i class="ri-calendar-2-fill"></i>
+        <span>Scheduling</span>
+      </a>
+    </li><!-- End Student Scheduling Progress Nav -->
+
+    <li class="nav-item">
+      <a class="nav-link " href="#">
         <i class="ri-artboard-line"></i>
         <span>Announcement</span>
       </a>

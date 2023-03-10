@@ -33,6 +33,15 @@
    return find_by_sql($sql);
  }
 
+ function find_by_guidance() {
+   global $db;
+   $sql = "SELECT g.id, g.name, g.gender, g.age, g.birth_date, g.present_address, g.email_address, a.password AS guidanceInfo,";
+   $sql .= " a.user_level, a.image, a.status, a.is_logged_in AS guidanceAccount FROM ";
+   $sql .= " guidance_info g LEFT JOIN user_account a ";
+   $sql .= " ON g.email_address = a.email_address ORDER BY g.id DESC";
+   return find_by_sql($sql);
+ }
+
  function delete_by_id($table, $id) {
    global $db;
    if(table_exist($table)) {
@@ -89,11 +98,37 @@
    return $current_user;
  }
 
+ function current_user_account($table, $field) {
+   global $db;
+   $table = $db->escape($table);
+   $field = $db->escape($field);
+   $sql = sprintf("SELECT * FROM `{$table}` WHERE `email_address` =
+     '%s' LIMIT 1", $field);
+   $result = $db->query($sql);
+   if ($db->num_rows($result)) {
+     $user = $db->fetch_assoc($result);
+     return $user;
+   }
+   return false;
+ }
+
  function find_by_id($table, $id) {
    global $db;
    $id = (int)$id;
    if(table_exist($table)) {
      $sql = $db->query("SELECT * FROM {$db->escape($table)} WHERE `id`='{$db->escape($id)} LIMIT 1'");
+     if ($result = $db->fetch_assoc($sql)) {
+       return $result;
+     } else {
+       return null;
+     }
+   }
+ }
+
+ function find_by_email($table, $email_address) {
+   global $db;
+   if(table_exist($table)) {
+     $sql = $db->query("SELECT * FROM {$db->escape($table)} WHERE `email_address`='{$db->escape($email_address)} LIMIT 1'");
      if ($result = $db->fetch_assoc($sql)) {
        return $result;
      } else {
@@ -114,7 +149,7 @@
    }
  }
 
- function insertUserAccount($full_name, $email_address, $password, $file_path_name) {
+ function insertUserAccount($full_name, $email_address, $password, $level, $file_path_name) {
    global $db;
    $encrypt_password = sha1($password);
    $sql = "INSERT INTO `user_account`(
@@ -124,7 +159,7 @@
      '{$full_name}',
      '{$email_address}',
      '{$encrypt_password}',
-     '3',
+     '{$level}',
      '{$file_path_name}',
      '0')";
    $db->query($sql);
@@ -143,6 +178,23 @@
          '{$email_address}',
          '{$course}',
          '{$year}',
+         '{$gender}',
+         '{$age}',
+         '{$birth_date}',
+         '{$present_address}'
+         )";
+         $db->query($sql);
+ }
+
+ function insertGuidanceAccount($full_name, $email_address, $gender, $age, $birth_date, $present_address) {
+     global $db;
+
+       $sql = "INSERT INTO `guidance_info`(`name`,`email_address`,`gender`,`age`
+         ,`birth_date`,`present_address`)";
+       $sql .= " VALUES ";
+       $sql .= "(
+         '{$full_name}',
+         '{$email_address}',
          '{$gender}',
          '{$age}',
          '{$birth_date}',

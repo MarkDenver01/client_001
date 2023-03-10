@@ -71,6 +71,7 @@ function addStudentAccount($button_name,
                 remove_junk($_POST[$full_name]),
                 remove_junk($_POST[$email_address]),
                 $default_password,
+                3,
                 $file);
 
             insertStudentAccount(
@@ -83,7 +84,7 @@ function addStudentAccount($button_name,
                 remove_junk($_POST[$birth_date]),
                 remove_junk($_POST[$present_address])
             );
-            redirect('view_student_account', false);
+            redirect('./view_student_account', false);
           } else {
             $session->message("d", $errors);
           }
@@ -91,6 +92,85 @@ function addStudentAccount($button_name,
       }
     }
 }
+
+
+function addGuidanceAccount($file_path_name,
+                           $full_name,
+                           $email_address,
+                           $gender,
+                           $age,
+                           $birth_date,
+                           $present_address) {
+    global $session;
+    $req_fields = array(
+      $full_name,
+      $email_address,
+      $gender,
+      $age,
+      $birth_date,
+      $present_address
+    );
+    validate_fields($req_fields); // check if fields are not empty
+
+    $target_dir = "C:\wamp64\www\client_001\uploads\users";
+    $target_file = $target_dir . basename($_FILES[$file_path_name]["name"]);
+    $upload_status = 1;
+    $image_file_type = pathinfo($target_file, PATHINFO_EXTENSION);
+
+    // check image file is actual image or a fake image
+    if (isset($_POST["button_save"])) {
+      $check = getimagesize($_FILES[$file_path_name]["tmp_name"]);
+      if($check != false) {
+        $upload_status = 1;
+      } else {
+        $upload_status = 0;
+        $session->message("d", "Sorry, we cannot allow to upload the image due to over sizing.");
+      }
+    }
+
+    // check if file already exists
+    if(file_exists($target_file)) {
+      $update_status = 0;
+      $session->message("d", "Sorry, but the image is already exist in the storage.");
+    }
+
+    // check file size
+    if ($_FILES[$file_path_name]["size"] > 500000) {
+      $upload_status = 0;
+        $session->message("d", "Sorry, but the image file size is over 5mb");
+    } else {
+      if (find_by_field("user_account","email_address", remove_junk($_POST[$email_address]))
+      || find_by_field("guidance_info","email_address", remove_junk($_POST[$email_address]))) {
+        $session->message("d", "Account is already existing.");
+      } else {
+        if (move_uploaded_file($_FILES[$file_path_name]["tmp_name"], $target_file)) {
+          $file = $_FILES[$file_path_name]["name"];
+          $default_password = sha1("default");
+          if (empty($errors)) {
+            insertUserAccount(
+                remove_junk($_POST[$full_name]),
+                remove_junk($_POST[$email_address]),
+                $default_password,
+                2,
+                $file);
+
+            insertGuidanceAccount(
+                remove_junk($_POST[$full_name]),
+                remove_junk($_POST[$email_address]),
+                remove_junk($_POST[$gender]),
+                remove_junk($_POST[$age]),
+                remove_junk($_POST[$birth_date]),
+                remove_junk($_POST[$present_address])
+            );
+            redirect('./view_guidance_account', false);
+          } else {
+            $session->message("d", $errors);
+          }
+        }
+      }
+    }
+}
+
 
 function login($email_address, $password) {
   global $session;

@@ -43,6 +43,7 @@
                     <thead>
                       <tr>
                         <th scope="col" class="text-center" style="width: 15%;">Name</th>
+                        <th scope="col" class="text-center" style="width: 5%;">Email address</th>
                         <th scope="col" class="text-center" style="width: 50px;">Age</th>
                         <th scope="col" class="text-center" style="width: 50px;">Gender</th>
                         <th scope="col" class="text-center" style="width: 15%;">Birthday</th>
@@ -58,16 +59,16 @@
                       <tr>
                         <td id="<?php echo remove_junk($student['id']); ?>" scope="row" class="text-center" style="width: 5%;" hidden>
                         <th data-target="name" scope="row" class="text-center" style="width: 15%;"><?php echo remove_junk($student['name']); ?></th>
+                        <td class="text-center" style="width: 5%;"><?php echo remove_junk($student['email_address']); ?></td>
                         <td class="text-center" style="width: 5%;"><?php echo remove_junk($student['age']); ?></td>
                         <td class="text-center" style="width: 5%;"><?php echo remove_junk($student['gender']); ?></td>
                         <td class="text-center" style="width: 10%;"><?php echo remove_junk($student['birth_date']); ?></td>
-                        <td class="text-center" style="width: 20%;"><?php echo remove_junk($student['present_address']); ?></td>
+                        <td class="text-center" style="width: 10%;"><?php echo remove_junk($student['present_address']); ?></td>
                         <td class="text-center" style="width: 10%;"><?php echo remove_junk($student['student_year']); ?></td>
-                        <td class="text-center" style="width: 15%;"><?php echo remove_junk($student['course']); ?></td>
+                        <td class="text-center" style="width: 10%;"><?php echo remove_junk($student['course']); ?></td>
                         <td class="text-center" style="width: 15%;">
-                          <br/>
                           <button type="button" name="button_edit" class="btn btn-primary rounded-pill btn-sm w-50"  data-bs-toggle="modal" data-bs-target="#ExtralargeModal<?php echo $student['id']; ?>"><span></span>Edit</button>
-                          <a href="../includes/delete_student?email_address=<?php echo secure::encrypt(remove_junk($student['email_address'])); ?>" type="button" class="btn btn-danger rounded-pill btn-sm">Delete</button>
+                          <a href="../includes/delete_account?email_address=<?php echo secure::encrypt(remove_junk($student['email_address'])); ?>" type="button" class="btn btn-danger rounded-pill btn-sm">Delete</button>
                         </td>
                       </tr>
                       <?php include('./update_student_account.php'); ?>
@@ -84,7 +85,7 @@
             </div>
 
             <div class="text-center">
-              <button type="submit" name="button_create" class="btn btn-success w-25" data-bs-toggle="modal" data-bs-target="#insert_student" >Create new account</button>
+              <button type="submit" name="button_create" class="btn btn-success w-25">Create new account</button>
             </div>
           </form><!-- End floating Labels Form -->
           <!-- End General Form Elements -->
