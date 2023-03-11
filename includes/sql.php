@@ -112,6 +112,38 @@
    return false;
  }
 
+ function find_guidance_login($email_address) {
+   global $db;
+   $email_address = $db->escape($email_address);
+   $sql = "SELECT `g`.`name` AS name, `g`.`gender` AS gender, `g`.`age` AS age,";
+   $sql .=" `g`.`birth_date` AS birth_date, `g`.`present_address` AS present_address,";
+   $sql .=" `u`.`email_address` AS email_address, `u`.`password` as password,";
+   $sql .=" `u`.`user_level` AS user_level, `u`.`image` AS image, `u`.`status` AS status,";
+   $sql .=" `u`.`is_logged_in` AS is_logged_in";
+   $sql .= " FROM `guidance_info` `g` LEFT JOIN `user_account` `u`";
+   $sql .= " ON `g`.`email_address` = `u`.`email_address`";
+   $sql .= " WHERE `u`.`email_address` = '{$email_address}' LIMIT 1";
+   $result = $db->query($sql);
+   if ($db->num_rows($result)) {
+     $user = $db->fetch_assoc($result);
+     return $user;
+   }
+   return false;
+ }
+
+ function find_student_login($email_address) {
+   global $db;
+   $email_address = $db-escape($email_address);
+   $sql ="SELECT `s`.`name` AS name, `s`.`course` AS course, `s`.`student_year` AS student_year,";
+   $sql .=" `s`.`gender` AS gender, `s`.`age` AS age, `s`.`birth_date` AS birth_date,";
+   $sql .=" `s`.`present_address` AS present_address, `u`.`email_address` AS email_address,";
+   $sql .=" `u`.`password` AS password, `u`.`user_level` AS user_level,";
+   $sql .=" `u`.`image` AS image, `u`.`status`, `u`.`is_logged_in`";
+   $sql .=" FROM `student_info` `s` LEFT JOIN `user_account` `u`";
+   $sql .=" ON `s`.`email_address` = `u`.`email_address`";
+   $sql .=" WHERE `u`.`email_address` ='{$email_address}' LIMIT 1";
+ }
+
  function find_by_id($table, $id) {
    global $db;
    $id = (int)$id;
@@ -260,17 +292,17 @@
       return ($result && $db->affected_rows() === 1 ? true : false);
   }
 
- function update_last_login($user_id) {
+ function update_last_login($email_address) {
    global $db;
    $date = make_date();
-   $sql = "UPDATE `user_account` SET `last_login` = '{$date}' WHERE `id` = '{$user_id}' LIMIT 1";
+   $sql = "UPDATE `user_account` SET `last_login` = '{$date}' WHERE `email_address` = '{$email_address}' LIMIT 1";
    $result = $db->query($sql);
    return ($result && $db->affected_rows() === 1 ? true : false);
  }
 
- function update_last_login_status($user_id, $is_logged_in) {
+ function update_last_login_status($email_address, $is_logged_in) {
    global $db;
-   $sql = "UPDATE `user_account` SET `is_logged_in` ='{$is_logged_in}' WHERE `id` ='{$user_id}' LIMIT 1";
+   $sql = "UPDATE `user_account` SET `is_logged_in` ='{$is_logged_in}' WHERE `email_address` ='{$email_address}' LIMIT 1";
    $result = $db->query($sql);
    return ($result && $db->affected_rows() === 1 ? true : false);
  }

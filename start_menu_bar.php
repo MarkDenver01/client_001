@@ -1,6 +1,5 @@
 <?php require_once('../lib/class.environment.php'); ?>
 <?php include_once('../includes/load.php'); ?>
-<?php $current_user = current_user(); ?>
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
 
@@ -163,24 +162,26 @@
 
         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
           <li class="dropdown-header">
-            <h6><?php echo $current_user['name']; ?> </h6>
+            <h6><?php echo $_SESSION['key_session']['name']; ?> </h6>
             <span>
               <?php
-                switch ($current_user['user_level']) {
+                $user_level = $_SESSION['key_session']['user_level'];
+                switch ($user_level) {
                   case '1':
-                     echo 'Administrator';
-                     break;
+                    echo "Administrator";
+                    break;
                   case '2':
-                    echo 'Guidance Counselor';
+                    echo "Guidance";
                     break;
                   case '3':
-                     echo 'Student';
-                     break;
-                  default:
+                    echo "Student";
                     break;
-                  }
+                  default:
+                    echo "Unknown Level";
+                    break;
+                }
               ?>
-            </span>
+          </span>
           </li>
           <li>
             <hr class="dropdown-divider">
@@ -225,11 +226,11 @@
 <aside id="sidebar" class="sidebar">
   <ul class="sidebar-nav" id="sidebar-nav">
     <?php
-      if ($current_user['user_level'] === '1') {
+      if ($_SESSION['key_session']['user_level'] === '1') {
         include_once('admin_menu.php');
-      } elseif ($current_user['user_level'] === '2') {
+      } elseif ($_SESSION['key_session']['user_level'] === '2') {
         include_once('guidance_menu.php');
-      } elseif ($current_user['user_level'] === '3') {
+      } elseif ($_SESSION['key_session']['user_level'] === '3') {
         include_once('student_menu.php');
       }
     ?>

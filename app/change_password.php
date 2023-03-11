@@ -1,9 +1,5 @@
-<?php require_once('../lib/class.environment.php'); ?>
-<?php
-  if ($_ENV['SITE_INSTALLATION_COMPLETED'] == false) {
-    header('location:../maintenance');
-  }
-?>
+<?php include_once('../includes/load.php'); ?>
+<?php is_check_login(); ?>
 <?php include('../header.php'); ?>
 <main style="background-image:url('./images/background_3.jpg');">
   <div class="container">
@@ -26,7 +22,7 @@
                   <div class="col-12">
                     <label for="yourCurrentPassword" class="form-label">Current password</label>
                     <div class="input-group has-validation">
-                      <input class="form-control current_password" type="password" name="current_password" id="yourNewPassword" value="secret!" required>
+                      <input class="form-control current_password" type="password" name="current_password" id="yourNewPassword" required>
                       <span class="input-group-text">
                         <i class="bi bi-eye-slash-fill" id="toggleCurrentPassword" style="cursor: pointer"></i>
                       </span>
@@ -36,7 +32,7 @@
                   <div class="col-12">
                     <label for="yourNewPassword" class="form-label">New password</label>
                     <div class="input-group has-validation">
-                      <input class="form-control new_password" type="password" name="new_password" id="yourNewPassword" value="secret!" required>
+                      <input class="form-control new_password" type="password" name="new_password" id="yourNewPassword" required>
                       <span class="input-group-text">
                         <i class="bi bi-eye-slash-fill" id="togglePassword" style="cursor: pointer"></i>
                       </span>
@@ -46,7 +42,7 @@
                   <div class="col-12">
                     <label for="yourConfirmPassword" class="form-label">Confirm password</label>
                     <div class="input-group has-validation">
-                      <input class="form-control confirm_password" type="password" name="confirm_password" id="yourConfirmPassword" value="secret!" required>
+                      <input class="form-control confirm_password" type="password" name="confirm_password" id="yourConfirmPassword" required>
                       <span class="input-group-text">
                         <i class="bi bi-eye-slash-fill" id="toggleConfirmPassword" style="cursor: pointer"></i>
                       </span>

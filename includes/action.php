@@ -1,4 +1,3 @@
-<?php require_once('../lib/class.environment.php'); ?>
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
@@ -244,7 +243,6 @@ function addGuidanceAccount($file_path_name,
     }
 }
 
-
 function login($email_address, $password) {
   global $session;
   $req_fields = array($email_address, $password);
@@ -258,22 +256,79 @@ function login($email_address, $password) {
     if ($is_check_user) {
       // redirect user to respective pages by user level
       if ($is_check_user['status'] === '1') {
-        if ( $is_check_user['user_level'] === '1'
-          || $is_check_user['user_level'] === '2'
-          || $is_check_user['user_level'] === '3') {
-            // create session with id
-            $session->login($is_check_user['id']);
-
-            // update signi in time
-            update_last_login($is_check_user['id']);
-
-            // update logged in status
-            update_last_login_status($is_check_user['id'], '1');
+        switch ($is_check_user['user_level']) {
+          case '1': // admin
+            // create session with email address
+            // pass the info that filtered by email to array list
+            $arr = array(
+              'name' => $is_check_user['name'],
+              'email_address' => $is_check_user['email_address'],
+              'user_level' => $is_check_user['user_level'],
+              'status' => $is_check_user['status'],
+              'is_logged_in' => $is_check_user['is_logged_in']
+            );
+            // then pass the array to session
+            $session->login_session($arr);
+            // update login time
+            update_last_login($email_address);
+            // update login status
+            update_last_login_status($email_address, '1');
+            // redirect to main page
             redirect('dashboard', false);
-        } else {
-          $session->message("d", "Sorry cannot find your account. Please contact the administrator.");
-          //redirect('login', false);
+            break;
+          case '2': // guidance
+            // find info from guidance
+            $guidance = find_guidance_login($email_address);
+            // create session with email address
+            // pass the info that filtered by email to array list
+            $arr = array(
+              'name' => $guidance['name'],
+              'email_address' => $guidance['email_address'],
+              'user_level' => $guidance['user_level'],
+              'status' => $guidance['status'],
+              'is_logged_in' => $guidance['is_logged_in']
+            );
+            // then pass the array to session
+            $session->login_session($arr);
+            // update log in time
+            update_last_login($email_address);
+            // update log in status
+            update_last_login_status($email_address, '1');
+            // redirecting to main page
+            redirect('dashboard', false);
+            break;
+          case '3': // student
+            // find info from student
+            $student = find_student_login($email_address);
+            // create session with email address
+            // pass the info that filtered by email to array list
+            $arr = array(
+              'name' => $student['name'],
+              'course' => $student['course'],
+              'student_year' => $student['student_year'],
+              'gender' => $student['gender'],
+              'age' => $student['age'],
+              'birth_date' => $student['birth_date'],
+              'present_address' => $student['present_address'],
+              'email_address' => $student['email_address'],
+              'user_level' => $student['user_level'],
+              'status' => $student['status'],
+              'is_logged_in' => $student['is_logged_in']
+            );
+            // then pass the array to session
+            $session->login_session($arr);
+            // update log in time
+            update_last_login($email_address);
+            // update log in status
+            update_last_login_status($email_address, '1');
+            // redirecting to main page
+            redirect('dashboard', false);
+            break;
+          default:
+            // code...
+            break;
         }
+
       } elseif($is_check_user['status'] === '0') {
         redirect('change_password', false);
       }
@@ -284,6 +339,24 @@ function login($email_address, $password) {
   } else {
     $session->message("d", $errors);
     redirect('login', false);
+  }
+}
+
+function change_password($email_address, $current_password,
+                         $new_password, $confirm_password) {
+
+}
+
+function is_check_login() {
+  global $session;
+  if ($_ENV['SITE_INSTALLATION_COMPLETED'] == false) {
+    redirect('../maintenance', true);
+  } else {
+    if (!$session->is_user_logged_in()) {
+      redirect('../app/login', true);
+    } else {
+      redirect('../app/dashboard', true);
+    }
   }
 }
 

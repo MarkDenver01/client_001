@@ -2,15 +2,10 @@
   error_reporting(E_ALL);
   ini_set('display_errors', '1');
 ?>
-<?php require_once('../lib/class.environment.php'); ?>
-<?php
-  if ($_ENV['SITE_INSTALLATION_COMPLETED'] == false) {
-    redirect('../maintenace');
-  }
-?>
 <?php include('../header.php'); ?>
 <?php header("Refresh: 15"); ?>
 <?php include('../includes/load.php'); ?>
+<?php is_check_login(); ?>
 <?php onClickButton("button_create", "./register_student_account"); ?>
 <?php include('../start_menu_bar.php'); ?>
 

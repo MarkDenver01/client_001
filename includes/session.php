@@ -1,27 +1,37 @@
-<?php session_start(); ?>
+<?php if (!isset($_SESSION)) session_start(); ?>
 <?php
   class session {
     public $msg;
-    private $user_is_logged_in = false;
+    private $user_mail_is_logged_in = false;
 
     function __construct() {
       $this->message_status();
-      $this->user_log_check();
+      $this->user_mail_log_check();
     }
 
-    public function is_user_logging_in() {
-      return $this->user_is_logged_in;
+    public function is_user_logged_in() {
+      return $this->user_mail_is_logged_in;
     }
 
-    public function login($user_id) {
-      $_SESSION['user_id'] = $user_id;
+    public function login_session(array $arr = array()) {
+      $_SESSION['key_session'] = $arr;
     }
 
-    public function user_log_check() {
-      if (isset($_SESSION['user_id'])) {
-        $this->user_is_logged_in = true;
+    public function user_mail_log_check() {
+      if (isset($_SESSION['key_session']['email_address'])) {
+        $this->user_mail_is_logged_in = true;
       } else {
-        $this->user_is_logged_in = false;
+        $this->user_mail_is_logged_in = false;
+      }
+    }
+
+    public function user_email_check() {
+      if (!empty($this->key_session)) {
+        if (isset($_SESSION[$this->key_session['email_address']])) {
+          $this->user_mail_is_logged_in = true;
+        } else {
+          $this->user_mail_is_logged_in = false;
+        }
       }
     }
 
