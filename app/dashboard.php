@@ -1,6 +1,6 @@
 <?php include('../header.php'); ?>
 <?php include('../includes/load.php'); ?>
-<?php is_check_login(); ?>
+<?php SET_NOT_LOGGED_IN(); ?>
 <?php include('../start_menu_bar.php'); ?>
 
 <main id="main" class="main">

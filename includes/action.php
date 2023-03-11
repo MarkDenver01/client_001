@@ -347,15 +347,24 @@ function change_password($email_address, $current_password,
 
 }
 
-function is_check_login() {
+function SET_LOGGED_IN() {
+  global $session;
+  if ($_ENV['SITE_INSTALLATION_COMPLETED'] == false) {
+    redirect('../maintenance', true);
+  } else {
+    if ($session->is_user_logged_in()) {
+      redirect('../app/dashboard', true);
+    }
+  }
+}
+
+function SET_NOT_LOGGED_IN() {
   global $session;
   if ($_ENV['SITE_INSTALLATION_COMPLETED'] == false) {
     redirect('../maintenance', true);
   } else {
     if (!$session->is_user_logged_in()) {
       redirect('../app/login', true);
-    } else {
-      redirect('../app/dashboard', true);
     }
   }
 }

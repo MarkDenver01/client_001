@@ -4,7 +4,7 @@
 ?>
 <?php include('../header.php'); ?>
 <?php include('../includes/load.php'); ?>
-<?php is_check_login(); ?>
+<?php SET_NOT_LOGGED_IN(); ?>
 <?php
     // button back
     onClickButton("button_back", "./view_student_account");

@@ -1,5 +1,5 @@
 <?php include_once('../includes/load.php'); ?>
-<?php is_check_login(); ?>
+<?php SET_LOGGED_IN(); ?>
 <?php include('../header.php'); ?>
 <main style="background-image:url('./images/background_3.jpg');">
   <div class="container">
