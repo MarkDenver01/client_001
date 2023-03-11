@@ -1,4 +1,5 @@
 <?php
+global $session;
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
   extract($_POST);
   if($password !== $c_password){
@@ -34,7 +35,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
       }else{
         $conn->close();
         $update_env_vars = $__DotEnvironment->update_env_variables(['SITE_INSTALLATION_COMPLETED' => 'true']);
-        $extra = $__DotEnvironment->update_env_variables(['SUPER_USER' => 'true']); // optional
+        $extra = $__DotEnvironment->update_env_variables(['SUPER_USER' => 'true']);
+        $session->login(1); // first account that stored to the database
+         // optional
         if($update_env_vars){
           echo "<script>location.href = './?step=installation_complete'</script>";
           exit;

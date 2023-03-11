@@ -67,14 +67,16 @@ function addStudentAccount($button_name,
           $file = $_FILES[$file_path_name]["name"];
           $default_password = sha1("default");
           if (empty($errors)) {
-            insertUserAccount(
+
+              insertUserAccount(
                 remove_junk($_POST[$full_name]),
                 remove_junk($_POST[$email_address]),
                 $default_password,
                 3,
-                $file);
+                $file
+              );
 
-            insertStudentAccount(
+              insertStudentAccount(
                 remove_junk($_POST[$full_name]),
                 remove_junk($_POST[$email_address]),
                 remove_junk($_POST[$course]),
@@ -83,8 +85,43 @@ function addStudentAccount($button_name,
                 remove_junk($_POST[$age]),
                 remove_junk($_POST[$birth_date]),
                 remove_junk($_POST[$present_address])
-            );
-            redirect('./view_student_account', false);
+              );
+
+              $get_name = remove_junk($_POST[$full_name]);
+              $get_mail_address = remove_junk($_POST[$email_address]);
+
+              $subject = "Your account has been created";
+              $content = 'Hi '.$get_name;
+              $content .= '<br/>';
+              $content .= 'Welcome to CESLICAM Portal!';
+              $content .= '<br/>';
+              $content .= '<br/>';
+              $content .= 'Your account has been created. Please change your default password for your security.';
+              $content .= '<br/>';
+              $content .= '---------------------------------------';
+              $content .= '<br/>';
+              $content .= 'Email address: '.$get_mail_address;
+              $content .= '<br/>';
+              $content .= 'Password: <b>default</b>';
+              $content .= '<br/>';
+              $content .= '---------------------------------------';
+              $content .= '<br/>';
+              $content .= '<br/>';
+              $content .= 'Thank you.';
+
+              // send mail account created
+              $send = send_email_account_created(
+                $get_mail_address,
+                $get_name,
+                $subject,
+                $content
+              );
+
+              if ($send) {
+                redirect('./view_student_account', false);
+              } else {
+                $session->message("d", "Error occured during sending an email.");
+              }
           } else {
             $session->message("d", $errors);
           }
@@ -162,7 +199,43 @@ function addGuidanceAccount($file_path_name,
                 remove_junk($_POST[$birth_date]),
                 remove_junk($_POST[$present_address])
             );
-            redirect('./view_guidance_account', false);
+
+            $get_name = remove_junk($_POST[$full_name]);
+            $get_mail_address = remove_junk($_POST[$email_address]);
+
+            $subject = "Your account has been created";
+            $content = 'Hi '.$get_name;
+            $content .= '<br/>';
+            $content .= 'Welcome to CESLICAM Portal!';
+            $content .= '<br/>';
+            $content .= '<br/>';
+            $content .= 'Your account has been created. Please change your default password for your security.';
+            $content .= '<br/>';
+            $content .= '---------------------------------------';
+            $content .= '<br/>';
+            $content .= 'Email address: '.$get_mail_address;
+            $content .= '<br/>';
+            $content .= 'Password: <b>default</b>';
+            $content .= '<br/>';
+            $content .= '---------------------------------------';
+            $content .= '<br/>';
+            $content .= '<br/>';
+            $content .= 'Thank you.';
+
+            // send mail account created
+            $send = send_email_account_created(
+              $get_mail_address,
+              $get_name,
+              $subject,
+              $content
+            );
+
+            if ($send) {
+              redirect('./view_guidance_account', false);
+            } else {
+              $session->message("d", "Error occured during sending an email.");
+            }
+
           } else {
             $session->message("d", $errors);
           }

@@ -15,4 +15,6 @@ require_once(LIB_PATH_INC.'session.php');
 require_once(LIB_PATH_INC.'sql.php');
 require_once(LIB_PATH_INC.'action.php');
 require_once(LIB_PATH_INC.'security.php');
+require_once(LIB_PATH_INC.'smtp_connection.php');
+require_once(LIB_PATH_INC.'mail_function.php');
 ?>
