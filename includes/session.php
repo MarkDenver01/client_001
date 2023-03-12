@@ -18,8 +18,14 @@
     }
 
     public function user_mail_log_check() {
-      if (isset($_SESSION['key_session']['email_address'])) {
-        $this->user_mail_is_logged_in = true;
+      if (isset($_SESSION['key_session']['email_address'])
+        && isset($_SESSION['key_session']['is_logged_in'])) {
+          $is_logged_in = $_SESSION['key_session']['is_logged_in'];
+          if ($is_logged_in == '1') {
+            $this->user_mail_is_logged_in = true;
+          } else {
+            $this->user_mail_is_logged_in = false;  
+          }
       } else {
         $this->user_mail_is_logged_in = false;
       }

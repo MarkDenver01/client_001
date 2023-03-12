@@ -226,12 +226,20 @@
 <aside id="sidebar" class="sidebar">
   <ul class="sidebar-nav" id="sidebar-nav">
     <?php
-      if ($_SESSION['key_session']['user_level'] === '1') {
-        include_once('admin_menu.php');
-      } elseif ($_SESSION['key_session']['user_level'] === '2') {
-        include_once('guidance_menu.php');
-      } elseif ($_SESSION['key_session']['user_level'] === '3') {
-        include_once('student_menu.php');
+      $user_check_level = $_SESSION['key_session']['user_level'];
+      switch ($user_check_level) {
+        case '1':
+          include_once('admin_menu.php');
+          break;
+        case '2':
+          include_once('guidance_menu.php');
+          break;
+        case '3':
+          include_once('student_menu.php');
+          break;
+        default:
+          echo "Error occured.";
+          break;
       }
     ?>
   </ul>

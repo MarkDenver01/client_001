@@ -1,6 +1,6 @@
 <?php
-error_reporting(E_ALL);
 ini_set('display_errors', '1');
+error_reporting(E_ALL);
 
 function onClickButton($button_name, $url) {
     if (isset($_POST[$button_name])) {
@@ -109,7 +109,7 @@ function addStudentAccount($button_name,
               $content .= 'Thank you.';
 
               // send mail account created
-              $send = send_email_account_created(
+              $send = send_email(
                 $get_mail_address,
                 $get_name,
                 $subject,
@@ -222,7 +222,7 @@ function addGuidanceAccount($file_path_name,
             $content .= 'Thank you.';
 
             // send mail account created
-            $send = send_email_account_created(
+            $send = send_email(
               $get_mail_address,
               $get_name,
               $subject,
@@ -243,6 +243,116 @@ function addGuidanceAccount($file_path_name,
     }
 }
 
+function one_time_password($email_address, $full_name, $password) {
+  global $session;
+  $otp = rand(100000,999999);
+  $get_name = remove_junk($_POST[$full_name]);
+  $get_mail_address = remove_junk($_POST[$email_address]);
+
+  $req_fields = array($email_address, $full_name, $password);
+  validate_fields($req_fields);
+
+  $subject = "Login OTP";
+  $content = 'Hi '.$full_name;
+  $content .= '<br/>';
+  $content .= '<br/>';
+  $content .= 'Please use the generated OTP to log in your account.';
+  $content .= '<br/>';
+  $content .= '---------------------------------------';
+  $content .= '<br/>';
+  $content .= 'OTP: '.$otp;
+  $content .= '<br/>';
+  $content .= '---------------------------------------';
+  $content .= '<br/>';
+  $content .= '<br/>';
+  $content .= 'Thank you.';
+
+  // send mail account created
+  $send = send_email(
+    $email_address,
+    $full_name,
+    $subject,
+    $content
+  );
+
+  if(empty($errors)) {
+    if ($send) {
+
+      // stored data to array list
+      $arr = array(
+        'email_address' => $email_address,
+        'password' => $password,
+        'is_logged_in' => '0'
+      );
+
+      // log in session
+      $session->login_session($arr);
+
+      insertOneTimePassword($email_address, $otp);
+      redirect('../app/send_otp', false);
+    } else {
+      $session->message("d", "Something wrong with sending an OTP to your email.");
+    }
+  } else {
+    $session->message("d", $errors);
+  }
+}
+
+function switch_user_level($email_address, $user_level) {
+  // update log in time
+  update_last_login($email_address);
+  // update log in status
+  update_last_login_status($email_address, '1');
+  // update otp verification
+  update_otp_verification($email_address);
+  echo $user_level;
+}
+
+function verify_otp_login($email_address, $one_time_password) {
+  global $session;
+  $email_address = $_SESSION['key_session']['email_address'];
+  $password = $_SESSION['key_session']['password'];
+  $otp = remove_junk($_POST[$one_time_password]);
+  $req_fields = array($email_address, $password, $otp);
+  validate_fields($req_fields);
+  if(empty($errors)) {
+    if (is_otp_expired($email_address, $otp)) {
+      $current_login = find_by_otp_login($email_address, $otp);
+      if ($current_login) {
+        if ($current_login['is_logged_in'] == '0') {
+          $is_verified = update_auth_verification($email_address, $otp);
+          if ($is_verified == '1') {
+            $is_current_user = find_current_user_by_otp($email_address, $password);
+            if ($is_current_user) {
+              switch_user_level(
+                $email_address,
+                $is_current_user['user_level']
+              );
+            } else {
+              $session->message("d","Cannot find the email address");
+              redirect('send_otp', false);
+            }
+          } else {
+            $session->message("d", "OTP already used recently.");
+            redirect('send_otp', false);
+          }
+        } else {
+          redirect('../app/dashboard', false);
+        }
+      } else {
+        $session->message("d", "Email address or OTP not exist.");
+        redirect('send_otp', false);
+      }
+    } else {
+      $session->message("w", "OTP is expired. Please resend a new OTP.");
+      redirect('send_otp', false);
+    }
+  } else {
+    $session->message("d", $errors);
+    redirect('send_otp', false);
+  }
+}
+
 function login($email_address, $password) {
   global $session;
   $req_fields = array($email_address, $password);
@@ -256,79 +366,31 @@ function login($email_address, $password) {
     if ($is_check_user) {
       // redirect user to respective pages by user level
       if ($is_check_user['status'] === '1') {
-        switch ($is_check_user['user_level']) {
-          case '1': // admin
-            // create session with email address
-            // pass the info that filtered by email to array list
-            $arr = array(
-              'name' => $is_check_user['name'],
-              'email_address' => $is_check_user['email_address'],
-              'user_level' => $is_check_user['user_level'],
-              'status' => $is_check_user['status'],
-              'is_logged_in' => $is_check_user['is_logged_in']
-            );
-            // then pass the array to session
-            $session->login_session($arr);
-            // update login time
-            update_last_login($email_address);
-            // update login status
-            update_last_login_status($email_address, '1');
-            // redirect to main page
-            redirect('dashboard', false);
-            break;
-          case '2': // guidance
-            // find info from guidance
-            $guidance = find_guidance_login($email_address);
-            // create session with email address
-            // pass the info that filtered by email to array list
-            $arr = array(
-              'name' => $guidance['name'],
-              'email_address' => $guidance['email_address'],
-              'user_level' => $guidance['user_level'],
-              'status' => $guidance['status'],
-              'is_logged_in' => $guidance['is_logged_in']
-            );
-            // then pass the array to session
-            $session->login_session($arr);
-            // update log in time
-            update_last_login($email_address);
-            // update log in status
-            update_last_login_status($email_address, '1');
-            // redirecting to main page
-            redirect('dashboard', false);
-            break;
-          case '3': // student
-            // find info from student
-            $student = find_student_login($email_address);
-            // create session with email address
-            // pass the info that filtered by email to array list
-            $arr = array(
-              'name' => $student['name'],
-              'course' => $student['course'],
-              'student_year' => $student['student_year'],
-              'gender' => $student['gender'],
-              'age' => $student['age'],
-              'birth_date' => $student['birth_date'],
-              'present_address' => $student['present_address'],
-              'email_address' => $student['email_address'],
-              'user_level' => $student['user_level'],
-              'status' => $student['status'],
-              'is_logged_in' => $student['is_logged_in']
-            );
-            // then pass the array to session
-            $session->login_session($arr);
-            // update log in time
-            update_last_login($email_address);
-            // update log in status
-            update_last_login_status($email_address, '1');
-            // redirecting to main page
-            redirect('dashboard', false);
-            break;
-          default:
-            // code...
-            break;
+        if ($_ENV['SUPER_USER'] == true && $is_check_user['user_level'] == '1') {
+          // create session with email address
+          // pass the info that filtered by email to array list
+          $arr = array(
+            'name' => $is_check_user['name'],
+            'email_address' => $is_check_user['email_address'],
+            'user_level' => $is_check_user['user_level'],
+            'status' => $is_check_user['status'],
+            'is_logged_in' => $is_check_user['is_logged_in']
+          );
+          // then pass the array to session
+          $session->login_session($arr);
+          // update login time
+          update_last_login($email_address);
+          // update login status
+          update_last_login_status($email_address, '1');
+          // redirect to main page
+          redirect('dashboard', false);
+        } else {
+          one_time_password(
+            $is_check_user['email_address'],
+            $is_check_user['name'],
+            $is_check_user['password']
+          );
         }
-
       } elseif($is_check_user['status'] === '0') {
         redirect('change_password', false);
       }
@@ -342,9 +404,14 @@ function login($email_address, $password) {
   }
 }
 
+// // TODO: CHANGE PASSWORD
 function change_password($email_address, $current_password,
                          $new_password, $confirm_password) {
+        global $session;
+        $current_user = current_user();
+        if (empty($errors)) {
 
+        }
 }
 
 function SET_LOGGED_IN() {

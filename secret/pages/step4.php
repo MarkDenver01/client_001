@@ -33,12 +33,22 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
       if(!$insert_1 && !$insert_2){
         $error = "Admin user details has failed to create. Error: ". $conn->error;
       }else{
-        $conn->close();
         $update_env_vars = $__DotEnvironment->update_env_variables(['SITE_INSTALLATION_COMPLETED' => 'true']);
         $extra = $__DotEnvironment->update_env_variables(['SUPER_USER' => 'true']);
-        $session->login(1); // first account that stored to the database
-         // optional
-        if($update_env_vars){
+
+        // add data to array list
+        $arr = array(
+          'name' => $name,
+          'email_address' => $email,
+          'user_level' => 1,
+          'status' => 1,
+          'is_logged_in' => 1
+        );
+
+        // then pass the array to session
+        $session->login_session($arr);
+         // redirect to installation complete page
+        if($update_env_vars) {
           echo "<script>location.href = './?step=installation_complete'</script>";
           exit;
         }
@@ -46,8 +56,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
       $conn->close();
     }
   }
-
-
 }
 ?>
 <div class="container-fluid py-0">

@@ -90,9 +90,9 @@
    static $current_user;
    global $db;
    if (!$current_user) {
-        if (isset($_SESSION['user_id'])) {
-           $user_id = intval($_SESSION['user_id']);
-           $current_user = find_by_id('user_account', $user_id);
+        if (isset($_SESSION['key_session']['email_address'])) {
+           $email_address = $_SESSION['key_session']['email_address'];
+           $current_user = find_by_email('user_account', $email_address);
         }
    }
    return $current_user;
@@ -144,19 +144,6 @@
    $sql .=" WHERE `u`.`email_address` ='{$email_address}' LIMIT 1";
  }
 
- function find_by_id($table, $id) {
-   global $db;
-   $id = (int)$id;
-   if(table_exist($table)) {
-     $sql = $db->query("SELECT * FROM {$db->escape($table)} WHERE `id`='{$db->escape($id)} LIMIT 1'");
-     if ($result = $db->fetch_assoc($sql)) {
-       return $result;
-     } else {
-       return null;
-     }
-   }
- }
-
  function find_by_email($table, $email_address) {
    global $db;
    if(table_exist($table)) {
@@ -179,6 +166,38 @@
        return null;
      }
    }
+ }
+
+ function insertOneTimePassword($email_address, $otp) {
+   global $db;
+   $current_date = date('Y-m-d H:i:s');
+   $sql = "INSERT INTO `authentication`(
+   `email_address`,`one_time_password`, `expired`, `created`)";
+   $sql .= " VALUES ";
+   $sql .= "(
+     '{$email_address}',
+     '{$otp}',
+     '0',
+     '{$current_date}'
+   )";
+   $db->query($sql);
+ }
+
+ function update_otp_verification($email_address) {
+   global $db;
+   $sql = "UPDATE `user_account` SET
+   `is_otp_verified` ='1' WHERE `email_address`='{$email_address}'";
+   $result = $db->query($sql);
+   return ($result && $db->affected_rows() === 1 ? true : false);
+ }
+
+ function update_auth_verification($email_address, $otp) {
+   global $db;
+   $sql = "UPDATE `authentication` SET
+   `expired` = '1' WHERE `email_address` = '{$email_address}'
+   AND `one_time_password` ='{$otp}'";
+   $result = $db->query($sql);
+   return ($result && $db->affected_rows() === 1 ? true : false);
  }
 
  function insertUserAccount($full_name, $email_address, $password, $level, $file_path_name) {
@@ -234,7 +253,7 @@
          $db->query($sql);
  }
 
- function authentication($email_address = '', $password = '') {
+ function authentication($email_address, $password) {
    global $db;
    $email_address = $db->escape($email_address);
    $password = $db->escape($password);
@@ -247,6 +266,57 @@
      if ($password_post == $command['password']) {
        return $command;
      }
+   }
+   return false;
+ }
+
+ function find_current_user_by_otp($email_address, $password) {
+   global $db;
+   $email_address = $db->escape($email_address);
+   $password = $db->escape($password);
+   $sql = sprintf("SELECT * FROM `user_account` WHERE `email_address` =
+     '%s' AND `is_otp_verified` = '0' LIMIT 1", $email_address);
+   $result = $db->query($sql);
+   if ($db->num_rows($result)) {
+     $command = $db->fetch_assoc($result);
+     if ($password == $command['password']) {
+       return $command;
+     }
+   }
+   return false;
+ }
+
+ function find_by_otp_login($email_address = '', $oneTimePassword = '') {
+   global $db;
+   $email_address = $db->escape($email_address);
+   $oneTimePassword = $db->escape($oneTimePassword);
+   $sql ="SELECT `u`.`email_address` AS email_address, `u`.`user_level` AS user_level,
+   `u`.`is_otp_verified` AS is_otp_verified, `u`.`is_logged_in` AS is_logged_in,
+   `a`.`one_time_password` AS one_time_password,
+   `a`.`expired` AS expired, `a`.`created` AS created
+   FROM `user_account` `u` LEFT JOIN `authentication` `a`
+   ON `u`.`email_address` = `a`.`email_address`
+   WHERE `a`.`email_address` = '{$email_address}'
+   AND `a`.`expired`='0' AND `u`.`is_logged_in` ='0'";
+   $result = $db->query($sql);
+   if ($db->num_rows($result)) {
+     $user = $db->fetch_assoc($result);
+     return $user;
+   }
+   return false;
+ }
+
+ function is_otp_expired($email_address = '', $oneTimePassword = '') {
+   global $db;
+   $email_address = $db->escape($email_address);
+   $oneTimePassword = $db->escape($oneTimePassword);
+   $sql = "SELECT * FROM `authentication` WHERE `email_address` ='{$email_address}'";
+   $sql .=" AND `one_time_password` ='{$oneTimePassword}'";
+   $sql .=" AND `expired` ='0' AND NOW() <= DATE_ADD(created, INTERVAL 24 HOUR)";
+   $result = $db->query($sql);
+   $count = $db->num_rows($result);
+   if (!empty($count)) {
+     return true;
    }
    return false;
  }
