@@ -41,7 +41,15 @@
                     <button name ="button_submit" class="btn btn-success w-100" type="submit">Submit</button>
                   </div>
                   <div class="col-8">
-                    <h6><b>1/3</b> attempts - 125 seconds remaining</h6>
+                    <h6><b><?php
+                    if ($login_count == 0) {
+                      echo '0';
+                    } else {
+                      echo display_log_count($login_count);
+                    }  
+                    ?>/3
+                  </b>
+                  Login attempts <br/>remaining.</h6>
                   </div>
 
                   <div class="12">

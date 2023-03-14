@@ -35,7 +35,7 @@
                   <div class="col-12">
                     <label for="yourConfirmPassword" class="form-label">Password</label>
                     <div class="input-group has-validation">
-                      <input class="form-control confirm_password" type="password" name="password" id="yourConfirmPassword" value="secret!" required>
+                      <input class="form-control confirm_password" type="password" name="password" id="yourConfirmPassword" required>
                       <span class="input-group-text">
                         <i class="bi bi-eye-slash-fill" id="toggleConfirmPassword" style="cursor: pointer"></i>
                       </span>

@@ -131,6 +131,39 @@
    return false;
  }
 
+ function login_attempts_query($time, $email_address) {
+   global $db;
+   $sql = "SELECT COUNT(*) AS `total_count` FROM `login_logs` WHERE";
+   $sql .=" `login_attempts` > '{$time}' AND";
+   $sql .=" `email_address` ='{$email_address}'";
+   $result = $db->query($sql);
+   if ($db->num_rows($result)) {
+     $check_login_row = $db->fetch_assoc($result);
+     $total_count = $check_login_row['total_count'];
+     return $total_count;
+   }
+   return false;
+ }
+
+ function delete_login_attempts_query($email_address) {
+   global $db;
+   $sql ="DELETE FROM `login_logs`";
+   $sql .=" WHERE `email_address` ='{$email_address}'";
+   $db->query($sql);
+   return ($db->affected_rows() === 1) ? true : false;
+ }
+
+ function insert_login_attempts_query($time, $email_address) {
+   global $db;
+   $sql ="INSERT INTO `login_logs` (`login_attempts`,`email_address`)";
+   $sql .=" VALUES ";
+   $sql .="(
+     '{$time}',
+     '{$email_address}'
+     )";
+    $db->query($sql);
+ }
+
  function find_student_login($email_address) {
    global $db;
    $email_address = $db-escape($email_address);
@@ -376,4 +409,15 @@
    $result = $db->query($sql);
    return ($result && $db->affected_rows() === 1 ? true : false);
  }
+
+ function change_password_by_query($email_address, $change_password) {
+   global $db;
+   $encrypt = sha1($change_password);
+   $sql ="UPDATE `user_account` SET `password` ='{$encrypt}',";
+   $sql .=" `status` ='1'";
+   $sql .=" WHERE `email_address` ='{$email_address}' LIMIT 1";
+   $result = $db->query($sql);
+   return ($result && $db->affected_rows() === 1 ? true : false);
+ }
+
 ?>

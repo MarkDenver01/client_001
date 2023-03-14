@@ -41,6 +41,18 @@ function display_message($msg = '') {
   }
 }
 
+function display_log_count($login_log = 0) {
+  $output = array();
+  if (!empty($login_log)) {
+    foreach ($login_log as $key => $value) {
+      $output  = $value;
+    }
+    return $output;
+  } else {
+    return "";
+  }
+}
+
 /** redirect page **/
 function redirect($url, $permanent = false) {
   if (headers_sent() == false) {
@@ -144,5 +156,18 @@ function generateOTP($length, $special_chars, $alpha_chars, $numbers) {
      $one_time_password .= chr(reset($chars));
    }
    return $one_time_password;
+}
+
+function getIdAddr() {
+    if(!empty($_SERVER['HTTP_CLIENT_IP'])){
+      $ip=$_SERVER['HTTP_CLIENT_IP'];
+    }
+    elseif(!empty($_SERVER['HTTP_X_FORWARDED_FOR'])){
+      $ip=$_SERVER['HTTP_X_FORWARDED_FOR'];
+    }
+    else{
+      $ip=$_SERVER['REMOTE_ADDR'];
+    }
+    return $ip;
 }
 ?>

@@ -111,3 +111,21 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT";
 
 $db_sql_5[] = "ALTER TABLE `authentication`
 ADD INDEX email_address (`email_address`)";
+
+// =================== login logs ========================== //
+$db_sql_6[] = "DROP TABLE IF EXISTS `login_logs`";
+
+$db_sql_6[] = "CREATE TABLE `login_logs` (
+  `id` int(11) NOT NULL,
+  `email_address` varchar(255) NOT NULL,
+  `login_attempts` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+$sql_db_6[] = "ALTER TABLE `login_logs`
+ADD PRIMARY KEY(`id`)";
+
+$sql_db_6[] = "ALTER TABLE `login_logs`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT";
+
+$sql_db_6[] = "ALTER TABLE `login_logs`
+ADD INDEX email_address (`email_address`)";

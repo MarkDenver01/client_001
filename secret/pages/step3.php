@@ -63,9 +63,19 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
           }
         }
 
-        // authentication 
+        // authentication
         if (isset($db_sql_5)) {
           foreach ($db_sql_5 as $sql) {
+            $conn->query($sql);
+            if ($conn->error) {
+              die($conn->error);
+            }
+          }
+        }
+
+        // login logs
+        if (isset($sql_db_6)) {
+          foreach ($db_sql_6 as $sql) {
             $conn->query($sql);
             if ($conn->error) {
               die($conn->error);

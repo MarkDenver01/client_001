@@ -299,13 +299,57 @@ function one_time_password($email_address, $full_name, $password) {
 }
 
 function switch_user_level($email_address, $user_level) {
+  global $session;
   // update log in time
   update_last_login($email_address);
   // update log in status
   update_last_login_status($email_address, '1');
   // update otp verification
   update_otp_verification($email_address);
-  echo $user_level;
+  switch ($user_level) {
+    case '2':
+        // find info from guidance
+        $guidance = find_guidance_login($email_address);
+        // create session with email address
+        // pass the info that filtered by email to array list
+        $arr = array(
+          'name' => $guidance['name'],
+          'email_address' => $guidance['email_address'],
+          'user_level' => $guidance['user_level'],
+          'status' => $guidance['status'],
+          'is_logged_in' => $guidance['is_logged_in']
+        );
+        // then pass the array to session
+        $session->login_session($arr);
+        // redirecting to main page
+        redirect('dashboard', false);
+        break;
+    case '3':
+        // find info from student
+        $student = find_student_login($email_address);
+        // create session with email address
+        // pass the info that filtered by email to array list
+        $arr = array(
+          'name' => $student['name'],
+          'course' => $student['course'],
+          'student_year' => $student['student_year'],
+          'gender' => $student['gender'],
+          'age' => $student['age'],
+          'birth_date' => $student['birth_date'],
+          'present_address' => $student['present_address'],
+          'email_address' => $student['email_address'],
+          'user_level' => $student['user_level'],
+          'status' => $student['status'],
+          'is_logged_in' => $student['is_logged_in']
+        );
+        // then pass the array to session
+        $session->login_session($arr);
+        // redirecting to main page
+        redirect('dashboard', false);
+        break;
+    default:
+        break;
+  }
 }
 
 function verify_otp_login($email_address, $one_time_password) {
@@ -316,36 +360,55 @@ function verify_otp_login($email_address, $one_time_password) {
   $req_fields = array($email_address, $password, $otp);
   validate_fields($req_fields);
   if(empty($errors)) {
-    if (is_otp_expired($email_address, $otp)) {
-      $current_login = find_by_otp_login($email_address, $otp);
-      if ($current_login) {
-        if ($current_login['is_logged_in'] == '0') {
-          $is_verified = update_auth_verification($email_address, $otp);
-          if ($is_verified == '1') {
-            $is_current_user = find_current_user_by_otp($email_address, $password);
-            if ($is_current_user) {
-              switch_user_level(
-                $email_address,
-                $is_current_user['user_level']
-              );
+    $time = time() - 30; // get 30 secs
+    $attempts = login_attempts_query($time, $email_address);
+    if ($attempts == 3) {
+      $session->message("w","To many failed login attempts. Please login after 30 secs.");
+      redirect('send_otp', false);
+    } else {
+        if (is_otp_expired($email_address, $otp)) {
+          $current_login = find_by_otp_login($email_address, $otp);
+          if ($current_login) {
+            if ($current_login['is_logged_in'] == '0') {
+              $is_verified = update_auth_verification($email_address, $otp);
+              if ($is_verified == '1') {
+                $is_current_user = find_current_user_by_otp($email_address, $password);
+                if ($is_current_user) {
+                  delete_login_attempts_query($email_address);
+                  switch_user_level(
+                    $email_address,
+                    $is_current_user['user_level']
+                  );
+                } else {
+                  $session->message("d", "Invalid email or OTP");
+                  redirect('send_otp', false);
+                }
+              } else {
+                $session->message("d", "OTP already used recently.");
+                redirect('send_otp', false);
+              }
             } else {
-              $session->message("d","Cannot find the email address");
-              redirect('send_otp', false);
+              redirect('../app/dashboard', false);
             }
           } else {
-            $session->message("d", "OTP already used recently.");
+            $session->message("d", "Email address or OTP not exist.");
             redirect('send_otp', false);
           }
         } else {
-          redirect('../app/dashboard', false);
-        }
-      } else {
-        $session->message("d", "Email address or OTP not exist.");
-        redirect('send_otp', false);
+          $attempts++;
+          $remain_attempts =  3 - $attempts;
+
+          if ($remain_attempts == 0) {
+            $session->message("w","To many failed login attempts. Please login after 30 secs.");
+            $session->attempt_login("d", $attempts);
+          }  else {
+            $session->message("d","Incorrect OTP.");
+            $session->attempt_login("d", $attempts);
+          }
+          $try_time = time();
+          insert_login_attempts_query($try_time, $email_address);
+          redirect('send_otp', false);
       }
-    } else {
-      $session->message("w", "OTP is expired. Please resend a new OTP.");
-      redirect('send_otp', false);
     }
   } else {
     $session->message("d", $errors);
@@ -392,6 +455,13 @@ function login($email_address, $password) {
           );
         }
       } elseif($is_check_user['status'] === '0') {
+
+        $arr = array(
+          'email_address' => $is_check_user['email_address'],
+          'is_logged_in' => $is_check_user['is_logged_in']
+        );
+        // then pass the array to session
+        $session->login_session($arr);
         redirect('change_password', false);
       }
     } else {
@@ -404,14 +474,24 @@ function login($email_address, $password) {
   }
 }
 
-// // TODO: CHANGE PASSWORD
-function change_password($email_address, $current_password,
-                         $new_password, $confirm_password) {
-        global $session;
-        $current_user = current_user();
-        if (empty($errors)) {
-
+function change_password($new_password, $confirm_password) {
+    global $session;
+    $new_password = remove_junk($_POST[$new_password]);
+    $confirm_password = remove_junk($_POST[$confirm_password]);
+    if (empty($errors)) {
+      if ($new_password == $confirm_password) {
+        if ($new_password == "default" || $confirm_password == "default") {
+          $session->message('w', 'Please change your default password.');
+          redirect('change_password', false);
+        } else {
+          change_password_by_query($_SESSION['key_session']['email_address'], $new_password);
+          redirect('login', false);
         }
+      } else {
+        $session->message('w', 'Password does not match. Please try again');
+        redirect('change_password', false);
+      }
+    }
 }
 
 function SET_LOGGED_IN() {
