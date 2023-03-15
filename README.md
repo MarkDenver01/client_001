@@ -1,4 +1,29 @@
 # client_001
+
+How to set up the server?
+
+** SMTP/Email SET UP **
+- Host: smtp.gmail.com 
+- Port: 587
+- Email: mceslicam@gmail.com
+- Password: ooswdnqskfcujmqw
+
+** Database set up ** (Note: If your DB is already exist, please delete from your PHPMYADMIN)
+- Host: localhost
+- User: Root
+- Password: 
+- Db name: client_db_001
+
+
+----------------------------------------------------------------------------------------
+Changelogs (03-16-2023)
+- Login (Admin, Student and Guidance)
+- OTP
+- User account creation
+- Sending Email for account and OTP
+- First to Fourth Year Exam Upload (no function yet)
+
+
 Changelogs (02-23-2023)
 - Change Counselor Services to Test Services
 - Add site installation (web & db config)
