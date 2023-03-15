@@ -305,7 +305,7 @@ function switch_user_level($email_address, $user_level) {
   // update log in status
   update_last_login_status($email_address, '1');
   // update otp verification
-  update_otp_verification($email_address);
+  update_otp_verification($email_address, '1');
   switch ($user_level) {
     case '2':
         // find info from guidance
@@ -352,7 +352,7 @@ function switch_user_level($email_address, $user_level) {
   }
 }
 
-function verify_otp_login($email_address, $one_time_password) {
+function verify_otp_login($one_time_password) {
   global $session;
   $email_address = $_SESSION['key_session']['email_address'];
   $password = $_SESSION['key_session']['password'];
@@ -372,17 +372,22 @@ function verify_otp_login($email_address, $one_time_password) {
             if ($current_login['is_logged_in'] == '0') {
               $is_verified = update_auth_verification($email_address, $otp);
               if ($is_verified == '1') {
-                $is_current_user = find_current_user_by_otp($email_address, $password);
-                if ($is_current_user) {
-                  delete_login_attempts_query($email_address);
-                  switch_user_level(
-                    $email_address,
-                    $is_current_user['user_level']
-                  );
-                } else {
-                  $session->message("d", "Invalid email or OTP");
-                  redirect('send_otp', false);
-                }
+                  $is_current_user = find_current_user_by_otp($email_address, $password);
+                  $check = false;
+                  if ($is_current_user['user_level'] == '2' || $is_current_user['user_level'] == '3') {
+                    $check = true;
+                  }
+                  if ($check) {
+                    delete_login_attempts_query($email_address);
+                    switch_user_level(
+                      $email_address,
+                      $is_current_user['user_level']
+                    );
+                  } else {
+                    $session->message("d", "Invalid email or OTP");
+                    redirect('send_otp', false);
+                  }
+
               } else {
                 $session->message("d", "OTP already used recently.");
                 redirect('send_otp', false);
@@ -406,7 +411,7 @@ function verify_otp_login($email_address, $one_time_password) {
             $session->attempt_login("d", $attempts);
           }
           $try_time = time();
-          insert_login_attempts_query($try_time, $email_address);
+          // TODO insert_login_attempts_query($try_time, $email_address);
           redirect('send_otp', false);
       }
     }

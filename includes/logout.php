@@ -1,5 +1,6 @@
 <?php include('../includes/load.php'); ?>
-<?php update_last_login_status($_SESSION['email_address'], '0'); ?>
+<?php update_last_login_status($_SESSION['key_session']['email_address'], '0'); ?>
+<?php update_otp_verification($_SESSION['key_session']['email_address'], '0'); ?>
 <?php
   session_start();
 

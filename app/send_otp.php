@@ -5,7 +5,7 @@
 <?php include_once('../includes/load.php'); ?>
 <?php SET_LOGGED_IN(); ?>
 <?php include('../header.php'); ?>
-<?php if (isset($_POST['button_submit'])) verify_otp_login("email_address", "verification_code"); ?>
+<?php if (isset($_POST['button_submit'])) verify_otp_login("verification_code"); ?>
 <main style="background-image:url('./images/background_3.jpg');">
   <div class="container">
 
@@ -46,7 +46,7 @@
                       echo '0';
                     } else {
                       echo display_log_count($login_count);
-                    }  
+                    }
                     ?>/3
                   </b>
                   Login attempts <br/>remaining.</h6>

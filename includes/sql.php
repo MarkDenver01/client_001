@@ -153,12 +153,12 @@
    return ($db->affected_rows() === 1) ? true : false;
  }
 
- function insert_login_attempts_query($time, $email_address) {
+ function insert_login_attempts_query($attempts, $email_address) {
    global $db;
    $sql ="INSERT INTO `login_logs` (`login_attempts`,`email_address`)";
    $sql .=" VALUES ";
    $sql .="(
-     '{$time}',
+     '{$attempts}',
      '{$email_address}'
      )";
     $db->query($sql);
@@ -166,15 +166,21 @@
 
  function find_student_login($email_address) {
    global $db;
-   $email_address = $db-escape($email_address);
+   $email_address = $db->escape($email_address);
    $sql ="SELECT `s`.`name` AS name, `s`.`course` AS course, `s`.`student_year` AS student_year,";
    $sql .=" `s`.`gender` AS gender, `s`.`age` AS age, `s`.`birth_date` AS birth_date,";
    $sql .=" `s`.`present_address` AS present_address, `u`.`email_address` AS email_address,";
    $sql .=" `u`.`password` AS password, `u`.`user_level` AS user_level,";
-   $sql .=" `u`.`image` AS image, `u`.`status`, `u`.`is_logged_in`";
+   $sql .=" `u`.`image` AS image, `u`.`status` AS status, `u`.`is_logged_in` AS is_logged_in";
    $sql .=" FROM `student_info` `s` LEFT JOIN `user_account` `u`";
    $sql .=" ON `s`.`email_address` = `u`.`email_address`";
    $sql .=" WHERE `u`.`email_address` ='{$email_address}' LIMIT 1";
+   $result = $db->query($sql);
+   if ($db->num_rows($result)) {
+     $user = $db->fetch_assoc($result);
+     return $user;
+   }
+   return false;
  }
 
  function find_by_email($table, $email_address) {
@@ -216,10 +222,10 @@
    $db->query($sql);
  }
 
- function update_otp_verification($email_address) {
+ function update_otp_verification($email_address, $is_otp_status) {
    global $db;
    $sql = "UPDATE `user_account` SET
-   `is_otp_verified` ='1' WHERE `email_address`='{$email_address}'";
+   `is_otp_verified` ='{$is_otp_status}' WHERE `email_address`='{$email_address}'";
    $result = $db->query($sql);
    return ($result && $db->affected_rows() === 1 ? true : false);
  }

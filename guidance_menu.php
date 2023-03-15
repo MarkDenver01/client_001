@@ -42,7 +42,7 @@
     </li><!-- End Student Scheduling Progress Nav -->
 
     <li class="nav-item">
-      <a class="nav-link " href="#">
+      <a class="nav-link " href="./post_announcement">
         <i class="ri-artboard-line"></i>
         <span>Announcement</span>
       </a>
