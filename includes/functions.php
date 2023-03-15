@@ -41,6 +41,18 @@ function display_message($msg = '') {
   }
 }
 
+function display_log_count($login_log = 0) {
+  $output = array();
+  if (!empty($login_log)) {
+    foreach ($login_log as $key => $value) {
+      $output  = $value;
+    }
+    return $output;
+  } else {
+    return "";
+  }
+}
+
 /** redirect page **/
 function redirect($url, $permanent = false) {
   if (headers_sent() == false) {
@@ -99,5 +111,63 @@ function debug_mode($log_msg) {
     // if you don't add `FILE_APPEND`, the file will be erased each time you add a log
     file_put_contents($log_file_data, $log_msg . "\n", FILE_APPEND);
   }
+}
+
+/** one time password **/
+function generateOTP($length, $special_chars, $alpha_chars, $numbers) {
+  $one_time_password = "";
+  $chars = array();
+
+  // special characters
+  if (isset($_POST[$special_chars])) {
+     array_merge($chars,
+     array(
+       33,35,36,37,38,40,41,42,43,44,45,
+       46,47,58,59,60,61,62,63,64,91,93,
+        94,95,123,124,125,126
+      ));
+  }
+
+  // alpha characters
+  if (isset($_POST[$alpha_chars])) {
+    array_merge($chars,
+    array(
+      65,66,67,68,69,70,71,72,73,74,
+      75,76,77,78,79,80,81,82,83,84,
+      85,86,87,88,89,90,
+      97,98,99,100,101,102,103,104,105,106,
+      107,108,109,110,111,112,113,114,115,116,
+      117,118,119,120,121,122
+    ));
+  }
+
+  // numbers
+  if(isset($_POST[$numbers])) {
+     array_merge($chars,
+     array(
+       48,49,50,51,52,53,54,55,56,57
+     ));
+  }
+
+   // let's random the character that depends on length
+   // and if type is special chars or alpha chars or numbers
+   for($i=0; $i<$length; $i++) {
+     shuffle($chars);
+     $one_time_password .= chr(reset($chars));
+   }
+   return $one_time_password;
+}
+
+function getIdAddr() {
+    if(!empty($_SERVER['HTTP_CLIENT_IP'])){
+      $ip=$_SERVER['HTTP_CLIENT_IP'];
+    }
+    elseif(!empty($_SERVER['HTTP_X_FORWARDED_FOR'])){
+      $ip=$_SERVER['HTTP_X_FORWARDED_FOR'];
+    }
+    else{
+      $ip=$_SERVER['REMOTE_ADDR'];
+    }
+    return $ip;
 }
 ?>

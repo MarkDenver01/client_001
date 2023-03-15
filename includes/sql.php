@@ -90,9 +90,9 @@
    static $current_user;
    global $db;
    if (!$current_user) {
-        if (isset($_SESSION['user_id'])) {
-           $user_id = intval($_SESSION['user_id']);
-           $current_user = find_by_id('user_account', $user_id);
+        if (isset($_SESSION['key_session']['email_address'])) {
+           $email_address = $_SESSION['key_session']['email_address'];
+           $current_user = find_by_email('user_account', $email_address);
         }
    }
    return $current_user;
@@ -112,17 +112,75 @@
    return false;
  }
 
- function find_by_id($table, $id) {
+ function find_guidance_login($email_address) {
    global $db;
-   $id = (int)$id;
-   if(table_exist($table)) {
-     $sql = $db->query("SELECT * FROM {$db->escape($table)} WHERE `id`='{$db->escape($id)} LIMIT 1'");
-     if ($result = $db->fetch_assoc($sql)) {
-       return $result;
-     } else {
-       return null;
-     }
+   $email_address = $db->escape($email_address);
+   $sql = "SELECT `g`.`name` AS name, `g`.`gender` AS gender, `g`.`age` AS age,";
+   $sql .=" `g`.`birth_date` AS birth_date, `g`.`present_address` AS present_address,";
+   $sql .=" `u`.`email_address` AS email_address, `u`.`password` as password,";
+   $sql .=" `u`.`user_level` AS user_level, `u`.`image` AS image, `u`.`status` AS status,";
+   $sql .=" `u`.`is_logged_in` AS is_logged_in";
+   $sql .= " FROM `guidance_info` `g` LEFT JOIN `user_account` `u`";
+   $sql .= " ON `g`.`email_address` = `u`.`email_address`";
+   $sql .= " WHERE `u`.`email_address` = '{$email_address}' LIMIT 1";
+   $result = $db->query($sql);
+   if ($db->num_rows($result)) {
+     $user = $db->fetch_assoc($result);
+     return $user;
    }
+   return false;
+ }
+
+ function login_attempts_query($time, $email_address) {
+   global $db;
+   $sql = "SELECT COUNT(*) AS `total_count` FROM `login_logs` WHERE";
+   $sql .=" `login_attempts` > '{$time}' AND";
+   $sql .=" `email_address` ='{$email_address}'";
+   $result = $db->query($sql);
+   if ($db->num_rows($result)) {
+     $check_login_row = $db->fetch_assoc($result);
+     $total_count = $check_login_row['total_count'];
+     return $total_count;
+   }
+   return false;
+ }
+
+ function delete_login_attempts_query($email_address) {
+   global $db;
+   $sql ="DELETE FROM `login_logs`";
+   $sql .=" WHERE `email_address` ='{$email_address}'";
+   $db->query($sql);
+   return ($db->affected_rows() === 1) ? true : false;
+ }
+
+ function insert_login_attempts_query($attempts, $email_address) {
+   global $db;
+   $sql ="INSERT INTO `login_logs` (`login_attempts`,`email_address`)";
+   $sql .=" VALUES ";
+   $sql .="(
+     '{$attempts}',
+     '{$email_address}'
+     )";
+    $db->query($sql);
+ }
+
+ function find_student_login($email_address) {
+   global $db;
+   $email_address = $db->escape($email_address);
+   $sql ="SELECT `s`.`name` AS name, `s`.`course` AS course, `s`.`student_year` AS student_year,";
+   $sql .=" `s`.`gender` AS gender, `s`.`age` AS age, `s`.`birth_date` AS birth_date,";
+   $sql .=" `s`.`present_address` AS present_address, `u`.`email_address` AS email_address,";
+   $sql .=" `u`.`password` AS password, `u`.`user_level` AS user_level,";
+   $sql .=" `u`.`image` AS image, `u`.`status` AS status, `u`.`is_logged_in` AS is_logged_in";
+   $sql .=" FROM `student_info` `s` LEFT JOIN `user_account` `u`";
+   $sql .=" ON `s`.`email_address` = `u`.`email_address`";
+   $sql .=" WHERE `u`.`email_address` ='{$email_address}' LIMIT 1";
+   $result = $db->query($sql);
+   if ($db->num_rows($result)) {
+     $user = $db->fetch_assoc($result);
+     return $user;
+   }
+   return false;
  }
 
  function find_by_email($table, $email_address) {
@@ -149,16 +207,47 @@
    }
  }
 
+ function insertOneTimePassword($email_address, $otp) {
+   global $db;
+   $current_date = date('Y-m-d H:i:s');
+   $sql = "INSERT INTO `authentication`(
+   `email_address`,`one_time_password`, `expired`, `created`)";
+   $sql .= " VALUES ";
+   $sql .= "(
+     '{$email_address}',
+     '{$otp}',
+     '0',
+     '{$current_date}'
+   )";
+   $db->query($sql);
+ }
+
+ function update_otp_verification($email_address, $is_otp_status) {
+   global $db;
+   $sql = "UPDATE `user_account` SET
+   `is_otp_verified` ='{$is_otp_status}' WHERE `email_address`='{$email_address}'";
+   $result = $db->query($sql);
+   return ($result && $db->affected_rows() === 1 ? true : false);
+ }
+
+ function update_auth_verification($email_address, $otp) {
+   global $db;
+   $sql = "UPDATE `authentication` SET
+   `expired` = '1' WHERE `email_address` = '{$email_address}'
+   AND `one_time_password` ='{$otp}'";
+   $result = $db->query($sql);
+   return ($result && $db->affected_rows() === 1 ? true : false);
+ }
+
  function insertUserAccount($full_name, $email_address, $password, $level, $file_path_name) {
    global $db;
-   $encrypt_password = sha1($password);
    $sql = "INSERT INTO `user_account`(
      `name`,`email_address`,`password`,`user_level`,`image`,`status`)";
    $sql .= " VALUES ";
    $sql .= "(
      '{$full_name}',
      '{$email_address}',
-     '{$encrypt_password}',
+     '{$password}',
      '{$level}',
      '{$file_path_name}',
      '0')";
@@ -203,20 +292,70 @@
          $db->query($sql);
  }
 
- function authentication($email_address = '', $password = '') {
+ function authentication($email_address, $password) {
    global $db;
    $email_address = $db->escape($email_address);
    $password = $db->escape($password);
    $sql = sprintf("SELECT * FROM `user_account` WHERE `email_address` =
      '%s' LIMIT 1", $email_address);
-   // $sql = "SELECT * FROM `user_account` WHERE `email_address` = '{$email_address}' LIMIT 1";
    $result = $db->query($sql);
    if ($db->num_rows($result)) {
      $command = $db->fetch_assoc($result);
      $password_post = sha1($password);
-     if ($password_post === $command['password']) {
+     if ($password_post == $command['password']) {
        return $command;
      }
+   }
+   return false;
+ }
+
+ function find_current_user_by_otp($email_address, $password) {
+   global $db;
+   $email_address = $db->escape($email_address);
+   $password = $db->escape($password);
+   $sql = sprintf("SELECT * FROM `user_account` WHERE `email_address` =
+     '%s' AND `is_otp_verified` = '0' LIMIT 1", $email_address);
+   $result = $db->query($sql);
+   if ($db->num_rows($result)) {
+     $command = $db->fetch_assoc($result);
+     if ($password == $command['password']) {
+       return $command;
+     }
+   }
+   return false;
+ }
+
+ function find_by_otp_login($email_address = '', $oneTimePassword = '') {
+   global $db;
+   $email_address = $db->escape($email_address);
+   $oneTimePassword = $db->escape($oneTimePassword);
+   $sql ="SELECT `u`.`email_address` AS email_address, `u`.`user_level` AS user_level,
+   `u`.`is_otp_verified` AS is_otp_verified, `u`.`is_logged_in` AS is_logged_in,
+   `a`.`one_time_password` AS one_time_password,
+   `a`.`expired` AS expired, `a`.`created` AS created
+   FROM `user_account` `u` LEFT JOIN `authentication` `a`
+   ON `u`.`email_address` = `a`.`email_address`
+   WHERE `a`.`email_address` = '{$email_address}'
+   AND `a`.`expired`='0' AND `u`.`is_logged_in` ='0'";
+   $result = $db->query($sql);
+   if ($db->num_rows($result)) {
+     $user = $db->fetch_assoc($result);
+     return $user;
+   }
+   return false;
+ }
+
+ function is_otp_expired($email_address = '', $oneTimePassword = '') {
+   global $db;
+   $email_address = $db->escape($email_address);
+   $oneTimePassword = $db->escape($oneTimePassword);
+   $sql = "SELECT * FROM `authentication` WHERE `email_address` ='{$email_address}'";
+   $sql .=" AND `one_time_password` ='{$oneTimePassword}'";
+   $sql .=" AND `expired` ='0' AND NOW() <= DATE_ADD(created, INTERVAL 24 HOUR)";
+   $result = $db->query($sql);
+   $count = $db->num_rows($result);
+   if (!empty($count)) {
+     return true;
    }
    return false;
  }
@@ -247,18 +386,44 @@
       return ($result && $db->affected_rows() === 1 ? true : false);
  }
 
- function update_last_login($user_id) {
+ function updateGuidanceInfo($full_name, $email_address, $gender,
+    $age, $birth_date, $present_address) {
+      global $db;
+
+      $sql = "UPDATE `guidance_info` SET
+      `name`='{$full_name}',
+      `email_address` ='{$email_address}',
+      `gender` ='{$gender}',
+      `age` ='{$age}',
+      `birth_date` ='{$birth_date}',
+      `present_address` ='{$present_address}' WHERE `email_address` ='{$email_address}'";
+      $result = $db->query($sql);
+      return ($result && $db->affected_rows() === 1 ? true : false);
+  }
+
+ function update_last_login($email_address) {
    global $db;
    $date = make_date();
-   $sql = "UPDATE `user_account` SET `last_login` = '{$date}' WHERE `id` = '{$user_id}' LIMIT 1";
+   $sql = "UPDATE `user_account` SET `last_login` = '{$date}' WHERE `email_address` = '{$email_address}' LIMIT 1";
    $result = $db->query($sql);
    return ($result && $db->affected_rows() === 1 ? true : false);
  }
 
- function update_last_login_status($user_id, $is_logged_in) {
+ function update_last_login_status($email_address, $is_logged_in) {
    global $db;
-   $sql = "UPDATE `user_account` SET `is_logged_in` ='{$is_logged_in}' WHERE `id` ='{$user_id}' LIMIT 1";
+   $sql = "UPDATE `user_account` SET `is_logged_in` ='{$is_logged_in}' WHERE `email_address` ='{$email_address}' LIMIT 1";
    $result = $db->query($sql);
    return ($result && $db->affected_rows() === 1 ? true : false);
  }
+
+ function change_password_by_query($email_address, $change_password) {
+   global $db;
+   $encrypt = sha1($change_password);
+   $sql ="UPDATE `user_account` SET `password` ='{$encrypt}',";
+   $sql .=" `status` ='1'";
+   $sql .=" WHERE `email_address` ='{$email_address}' LIMIT 1";
+   $result = $db->query($sql);
+   return ($result && $db->affected_rows() === 1 ? true : false);
+ }
+
 ?>

@@ -1,6 +1,8 @@
 <?php
 error_reporting(-1);
 require_once('./../lib/class.environment.php');
+require_once('../includes/security.php');
+require_once('../includes/session.php');
 if($_ENV['SITE_INSTALLATION_COMPLETED'] == true){
   header('location:../app/dashboard');
   exit;

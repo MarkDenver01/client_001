@@ -1,7 +1,6 @@
-<?php require_once('../lib/class.environment.php'); ?>
 <?php
-error_reporting(E_ALL);
 ini_set('display_errors', '1');
+error_reporting(E_ALL);
 
 function onClickButton($button_name, $url) {
     if (isset($_POST[$button_name])) {
@@ -67,14 +66,16 @@ function addStudentAccount($button_name,
           $file = $_FILES[$file_path_name]["name"];
           $default_password = sha1("default");
           if (empty($errors)) {
-            insertUserAccount(
+
+              insertUserAccount(
                 remove_junk($_POST[$full_name]),
                 remove_junk($_POST[$email_address]),
                 $default_password,
                 3,
-                $file);
+                $file
+              );
 
-            insertStudentAccount(
+              insertStudentAccount(
                 remove_junk($_POST[$full_name]),
                 remove_junk($_POST[$email_address]),
                 remove_junk($_POST[$course]),
@@ -83,8 +84,43 @@ function addStudentAccount($button_name,
                 remove_junk($_POST[$age]),
                 remove_junk($_POST[$birth_date]),
                 remove_junk($_POST[$present_address])
-            );
-            redirect('./view_student_account', false);
+              );
+
+              $get_name = remove_junk($_POST[$full_name]);
+              $get_mail_address = remove_junk($_POST[$email_address]);
+
+              $subject = "Your account has been created";
+              $content = 'Hi '.$get_name;
+              $content .= '<br/>';
+              $content .= 'Welcome to CESLICAM Portal!';
+              $content .= '<br/>';
+              $content .= '<br/>';
+              $content .= 'Your account has been created. Please change your default password for your security.';
+              $content .= '<br/>';
+              $content .= '---------------------------------------';
+              $content .= '<br/>';
+              $content .= 'Email address: '.$get_mail_address;
+              $content .= '<br/>';
+              $content .= 'Password: <b>default</b>';
+              $content .= '<br/>';
+              $content .= '---------------------------------------';
+              $content .= '<br/>';
+              $content .= '<br/>';
+              $content .= 'Thank you.';
+
+              // send mail account created
+              $send = send_email(
+                $get_mail_address,
+                $get_name,
+                $subject,
+                $content
+              );
+
+              if ($send) {
+                redirect('./view_student_account', false);
+              } else {
+                $session->message("d", "Error occured during sending an email.");
+              }
           } else {
             $session->message("d", $errors);
           }
@@ -162,7 +198,43 @@ function addGuidanceAccount($file_path_name,
                 remove_junk($_POST[$birth_date]),
                 remove_junk($_POST[$present_address])
             );
-            redirect('./view_guidance_account', false);
+
+            $get_name = remove_junk($_POST[$full_name]);
+            $get_mail_address = remove_junk($_POST[$email_address]);
+
+            $subject = "Your account has been created";
+            $content = 'Hi '.$get_name;
+            $content .= '<br/>';
+            $content .= 'Welcome to CESLICAM Portal!';
+            $content .= '<br/>';
+            $content .= '<br/>';
+            $content .= 'Your account has been created. Please change your default password for your security.';
+            $content .= '<br/>';
+            $content .= '---------------------------------------';
+            $content .= '<br/>';
+            $content .= 'Email address: '.$get_mail_address;
+            $content .= '<br/>';
+            $content .= 'Password: <b>default</b>';
+            $content .= '<br/>';
+            $content .= '---------------------------------------';
+            $content .= '<br/>';
+            $content .= '<br/>';
+            $content .= 'Thank you.';
+
+            // send mail account created
+            $send = send_email(
+              $get_mail_address,
+              $get_name,
+              $subject,
+              $content
+            );
+
+            if ($send) {
+              redirect('./view_guidance_account', false);
+            } else {
+              $session->message("d", "Error occured during sending an email.");
+            }
+
           } else {
             $session->message("d", $errors);
           }
@@ -171,6 +243,183 @@ function addGuidanceAccount($file_path_name,
     }
 }
 
+function one_time_password($email_address, $full_name, $password) {
+  global $session;
+  $otp = rand(100000,999999);
+  $get_name = remove_junk($_POST[$full_name]);
+  $get_mail_address = remove_junk($_POST[$email_address]);
+
+  $req_fields = array($email_address, $full_name, $password);
+  validate_fields($req_fields);
+
+  $subject = "Login OTP";
+  $content = 'Hi '.$full_name;
+  $content .= '<br/>';
+  $content .= '<br/>';
+  $content .= 'Please use the generated OTP to log in your account.';
+  $content .= '<br/>';
+  $content .= '---------------------------------------';
+  $content .= '<br/>';
+  $content .= 'OTP: '.$otp;
+  $content .= '<br/>';
+  $content .= '---------------------------------------';
+  $content .= '<br/>';
+  $content .= '<br/>';
+  $content .= 'Thank you.';
+
+  // send mail account created
+  $send = send_email(
+    $email_address,
+    $full_name,
+    $subject,
+    $content
+  );
+
+  if(empty($errors)) {
+    if ($send) {
+
+      // stored data to array list
+      $arr = array(
+        'email_address' => $email_address,
+        'password' => $password,
+        'is_logged_in' => '0'
+      );
+
+      // log in session
+      $session->login_session($arr);
+
+      insertOneTimePassword($email_address, $otp);
+      redirect('../app/send_otp', false);
+    } else {
+      $session->message("d", "Something wrong with sending an OTP to your email.");
+    }
+  } else {
+    $session->message("d", $errors);
+  }
+}
+
+function switch_user_level($email_address, $user_level) {
+  global $session;
+  // update log in time
+  update_last_login($email_address);
+  // update log in status
+  update_last_login_status($email_address, '1');
+  // update otp verification
+  update_otp_verification($email_address, '1');
+  switch ($user_level) {
+    case '2':
+        // find info from guidance
+        $guidance = find_guidance_login($email_address);
+        // create session with email address
+        // pass the info that filtered by email to array list
+        $arr = array(
+          'name' => $guidance['name'],
+          'email_address' => $guidance['email_address'],
+          'user_level' => $guidance['user_level'],
+          'status' => $guidance['status'],
+          'is_logged_in' => $guidance['is_logged_in']
+        );
+        // then pass the array to session
+        $session->login_session($arr);
+        // redirecting to main page
+        redirect('dashboard', false);
+        break;
+    case '3':
+        // find info from student
+        $student = find_student_login($email_address);
+        // create session with email address
+        // pass the info that filtered by email to array list
+        $arr = array(
+          'name' => $student['name'],
+          'course' => $student['course'],
+          'student_year' => $student['student_year'],
+          'gender' => $student['gender'],
+          'age' => $student['age'],
+          'birth_date' => $student['birth_date'],
+          'present_address' => $student['present_address'],
+          'email_address' => $student['email_address'],
+          'user_level' => $student['user_level'],
+          'status' => $student['status'],
+          'is_logged_in' => $student['is_logged_in']
+        );
+        // then pass the array to session
+        $session->login_session($arr);
+        // redirecting to main page
+        redirect('dashboard', false);
+        break;
+    default:
+        break;
+  }
+}
+
+function verify_otp_login($one_time_password) {
+  global $session;
+  $email_address = $_SESSION['key_session']['email_address'];
+  $password = $_SESSION['key_session']['password'];
+  $otp = remove_junk($_POST[$one_time_password]);
+  $req_fields = array($email_address, $password, $otp);
+  validate_fields($req_fields);
+  if(empty($errors)) {
+    $time = time() - 30; // get 30 secs
+    $attempts = login_attempts_query($time, $email_address);
+    if ($attempts == 3) {
+      $session->message("w","To many failed login attempts. Please login after 30 secs.");
+      redirect('send_otp', false);
+    } else {
+        if (is_otp_expired($email_address, $otp)) {
+          $current_login = find_by_otp_login($email_address, $otp);
+          if ($current_login) {
+            if ($current_login['is_logged_in'] == '0') {
+              $is_verified = update_auth_verification($email_address, $otp);
+              if ($is_verified == '1') {
+                  $is_current_user = find_current_user_by_otp($email_address, $password);
+                  $check = false;
+                  if ($is_current_user['user_level'] == '2' || $is_current_user['user_level'] == '3') {
+                    $check = true;
+                  }
+                  if ($check) {
+                    delete_login_attempts_query($email_address);
+                    switch_user_level(
+                      $email_address,
+                      $is_current_user['user_level']
+                    );
+                  } else {
+                    $session->message("d", "Invalid email or OTP");
+                    redirect('send_otp', false);
+                  }
+
+              } else {
+                $session->message("d", "OTP already used recently.");
+                redirect('send_otp', false);
+              }
+            } else {
+              redirect('../app/dashboard', false);
+            }
+          } else {
+            $session->message("d", "Email address or OTP not exist.");
+            redirect('send_otp', false);
+          }
+        } else {
+          $attempts++;
+          $remain_attempts =  3 - $attempts;
+
+          if ($remain_attempts == 0) {
+            $session->message("w","To many failed login attempts. Please login after 30 secs.");
+            $session->attempt_login("d", $attempts);
+          }  else {
+            $session->message("d","Incorrect OTP.");
+            $session->attempt_login("d", $attempts);
+          }
+          $try_time = time();
+          // TODO insert_login_attempts_query($try_time, $email_address);
+          redirect('send_otp', false);
+      }
+    }
+  } else {
+    $session->message("d", $errors);
+    redirect('send_otp', false);
+  }
+}
 
 function login($email_address, $password) {
   global $session;
@@ -185,23 +434,39 @@ function login($email_address, $password) {
     if ($is_check_user) {
       // redirect user to respective pages by user level
       if ($is_check_user['status'] === '1') {
-        if ( $is_check_user['user_level'] === '1'
-          || $is_check_user['user_level'] === '2'
-          || $is_check_user['user_level'] === '3') {
-            // create session with id
-            $session->login($is_check_user['id']);
-
-            // update signi in time
-            update_last_login($is_check_user['id']);
-
-            // update logged in status
-            update_last_login_status($is_check_user['id'], '1');
-            redirect('dashboard', false);
+        if ($_ENV['SUPER_USER'] == true && $is_check_user['user_level'] == '1') {
+          // create session with email address
+          // pass the info that filtered by email to array list
+          $arr = array(
+            'name' => $is_check_user['name'],
+            'email_address' => $is_check_user['email_address'],
+            'user_level' => $is_check_user['user_level'],
+            'status' => $is_check_user['status'],
+            'is_logged_in' => $is_check_user['is_logged_in']
+          );
+          // then pass the array to session
+          $session->login_session($arr);
+          // update login time
+          update_last_login($email_address);
+          // update login status
+          update_last_login_status($email_address, '1');
+          // redirect to main page
+          redirect('dashboard', false);
         } else {
-          $session->message("d", "Sorry cannot find your account. Please contact the administrator.");
-          redirect('login', false);
+          one_time_password(
+            $is_check_user['email_address'],
+            $is_check_user['name'],
+            $is_check_user['password']
+          );
         }
       } elseif($is_check_user['status'] === '0') {
+
+        $arr = array(
+          'email_address' => $is_check_user['email_address'],
+          'is_logged_in' => $is_check_user['is_logged_in']
+        );
+        // then pass the array to session
+        $session->login_session($arr);
         redirect('change_password', false);
       }
     } else {
@@ -214,7 +479,80 @@ function login($email_address, $password) {
   }
 }
 
-function update_user_account(
+function change_password($new_password, $confirm_password) {
+    global $session;
+    $new_password = remove_junk($_POST[$new_password]);
+    $confirm_password = remove_junk($_POST[$confirm_password]);
+    if (empty($errors)) {
+      if ($new_password == $confirm_password) {
+        if ($new_password == "default" || $confirm_password == "default") {
+          $session->message('w', 'Please change your default password.');
+          redirect('change_password', false);
+        } else {
+          change_password_by_query($_SESSION['key_session']['email_address'], $new_password);
+          redirect('login', false);
+        }
+      } else {
+        $session->message('w', 'Password does not match. Please try again');
+        redirect('change_password', false);
+      }
+    }
+}
+
+function SET_LOGGED_IN() {
+  global $session;
+  if ($_ENV['SITE_INSTALLATION_COMPLETED'] == false) {
+    redirect('../maintenance', true);
+  } else {
+    if ($session->is_user_logged_in()) {
+      redirect('../app/dashboard', true);
+    }
+  }
+}
+
+function SET_NOT_LOGGED_IN() {
+  global $session;
+  if ($_ENV['SITE_INSTALLATION_COMPLETED'] == false) {
+    redirect('../maintenance', true);
+  } else {
+    if (!$session->is_user_logged_in()) {
+      redirect('../app/login', true);
+    }
+  }
+}
+
+function update_guidance_account(
+  $file_path_name,
+  $full_name,
+  $email_address,
+  $gender,
+  $age,
+  $birth_date,
+  $present_address
+) {
+  $is_user_account = updateUsertAccount(
+    remove_junk($_POST[$full_name]),
+    remove_junk($_POST[$email_address]),
+    remove_junk($_POST[$file_path_name])
+  );
+
+  $is_guidance_info = updateGuidanceInfo(
+    remove_junk($_POST[$full_name]),
+    remove_junk($_POST[$email_address]),
+    remove_junk($_POST[$gender]),
+    remove_junk($_POST[$age]),
+    remove_junk($_POST[$birth_date]),
+    remove_junk($_POST[$present_address])
+  );
+
+  if ($is_user_account && $is_guidance_info) {
+    redirect('../app/view_guidance_account', false);
+  } else {
+    redirect('../app/view_guidance_account', false);
+  }
+}
+
+function update_student_account(
   $file_path_name,
   $full_name,
   $email_address,

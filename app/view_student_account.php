@@ -2,15 +2,10 @@
   error_reporting(E_ALL);
   ini_set('display_errors', '1');
 ?>
-<?php require_once('../lib/class.environment.php'); ?>
-<?php
-  if ($_ENV['SITE_INSTALLATION_COMPLETED'] == false) {
-    redirect('../maintenace');
-  }
-?>
 <?php include('../header.php'); ?>
 <?php header("Refresh: 15"); ?>
 <?php include('../includes/load.php'); ?>
+<?php SET_NOT_LOGGED_IN(); ?>
 <?php onClickButton("button_create", "./register_student_account"); ?>
 <?php include('../start_menu_bar.php'); ?>
 
@@ -62,11 +57,11 @@
                         <td class="text-center" style="width: 5%;"><?php echo remove_junk($student['email_address']); ?></td>
                         <td class="text-center" style="width: 5%;"><?php echo remove_junk($student['age']); ?></td>
                         <td class="text-center" style="width: 5%;"><?php echo remove_junk($student['gender']); ?></td>
-                        <td class="text-center" style="width: 10%;"><?php echo remove_junk($student['birth_date']); ?></td>
+                        <td class="text-center" style="width: 5%;"><?php echo remove_junk($student['birth_date']); ?></td>
                         <td class="text-center" style="width: 10%;"><?php echo remove_junk($student['present_address']); ?></td>
-                        <td class="text-center" style="width: 10%;"><?php echo remove_junk($student['student_year']); ?></td>
-                        <td class="text-center" style="width: 10%;"><?php echo remove_junk($student['course']); ?></td>
-                        <td class="text-center" style="width: 15%;">
+                        <td class="text-center" style="width: 5%;"><?php echo remove_junk($student['student_year']); ?></td>
+                        <td class="text-center" style="width: 5%;"><?php echo remove_junk($student['course']); ?></td>
+                        <td class="text-center" style="width: 20%;">
                           <button type="button" name="button_edit" class="btn btn-primary rounded-pill btn-sm w-50"  data-bs-toggle="modal" data-bs-target="#ExtralargeModal<?php echo $student['id']; ?>"><span></span>Edit</button>
                           <a href="../includes/delete_account?email_address=<?php echo secure::encrypt(remove_junk($student['email_address'])); ?>" type="button" class="btn btn-danger rounded-pill btn-sm">Delete</button>
                         </td>

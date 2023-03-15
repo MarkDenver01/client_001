@@ -1,6 +1,6 @@
-<?php include('../header.php'); ?>
 <?php include_once('../includes/load.php'); ?>
-<?php if($session->is_user_logging_in()) redirect('dashboard', false); ?>
+<?php SET_LOGGED_IN(); ?>
+<?php include('../header.php'); ?>
 <?php if (isset($_POST['button_login'])) login("email_address", "password"); ?>
 <main style="background-image:url('./images/background_3.jpg');">
   <div class="container">
@@ -35,7 +35,7 @@
                   <div class="col-12">
                     <label for="yourConfirmPassword" class="form-label">Password</label>
                     <div class="input-group has-validation">
-                      <input class="form-control confirm_password" type="password" name="password" id="yourConfirmPassword" value="secret!" required>
+                      <input class="form-control confirm_password" type="password" name="password" id="yourConfirmPassword" required>
                       <span class="input-group-text">
                         <i class="bi bi-eye-slash-fill" id="toggleConfirmPassword" style="cursor: pointer"></i>
                       </span>

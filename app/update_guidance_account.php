@@ -1,6 +1,6 @@
 <?php
 if (isset($_POST["button_update"])) {
-    update_user_account(
+    update_guidance_account(
       "image_path",
       "full_name",
       "email_address",

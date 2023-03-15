@@ -1,15 +1,10 @@
-<?php require_once('../lib/class.environment.php'); ?>
-<?php
-  if ($_ENV['SITE_INSTALLATION_COMPLETED'] == false) {
-    redirect('../maintenance');
-  }
-?>
 <?php
   error_reporting(E_ALL);
   ini_set('display_errors', '1');
 ?>
 <?php include('../header.php'); ?>
 <?php include('../includes/load.php'); ?>
+<?php SET_NOT_LOGGED_IN(); ?>
 <?php
 
     // button back
