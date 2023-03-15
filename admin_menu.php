@@ -32,11 +32,33 @@
     </li><!-- End Student Records Nav -->
 
     <li class="nav-item">
-      <a class="nav-link " href="#">
-        <i class="ri-question-answer-fill"></i>
-        <span>Test Questionaires</span>
+      <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+        <i class="ri-hand-heart-fill"></i>
+        <span>Test Services</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
-    </li><!-- End Test Questionaires Nav -->
+      <ul id="tables-nav" class="nav-content collapsed" data-bs-parent="#sidebar-nav">
+        <li>
+          <a href="./first_year_exam">
+            <i class="bi bi-circle"></i><span>First Year</span>
+          </a>
+        </li>
+        <li>
+          <a href="./second_year_exam">
+            <i class="bi bi-circle"></i><span>Second Year</span>
+          </a>
+        </li>
+        <li>
+          <a href="./third_year_exam">
+            <i class="bi bi-circle"></i><span>Third Year</span>
+          </a>
+        </li>
+        <li>
+          <a href="./fourth_year_exam">
+            <i class="bi bi-circle"></i><span>Fourth Year</span>
+          </a>
+        </li>
+      </ul>
+    </li><!-- End Dashboard Nav -->
 
     <li class="nav-item">
       <a class="nav-link " href="#">
