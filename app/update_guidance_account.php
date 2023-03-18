@@ -34,14 +34,14 @@ if (isset($_POST["button_update"])) {
                         $image_file_data = "";
                         if ($check_image != NUll) {
 
-                          $image_file_data = "./uploads/".$check_image;
+                          $image_file_data = $check_image;
                         } else {
                           $image_file_data = "./assets/img/profile.png";
                         }
                       ?>
-                      <img  src="<?php echo $image_file_data; ?>" alt="Profile" class="rounded-circle">
+                      <img id="ic_image_file" src="<?php echo $image_file_data; ?>" alt="Profile" class="rounded-circle" style="height: 100px; width: 150px;">
                     </br>
-                    <input name="image_path" type="file" class="form-control btn btn-primary rounded-pill btn-sm" value="<?php echo $image_file_data; ?>"></input>
+                    <input id="ic_image_file_path" name="image_path" type="file" class="form-control btn btn-primary rounded-pill btn-sm"></input>
                   </div>
                 </div>
 

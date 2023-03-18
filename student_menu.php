@@ -1,14 +1,14 @@
 <li class="nav-item">
   <a class="nav-link " href="./dashboard">
-    <i class="ri-dashboard-filld"></i>
+    <i class="ri-dashboard-fill"></i>
     <span>Dashboard</span>
   </a>
 </li><!-- End Dashboard Nav -->
 
 <li class="nav-item">
-  <a class="nav-link " href="#">
-    <i class="ri-question-answer-fill"></i>
-    <span>Test Questionaires</span>
+  <a class="nav-link " href="./available_exam">
+    <i class="ri-todo-fill"></i>
+    <span>Available Exam</span>
   </a>
 </li><!-- End Test Questionaires Nav -->
 

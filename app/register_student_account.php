@@ -61,11 +61,11 @@
               <ul class="nav nav-tabs nav-tabs-bordered">
                 <li class="nav-item">
                   <h5>Add Student Account</h5>
+                  <?php echo display_message($msg); ?>
                 </li>
               </ul>
                 <br/>
                 <div class="tab-content pt-2" id="profile-edit">
-                  <?php echo display_message($msg); ?>
                   <br/>
                   <!-- Profile Edit Form -->
                     <div class="row mb-3">
@@ -86,6 +86,23 @@
                       <label for="course" class="col-md-4 col-lg-3 col-form-label">Course</label>
                       <div class="col-md-8 col-lg-9">
                         <input name="course" type="text" class="form-control" id="course">
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="course" class="col-md-4 col-lg-3 col-form-label">Course</label>
+                      <div class="col-md-4 col-lg-8">
+                        <select name="course" id="course" class="form-select">
+                          <option selected>Select course</option>
+                          <option value="BSIE">Bachelor of Science in Industrial Engineering</option>
+                          <option value="BSIT">Bachelor of Science in Information Technology</option>
+                          <option value="BS-Psy">Bachelor of Science in Psychology</option>
+                          <option value="BSHRM">Bachelor of Science in Hospitality Management</option>
+                          <option value="BSTM">Bachelor of Science in Tourism Management</option>
+                          <option value="BSA">Bachelor of Science in Accountancy</option>
+                          <option value="BSIA">Bachelor of Science in Internal Auditing</option>
+                          <option value="BSMA">Bachelor of Science in Management Accounting</option>
+                        </select>
                       </div>
                     </div>
 

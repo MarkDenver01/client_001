@@ -59,11 +59,11 @@
               <ul class="nav nav-tabs nav-tabs-bordered">
                 <li class="nav-item">
                   <h5>Add Guidance Account</h5>
+                  <?php echo display_message($msg); ?>
                 </li>
               </ul>
                 <br/>
                 <div class="tab-content pt-2" id="profile-edit">
-                  <?php echo display_message($msg); ?>
                   <br/>
                   <!-- Profile Edit Form -->
                     <div class="row mb-3">
