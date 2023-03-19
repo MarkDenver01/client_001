@@ -87,72 +87,6 @@
 
       </li><!-- End Notification Nav -->
 
-      <li class="nav-item dropdown">
-
-        <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
-          <i class="bi bi-chat-left-text"></i>
-          <span class="badge bg-success badge-number">3</span>
-        </a><!-- End Messages Icon -->
-
-        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-          <li class="dropdown-header">
-            You have 3 new messages
-            <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-          </li>
-          <li>
-            <hr class="dropdown-divider">
-          </li>
-
-          <li class="message-item">
-            <a href="#">
-              <img src="assets/img/user.png" alt="" class="rounded-circle">
-              <div>
-                <h4>Maria</h4>
-                <p>Not yet available...</p>
-                <p>4 hrs. ago</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <hr class="dropdown-divider">
-          </li>
-
-          <li class="message-item">
-            <a href="#">
-              <img src="assets/img/user.png" alt="" class="rounded-circle">
-              <div>
-                <h4>Anna</h4>
-                <p>Not yet available...</p>
-                <p>6 hrs. ago</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <hr class="dropdown-divider">
-          </li>
-
-          <li class="message-item">
-            <a href="#">
-              <img src="assets/img/user.png" alt="" class="rounded-circle">
-              <div>
-                <h4>David</h4>
-                <p>Not yet available...</p>
-                <p>8 hrs. ago</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <hr class="dropdown-divider">
-          </li>
-
-          <li class="dropdown-footer">
-            <a href="../app/chat">Show all messages</a>
-          </li>
-
-        </ul><!-- End Messages Dropdown Items -->
-
-      </li><!-- End Messages Nav -->
-
       <li class="nav-item dropdown pe-3">
 
         <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
@@ -224,23 +158,15 @@
 
 <!-- ======= Sidebar ======= -->
 <aside id="sidebar" class="sidebar">
-  <ul class="sidebar-nav" id="sidebar-nav">
-    <?php
-      $user_check_level = $_SESSION['key_session']['user_level'];
-      switch ($user_check_level) {
-        case '1':
-          include_once('admin_menu.php');
-          break;
-        case '2':
-          include_once('guidance_menu.php');
-          break;
-        case '3':
-          include_once('student_menu.php');
-          break;
-        default:
-          echo "Error occured.";
-          break;
-      }
-    ?>
+  <div class="chat-search-box">
+    <div class="input-group">
+      <input class="form-control" placeholder="Search" >
+      <div class="input-group-btn">
+        <button type="button" class="btn btn-primary"><i class="ri-search-line"></i></button>
+      </div>
+    </div>
+  </div>
+  <ul class="sidebar-nav users" id="sidebar-nav">
+    <?php include_once('chat_side_menu.php'); ?>
   </ul>
 </aside><!-- End Sidebar-->

@@ -30,7 +30,9 @@
   <link href="./assets/vendor/simple-datatables/style.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="./assets/css/style.css" rel="stylesheet">
+  <link href="../app/assets/css/style.css" rel="stylesheet">
+  <link href="../app/assets/css/main.css" rel="stylesheet">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: NiceAdmin - v2.5.0
