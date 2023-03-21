@@ -426,4 +426,90 @@
    return ($result && $db->affected_rows() === 1 ? true : false);
  }
 
+ function find_chat_user($key = '') {
+   global $db;
+   $email_address = $db->escape($email_address);
+   $sql = "SELECT * FROM `user_account` WHERE `email_address` ='{$email_address}'";
+   $result = $db->query($sql);
+   if ($db->num_rows($result)) {
+     $user = $db->fetch_assoc($result);
+     return $user;
+   }
+   return false;
+ }
+
+ function find_all_user($id) {
+   global $db;
+
+   $sql ="SELECT * FROM `user_account` WHERE ";
+   $sql .="`id` ='{$id}'";
+   return find_by_sql($sql);
+ }
+
+ function find_conversation($id) {
+   global $db;
+
+   $sql ="SELECT * FROM `conversation_logs` WHERE ";
+   $sql .="`user_1` ='{$id}' OR `user_2` = '{$id}' ";
+   $sql .="ORDER BY `conversation_id` DESC";
+   return find_by_sql($sql);
+ }
+
+ function last_chat($id_1, $id_2) {
+   global $db;
+
+   $sql = "SELECT * FROM `chat_logs` WHERE ";
+   $sql .="(from_id = '{$id_1}' AND to_id ='{$id_2}') OR ";
+   $sql .="(to_id ='{$id_1}' AND from_id ='{$id_2}') ORDER BY ";
+   $sql .="`chat_id` DESC LIMIT 1";
+   $result = $db->query($sql);
+   if ($db->num_rows($result)) {
+     $chat = $db->fetch_assoc($result);
+     return $chat['message'];
+   } else {
+     $chat = '';
+     return $chat;
+   }
+ }
+
+ function get_chats($id_1, $id_2) {
+   global $db;
+
+   $sql ="SELECT * FROM `chat_logs` WHERE ";
+   $sql .="(from_id = '{$id_1}' AND to_id ='{$id_2}') OR ";
+   $sql .="(to_id ='{$id_1}' AND from_id = '{$id_2}') ORDER BY ";
+   $sql .="`chat_id` ASC";
+   return find_by_sql($sql);
+ }
+
+ function chat_opened($id_1, $chats) {
+   global $db;
+   foreach ($chats as $key) {
+     if ($key['opened'] == 0) {
+       $opened = 1;
+       $chat_id = $key['chat_id'];
+       $sql = "UPDATE `chat_logs` SET = `opened` ='{$opened}' ";
+       $sql .="WHERE `from_id` ='{$id_1}' ";
+       $sql .="AND `chat_id` = '{$chat_id}'";
+       $db->query($sql);
+     }
+   }
+ }
+
+ function search_chat($key) {
+   global $db;
+
+   $sql ="SELECT * FROM `user_account` WHERE ";
+   $sql .="`email_address` LIKE '%{$key}%' OR ";
+   $sql .="`name` LIKE '%{$key}%'";
+   return find_by_sql($sql);
+ }
+
+ function last_seen_query($id) {
+   global $db;
+   $sql = "UPDATE `user_account` SET `last_seen` = NOW() ";
+   $sql .="WHERE `id` = '{$id}'";
+   $db->query($sql);
+ }
+
 ?>

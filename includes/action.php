@@ -8,8 +8,7 @@ function onClickButton($button_name, $url) {
   }
 }
 
-function addStudentAccount($button_name,
-                           $file_path_name,
+function addStudentAccount($file_path_name,
                            $full_name,
                            $email_address,
                            $course,
@@ -57,7 +56,7 @@ function addStudentAccount($button_name,
                 remove_junk($_POST[$email_address]),
                 $default_password,
                 3,
-                $file
+                $dir
               );
 
               insertStudentAccount(
@@ -300,6 +299,7 @@ function switch_user_level($email_address, $user_level) {
         // create session with email address
         // pass the info that filtered by email to array list
         $arr = array(
+          'id' =>$guidance['id'],
           'name' => $guidance['name'],
           'email_address' => $guidance['email_address'],
           'user_level' => $guidance['user_level'],
@@ -317,6 +317,7 @@ function switch_user_level($email_address, $user_level) {
         // create session with email address
         // pass the info that filtered by email to array list
         $arr = array(
+          'id' => $student['id'],
           'name' => $student['name'],
           'course' => $student['course'],
           'student_year' => $student['student_year'],
@@ -425,6 +426,7 @@ function login($email_address, $password) {
           // create session with email address
           // pass the info that filtered by email to array list
           $arr = array(
+            'id' => $is_check_user['id'],
             'name' => $is_check_user['name'],
             'email_address' => $is_check_user['email_address'],
             'user_level' => $is_check_user['user_level'],

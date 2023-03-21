@@ -1,8 +1,18 @@
+<?php
+error_reporting(E_ALL);
+error_reporting(-1);
+ini_set('error_reporting', E_ALL);
+?>
 <?php include('../header.php'); ?>
 <?php include('../includes/load.php'); ?>
 <?php SET_NOT_LOGGED_IN(); ?>
 <?php include('../chat_menu_bar.php'); ?>
-
+<?php;
+  $email_address = $_SESSION['key_session']['email_address'];
+  $users = find_chat_user($email_address);
+  $chats = get_chats($_SESSION['key_session']['id'], $users['id']);
+  chat_opened($users['id'], $chats);
+?>
 <main id="main" class="main">
 
     <div class="pagetitle">

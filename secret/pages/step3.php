@@ -74,8 +74,28 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         }
 
         // login logs
-        if (isset($sql_db_6)) {
+        if (isset($db_sql_6)) {
           foreach ($db_sql_6 as $sql) {
+            $conn->query($sql);
+            if ($conn->error) {
+              die($conn->error);
+            }
+          }
+        }
+
+        // conversation logs
+        if (isset($db_sql_7)) {
+          foreach ($db_sql_7 as $sql) {
+            $conn->query($sql);
+            if ($conn->error) {
+              die($conn->error);
+            }
+          }
+        }
+
+        // chat logs
+        if (isset($db_sql_8)) {
+          foreach ($db_sql_8 as $sql) {
             $conn->query($sql);
             if ($conn->error) {
               die($conn->error);

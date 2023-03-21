@@ -13,7 +13,8 @@ $db_sql_1[] = "CREATE TABLE `user_account` (
   `status` int(11) NOT NULL,
   `is_otp_verified` int(11) NOT NULL,
   `is_logged_in` int(11) NOT NULL,
-  `last_login` varchar(255) NOT NULL
+  `last_login` varchar(255) NOT NULL,
+  `last_seen` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
 
 $db_sql_1[] = "ALTER TABLE `user_account`
@@ -129,3 +130,36 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT";
 
 $sql_db_6[] = "ALTER TABLE `login_logs`
 ADD INDEX email_address (`email_address`)";
+
+// =================== conversation logs ========================== //
+$db_sql_7[] = "DROP TABLE IF EXISTS `conversation_logs`";
+
+$db_sql_7[] = "CREATE TABLE `conversation_logs` (
+  `conversation_id` int(11) NOT NULL,
+  `user_1` int(11) NOT NULL,
+  `user_2` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+$db_sql_7[] = "ALTER TABLE `conversation_logs`
+ADD PRIMARY KEY(`conversation_id`)";
+
+$db_sql_7[] = "ALTER TABLE `conversation_logs`
+MODIFY `conversation_id` int(11) NOT NULL AUTO_INCREMENT";
+
+// =================== chat logs ========================== //
+$db_sql_8[] = "DROP TABLE IF EXISTS `chat_logs`";
+
+$db_sql_8[] = "CREATE TABLE `chat_logs` (
+  `chat_id` int(11) NOT NULL,
+  `from_id` int(11) NOT NULL,
+  `to_id` int(11) NOT NULL,
+  `message` text NOT NULL,
+  `opened` tinyint(1) NOT NULL DEFAULT 0,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+$db_sql_8[] = "ALTER TABLE `chat_logs`
+ADD PRIMARY KEY(`chat_id`)";
+
+$db_sql_8[] = "ALTER TABLE `chat_logs`
+MODIFY `chat_id` int(11) NOT NULL AUTO_INCREMENT";

@@ -10,8 +10,7 @@
     onClickButton("button_back", "./view_student_account");
     // upload image & save account info
     if (isset($_POST["button_save"])) {
-      addStudentAccount("button_save",
-        "image_path",
+      addStudentAccount("image_path",
         "full_name",
         "email_address",
         "course",
@@ -79,13 +78,6 @@
                       <label for="email_address" class="col-md-4 col-lg-3 col-form-label">Email address</label>
                       <div class="col-md-8 col-lg-9">
                         <input name="email_address" type="email" class="form-control" id="email_address">
-                      </div>
-                    </div>
-
-                    <div class="row mb-3">
-                      <label for="course" class="col-md-4 col-lg-3 col-form-label">Course</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="course" type="text" class="form-control" id="course">
                       </div>
                     </div>
 

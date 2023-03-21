@@ -21,7 +21,6 @@
 
         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
           <li class="dropdown-header">
-            You have 4 new notifications
             <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
           </li>
           <li>
@@ -134,7 +133,7 @@
           <li>
             <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
               <i class="bi bi-gear"></i>
-              <span>Account Settings</span>
+              <span><?php echo $convo['name']; ?></span>
             </a>
           </li>
           <li>
@@ -157,16 +156,4 @@
 </header><!-- End Header -->
 
 <!-- ======= Sidebar ======= -->
-<aside id="sidebar" class="sidebar">
-  <div class="chat-search-box">
-    <div class="input-group">
-      <input class="form-control" placeholder="Search" >
-      <div class="input-group-btn">
-        <button type="button" class="btn btn-primary"><i class="ri-search-line"></i></button>
-      </div>
-    </div>
-  </div>
-  <ul class="sidebar-nav users" id="sidebar-nav">
-    <?php include_once('chat_side_menu.php'); ?>
-  </ul>
-</aside><!-- End Sidebar-->
+<?php include_once('../chat_ajax/chat_side_bar.php'); ?>
