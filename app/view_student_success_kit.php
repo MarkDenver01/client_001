@@ -47,10 +47,12 @@
                         <th data-target="name" scope="row" class="text-center" style="width: 10%;">Academic SKills Development</th>
                         <td class="text-center" style="width: 15%;">/uploads/academic_skills_development.png</td>
 
-                        <td class="text-center" style="width: 30%;">
-                          <button type="button" name="button_edit" class="btn btn-success rounded-pill btn-sm w-25"  data-bs-toggle="modal" data-bs-target="#ExtralargeModal">View Image</button>
-                          <button type="button" name="button_edit" class="btn btn-primary rounded-pill btn-sm w-25"  data-bs-toggle="modal" data-bs-target="#ExtralargeModal">Edit</button>
-                          <button type="button" name="button_edit" class="btn btn-danger rounded-pill btn-sm w-25"  data-bs-toggle="modal" data-bs-target="#ExtralargeModal">Delete</button>
+                        <td class="text-center" style="width: 10%;">
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                              <button type="button" class="btn btn-success  w-50">View</button>
+                              <button type="button" class="btn btn-primary  w-50">Edit</button>
+                              <button type="button" class="btn btn-danger  w-50">Delete</button>
+                            </div>
                         </td>
                       </tr>
                     </tbody>

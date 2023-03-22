@@ -5,7 +5,7 @@
 
   <div class="d-flex align-items-center justify-content-between">
     <a href="#" class="logo d-flex align-items-center">
-      <lottie-player src="./assets/json/book.json" background="transparent"  speed="1"  style="width: 60px; height: 60px;" loop autoplay></lottie-player>
+      <lottie-player src="../app/assets/json/book.json" background="transparent"  speed="1"  style="width: 60px; height: 60px;" loop autoplay></lottie-player>
       <span class="d-none d-lg-block"><?= $_ENV['SITE_PORTAL']; ?></span>
     </a>
     <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -87,18 +87,10 @@
 
       </li><!-- End Notification Nav -->
 
-      <li class="nav-item dropdown">
-
-        <a class="nav-link nav-icon" href="../chat/chat_app">
-          <i class="bi bi-chat-left-text"></i>
-          <span class="badge bg-success badge-number">Chat</span>
-        </a><!-- End Messages Icon -->
-      </li><!-- End Messages Nav -->
-
       <li class="nav-item dropdown pe-3">
 
         <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-          <img src="assets/img/profile.png" alt="Profile" class="rounded-circle">
+          <img src="../app/assets/img/profile.png" alt="Profile" class="rounded-circle">
           <span class="d-none d-md-block dropdown-toggle ps-2"><?php echo $_SESSION['key_session']['name']; ?></span>
         </a><!-- End Profile Iamge Icon -->
 
@@ -166,23 +158,6 @@
 
 <!-- ======= Sidebar ======= -->
 <aside id="sidebar" class="sidebar">
-  <ul class="sidebar-nav" id="sidebar-nav">
-    <?php
-      $user_check_level = $_SESSION['key_session']['user_level'];
-      switch ($user_check_level) {
-        case '1':
-          include_once('admin_menu.php');
-          break;
-        case '2':
-          include_once('guidance_menu.php');
-          break;
-        case '3':
-          include_once('student_menu.php');
-          break;
-        default:
-          echo "Error occured.";
-          break;
-      }
-    ?>
-  </ul>
+  <?php include('chat_list.php'); ?>
+
 </aside><!-- End Sidebar-->

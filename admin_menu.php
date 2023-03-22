@@ -34,7 +34,7 @@
     <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
         <i class="ri-hand-heart-fill"></i>
-        <span>Test Services</span><i class="bi bi-chevron-down ms-auto"></i>
+        <span>Manage Exam</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
       <ul id="tables-nav" class="nav-content collapsed" data-bs-parent="#sidebar-nav">
         <li>

@@ -8,8 +8,7 @@ function onClickButton($button_name, $url) {
   }
 }
 
-function addStudentAccount($button_name,
-                           $file_path_name,
+function addStudentAccount($file_path_name,
                            $full_name,
                            $email_address,
                            $course,
@@ -31,48 +30,33 @@ function addStudentAccount($button_name,
     );
     validate_fields($req_fields); // check if fields are not empty
 
-    $target_dir = "C:\wamp64\www\client_001\uploads\users";
-    $target_file = $target_dir . basename($_FILES[$file_path_name]["name"]);
-    $upload_status = 1;
-    $image_file_type = pathinfo($target_file, PATHINFO_EXTENSION);
+    $img_file = $_FILES[$file_path_name]['name'];
+    $tmp_dir = $_FILES[$file_path_name]['tmp_name'];
+    $img_size = $_FILES[$file_path_name]['size'];
 
-    // check image file is actual image or a fake image
-    if (isset($_POST[$button_name])) {
-      $check = getimagesize($_FILES[$file_path_name]["tmp_name"]);
-      if($check != false) {
-        $upload_status = 1;
-      } else {
-        $upload_status = 0;
-        $session->message("d", "Sorry, we cannot allow to upload the image due to over sizing.");
-      }
-    }
-
-    // check if file already exists
-    if(file_exists($target_file)) {
-      $update_status = 0;
-      $session->message("d", "Sorry, but the image is already exist in the storage.");
-    }
-
-    // check file size
-    if ($_FILES[$file_path_name]["size"] > 500000) {
-      $upload_status = 0;
-        $session->message("d", "Sorry, but the image file size is over 5mb");
+    if (empty($img_file)) {
+      $session->message("d","Please select the image file...");
     } else {
-      if (find_by_field("user_account","email_address", remove_junk($_POST[$email_address]))
-      || find_by_field("student_info","email_address", remove_junk($_POST[$email_address]))) {
-        $session->message("d", "Account is already existing.");
-      } else {
-        if (move_uploaded_file($_FILES[$file_path_name]["tmp_name"], $target_file)) {
-          $file = $_FILES[$file_path_name]["name"];
-          $default_password = sha1("default");
-          if (empty($errors)) {
+      $upload_dir = '../uploads/students/';
+      $img_ext = strtolower(pathinfo($img_file, PATHINFO_EXTENSION)); // get image extensions
+      $valid_extensions = array('jpeg', 'jpg', 'png', 'gif'); // valid extensions
 
+      // rename uploading image
+      $profile_pic = rand(1000,1000000).".".$img_ext;
+      // allow valid image file formats
+      if (in_array($img_ext, $valid_extensions)) {
+        // check file size '5MiB'
+        if ($img_size < 5000000) {
+          if (move_uploaded_file($tmp_dir, $upload_dir.$profile_pic)) {
+            $default_password = sha1("default");
+            $dir = $upload_dir.$profile_pic;
+            if (empty($errors)) {
               insertUserAccount(
                 remove_junk($_POST[$full_name]),
                 remove_junk($_POST[$email_address]),
                 $default_password,
                 3,
-                $file
+                $dir
               );
 
               insertStudentAccount(
@@ -121,9 +105,17 @@ function addStudentAccount($button_name,
               } else {
                 $session->message("d", "Error occured during sending an email.");
               }
+            } else {
+              $session->message("d", $errors);
+              redirect('./register_student_account', false);
+            }
           } else {
-            $session->message("d", $errors);
+            $session->message("d","Cannot upload the image. Please try again.");
+            redirect('./register_student_account', false);
           }
+        } else {
+          $session->message("w", "Please reduce the image size atleast 5Mb.");
+          redirect('./register_student_account', false);
         }
       }
     }
@@ -148,96 +140,90 @@ function addGuidanceAccount($file_path_name,
     );
     validate_fields($req_fields); // check if fields are not empty
 
-    $target_dir = "C:\wamp64\www\client_001\uploads\users";
-    $target_file = $target_dir . basename($_FILES[$file_path_name]["name"]);
-    $upload_status = 1;
-    $image_file_type = pathinfo($target_file, PATHINFO_EXTENSION);
+    $img_file = $_FILES[$file_path_name]['name'];
+    $tmp_dir = $_FILES[$file_path_name]['tmp_name'];
+    $img_size = $_FILES[$file_path_name]['size'];
 
-    // check image file is actual image or a fake image
-    if (isset($_POST["button_save"])) {
-      $check = getimagesize($_FILES[$file_path_name]["tmp_name"]);
-      if($check != false) {
-        $upload_status = 1;
-      } else {
-        $upload_status = 0;
-        $session->message("d", "Sorry, we cannot allow to upload the image due to over sizing.");
-      }
-    }
-
-    // check if file already exists
-    if(file_exists($target_file)) {
-      $update_status = 0;
-      $session->message("d", "Sorry, but the image is already exist in the storage.");
-    }
-
-    // check file size
-    if ($_FILES[$file_path_name]["size"] > 500000) {
-      $upload_status = 0;
-        $session->message("d", "Sorry, but the image file size is over 5mb");
+    if (empty($img_file)) {
+      $session->message("d","Please select the image file...");
     } else {
-      if (find_by_field("user_account","email_address", remove_junk($_POST[$email_address]))
-      || find_by_field("guidance_info","email_address", remove_junk($_POST[$email_address]))) {
-        $session->message("d", "Account is already existing.");
-      } else {
-        if (move_uploaded_file($_FILES[$file_path_name]["tmp_name"], $target_file)) {
-          $file = $_FILES[$file_path_name]["name"];
-          $default_password = sha1("default");
-          if (empty($errors)) {
-            insertUserAccount(
-                remove_junk($_POST[$full_name]),
-                remove_junk($_POST[$email_address]),
-                $default_password,
-                2,
-                $file);
+      $upload_dir = '../uploads/users/';
+      $img_ext = strtolower(pathinfo($img_file, PATHINFO_EXTENSION)); // get image extensions
+      $valid_extensions = array('jpeg', 'jpg', 'png', 'gif'); // valid extensions
 
-            insertGuidanceAccount(
-                remove_junk($_POST[$full_name]),
-                remove_junk($_POST[$email_address]),
-                remove_junk($_POST[$gender]),
-                remove_junk($_POST[$age]),
-                remove_junk($_POST[$birth_date]),
-                remove_junk($_POST[$present_address])
-            );
+      // rename uploading image
+      $profile_pic = rand(1000,1000000).".".$img_ext;
 
-            $get_name = remove_junk($_POST[$full_name]);
-            $get_mail_address = remove_junk($_POST[$email_address]);
+      // allow valid image file formats
+      if (in_array($img_ext, $valid_extensions)) {
+        // check file size '5MiB'
+        if ($img_size < 5000000) {
+          if (move_uploaded_file($tmp_dir, $upload_dir.$profile_pic)) {
+            $default_password = sha1("default");
+            $dir = $upload_dir.$profile_pic;
+            if (empty($errors)) {
+                insertUserAccount(
+                  remove_junk($_POST[$full_name]),
+                  remove_junk($_POST[$email_address]),
+                  $default_password,
+                  2,
+                  $dir);
 
-            $subject = "Your account has been created";
-            $content = 'Hi '.$get_name;
-            $content .= '<br/>';
-            $content .= 'Welcome to CESLICAM Portal!';
-            $content .= '<br/>';
-            $content .= '<br/>';
-            $content .= 'Your account has been created. Please change your default password for your security.';
-            $content .= '<br/>';
-            $content .= '---------------------------------------';
-            $content .= '<br/>';
-            $content .= 'Email address: '.$get_mail_address;
-            $content .= '<br/>';
-            $content .= 'Password: <b>default</b>';
-            $content .= '<br/>';
-            $content .= '---------------------------------------';
-            $content .= '<br/>';
-            $content .= '<br/>';
-            $content .= 'Thank you.';
+                insertGuidanceAccount(
+                  remove_junk($_POST[$full_name]),
+                  remove_junk($_POST[$email_address]),
+                  remove_junk($_POST[$gender]),
+                  remove_junk($_POST[$age]),
+                  remove_junk($_POST[$birth_date]),
+                  remove_junk($_POST[$present_address])
+              );
 
-            // send mail account created
-            $send = send_email(
-              $get_mail_address,
-              $get_name,
-              $subject,
-              $content
-            );
+              $get_name = remove_junk($_POST[$full_name]);
+              $get_mail_address = remove_junk($_POST[$email_address]);
 
-            if ($send) {
-              redirect('./view_guidance_account', false);
+              $subject = "Your account has been created";
+              $content = 'Hi '.$get_name;
+              $content .= '<br/>';
+              $content .= 'Welcome to CESLICAM Portal!';
+              $content .= '<br/>';
+              $content .= '<br/>';
+              $content .= 'Your account has been created. Please change your default password for your security.';
+              $content .= '<br/>';
+              $content .= '---------------------------------------';
+              $content .= '<br/>';
+              $content .= 'Email address: '.$get_mail_address;
+              $content .= '<br/>';
+              $content .= 'Password: <b>default</b>';
+              $content .= '<br/>';
+              $content .= '---------------------------------------';
+              $content .= '<br/>';
+              $content .= '<br/>';
+              $content .= 'Thank you.';
+
+              // send mail account created
+              $send = send_email(
+                $get_mail_address,
+                $get_name,
+                $subject,
+                $content
+              );
+
+              if ($send) {
+                redirect('./view_guidance_account', false);
+              } else {
+                $session->message("d", "Error occured during sending an email.");
+              }
             } else {
-              $session->message("d", "Error occured during sending an email.");
+               $session->message("d", $errors);
+               redirect('./register_guidance_account', false);
             }
-
           } else {
-            $session->message("d", $errors);
+            $session->message("d","Cannot upload the image. Please try again.");
+            redirect('./register_guidance_account', false);
           }
+        } else {
+          $session->message("w", "Please reduce the image size atleast 5Mb.");
+          redirect('./register_guidance_account', false);
         }
       }
     }
@@ -313,6 +299,7 @@ function switch_user_level($email_address, $user_level) {
         // create session with email address
         // pass the info that filtered by email to array list
         $arr = array(
+          'id' =>$guidance['id'],
           'name' => $guidance['name'],
           'email_address' => $guidance['email_address'],
           'user_level' => $guidance['user_level'],
@@ -330,6 +317,7 @@ function switch_user_level($email_address, $user_level) {
         // create session with email address
         // pass the info that filtered by email to array list
         $arr = array(
+          'id' => $student['id'],
           'name' => $student['name'],
           'course' => $student['course'],
           'student_year' => $student['student_year'],
@@ -438,6 +426,7 @@ function login($email_address, $password) {
           // create session with email address
           // pass the info that filtered by email to array list
           $arr = array(
+            'id' => $is_check_user['id'],
             'name' => $is_check_user['name'],
             'email_address' => $is_check_user['email_address'],
             'user_level' => $is_check_user['user_level'],
