@@ -1,6 +1,6 @@
 <?php
   function get_user_chat_conversation($id) {
-    $conversations = find_conversation($_GET[$id]);
+    $conversations = find_conversation($id);
 
     # creating empty array to
     # store the user conversation

@@ -426,9 +426,9 @@
    return ($result && $db->affected_rows() === 1 ? true : false);
  }
 
- function find_chat_user($key = '') {
+ function find_chat_user($key) {
    global $db;
-   $email_address = $db->escape($email_address);
+   $email_address = $db->escape($key);
    $sql = "SELECT * FROM `user_account` WHERE `email_address` ='{$email_address}'";
    $result = $db->query($sql);
    if ($db->num_rows($result)) {
@@ -488,7 +488,7 @@
      if ($key['opened'] == 0) {
        $opened = 1;
        $chat_id = $key['chat_id'];
-       $sql = "UPDATE `chat_logs` SET = `opened` ='{$opened}' ";
+       $sql = "UPDATE `chat_logs` SET =`opened` ='{$opened}' ";
        $sql .="WHERE `from_id` ='{$id_1}' ";
        $sql .="AND `chat_id` = '{$chat_id}'";
        $db->query($sql);
@@ -496,12 +496,28 @@
    }
  }
 
+ function update_chat_by_id($opened, $chat_id) {
+   global $db;
+
+   $sql = "UPDATE `chat_logs` SET =`opened` ='{$opened}' ";
+   $sql .="WHERE `chat_id` = '{$chat_id}'";
+   $db->query($sql);
+ }
+
  function search_chat($key) {
    global $db;
 
    $sql ="SELECT * FROM `user_account` WHERE ";
-   $sql .="`email_address` LIKE '%{$key}%' OR ";
-   $sql .="`name` LIKE '%{$key}%'";
+   $sql .="`email_address` LIKE '{$key}' OR ";
+   $sql .="`name` LIKE '{$key}'";
+   return find_by_sql($sql);
+ }
+
+ function check_chat_by_id($id_1, $id_2) {
+   global $db;
+
+   $sql = "SELECT * FROM `chat_logs` WHERE `to_id` = '{$id_1}'
+    AND `from_id` ='{$id_2}' ORDER BY `chat_id` ASC";
    return find_by_sql($sql);
  }
 
@@ -509,6 +525,50 @@
    global $db;
    $sql = "UPDATE `user_account` SET `last_seen` = NOW() ";
    $sql .="WHERE `id` = '{$id}'";
+   $db->query($sql);
+ }
+
+ function check_conversation($from_id, $to_id) {
+   global $db;
+
+   $sql = "SELECT * FROM `conversation_logs` WHERE ";
+   $sql .="(user_1 ='{$from_id}' AND user_2 ='{$to_id}') OR ";
+   $sql .="(user_2 ='{$from_id}' AND user_2 ='{$to_id}')";
+   $result = $db->query($sql);
+   if ($db->num_rows($result)) {
+     $convo = $db->fetch_assoc($result);
+     return $convo;
+   }
+   return false;
+ }
+
+ function insert_chat_user($from_id, $to_id, $message) {
+   global $db;
+
+   $sql = "INSERT INTO `chat_logs` (`from_id`, `to_id`, `message`)";
+   $sql .=" VALUES ";
+   $sql .="(
+     '{$from_id}',
+     '{$to_id}',
+     '{$messaage}'
+     )";
+   $result = $db->query($sql);
+   if ($result) {
+     return true;
+   } else {
+     return false;
+   }
+ }
+
+ function insert_conversation_user($from_id, $to_id) {
+   global $db;
+
+   $sql = "INSERT INTO `conversation_logs` (`user_1`, `user_2`)";
+   $sql .=" VALUES ";
+   $sql .="(
+     '{$from_id}',
+     '{$to_id}'
+     )";
    $db->query($sql);
  }
 

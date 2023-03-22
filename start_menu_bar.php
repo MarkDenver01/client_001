@@ -146,7 +146,7 @@
           </li>
 
           <li class="dropdown-footer">
-            <a href="../app/chat">Show all messages</a>
+            <a href="../chat/chat_app">Show all messages</a>
           </li>
 
         </ul><!-- End Messages Dropdown Items -->
