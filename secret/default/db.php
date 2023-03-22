@@ -163,3 +163,21 @@ ADD PRIMARY KEY(`chat_id`)";
 
 $db_sql_8[] = "ALTER TABLE `chat_logs`
 MODIFY `chat_id` int(11) NOT NULL AUTO_INCREMENT";
+
+// =================== announcement ========================== //
+$db_sql_9[] = "DROP TABLE IF EXISTS `announcement_logs`";
+
+$db_sql_9[] = "CREATE TABLE `announcement_logs` (
+  `id` int(11) NOT NULL,
+  `title` VARCHAR(255) NOT NULL,
+  `body_message` VARCHAR(255) NOT NULL,
+  `attached_file_path` VARCHAR(255) NOT NULL,
+  `date_posted` datetime NOT NULL,
+  `from` VARCHAR(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET = utf8mb4";
+
+$db_sql_9[] = "ALTER TABLE `announcement_logs`
+ADD PRIMARY KEY(`id`)";
+
+$db_sql_9[] = "ALTER TABLE `announcement_logs`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT";

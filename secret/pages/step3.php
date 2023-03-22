@@ -103,6 +103,17 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
           }
         }
 
+        // announcement logs
+        if (isset($db_sql_9)) {
+          foreach ($db_sql_9 as $sql) {
+            $conn->query($sql);
+            if ($conn->error) {
+              die($conn->error);
+            }
+          }
+        }
+
+
         $update_env_vars = $__DotEnvironment->update_env_variables($_POST);
         if($update_env_vars){
           echo "<script>location.href = './?step=4'</script>";
