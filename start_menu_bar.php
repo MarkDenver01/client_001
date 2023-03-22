@@ -89,68 +89,10 @@
 
       <li class="nav-item dropdown">
 
-        <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+        <a class="nav-link nav-icon" href="../chat/chat_app">
           <i class="bi bi-chat-left-text"></i>
-          <span class="badge bg-success badge-number">3</span>
+          <span class="badge bg-success badge-number">Chat</span>
         </a><!-- End Messages Icon -->
-
-        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-          <li class="dropdown-header">
-            You have 3 new messages
-            <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-          </li>
-          <li>
-            <hr class="dropdown-divider">
-          </li>
-
-          <li class="message-item">
-            <a href="#">
-              <img src="assets/img/user.png" alt="" class="rounded-circle">
-              <div>
-                <h4>Maria</h4>
-                <p>Not yet available...</p>
-                <p>4 hrs. ago</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <hr class="dropdown-divider">
-          </li>
-
-          <li class="message-item">
-            <a href="#">
-              <img src="assets/img/user.png" alt="" class="rounded-circle">
-              <div>
-                <h4>Anna</h4>
-                <p>Not yet available...</p>
-                <p>6 hrs. ago</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <hr class="dropdown-divider">
-          </li>
-
-          <li class="message-item">
-            <a href="#">
-              <img src="assets/img/user.png" alt="" class="rounded-circle">
-              <div>
-                <h4>David</h4>
-                <p>Not yet available...</p>
-                <p>8 hrs. ago</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <hr class="dropdown-divider">
-          </li>
-
-          <li class="dropdown-footer">
-            <a href="../chat/chat_app">Show all messages</a>
-          </li>
-
-        </ul><!-- End Messages Dropdown Items -->
-
       </li><!-- End Messages Nav -->
 
       <li class="nav-item dropdown pe-3">
