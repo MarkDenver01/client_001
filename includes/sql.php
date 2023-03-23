@@ -256,9 +256,9 @@
 
  function display_announcement() {
    global $db;
-   $current_date = date("Y-m-d H:i:s", strtotime('+10 day'));
-   $sql = sprintf("SELECT * FROM `announcement_logs` WHERE `date_posted` >
-   '%s'", $current_date);
+   $current_date = date("Y-m-d H:i:s", strtotime('9 day'));
+   $sql = sprintf("SELECT * FROM `announcement_logs` WHERE `date_posted` <
+   '%s' ORDER BY `id` DESC", $current_date);
    return find_by_sql($sql);
  }
 
