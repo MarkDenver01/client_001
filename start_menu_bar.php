@@ -1,6 +1,7 @@
 <?php require_once('../lib/class.environment.php'); ?>
 <?php include_once('../includes/load.php'); ?>
-<?php delete_announcement_after_a_days(); // 15 days the announcement automatically deleted ?>
+<?php delete_announcement_after_a_days(); ?>
+
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
 
