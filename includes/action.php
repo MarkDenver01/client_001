@@ -8,6 +8,60 @@ function onClickButton($button_name, $url) {
   }
 }
 
+function post_announcements($title, $body_message, $file_path_name) {
+  global $session;
+  $req_fields = array(
+    $title,
+    $body_message,
+    $file_path_name,
+    $from
+  );
+  validate_fields($req_fields);
+  $upload_file = $_FILES[$file_path_name]['name'];
+  $tmp_dir = $_FILES[$file_path_name]['tmp_name'];
+  $upload_size = $_FILES[$file_path_name]['size'];
+
+  $upload_dir = "../uploads/posts/";
+  $upload_ext = strtolower(pathinfo($upload_file, PATHINFO_EXTENSION));
+  $valid_extensions = array(
+    'jpeg',
+    'jpg',
+    'png',
+    'gif',
+    'pdf'
+  );
+  $upload_destination = rand(1000,1000000).".".$upload_ext;
+  if (in_array($upload_ext, $valid_extensions)) {
+    if ($upload_size < 10000000) {
+      if (move_uploaded_file($tmp_dir, $upload_dir.$upload_destination)) {
+        $dir = $upload_dir.$upload_destination;
+        if (empty($errors)) {
+
+          $user_level = $_SESSION['key_session']['user_level'];
+          if ($user_level == '1') {
+            $user_level = 'Administrator';
+          } elseif ($user_level == '2') {
+            $user_level = 'Guidance';
+          }
+
+          insert_post_announcements(
+            remove_junk($_POST[$title]),
+            remove_junk($_POST[$body_message]),
+            $dir,
+            $user_level
+          );
+        } else {
+          $session->message("d", $errors);
+        }
+      } else {
+        $session->message("w", "Unable to upload the file");
+      }
+    } else {
+      $session->message("d", "The upload file size is too big. Please reduce the size of the file.");
+    }
+  }
+}
+
 function addStudentAccount($file_path_name,
                            $full_name,
                            $email_address,
