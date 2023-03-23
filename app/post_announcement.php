@@ -6,10 +6,21 @@
 <?php include('../includes/load.php'); ?>
 <?php SET_NOT_LOGGED_IN(); ?>
 <?php include('../start_menu_bar.php'); ?>
+<?php
+  if (isset($_SESSION['key_session']['email_address'])) {
+    if (isset($_POST['button_submit'])) {
+      post_announcements(
+        "title",
+        "body_message",
+        "image_path"
+      );
+    }
+  }
+?>
 <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Post Announcement</h1>
+      <h1>Post Announcement </h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="#">Announcement</a></li>
@@ -24,18 +35,18 @@
           <div class="card">
           <div class="card-body">
             <h5 class="card-title">Post an announcement</h5>
-
+            <?php echo display_message($msg); ?>
             <!-- Floating Labels Form -->
-              <form class="row g-3">
+              <form class="row g-3" action="", method="POST" enctype="multipart/form-data">
                 <div class="col-md-12">
                   <div class="form-floating">
-                    <input type="text" class="form-control" id="floatingName" placeholder="Your Name">
+                    <input name="title" type="text" class="form-control" id="floatingName" placeholder="Your title">
                     <label for="floatingName">Title</label>
                   </div>
                 </div>
                 <div class="col-12">
                   <div class="form-floating">
-                    <textarea class="form-control" placeholder="Address" id="floatingTextarea" style="height: 100px;"></textarea>
+                    <textarea name="body_message" class="form-control" placeholder="Your announcement" id="floatingTextarea" style="height: 100px;"></textarea>
                     <label for="floatingTextarea">Body Message</label>
                   </div>
                 </div>
@@ -46,8 +57,7 @@
 
 
                 <div class="text-left">
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                  <button type="reset" class="btn btn-secondary">Reset</button>
+                  <button name="button_submit" type="submit" class="btn btn-primary">Submit</button>
                 </div>
               </form><!-- End floating Labels Form -->
 

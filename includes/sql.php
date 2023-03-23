@@ -254,6 +254,43 @@
    $db->query($sql);
  }
 
+ function display_announcement() {
+   global $db;
+   $current_date = date("Y-m-d H:i:s", strtotime('9 day'));
+   $sql = sprintf("SELECT * FROM `announcement_logs` WHERE `date_posted` <
+   '%s' ORDER BY `id` DESC", $current_date);
+   return find_by_sql($sql);
+ }
+
+ function insert_post_announcements($title, $body_message, $attached_file, $from) {
+   global $db;
+   $current_date = date('Y-m-d H:i:s');
+   $sql = "INSERT INTO `announcement_logs` (
+     `title`,
+     `body_message`,
+     `attached_file_path`,
+     `date_posted`,
+     `from`
+   )";
+   $sql .=" VALUES ";
+   $sql .="(
+     '{$title}',
+     '{$body_message}',
+     '{$attached_file}',
+     '{$current_date}',
+     '{$from}'
+     )";
+    $db->query($sql);
+ }
+
+ function delete_announcement_after_a_days() {
+   global $db;
+
+   $date_expired = date("Y-m-d H:i:s", strtotime('-15 day'));
+   $sql = "DELETE FROM `announcement_logs` WHERE `date_posted` < '{$date_expired}'";
+   $db->query($sql);
+ }
+
  function insertStudentAccount($full_name, $email_address, $course,
      $year, $gender, $age, $birth_date, $present_address) {
      global $db;
