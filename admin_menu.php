@@ -62,6 +62,13 @@
 
     <li class="nav-item">
       <a class="nav-link " href="#">
+        <i class="ri-todo-fill"></i>
+        <span>Manage Schedule Exam</span>
+      </a>
+    </li><!-- End Generate Reports Nav -->
+
+    <li class="nav-item">
+      <a class="nav-link " href="#">
         <i class="ri-file-3-fill"></i>
         <span>Generate Reports</span>
       </a>
