@@ -51,52 +51,39 @@
                 <hr/>
 
                 <form class="row g-3" action="" method="POST" enctype="multipart/form-data">
-                   <div class="col-lg-5">
+                   <div class="col-lg-6">
 
                      <label for="ic_image_file_path">
                        <img style="height:250px" id="ic_image_file" src="./assets/img/profile.png" alt="Profile" class="d-block w-100 border border-info">
-                       <p class="small fst-italic">(Attached Page1) - Academic Skill Development</p>
+                       <p class="small fst-italic text-center">(Attached Image of Exam)</p>
                      </label>
-                     <input id="ic_image_file_path" type="file" name="image_path[]" class="form-control btn btn-primary rounded-pill btn-sm" multiple></input>
-                     <br/>
-                     <br/>
-                     <label for="ic_image_file_path">
-                       <img style="height:250px" id="ic_image_file" src="./assets/img/profile.png" alt="Profile" class="d-block w-100 border border-info">
-                       <p class="small fst-italic">(Attached Page2) - Study and Thinking Skills</p>
-                     </label>
-                     <input id="ic_image_file_path" type="file" name="image_path[]" class="form-control btn btn-primary rounded-pill btn-sm" multiple></input>
-                     <br/>
-                     <br/>
-                     <label for="ic_image_file_path">
-                       <img style="height:250px" id="ic_image_file" src="./assets/img/profile.png" alt="Profile" class="d-block w-100 border border-info">
-                       <p class="small fst-italic">(Attached Page3) - Personal Issues</p>
-                     </label>
-                     <input id="ic_image_file_path" type="file" name="image_path[]" class="form-control btn btn-primary rounded-pill btn-sm" multiple></input>
-                     <br/>
-                     <br/>
-                     <label for="ic_image_file_path">
-                       <img style="height:250px" id="ic_image_file" src="./assets/img/profile.png" alt="Profile" class="d-block w-100 border border-info">
-                       <p class="small fst-italic">(Attached Page4) - Planning for the future</p>
-                     </label>
-                     <input id="ic_image_file_path" type="file" name="image_path[]" class="form-control btn btn-primary rounded-pill btn-sm" multiple></input>
-                     <br/>
-                     <br/>
-                     <label for="ic_image_file_path">
-                       <img style="height:250px" id="ic_image_file" src="./assets/img/profile.png" alt="Profile" class="d-block w-100 border border-info">
-                       <p class="small fst-italic">(Attached Page5) - Resource needs</p>
-                     </label>
-                     <input id="ic_image_file_path" type="file" name="image_path[]" class="form-control btn btn-primary rounded-pill btn-sm" multiple></input>
+                     <input id="ic_image_file_path" type="file" name="image_path[]" class="form-control btn btn-primary rounded-pill btn-sm w-75" multiple></input>
                      <br/>
 
                    </div>
-                   <div class="col-lg-7">
+                   <div class="col-lg-6">
+
+                     <label for="inputNumber" class="col-sm-5 col-form-label">Student Year</label>
+                     <div class="col-sm-10">
+                       <input type="text" class="form-control" value="First Year" disabled>
+                    </div>
+
+                    <label for="inputNumber" class="col-sm-5 col-form-label">Title</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" value="Student Success Survey and Student Guide" disabled>
+                    </div>
+
+                    <label for="inputNumber" class="col-sm-5 col-form-label">Exam Created</label>
+                    <div class="col-sm-10">
+                      <input type="date" class="form-control" >
+                    </div>
+                    <br/>
+                    <div class="text-center">
+                      <button type="submit" class="btn btn-primary">Create</button>
+                      <button type="submit" name="button_view_success_kit" class="btn btn-success">View Records</button>
+                    </div>
 
                    </div>
-                   <div class="text-left">
-                     <button type="submit" class="btn btn-primary">Upload</button>
-                     <button type="submit" name="button_view_success_kit" class="btn btn-success">View Test Records</button>
-                   </div>
-
                 </form>
               </div>
 
