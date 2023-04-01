@@ -37,14 +37,18 @@
                     <thead>
                       <tr>
                         <th scope="col" class="text-center" style="width: 10%;">Exam Type</th>
-                        <th scope="col" class="text-center" style="width: 15%;">File Name</th>
+                        <th scope="col" class="text-center" style="width: 15%;">Student Year</th>
+                        <th scope="col" class="text-center" style="width: 15%;">Created At</th>
+                        <th scope="col" class="text-center" style="width: 15%;">Image Path</th>
                         <th scope="col" class="text-center" style="width: 30%;">Action</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
                         <td scope="row" class="text-center" style="width: 5%;" hidden>
-                        <th data-target="name" scope="row" class="text-center" style="width: 10%;">Academic SKills Development</th>
+                        <th data-target="name" scope="row" class="text-center" style="width: 10%;">Student Success Survey</th>
+                        <td data-target="name" scope="row" class="text-center" style="width: 10%;">First Year</td>
+                        <td data-target="name" scope="row" class="text-center" style="width: 10%;">Mar-03-2023</td>
                         <td class="text-center" style="width: 15%;">/uploads/academic_skills_development.png</td>
 
                         <td class="text-center" style="width: 10%;">
