@@ -1,7 +1,4 @@
 <?php
-ini_set('display_errors', '1');
-error_reporting(E_ALL);
-
 function onClickButton($button_name, $url) {
     if (isset($_POST[$button_name])) {
       redirect($url);
@@ -663,6 +660,4 @@ function check_user_level() {
     }
   }
 }
-
-
 ?>

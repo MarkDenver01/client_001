@@ -463,4 +463,10 @@
    return ($result && $db->affected_rows() === 1 ? true : false);
  }
 
- ?>
+ function insert_exam_image(array $data) {
+  global $db;
+  $sql = "INSERT INTO exam_image_upload(".implode(',', array_keys($data)). ") 
+  VALUES (".implode(',', array_fill(0, $data, '?')) . ")";
+  $db->query($sql);
+ }
+?>

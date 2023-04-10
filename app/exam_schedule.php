@@ -5,7 +5,6 @@
 <?php include('../header.php'); ?>
 <?php include('../includes/load.php'); ?>
 <?php SET_NOT_LOGGED_IN(); ?>
-
 <?php include('../start_menu_bar.php'); ?>
 <main id="main" class="main">
 
@@ -44,7 +43,11 @@
 
                  <label for="inputNumber" class="col-sm-5 col-form-label">Exam Type</label>
                  <div class="col-sm-10">
-                   <input type="text" class="form-control" value="Student Success Kit" disabled>
+                   <select name="course" id="course" class="form-select">
+                     <option selected>Select exam type</option>
+                     <option value="Student Success Survey and Student Guide">Student Success Survey and Student Guide</option>
+                     <option value="Second Year">OASIS</option>
+                   </select>
                  </div>
 
                  <label for="inputNumber" class="col-sm-5 col-form-label">Created At</label>
@@ -93,7 +96,7 @@
                  <br/>
                  <div class="text-center">
                    <button type="submit" class="btn btn-danger">Schedule</button>
-                   <button type="submit" name="" class="btn btn-success">View Records</button>
+                   <button type="submit" name="button_submit" class="btn btn-success">View Records</button>
                  </div>
 
                </div>

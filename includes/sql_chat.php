@@ -87,5 +87,4 @@ function chat_opened($id_1, $chats) {
     }
   }
 }
-
 ?>

@@ -1,4 +1,9 @@
 <?php require_once('../lib/class.environment.php'); ?>
+<?php
+  error_reporting(E_ALL);
+  ini_set('display_errors', '1');
+  ini_set('display_startup_errors', '1');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,5 +46,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  <link rel="stylesheet" href="../app/dropzone/dropzone.css" type="text/css">
 </head>
 <body>
