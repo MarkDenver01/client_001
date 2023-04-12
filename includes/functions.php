@@ -1,7 +1,7 @@
 <?php
 // setting up the time Zone
 // It Depends on your location or your P.c settings
-define('TIMEZONE', 'Africa/Addis_Ababa');
+define('TIMEZONE', 'Asia/Manila');
 date_default_timezone_set(TIMEZONE);
 
 $errors = array();

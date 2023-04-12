@@ -123,7 +123,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
           }
         }
 
-        // exam upload image 
+        // exam schedule
         if (isset($db_sql_11)) {
           foreach ($db_sql_11 as $sql) {
             $conn->query($sql);
@@ -133,7 +133,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
           }
         }
 
-        // exam schedule
+        // student records
         if (isset($db_sql_12)) {
           foreach ($db_sql_12 as $sql) {
             $conn->query($sql);
@@ -143,7 +143,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
           }
         }
 
-        // student records
+        // assign exam record
         if (isset($db_sql_13)) {
           foreach ($db_sql_13 as $sql) {
             $conn->query($sql);

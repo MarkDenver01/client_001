@@ -660,4 +660,56 @@ function check_user_level() {
     }
   }
 }
+
+function create_exam($student_year, $title, $description, $image_file_path, $image_dir, $redirect_page) {
+  global $session;
+  $student_year = $_POST[$student_year];
+  $title = $_POST[$title];
+  $description = $_POST[$description];
+  $created_at = date('Y-m-d h:i:s A');
+
+  $img_file = $_FILES[$image_file_path]['name'];
+  $tmp_dir = $_FILES[$image_file_path]['tmp_name'];
+  $img_size = $_FILES[$image_file_path]['size'];
+
+  if (empty($img_file)) {
+    $session->message('w', 'Please select the image file.');
+    redirect($redirect_page, false);
+  } else {
+    $upload_dir = $image_dir;
+    $img_ext = strtolower(pathinfo($img_file, PATHINFO_EXTENSION));
+    $valid_extensions = array('jpeg', 'jpg', 'png', 'gif');
+
+    $generate_file_name = 'EXAM_'.$student_year.'_'.rand(1000,1000000).".".$img_ext;
+    if (in_array($img_ext, $valid_extensions)) {
+      if ($img_size < 5000000) {
+        if (move_uploaded_file($tmp_dir, $upload_dir.$generate_file_name)) {
+          $dir = $upload_dir.$generate_file_name;
+          if (empty($errors)) {
+            $data = array(
+              'student_year' => $student_year,
+              'exam_title' => $title,
+              'exam_description' => $description,
+              'image_exam_path' => $dir,
+              'created_at' => $created_at
+            );
+            // insert data
+            insert_new_exam($data);
+            $session->message('s', 'Exam has been uploaded');
+            redirect($redirect_page, false);
+          } else {
+            $session->message('d', $errors);
+            redirect($redirect_page, false);
+          }
+        } else {
+          $session->message('w', 'Cannot upload the image. Please try again.');
+          redirect($redirect_page, false);
+        }
+      } else {
+        $session->message('w', 'Please reduce the image size atleast 5Mib');
+        redirect($redirect_page, false);
+      }
+    }
+  }
+}
 ?>

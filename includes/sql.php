@@ -463,10 +463,34 @@
    return ($result && $db->affected_rows() === 1 ? true : false);
  }
 
- function insert_exam_image(array $data) {
+ function insert_new_exam(array $data) {
   global $db;
-  $sql = "INSERT INTO exam_image_upload(".implode(',', array_keys($data)). ") 
-  VALUES (".implode(',', array_fill(0, $data, '?')) . ")";
-  $db->query($sql);
+  $sql ="INSERT INTO exam_created(student_year, exam_title, exam_description, image_exam_path, created_at) ";
+  $sql .="VALUES ('" .$data['student_year'];
+  $sql .="','" .$data['exam_title'];
+  $sql .="','" .$data['exam_description'];
+  $sql .="','" .$data['image_exam_path'];
+  $sql .="','" .$data['created_at']. "')";
+  $result = $db->query($sql);
+  if ($result) {
+    return true;
+  } else {
+    return false;
+  }
  }
+
+ function find_by_exam_created() {
+  global $db;
+  $sql = "SELECT * FROM exam_created ORDER BY id DESC";
+  return find_by_sql($sql);
+}
+
+function delete_exam_created($id) {
+  global $db;
+  $sql = "DELETE FROM exam_created";
+  $sql .= " WHERE id='" .$id. "'";
+  $db->query($sql);
+  return ($db->affected_rows() === 1) ? true : false;
+}
+
 ?>

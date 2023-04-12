@@ -34,27 +34,17 @@
     <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
         <i class="ri-file-list-fill"></i>
-        <span>Create Exam</span><i class="bi bi-chevron-down ms-auto"></i>
+        <span>Manage Exam</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
       <ul id="icons-nav" class="nav-content collapsed" data-bs-parent="#sidebar-nav">
         <li>
-          <a href="./create_exam_first">
-            <i class="bi bi-circle"></i><span>First Year</span>
+          <a href="./create_exam">
+            <i class="bi bi-circle"></i><span>Create an exam</span>
           </a>
         </li>
         <li>
-          <a href="./create_exam_second">
-            <i class="bi bi-circle"></i><span>Second Year</span>
-          </a>
-        </li>
-        <li>
-          <a href="./create_exam_third">
-            <i class="bi bi-circle"></i><span>Third Year</span>
-          </a>
-        </li>
-        <li>
-          <a href="./create_exam_fourth">
-            <i class="bi bi-circle"></i><span>Fourth Year</span>
+          <a href="./view_exam">
+            <i class="bi bi-circle"></i><span>View exam record</span>
           </a>
         </li>
       </ul>
