@@ -15,7 +15,8 @@
 
   <nav class="header-nav ms-auto">
     <ul class="d-flex align-items-center">
-      <li class="nav-item dropdown">
+
+    <li class="nav-item dropdown">
         <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
           <i class="bi bi-bell"></i>
           <span class="badge bg-primary badge-number">4</span>

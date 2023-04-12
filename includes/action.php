@@ -283,8 +283,8 @@ function addGuidanceAccount($file_path_name,
 function one_time_password($email_address, $full_name, $password) {
   global $session;
   $otp = rand(100000,999999);
-  $get_name = remove_junk($_POST[$full_name]);
-  $get_mail_address = remove_junk($_POST[$email_address]);
+  $get_name = $full_name;
+  $get_mail_address = $email_address;
 
   $req_fields = array($email_address, $full_name, $password);
   validate_fields($req_fields);
@@ -350,7 +350,6 @@ function switch_user_level($email_address, $user_level) {
         // create session with email address
         // pass the info that filtered by email to array list
         $arr = array(
-          'id' =>$guidance['id'],
           'name' => $guidance['name'],
           'email_address' => $guidance['email_address'],
           'user_level' => $guidance['user_level'],
@@ -368,7 +367,6 @@ function switch_user_level($email_address, $user_level) {
         // create session with email address
         // pass the info that filtered by email to array list
         $arr = array(
-          'id' => $student['id'],
           'name' => $student['name'],
           'course' => $student['course'],
           'student_year' => $student['student_year'],

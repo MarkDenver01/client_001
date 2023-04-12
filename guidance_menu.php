@@ -1,4 +1,4 @@
-    <li class="nav-item">
+<li class="nav-item">
       <a class="nav-link " href="./dashboard">
         <i class="ri-dashboard-fill"></i>
         <span>Dashboard</span>
@@ -6,16 +6,35 @@
     </li><!-- End Dashboard Nav -->
 
     <li class="nav-item">
-      <a class="nav-link " href="#">
+      <a class="nav-link " href="./student_records">
         <i class="ri-account-pin-circle-fill"></i>
         <span>Student Records</span>
       </a>
     </li><!-- End Student Records Nav -->
 
     <li class="nav-item">
+      <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
+        <i class="ri-file-list-fill"></i>
+        <span>Manage Exam</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul id="icons-nav" class="nav-content collapsed" data-bs-parent="#sidebar-nav">
+        <li>
+          <a href="./create_exam">
+            <i class="bi bi-circle"></i><span>Create an exam</span>
+          </a>
+        </li>
+        <li>
+          <a href="./view_exam">
+            <i class="bi bi-circle"></i><span>View exam record</span>
+          </a>
+        </li>
+      </ul>
+    </li><!-- End Dashboard Nav -->
+
+    <!--<li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
         <i class="ri-hand-heart-fill"></i>
-        <span>Test Services</span><i class="bi bi-chevron-down ms-auto"></i>
+        <span>Manage Exam</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
       <ul id="tables-nav" class="nav-content collapsed" data-bs-parent="#sidebar-nav">
         <li>
@@ -39,10 +58,10 @@
           </a>
         </li>
       </ul>
-    </li><!-- End Dashboard Nav -->
+    </li>-->
 
     <li class="nav-item">
-      <a class="nav-link " href="#">
+      <a class="nav-link " href="./exam_schedule">
         <i class="ri-todo-fill"></i>
         <span>Manage Schedule Exam</span>
       </a>

@@ -12,7 +12,7 @@
       <h1>Manage Schedule Exam</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item">User Level Here (TBD)</li>
+          <li class="breadcrumb-item">Create an exam schedule</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
@@ -32,7 +32,7 @@
 
                  <label for="inputNumber" class="col-sm-5 col-form-label">Student Year</label>
                  <div class="col-sm-10">
-                   <select name="course" id="course" class="form-select">
+                   <select id="student_year" name="course" id="course" class="form-select">
                      <option selected>Select student year</option>
                      <option value="First Year">First Year</option>
                      <option value="Second Year">Second Year</option>
@@ -43,16 +43,14 @@
 
                  <label for="inputNumber" class="col-sm-5 col-form-label">Exam Type</label>
                  <div class="col-sm-10">
-                   <select name="course" id="course" class="form-select">
+                   <select id="exam_title" name="course" id="course" class="form-select">
                      <option selected>Select exam type</option>
-                     <option value="Student Success Survey and Student Guide">Student Success Survey and Student Guide</option>
-                     <option value="Second Year">OASIS</option>
                    </select>
                  </div>
 
                  <label for="inputNumber" class="col-sm-5 col-form-label">Created At</label>
                  <div class="col-sm-10">
-                   <input type="date" class="form-control" disabled>
+                   <input id="created_at" type="date" class="form-control" disabled>
                  </div>
 
                  <label for="inputNumber" class="col-sm-5 col-form-label">Expired At</label>
@@ -109,21 +107,11 @@
 
   </main><!-- End #main -->
 
-  <script>
-      function readURL(input) {
-          if (input.files && input.files[0]) {
-              var reader = new FileReader();
-
-              reader.onload = function (e) {
-                  $('#ic_image_file').attr('src', e.target.result);
-              }
-
-              reader.readAsDataURL(input.files[0]);
-          }
-      }
-
-      $("#ic_image_file_path").change(function(){
-          readURL(this);
-      });
-  </script>
+ <script>
+  $(document).ready(function() {
+    $('#student_year').on('change', function() {
+      
+    });
+  });
+ </script>
 <?php include('../footer.php'); ?>

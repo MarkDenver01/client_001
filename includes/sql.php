@@ -479,6 +479,14 @@
   }
  }
 
+ function find_all_user($id) {
+  global $db;
+
+  $sql ="SELECT * FROM `user_account` WHERE ";
+  $sql .="`id` ='{$id}'";
+  return find_by_sql($sql);
+}
+
  function find_by_exam_created() {
   global $db;
   $sql = "SELECT * FROM exam_created ORDER BY id DESC";
