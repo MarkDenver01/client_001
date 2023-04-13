@@ -60,10 +60,6 @@
 
 
             </div>
-
-            <div class="text-left">
-              <button type="submit" name="button_back" class="btn btn-danger w-25">Back</button>
-            </div>
           </form><!-- End floating Labels Form -->
           <!-- End General Form Elements -->
 

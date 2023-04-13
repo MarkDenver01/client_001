@@ -212,7 +212,7 @@ $db_sql_11[] = "CREATE TABLE `exam_schedule` (
   `exam_title` VARCHAR(255) NOT NULL,
   `created_on` datetime NOT NULL,
   `expired_on` datetime NOT NULL,
-  `exam_duration` datetime NOT NULL,
+  `exam_duration` int(11) NOT NULL,
   `result_date_and_time` datetime NOT NULL,
   `status` VARCHAR(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";

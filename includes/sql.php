@@ -479,8 +479,26 @@
   }
  }
 
- function find_all_user($id) {
+ function insert_exam_schedule(array $data) {
   global $db;
+  $sql = "INSERT INTO exam_schedule(student_year, exam_title, created_on, expired_on, exam_duration, result_date_and_time, `status`) ";
+  $sql .="VALUES('" .$data['student_year'];
+  $sql .="','" .$data['exam_title'];
+  $sql .="','" .$data['created_at'];
+  $sql .="','" .$data['expired_at'];
+  $sql .="','" .$data['exam_duration'];
+  $sql .="','" .$data['result_date'];
+  $sql .="','" .$data['exam_status']. "')";
+  $result = $db->query($sql);
+  if ($result) {
+    return true;
+  } else {
+    return false;
+  }
+ }
+
+ function find_all_user($id) {
+   global $db;
 
   $sql ="SELECT * FROM `user_account` WHERE ";
   $sql .="`id` ='{$id}'";
@@ -493,12 +511,30 @@
   return find_by_sql($sql);
 }
 
+function find_by_exam_schedule() {
+  global $db;
+  $sql = "SELECT * FROM exam_schedule ORDER BY id DESC";
+  return find_by_sql($sql);
+}
+
 function delete_exam_created($id) {
   global $db;
   $sql = "DELETE FROM exam_created";
   $sql .= " WHERE id='" .$id. "'";
   $db->query($sql);
   return ($db->affected_rows() === 1) ? true : false;
+}
+
+function find_all_student($student_year) {
+  global $db;
+  $student_year = $db->escape($student_year);
+  $sql ="SELECT * FROM student_info WHERE student_year='" .$student_year. "'";
+  $result = $db->query($sql);
+  if ($db->num_rows($result)) {
+    $user = $db->fetch_assoc($result);
+    return $user;
+  }
+  return $user=[];
 }
 
 ?>

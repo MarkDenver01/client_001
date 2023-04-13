@@ -710,4 +710,88 @@ function create_exam($student_year, $title, $description, $image_file_path, $ima
     }
   }
 }
+
+# TODO : add validation for schedule of exam
+function create_exam_schedule($student_year, $exam_title, $created_at, $expired_at, $exam_duration, $result_date, $exam_status) {
+  global $db;
+  global $session;
+  $student_year = $_POST[$student_year];
+  $exam_title = $_POST[$exam_title];
+  $created_at = $_POST[$created_at];
+  $expired_at = $_POST[$expired_at];
+  $exam_duration = $_POST[$exam_duration];
+  $result_date = $_POST[$result_date];
+  $exam_status  = $_POST[$exam_status];
+
+  $data = array(
+    'student_year' => $student_year,
+    'exam_title' => $exam_title,
+    'created_at' => $created_at,
+    'expired_at' => $expired_at,
+    'exam_duration' => $exam_duration,
+    'result_date' => $result_date,
+    'exam_status' => $exam_status
+  );
+
+  $user_level = $_SESSION['key_session']['user_level'];
+  if ($user_level == '1') {
+    $user_level = 'Administrator';
+  } elseif ($user_level == '2') {
+    $user_level = 'Guidance';
+  }
+
+  $result = insert_exam_schedule($data);
+  if ($result) {
+    insert_post_announcements(
+      "Schedule of Exam - " .$student_year, 
+      "Exam title: " .$exam_title. "<br/>Exam will be closed at: " .$expired_at,
+      null, 
+      $user_level
+    );
+
+    $sql = "SELECT * FROM student_info WHERE student_year ='" .$student_year. "'";
+    $result = $db->query($sql);
+    while($users = mysqli_fetch_assoc($result)) {
+      $subject = "Exam Schedule has been posted";
+      $content = 'Hi Students';
+      $content .= '<br/>';
+      $content .= '<br/>';
+      $content .= 'This email has remind you that the schedule of exam has been posted in the website.';
+      $content .= '<br/>';
+      $content .= '---------------------------------------';
+      $content .= '<br/>';
+      $content .= 'Year level:' .$student_year;
+      $content .= '<br/>';
+      $content .= 'Exam Type:' .$exam_title;
+      $content .= '<br/>';
+      $content .= 'Exam started at: ' .$created_at;
+      $content .= '<br/>';
+      $content .= 'Exam will be ended at: ' .$expired_at;
+      $content .= '<br/>';
+      $content .= '---------------------------------------';
+      $content .= '<br/>';
+      $content .= '<br/>';
+      $content .= 'Thank you.';
+
+       // send mail account created
+      $send = send_email(
+        $users['email_address'],
+        $users['name'],
+        $subject,
+        $content
+      );
+    }
+
+    if ($send) {
+      $session->message('s', 'Exam schedule set up has been successful');
+      redirect('./exam_schedule', false);
+    } else {
+      $session->message('d', 'The posted exam not send to the students');
+      redirect('./exam_schedule', false);
+    }
+  } else {
+    $session->message('d', 'Exam schedule set up has been failed');
+    redirect('./exam_schedule', false);
+  }
+}
 ?>

@@ -5,6 +5,23 @@
 <?php include('../header.php'); ?>
 <?php include('../includes/load.php'); ?>
 <?php SET_NOT_LOGGED_IN(); ?>
+<?php if (isset($_POST['button_view'])) {
+  redirect('./view_exam_schedule', false);
+} ?>
+<?php 
+if (isset($_POST['button_schedule'])) {
+  create_exam_schedule(
+    "student_year",
+    "exam_title",
+    "created_at",
+    "expired_at",
+    "exam_duration",
+    "result_date",
+    "exam_status"
+  );
+}
+
+?>
 <?php include('../start_menu_bar.php'); ?>
 <main id="main" class="main">
 
@@ -27,74 +44,82 @@
             </h5>
             <hr/>
             <form class="row g-3" action="" method="POST" enctype="multipart/form-data">
-
+               <?php echo display_message($msg); ?>
                <div class="col-lg-6">
 
                  <label for="inputNumber" class="col-sm-5 col-form-label">Student Year</label>
                  <div class="col-sm-10">
-                   <select id="student_year" name="course" id="course" class="form-select">
+                   <select id="student_year" name="student_year"  class="form-select">
                      <option selected>Select student year</option>
-                     <option value="First Year">First Year</option>
-                     <option value="Second Year">Second Year</option>
-                     <option value="Third Year">Third Year</option>
-                     <option value="Fourth Year">Fourth Year</option>
+                     <?php 
+                        global $db;
+                        $sql = "SELECT distinct(student_year) FROM exam_created";
+                        $result = $db->query($sql);
+                        if ($result->num_rows > 0) {
+                          while ($row = $result->fetch_assoc()) {
+                            echo '<option value="' .$row['student_year']. '">' .$row['student_year']. '</option>';
+                          }
+                        } else {
+                          echo '<option value="">No created exam yet. Please create exam first!</option>';
+                        }
+                     ?>
                    </select>
                  </div>
 
                  <label for="inputNumber" class="col-sm-5 col-form-label">Exam Type</label>
                  <div class="col-sm-10">
-                   <select id="exam_title" name="course" id="course" class="form-select">
+                   <select id="exam_title" name="exam_title" class="form-select">
                      <option selected>Select exam type</option>
                    </select>
                  </div>
 
                  <label for="inputNumber" class="col-sm-5 col-form-label">Created At</label>
                  <div class="col-sm-10">
-                   <input id="created_at" type="date" class="form-control" disabled>
+                   <input id="created_at" name="created_at" type="text" class="form-control" readonly>
                  </div>
 
                  <label for="inputNumber" class="col-sm-5 col-form-label">Expired At</label>
                  <div class="col-sm-10">
-                   <input type="date" class="form-control text-danger">
+                   <input name="expired_at" type="date" class="form-control text-danger">
                  </div>
 
                </div>
                <div class="col-lg-6">
                  <label for="inputNumber" class="col-sm-5 col-form-label">Exam Duration</label>
                  <div class="col-sm-10">
-                   <select name="course" id="course" class="form-select">
+                   <select name="exam_duration" id="course" class="form-select">
                      <option selected>Select exam duration</option>
-                     <option value="First Year">30 seconds</option>
-                     <option value="First Year">1 minute</option>
-                     <option value="First Year">5 minutes</option>
-                     <option value="First Year">8 minutes</option>
-                     <option value="First Year">9 minutes</option>
-                     <option value="First Year">10 minutes</option>
-                     <option value="First Year">12 minutes</option>
-                     <option value="Second Year">20 minutes</option>
-                     <option value="Third Year">30 minutes </option>
-                     <option value="Fourth Year">40 minutes</option>
+                     <option value="30000">30 seconds</option>
+                     <option value="60000">1 minute</option>
+                     <option value="300000">5 minutes</option>
+                     <option value="480000">8 minutes</option>
+                     <option value="540000">9 minutes</option>
+                     <option value="600000">10 minutes</option>
+                     <option value="720000">12 minutes</option>
+                     <option value="1200000">20 minutes</option>
+                     <option value="1800000">30 minutes </option>
+                     <option value="2400000">40 minutes</option>
                    </select>
                  </div>
 
                  <label for="inputNumber" class="col-sm-5 col-form-label">Result Date</label>
                  <div class="col-sm-10">
-                   <input type="date" class="form-control text-success">
+                   <input name="result_date" type="date" class="form-control text-success">
                  </div>
 
-                 <label for="inputNumber" class="col-sm-5 col-form-label">Status</label>
+                 <label for="inputNumber" class="col-sm-5 col-form-label">Exam Status</label>
                  <div class="col-sm-10">
-                   <select name="course" id="course" class="form-select">
-                     <option selected>Select status</option>
-                     <option value="First Year">Not Completed</option>
-                     <option value="First Year">Completed</option>
+                   <select name="exam_status" id="course" class="form-select">
+                     <option selected>Select exam status</option>
+                     <option value="Ready">READY</option>
+                     <option value="Not Ready">NOT READY</option>
                    </select>
                  </div>
 
                  <br/>
                  <div class="text-center">
-                   <button type="submit" class="btn btn-danger">Schedule</button>
-                   <button type="submit" name="button_submit" class="btn btn-success">View Records</button>
+                   <button type="submit" name="button_schedule" class="btn btn-danger">Schedule</button>
+                   <button type="submit" name="button_view" class="btn btn-success">View Schedule</button>
                  </div>
 
                </div>
@@ -110,7 +135,29 @@
  <script>
   $(document).ready(function() {
     $('#student_year').on('change', function() {
-      
+      var studentYear = $(this).val();
+        if (studentYear) {
+          $.ajax({
+            type: 'POST',
+            url: './ajax/exam_sched_ajax_func.php',
+            data: 'student_year='+studentYear,
+            success:function(html) {
+              $('#exam_title').html(html);
+            }
+          }); 
+        } else {
+              $('#exam_title').html('<option value="">Select student year first</option>');
+        }
+    });
+    $('#exam_title').on('change', function() {
+      $.ajax({
+        type: 'POST',
+        url: './ajax/exam_date_created_ajax_func.php',
+        data: {student_year: $('#student_year').val(), exam_title: $('#exam_title').val()},
+        success:function(data) {
+            $('#created_at').val(data);
+          }
+      });
     });
   });
  </script>

@@ -34,44 +34,60 @@
                   <table class="table table-sm table-hover datatable">
                     <thead>
                       <tr>
-                        <th scope="col" class="text-center" style="width: 15%;">Name</th>
-                        <th scope="col" class="text-center" style="width: 15%;">Student Year</th>
-                        <th scope="col" class="text-center" style="width: 15%;">Course</th>
-                        <th scope="col" class="text-center" style="width: 15%;">Exam Status</th>
-                        <th scope="col" class="text-center" style="width: 15%;">Total Average</th>
-                        <th scope="col" class="text-center" style="width: 15%;">Counseling</th>
+                        <th scope="col" class="text-center" style="width: 20%;">Name</th>
+                        <th scope="col" class="text-center" style="width: 10%;">Student Year</th>
+                        <th scope="col" class="text-center" style="width: 20%;">Course</th>
+                        <th scope="col" class="text-center" style="width: 10%;">Exam Type</th>
+                        <th scope="col" class="text-center" style="width: 10%;">Grades</th>
+                        <th scope="col" class="text-center" style="width: 30%;">Counseling Status</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr class="text-danger">
-                        <th scope="row" class="text-center" style="width: 10%;">Juan Dela Cruz</th>
-                        <td scope="row" class="text-center" style="width: 5%;">First Year</td>
-                        <td scope="row" class="text-center" style="width: 10%;">BSIT</td>
-                        <td scope="row" class="text-center" style="width: 5%;">FAILED</td>
-                        <td scope="row" class="text-center" style="width: 5%;">20%</td>
-                        <td scope="row" class="text-center" style="width: 5%;">
-                          <button type="button" name="button_counseling" class="btn btn-success btn-sm w-10" ><span>Counseling</button>
+                      <tr class="text-success">
+                        <th scope="row" class="text-center" style="width: 20%;">Juan Dela Cruz</th>
+                        <td scope="row" class="text-center" style="width: 10%;">First Year</td>
+                        <td scope="row" class="text-center" style="width: 20%;">BSIT</td>
+                        <td scope="row" class="text-center" style="width: 10%;">Student Success Kit</td>
+                        <td scope="row" class="text-center" style="width: 10%;">30%</td>
+                        <td scope="row" class="text-center" style="width: 30%;">
+                          Monitoring
                         </td>
                       </tr>
-                      <tr>
-                        <th scope="row" class="text-center" style="width: 10%;">Pedro Dela Cruz</th>
-                        <td scope="row" class="text-center" style="width: 5%;">First Year</td>
-                        <td scope="row" class="text-center" style="width: 10%;">BSIT</td>
-                        <td scope="row" class="text-center" style="width: 5%;">PASSED</td>
-                        <td scope="row" class="text-center" style="width: 5%;">40%</td>
-                        <td scope="row" class="text-center" style="width: 5%;">
-                          OK
+                      <tr class="text-success">
+                        <th scope="row" class="text-center" style="width: 20%;">Albero de Guzman</th>
+                        <td scope="row" class="text-center" style="width: 10%;">First Year</td>
+                        <td scope="row" class="text-center" style="width: 20%;">BSIT</td>
+                        <td scope="row" class="text-center" style="width: 10%;">Student Success Kit</td>
+                        <td scope="row" class="text-center" style="width: 10%;">40%</td>
+                        <td scope="row" class="text-center" style="width: 30%;">
+                          Monitoring
+                        </td>
+                      </tr>
+                      <tr class="text-danger">
+                        <th scope="row" class="text-center" style="width: 20%;">Pedro Dela Cruz</th>
+                        <td scope="row" class="text-center" style="width: 10%;">First Year</td>
+                        <td scope="row" class="text-center" style="width: 20%;">BSIT</td>
+                        <td scope="row" class="text-center" style="width: 10%;">Student Success Kit</td>
+                        <td scope="row" class="text-center" style="width: 10%;">20%</td>
+                        <td scope="row" class="text-center" style="width: 30%;">
+                          <button type="button" name="button_counseling" class="btn btn-warning btn-sm rounded-pill w-10" ><span>Counseling</button>
+                        </td>
+                      </tr>
+                      <tr class="text-info">
+                        <th scope="row" class="text-center" style="width: 20%;">Andress Montalban</th>
+                        <td scope="row" class="text-center" style="width: 10%;">First Year</td>
+                        <td scope="row" class="text-center" style="width: 20%;">BSIT</td>
+                        <td scope="row" class="text-center" style="width: 10%;">Student Success Kit</td>
+                        <td scope="row" class="text-center" style="width: 10%;"><h3>-</h3></td>
+                        <td scope="row" class="text-center" style="width: 30%;">
+                          <button type="button" name="button_counseling" class="btn btn-secondary btn-sm rounded-pill w-10" ><span>Upload Exam Result</button>
                         </td>
                       </tr>
                     </tbody>
                   </table>
                   <!-- End Table with hoverable rows -->
-
-
                 </div>
               </div>
-
-
             </div>
 
             <div class="text-left">
