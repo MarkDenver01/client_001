@@ -113,6 +113,45 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
           }
         }
 
+        // exam created
+        if (isset($db_sql_10)) {
+          foreach ($db_sql_10 as $sql) {
+            $conn->query($sql);
+            if ($conn->error) {
+              die($conn->error);
+            }
+          }
+        }
+
+        // exam schedule
+        if (isset($db_sql_11)) {
+          foreach ($db_sql_11 as $sql) {
+            $conn->query($sql);
+            if ($conn->error) {
+              die($conn->error);
+            }
+          }
+        }
+
+        // student records
+        if (isset($db_sql_12)) {
+          foreach ($db_sql_12 as $sql) {
+            $conn->query($sql);
+            if ($conn->error) {
+              die($conn->error);
+            }
+          }
+        }
+
+        // assign exam record
+        if (isset($db_sql_13)) {
+          foreach ($db_sql_13 as $sql) {
+            $conn->query($sql);
+            if ($conn->error) {
+              die($conn->error);
+            }
+          }
+        }
 
         $update_env_vars = $__DotEnvironment->update_env_variables($_POST);
         if($update_env_vars){

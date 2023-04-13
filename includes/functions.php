@@ -1,7 +1,7 @@
 <?php
 // setting up the time Zone
 // It Depends on your location or your P.c settings
-define('TIMEZONE', 'Africa/Addis_Ababa');
+define('TIMEZONE', 'Asia/Manila');
 date_default_timezone_set(TIMEZONE);
 
 $errors = array();
@@ -23,7 +23,7 @@ function first_character($str) {
 function validate_fields($var) {
   global $errors;
   foreach ($var as $field) {
-    $value = remove_junk($_POST[$field]);
+    $value = $field;
     if (isset($value) && $value == '') {
       $errors = $field ." can't be blank";
       return $errors;

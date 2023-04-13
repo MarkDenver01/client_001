@@ -1,7 +1,4 @@
 <?php
-ini_set('display_errors', '1');
-error_reporting(E_ALL);
-
 function onClickButton($button_name, $url) {
     if (isset($_POST[$button_name])) {
       redirect($url);
@@ -286,8 +283,8 @@ function addGuidanceAccount($file_path_name,
 function one_time_password($email_address, $full_name, $password) {
   global $session;
   $otp = rand(100000,999999);
-  $get_name = remove_junk($_POST[$full_name]);
-  $get_mail_address = remove_junk($_POST[$email_address]);
+  $get_name = $full_name;
+  $get_mail_address = $email_address;
 
   $req_fields = array($email_address, $full_name, $password);
   validate_fields($req_fields);
@@ -353,7 +350,6 @@ function switch_user_level($email_address, $user_level) {
         // create session with email address
         // pass the info that filtered by email to array list
         $arr = array(
-          'id' =>$guidance['id'],
           'name' => $guidance['name'],
           'email_address' => $guidance['email_address'],
           'user_level' => $guidance['user_level'],
@@ -371,7 +367,6 @@ function switch_user_level($email_address, $user_level) {
         // create session with email address
         // pass the info that filtered by email to array list
         $arr = array(
-          'id' => $student['id'],
           'name' => $student['name'],
           'course' => $student['course'],
           'student_year' => $student['student_year'],
@@ -664,5 +659,139 @@ function check_user_level() {
   }
 }
 
+function create_exam($student_year, $title, $description, $image_file_path, $image_dir, $redirect_page) {
+  global $session;
+  $student_year = $_POST[$student_year];
+  $title = $_POST[$title];
+  $description = $_POST[$description];
+  $created_at = date('Y-m-d h:i:s A');
 
+  $img_file = $_FILES[$image_file_path]['name'];
+  $tmp_dir = $_FILES[$image_file_path]['tmp_name'];
+  $img_size = $_FILES[$image_file_path]['size'];
+
+  if (empty($img_file)) {
+    $session->message('w', 'Please select the image file.');
+    redirect($redirect_page, false);
+  } else {
+    $upload_dir = $image_dir;
+    $img_ext = strtolower(pathinfo($img_file, PATHINFO_EXTENSION));
+    $valid_extensions = array('jpeg', 'jpg', 'png', 'gif');
+
+    $generate_file_name = 'EXAM_'.$student_year.'_'.rand(1000,1000000).".".$img_ext;
+    if (in_array($img_ext, $valid_extensions)) {
+      if ($img_size < 5000000) {
+        if (move_uploaded_file($tmp_dir, $upload_dir.$generate_file_name)) {
+          $dir = $upload_dir.$generate_file_name;
+          if (empty($errors)) {
+            $data = array(
+              'student_year' => $student_year,
+              'exam_title' => $title,
+              'exam_description' => $description,
+              'image_exam_path' => $dir,
+              'created_at' => $created_at
+            );
+            // insert data
+            insert_new_exam($data);
+            $session->message('s', 'Exam has been uploaded');
+            redirect($redirect_page, false);
+          } else {
+            $session->message('d', $errors);
+            redirect($redirect_page, false);
+          }
+        } else {
+          $session->message('w', 'Cannot upload the image. Please try again.');
+          redirect($redirect_page, false);
+        }
+      } else {
+        $session->message('w', 'Please reduce the image size atleast 5Mib');
+        redirect($redirect_page, false);
+      }
+    }
+  }
+}
+
+# TODO : add validation for schedule of exam
+function create_exam_schedule($student_year, $exam_title, $created_at, $expired_at, $exam_duration, $result_date, $exam_status) {
+  global $db;
+  global $session;
+  $student_year = $_POST[$student_year];
+  $exam_title = $_POST[$exam_title];
+  $created_at = $_POST[$created_at];
+  $expired_at = $_POST[$expired_at];
+  $exam_duration = $_POST[$exam_duration];
+  $result_date = $_POST[$result_date];
+  $exam_status  = $_POST[$exam_status];
+
+  $data = array(
+    'student_year' => $student_year,
+    'exam_title' => $exam_title,
+    'created_at' => $created_at,
+    'expired_at' => $expired_at,
+    'exam_duration' => $exam_duration,
+    'result_date' => $result_date,
+    'exam_status' => $exam_status
+  );
+
+  $user_level = $_SESSION['key_session']['user_level'];
+  if ($user_level == '1') {
+    $user_level = 'Administrator';
+  } elseif ($user_level == '2') {
+    $user_level = 'Guidance';
+  }
+
+  $result = insert_exam_schedule($data);
+  if ($result) {
+    insert_post_announcements(
+      "Schedule of Exam - " .$student_year, 
+      "Exam title: " .$exam_title. "<br/>Exam will be closed at: " .$expired_at,
+      null, 
+      $user_level
+    );
+
+    $sql = "SELECT * FROM student_info WHERE student_year ='" .$student_year. "'";
+    $result = $db->query($sql);
+    while($users = mysqli_fetch_assoc($result)) {
+      $subject = "Exam Schedule has been posted";
+      $content = 'Hi Students';
+      $content .= '<br/>';
+      $content .= '<br/>';
+      $content .= 'This email has remind you that the schedule of exam has been posted in the website.';
+      $content .= '<br/>';
+      $content .= '---------------------------------------';
+      $content .= '<br/>';
+      $content .= 'Year level:' .$student_year;
+      $content .= '<br/>';
+      $content .= 'Exam Type:' .$exam_title;
+      $content .= '<br/>';
+      $content .= 'Exam started at: ' .$created_at;
+      $content .= '<br/>';
+      $content .= 'Exam will be ended at: ' .$expired_at;
+      $content .= '<br/>';
+      $content .= '---------------------------------------';
+      $content .= '<br/>';
+      $content .= '<br/>';
+      $content .= 'Thank you.';
+
+       // send mail account created
+      $send = send_email(
+        $users['email_address'],
+        $users['name'],
+        $subject,
+        $content
+      );
+    }
+
+    if ($send) {
+      $session->message('s', 'Exam schedule set up has been successful');
+      redirect('./exam_schedule', false);
+    } else {
+      $session->message('d', 'The posted exam not send to the students');
+      redirect('./exam_schedule', false);
+    }
+  } else {
+    $session->message('d', 'Exam schedule set up has been failed');
+    redirect('./exam_schedule', false);
+  }
+}
 ?>

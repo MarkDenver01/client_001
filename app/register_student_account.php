@@ -103,10 +103,10 @@
                       <div class="col-md-4 col-lg-4">
                         <select name="student-year" id="inputState" class="form-select">
                           <option selected>Select year</option>
-                          <option value="1st Year">1st Year</option>
-                          <option value="2nd Year">2nd Year</option>
-                          <option value="3rd Year">3rd Year</option>
-                          <option value="4th Year">4th Year</option>
+                          <option value="First Year">1st Year</option>
+                          <option value="Second Year">2nd Year</option>
+                          <option value="Third Year">3rd Year</option>
+                          <option value="Fourth Year">4th Year</option>
                         </select>
                       </div>
                     </div>

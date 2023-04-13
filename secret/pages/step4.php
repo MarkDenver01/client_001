@@ -30,7 +30,25 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
       VALUES('{$email}', 'Admin','1','1')";
       $insert_2 = $conn->query($sql_2);
 
-      if(!$insert_1 && !$insert_2){
+      $sql_3 ="INSERT INTO assign_exam_record (student_year, exam_title, exam_description) VALUES ('First Year', 'Student Success Kit', 'Academic Skills Development');";
+      $sql_3 .="INSERT INTO assign_exam_record (student_year, exam_title, exam_description) VALUES ('First Year', 'Student Success Kit', 'Study and Thinking Skills');";
+      $sql_3 .="INSERT INTO assign_exam_record (student_year, exam_title, exam_description) VALUES ('First Year', 'Student Success Kit', 'Personal Issues');";
+      $sql_3 .="INSERT INTO assign_exam_record (student_year, exam_title, exam_description) VALUES ('First Year', 'Student Success Kit', 'Planning for the future');";
+      $sql_3 .="INSERT INTO assign_exam_record (student_year, exam_title, exam_description) VALUES ('First Year', 'Student Success Kit', 'Resources needs');";
+      $sql_3 .="INSERT INTO assign_exam_record (student_year, exam_title, exam_description) VALUES ('First Year', 'OASIS 3', 'Vocabulary');";
+      $sql_3 .="INSERT INTO assign_exam_record (student_year, exam_title, exam_description) VALUES ('First Year', 'OASIS 3', 'Computation');";
+      $sql_3 .="INSERT INTO assign_exam_record (student_year, exam_title, exam_description) VALUES ('First Year', 'OASIS 3', 'Spatial');";
+      $sql_3 .="INSERT INTO assign_exam_record (student_year, exam_title, exam_description) VALUES ('First Year', 'OASIS 3', 'Word Comparison');";
+      $sql_3 .="INSERT INTO assign_exam_record (student_year, exam_title, exam_description) VALUES ('First Year', 'OASIS 3', 'Making marks Part 1');";
+      $sql_3 .="INSERT INTO assign_exam_record (student_year, exam_title, exam_description) VALUES ('First Year', 'OASIS 3', 'Making marks Part 2');";
+      $sql_3 .="INSERT INTO assign_exam_record (student_year, exam_title, exam_description) VALUES ('Second Year', 'BarOn EQ-i:S', 'BarOn EQ-i:S');";
+      $sql_3 .="INSERT INTO assign_exam_record (student_year, exam_title, exam_description) VALUES ('Third Year', 'The Keirsey Temperament Sorter', 'The Keirsey Temerament Sorter');";
+      $sql_3 .="INSERT INTO assign_exam_record (student_year, exam_title, exam_description) VALUES ('Fourth Year', 'Aptitude J and C', 'Aptitude J and C');";
+      $sql_3 .="INSERT INTO assign_exam_record (student_year, exam_title, exam_description) VALUES ('Fourth Year', 'ESA', 'ESA');";
+      $sql_3 .="INSERT INTO assign_exam_record (student_year, exam_title, exam_description) VALUES ('Fourth Year', 'Aptitude Verbal and Numerical', 'Aptitude Verbal and Numerical');";
+      $insert_3 = $conn->multi_query($sql_3);
+
+      if(!$insert_1 && !$insert_2 && !$insert_3){
         $error = "Admin user details has failed to create. Error: ". $conn->error;
       }else{
         $update_env_vars = $__DotEnvironment->update_env_variables(['SITE_INSTALLATION_COMPLETED' => 'true']);

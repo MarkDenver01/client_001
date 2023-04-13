@@ -3,14 +3,19 @@
 <?php include('./chat_header.php'); ?>
 <?php include('./chat_side_bar.php'); ?>
 <?php
+  if (isset($_SESSION['key_session']['email_address'])) {
+    if (!isset($_GET['user'])) {
+      redirect('index', false);
+    }
 
+    $chatWith = get_user_chat($_GET['user']);
 
-  $chatWith = find_chat_user($_GET['email_address']);
+    if (empty($chatWith)) {
+      redirect('index', false);
+    }
 
-
-  $chats = get_chats($_SESSION['key_session']['id'], $chatWith['id']);
-  //chat_opened($chatWith['id'], $chats);
-
+    $chats = get_chats($_SESSION['key_session']['id'], $chatWith['id']);
+    chat_opened($chatWith['id'], $chats);
 ?>
 
 <main id="main" class="main">
@@ -33,7 +38,8 @@
                                  </span>
                                <?php } else { ?>
                                  <span class="d-none d-md-block fa fa-circle offline">
-                                   offline
+                                   Last seen:
+                                   <?php last_seen($chatWith['last_seen']); ?>
                                  </span>
                                <?php } ?>
                             </div>
@@ -59,7 +65,7 @@
                             </div>
                             <div class="message other-message float-right"> <?php echo $chat['message']; ?> </div>
                         </li>
-                      <?php } } ?>
+                      <?php } } }?>
                     </ul>
                 </div>
                 <div class="chat-message clearfix">

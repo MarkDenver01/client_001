@@ -1,6 +1,7 @@
 <?php require_once('../lib/class.environment.php'); ?>
 <?php include_once('../includes/load.php'); ?>
-<?php delete_announcement_after_a_days(); // 15 days the announcement automatically deleted ?>
+<?php delete_announcement_after_a_days(); ?>
+
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
 
@@ -14,7 +15,8 @@
 
   <nav class="header-nav ms-auto">
     <ul class="d-flex align-items-center">
-      <li class="nav-item dropdown">
+
+    <li class="nav-item dropdown">
         <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
           <i class="bi bi-bell"></i>
           <span class="badge bg-primary badge-number">4</span>

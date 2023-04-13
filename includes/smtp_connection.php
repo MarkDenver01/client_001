@@ -36,20 +36,20 @@ class smtp_connection  {
     $this->mail->Subject = "[CESLICAM] ".$subject;
     $this->mail->MsgHTML($content);
     if (!$this->mail->Send()) {
-      $status = ["status" => "failed"];
+      // $status = ["status" => "failed"];
 
-      header("Access-Control-Allow-Origin: *");
-      header('Access-Control-Allow-Methods: GET , POST');
-      header('Content-Type: application/json; charset=utf-8');
-      echo json_encode($status, true);
+      // header("Access-Control-Allow-Origin: *");
+      // header('Access-Control-Allow-Methods: GET , POST');
+      // header('Content-Type: application/json; charset=utf-8');
+      // echo json_encode($status, true);
       return false;
     } else {
-      $status = ["status" => "success"];
+      // $status = ["status" => "success"];
 
-      header("Access-Control-Allow-Origin: *");
-      header('Access-Control-Allow-Methods: GET , POST');
-      header('Content-Type: application/json; charset=utf-8');
-      echo json_encode($status, true);
+      // header("Access-Control-Allow-Origin: *");
+      // header('Access-Control-Allow-Methods: GET , POST');
+      // header('Content-Type: application/json; charset=utf-8');
+      // echo json_encode($status, true);
       return true;
     }
   }
