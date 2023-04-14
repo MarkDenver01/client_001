@@ -12,7 +12,7 @@
         <div class="row justify-content-center">
           <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
 
-            <div class="card mb-3">
+            <div class="card mb-3 rounded-0">
               <div class="card-body">
                 <div class="pt-4 pb-2">
                   <h5 class="card-title text-center pb-0 fs-4">Change your password</h5>
@@ -24,7 +24,7 @@
                   <div class="col-12">
                     <label for="yourNewPassword" class="form-label">New password</label>
                     <div class="input-group has-validation">
-                      <input class="form-control new_password" type="password" name="new_password" id="yourNewPassword" required>
+                      <input class="form-control new_password rounded-0" type="password" name="new_password" id="yourNewPassword" required>
                       <span class="input-group-text">
                         <i class="bi bi-eye-slash-fill" id="togglePassword" style="cursor: pointer"></i>
                       </span>
@@ -34,7 +34,7 @@
                   <div class="col-12">
                     <label for="yourConfirmPassword" class="form-label">Confirm password</label>
                     <div class="input-group has-validation">
-                      <input class="form-control confirm_password" type="password" name="confirm_password" id="yourConfirmPassword" required>
+                      <input class="form-control confirm_password rounded-0" type="password" name="confirm_password" id="yourConfirmPassword" required>
                       <span class="input-group-text">
                         <i class="bi bi-eye-slash-fill" id="toggleConfirmPassword" style="cursor: pointer"></i>
                       </span>
@@ -42,10 +42,10 @@
                   </div>
 
                   <div class="col-6">
-                    <button name="button_change" class="btn btn-primary w-100" type="submit">Change Password</button>
+                    <button name="button_change" class="btn btn-primary w-100 rounded-0" type="submit">Change Password</button>
                   </div>
                   <div class="col-6">
-                    <button class="btn btn-danger w-100" type="submit">Back</button>
+                    <button class="btn btn-danger w-100 rounded-0" type="submit">Back</button>
                   </div>
                 </form>
               </div>

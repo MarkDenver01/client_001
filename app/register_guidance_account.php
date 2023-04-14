@@ -11,8 +11,7 @@
     onClickButton("button_back", "./view_guidance_account");
     // upload image & save account info
     if (isset($_POST["button_save"])) {
-      addGuidanceAccount("image_path",
-        "full_name",
+      addGuidanceAccount("full_name",
         "email_address",
         "gender",
         "age",
@@ -38,22 +37,10 @@
 
     <section class="section profile">
       <div class="row">
-        <div class="col-xl-4">
-          <form method="POST" action="" enctype="multipart/form-data">
-          <div class="card">
-            <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+        <form method="POST" action="" enctype="multipart/form-data">
+        <div class="col-xl-12">
 
-              <img id="ic_image_file" src="./assets/img/profile.png" alt="Profile" class="rounded-circle" style="height: 120px; width: 200px;">
-            </br>
-            <input id="ic_image_file_path" type="file" name="image_path" class="form-control btn btn-primary rounded-pill btn-sm" ></input>
-          </div>
-        </div>
-
-        </div>
-
-        <div class="col-xl-8">
-
-          <div class="card">
+          <div class="card rounded-0">
             <div class="card-body pt-3">
               <!-- Bordered Tabs -->
               <ul class="nav nav-tabs nav-tabs-bordered">
@@ -68,22 +55,22 @@
                   <!-- Profile Edit Form -->
                     <div class="row mb-3">
                       <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Full Name</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="full_name" type="text" class="form-control" id="fullName">
+                      <div class="col-md-8 col-lg-5">
+                        <input name="full_name" type="text" class="form-control rounded-0" id="fullName">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="email_address" class="col-md-4 col-lg-3 col-form-label">Email address</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="email_address" type="email" class="form-control" id="email_address">
+                      <div class="col-md-8 col-lg-5">
+                        <input name="email_address" type="email" class="form-control rounded-0" id="email_address">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="gender" class="col-md-4 col-lg-3 col-form-label">Gender</label>
-                      <div class="col-md-4 col-lg-4">
-                        <select name="gender" id="inputState" class="form-select">
+                      <div class="col-md-4 col-lg-2">
+                        <select name="gender" id="inputState" class="form-select rounded-0">
                           <option selected>Select Gender</option>
                           <option value="Male">Male</option>
                           <option value="Female">Female</option>
@@ -93,29 +80,29 @@
 
                     <div class="row mb-3">
                       <label for="age" class="col-md-4 col-lg-3 col-form-label">Age</label>
-                      <div class="col-md-8 col-lg-2">
-                        <input name="age" type="number" class="form-control" id="age">
+                      <div class="col-md-8 col-lg-1">
+                        <input name="age" type="number" class="form-control rounded-0" id="age">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="birth_date" class="col-md-4 col-lg-3 col-form-label">Birth date</label>
-                      <div class="col-md-8 col-lg-9">
-                        <input name="birth_date" type="date" class="form-control" id="birth_date">
+                      <div class="col-md-8 col-lg-3">
+                        <input name="birth_date" type="date" class="form-control rounded-0" id="birth_date">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="present_address" class="col-md-4 col-lg-3 col-form-label">Present Address</label>
                       <div class="col-md-8 col-lg-9">
-                        <textarea name="present_address" class="form-control" id="present_address" style="height: 100px"></textarea>
+                        <textarea name="present_address" class="form-control rounded-0" id="present_address" style="height: 100px"></textarea>
                       </div>
                     </div>
 
 
                     <div class="text-center">
-                      <button type="submit" name="button_save" class="btn btn-primary w-25">Save Changes</button>
-                      <button type="submit" name="button_back" class="btn btn-danger w-25">Back</button>
+                      <button type="submit" name="button_save" class="btn btn-primary w-25 rounded-0">Save Changes</button>
+                      <button type="submit" name="button_back" class="btn btn-danger w-25 rounded-0">Back</button>
                     </div>
                   </form><!-- End Profile Edit Form -->
                 </div>

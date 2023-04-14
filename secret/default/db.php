@@ -9,7 +9,6 @@ $db_sql_1[] = "CREATE TABLE `user_account` (
   `email_address` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `user_level` int(11) NOT NUll,
-  `image` varchar(255) NOT NULL,
   `status` int(11) NOT NULL,
   `is_otp_verified` int(11) NOT NULL,
   `is_logged_in` int(11) NOT NULL,
@@ -55,7 +54,9 @@ $db_sql_3[] = "CREATE TABLE `student_info` (
   `name` varchar(255) NOT NULL,
   `email_address` varchar(255) NOT NULL,
   `course` varchar(255) NOT NULL,
-  `student_year` varchar(255) NOT NULL,
+  `student_year` varchar(255) NOT NULL, 
+  `semester` VARCHAR(255) NOT NULL,
+  `school_year` VARCHAR(255) NOT NULL,
   `gender` varchar(120) NOT NULL,
   `age` int(32),
   `birth_date` varchar(255),
@@ -191,7 +192,8 @@ $db_sql_10[] = "CREATE TABLE `exam_created` (
   `exam_title` VARCHAR(255) NOT NULL,
   `exam_description` VARCHAR(255) NOT NULL,
   `image_exam_path` VARCHAR(255) NOT NULL,
-  `created_at` datetime NOT NULL
+  `created_at` datetime NOT NULL,
+  `exam_status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
 
 $db_sql_10[] = "ALTER TABLE `exam_created`
@@ -233,6 +235,8 @@ $db_sql_12[] = "CREATE TABLE `student_records` (
   `gender` VARCHAR(150) NOT NULL,
   `student_year` VARCHAR(255) NOT NULL,
   `course` VARCHAR(255) NOT NULL,
+  `school_year` VARCHAR(255) NOT NULL,
+  `semester` VARCHAR(255) NOT NULL,
   `exam_title` VARCHAR(255) NOT NULL,
   `exam_description` VARCHAR(255) NOT NULL,
   `finish_exam_date` datetime NOT NULL,
@@ -267,4 +271,19 @@ $db_sql_13[] = "ALTER TABLE `assign_exam_record`
 ADD PRIMARY KEY(`id`)";
 
 $db_sql_13[] = "ALTER TABLE `assign_exam_record`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT";
+
+// ===================(sub) exam category ========================== //
+$db_sql_14[] = "DROP TABLE IF EXISTS `exam_category`";
+
+$db_sql_14[] = "CREATE TABLE `exam_category` (
+  `id` int(11) NOT NULL,
+  `exam_description` VARCHAR(255) NOT NULL,
+  `exam_category` VARCHAR(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+$db_sql_14[] = "ALTER TABLE  `exam_category`
+ADD PRIMARY KEY(`id`)";
+
+$db_sql_14[] = "ALTER TABLE `exam_category` 
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT";

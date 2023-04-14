@@ -37,7 +37,7 @@ if (isset($_POST['button_schedule'])) {
     <section class="section profile">
       <div class="row">
         <div class="col-xl-12">
-          <div class="card">
+          <div class="card rounded-0">
           <div class="card-body">
             <h5 class="card-title">
               Manage Exam Schedule and Send Notification
@@ -49,7 +49,7 @@ if (isset($_POST['button_schedule'])) {
 
                  <label for="inputNumber" class="col-sm-5 col-form-label">Student Year</label>
                  <div class="col-sm-10">
-                   <select id="student_year" name="student_year"  class="form-select">
+                   <select id="student_year" name="student_year"  class="form-select rounded-0">
                      <option selected>Select student year</option>
                      <?php 
                         global $db;
@@ -68,26 +68,26 @@ if (isset($_POST['button_schedule'])) {
 
                  <label for="inputNumber" class="col-sm-5 col-form-label">Exam Type</label>
                  <div class="col-sm-10">
-                   <select id="exam_title" name="exam_title" class="form-select">
+                   <select id="exam_title" name="exam_title" class="form-select rounded-0">
                      <option selected>Select exam type</option>
                    </select>
                  </div>
 
                  <label for="inputNumber" class="col-sm-5 col-form-label">Created At</label>
                  <div class="col-sm-10">
-                   <input id="created_at" name="created_at" type="text" class="form-control" readonly>
+                   <input id="created_at" name="created_at" type="text" class="form-control rounded-0" readonly>
                  </div>
 
                  <label for="inputNumber" class="col-sm-5 col-form-label">Expired At</label>
                  <div class="col-sm-10">
-                   <input name="expired_at" type="date" class="form-control text-danger">
+                   <input name="expired_at" type="date" class="form-control text-danger rounded-0">
                  </div>
 
                </div>
                <div class="col-lg-6">
                  <label for="inputNumber" class="col-sm-5 col-form-label">Exam Duration</label>
                  <div class="col-sm-10">
-                   <select name="exam_duration" id="course" class="form-select">
+                   <select name="exam_duration" id="course" class="form-select rounded-0">
                      <option selected>Select exam duration</option>
                      <option value="30000">30 seconds</option>
                      <option value="60000">1 minute</option>
@@ -104,12 +104,12 @@ if (isset($_POST['button_schedule'])) {
 
                  <label for="inputNumber" class="col-sm-5 col-form-label">Result Date</label>
                  <div class="col-sm-10">
-                   <input name="result_date" type="date" class="form-control text-success">
+                   <input name="result_date" type="date" class="form-control text-success rounded-0">
                  </div>
 
                  <label for="inputNumber" class="col-sm-5 col-form-label">Exam Status</label>
                  <div class="col-sm-10">
-                   <select name="exam_status" id="course" class="form-select">
+                   <select name="exam_status" id="course" class="form-select rounded-0">
                      <option selected>Select exam status</option>
                      <option value="Ready">READY</option>
                      <option value="Not Ready">NOT READY</option>
@@ -118,8 +118,8 @@ if (isset($_POST['button_schedule'])) {
 
                  <br/>
                  <div class="text-center">
-                   <button type="submit" name="button_schedule" class="btn btn-danger">Schedule</button>
-                   <button type="submit" name="button_view" class="btn btn-success">View Schedule</button>
+                   <button type="submit" name="button_schedule" class="btn btn-danger rounded-0">Schedule</button>
+                   <button type="submit" name="button_view" class="btn btn-success rounded-0">View Schedule</button>
                  </div>
 
                </div>

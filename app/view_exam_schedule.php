@@ -18,13 +18,13 @@
 <section class="section">
     <div class="row">
       <!-- start create account -->
-      <div class="card">
+      <div class="card rounded-0">
         <div class="card-body">
           <br/>
           <!-- General Form Elements -->
           <form class="row g-3" method="POST" action="">
             <div class="col-md-12">
-              <div class="card">
+              <div class="card rounded-0">
                 <div class="card-body">
                   <!-- Table with hoverable rows -->
                   <table class="table table-sm table-hover datatable">
@@ -59,7 +59,7 @@
                   <!-- End Table with hoverable rows -->
 
                   <div class="text-left">
-                    <button class="btn btn-secondary rounded-pill" type="submit" name="button_back">BACK</button>
+                    <button class="btn btn-secondary rounded-0" type="submit" name="button_back">BACK</button>
                   </div>
 
                 </div>

@@ -1,6 +1,6 @@
 <?php $announcements = display_announcement(); ?>
 <div class="col-lg-4">
-  <div class="card">
+  <div class="card rounded-0">
             <div class="card-body pb-0">
               <h5 class="card-title">News &amp; Updates <span>| Today</span></h5>
 

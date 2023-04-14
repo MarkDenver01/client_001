@@ -14,7 +14,7 @@
         <div class="row justify-content-center">
           <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
 
-            <div class="card mb-3">
+            <div class="card mb-3 rounded-0">
 
               <div class="card-body">
 
@@ -30,7 +30,7 @@
                   <div class="col-12">
                     <label for="yourOtp" class="form-label">Enter your OTP</label>
                     <div class="input-group has-validation">
-                      <input class="form-control" type="text"  name="verification_code" id="yourOtp" value="" required>
+                      <input class="form-control rounded-0" type="text"  name="verification_code" id="yourOtp" value="" required>
                       <span class="input-group-text">
                         <i class="bi bi-mailbox"></i>
                       </span>
@@ -38,7 +38,7 @@
                   </div>
 
                   <div class="col-4">
-                    <button name ="button_submit" class="btn btn-success w-100" type="submit">Submit</button>
+                    <button name ="button_submit" class="btn btn-success w-100 rounded-0" type="submit">Submit</button>
                   </div>
                   <div class="col-8">
                     <h6><b><?php

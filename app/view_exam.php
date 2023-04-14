@@ -17,7 +17,7 @@
 <section class="section">
     <div class="row">
       <!-- start create account -->
-      <div class="card">
+      <div class="card rounded-0">
         <div class="card-body">
           <br/>
           <!-- General Form Elements -->

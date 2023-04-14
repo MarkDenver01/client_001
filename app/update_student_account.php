@@ -1,11 +1,11 @@
 <?php
 if (isset($_POST["button_update"])) {
-    update_student_account(
-      "image_path",
-      "full_name",
+    update_student_account("full_name",
       "email_address",
       "course",
       "student_year",
+      "semester",
+      "school_year",
       "gender",
       "age",
       "birth_date",
@@ -27,31 +27,9 @@ if (isset($_POST["button_update"])) {
           <div class="col-md-12">
             <section class="section profile">
               <div class="row">
-                <div class="col-xl-4">
+              <div class="col-xl-12">
 
-                  <div class="card">
-                    <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-                      <?php
-                        $check_image = $student['image'];
-                        $image_file_data = "";
-                        if ($check_image != NUll) {
-
-                          $image_file_data = "./uploads/".$check_image;
-                        } else {
-                          $image_file_data = "./assets/img/profile.png";
-                        }
-                      ?>
-                      <img  src="<?php echo $image_file_data; ?>" alt="Profile" class="rounded-circle">
-                    </br>
-                    <input name="image_path" type="file" class="form-control btn btn-primary rounded-pill btn-sm" value="<?php echo $image_file_data; ?>"></input>
-                  </div>
-                </div>
-
-              </div>
-
-              <div class="col-xl-8">
-
-                <div class="card">
+                <div class="card rounded-0">
                   <div class="card-body pt-3">
                     <!-- Bordered Tabs -->
                     <ul class="nav nav-tabs nav-tabs-bordered">
@@ -66,42 +44,67 @@ if (isset($_POST["button_update"])) {
                         <div class="row mb-3">
                           <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Full Name</label>
                           <div class="col-md-8 col-lg-9">
-                            <input name="full_name" type="text" class="form-control" id="fullName" value="<?php echo $student['name']; ?>">
+                            <input name="full_name" type="text" class="form-control rounded-0" id="fullName" value="<?php echo $student['name']; ?>">
                           </div>
                         </div>
 
                         <div class="row mb-3">
                           <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Email</label>
                           <div class="col-md-8 col-lg-9">
-                            <input name="email_address" type="email" class="form-control" id="fullName" value="<?php echo $student['email_address']; ?>" >
+                            <input name="email_address" type="email" class="form-control rounded-0" id="fullName" value="<?php echo $student['email_address']; ?>" >
                           </div>
                         </div>
 
                         <div class="row mb-3">
                           <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Course</label>
                           <div class="col-md-8 col-lg-9">
-                            <input name="course" type="text" class="form-control" id="fullName" value="<?php echo $student['course']; ?>">
+                            <input name="course" type="text" class="form-control rounded-0" id="fullName" value="<?php echo $student['course']; ?>">
                           </div>
                         </div>
 
                         <div class="row mb-3">
-                          <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Year</label>
-                          <div class="col-md-4 col-lg-2">
-                            <input name="student_year" type="text" class="form-control" id="fullName" value="<?php echo $student['student_year']; ?>">
+                          <label for="year" class="col-md-4 col-lg-3 col-form-label">Year</label>
+                            <div class="col-md-4 col-lg-4">
+                              <select name="student_year" id="inputState" class="form-select rounded-0">
+                                <option selected><?php echo $student['student_year']; ?></option>
+                                <option value="First Year">First Year</option>
+                                <option value="Second Year">Second Year</option>
+                                <option value="Third Year">Third Year</option>
+                                <option value="Fourth Year">Fourth Year</option>
+                              </select>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                          <label for="Semester" class="col-md-4 col-lg-3 col-form-label">Semester</label>
+                          <div class="col-md-4 col-lg-4">
+                            <select name="semester" id="inputState" class="form-select rounded-0">
+                              <option selected><?php echo $student['semester']; ?></option>
+                              <option value="First semester">First semester</option>
+                              <option value="Second semester">Second semester</option>
+                              <option value="Summer">Summer</option>
+                              </select>
                           </div>
+                        </div>
+
+                        <div class="row mb-3">
+                          <label for="school_year_start" class="col-md-4 col-lg-3 col-form-label">Academic School Year</label>
+                            <div class="col-md-5 col-lg-2">
+                              <input name="school_year" type="text" class="form-control rounded-0 text-danger" id="school_year_start" value="<?php echo $student['school_year']; ?>">
+                            </div>
                         </div>
 
                         <div class="row mb-3">
                           <label for="fullName" class="col-md-3 col-lg-3 col-form-label">Age</label>
-                          <div class="col-md-4 col-lg-2">
-                            <input name="age" type="text" class="form-control" id="fullName" value="<?php echo $student['age']; ?>">
+                          <div class="col-md-4 col-lg-1">
+                            <input name="age" type="text" class="form-control rounded-0" id="fullName" value="<?php echo $student['age']; ?>">
                           </div>
                         </div>
 
                         <div class="row mb-3">
                           <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Gender</label>
                           <div class="col-md-8 col-lg-9">
-                            <select name="gender" id="inputState" class="form-select">
+                            <select name="gender" id="inputState" class="form-select rounded-0">
                               <option selected><?php echo $student['gender']; ?></option>
                               <option value="Female">Female</option>
                               <option value="Male">Male</option>
@@ -112,14 +115,14 @@ if (isset($_POST["button_update"])) {
                         <div class="row mb-3">
                           <label for="birth_date" class="col-md-4 col-lg-3 col-form-label">Birth date</label>
                           <div class="col-md-8 col-lg-9">
-                            <input name="birth_date" type="date" class="form-control" id="birth_date" value="<?php echo $student['birth_date']; ?>">
+                            <input name="birth_date" type="date" class="form-control rounded-0" id="birth_date" value="<?php echo $student['birth_date']; ?>">
                           </div>
                         </div>
 
                         <div class="row mb-3">
                           <label for="about" class="col-md-4 col-lg-3 col-form-label">Present Address</label>
                           <div class="col-md-8 col-lg-9">
-                            <textarea name="present_address" class="form-control" id="about" style="height: 100px"><?php echo $student['present_address']; ?></textarea>
+                            <textarea name="present_address" class="form-control rounded-0" id="about" style="height: 100px"><?php echo $student['present_address']; ?></textarea>
                           </div>
                         </div>
 
@@ -138,8 +141,8 @@ if (isset($_POST["button_update"])) {
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <input type="submit" name="button_update" class="btn btn-primary" value="Update Account"></input>
+        <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal">Close</button>
+        <input type="submit" name="button_update" class="btn btn-primary rounded-0" value="Update Account"></input>
       </div>
     </form><!-- End floating Labels Form -->
   </div>
