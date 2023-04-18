@@ -21,7 +21,7 @@
   </div><!-- End Page Title -->
 
 
-<section class="section" style="width: 1460px;">
+<section class="section" style="width: 1960px;">
     <div class="row">
       <!-- start create account -->
       <div class="card rounded-0 bg-light">

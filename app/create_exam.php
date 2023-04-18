@@ -7,6 +7,7 @@
       "student_year", 
       "exam_title", 
       "exam_description", 
+      "exam_category",
       "ic_img_exam_path", 
       "../uploads/exam/",
       "create_exam"

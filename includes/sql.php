@@ -467,10 +467,11 @@
 
  function insert_new_exam(array $data) {
   global $db;
-  $sql ="INSERT INTO exam_created(student_year, exam_title, exam_description, image_exam_path, created_at) ";
+  $sql ="INSERT INTO exam_created(student_year, exam_title, exam_description, exam_category, image_exam_path, created_at) ";
   $sql .="VALUES ('" .$data['student_year'];
   $sql .="','" .$data['exam_title'];
   $sql .="','" .$data['exam_description'];
+  $sql .="','" .$data['exam_category'];
   $sql .="','" .$data['image_exam_path'];
   $sql .="','" .$data['created_at']. "')";
   $result = $db->query($sql);

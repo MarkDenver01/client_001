@@ -42,9 +42,52 @@
                   <div class="col-sm-4"></div>
                   <div class="col-sm-4">
                     <button id="gameStart" class="btn btn-success rounded-0 btn-sm w-25">START</button>
-                    <button class="btn btn-danger rounded-0 btn-sm w-25">CLOSE</button>
+                    <button class="btn btn-danger rounded-0 btn-sm w-25">CLOSE</button>                 
                   </div>
                   <div class="col-sm-4"></div>
+                </div>
+                <hr/>
+                <div class="row">
+                  <div class="col-lg-1"></div>
+                  <div class="col-lg-5">
+
+                    <label for="yourConfirmPassword" class="form-label text-left">Student Year Level</label>
+                    <div class="input-group has-validation">
+                      <input class="form-control confirm_password rounded-0" type="password" name="confirm_password" id="yourConfirmPassword" readonly>
+                      <span class="input-group-text">
+                        <i class="ri-align-top" id="toggleConfirmPassword" style="cursor: pointer"></i>
+                      </span>
+                    </div>
+                    <br/>
+                    <label for="yourConfirmPassword" class="form-label text-left">Exam Type</label>
+                    <div class="input-group has-validation">
+                      <input class="form-control confirm_password rounded-0" type="password" name="confirm_password" id="yourConfirmPassword" readonly>
+                      <span class="input-group-text">
+                        <i class="ri-align-justify" id="toggleConfirmPassword" style="cursor: pointer"></i>
+                      </span>
+                    </div>
+
+                  </div>
+                  <div class="col-lg-5">
+
+                   <label for="yourConfirmPassword" class="form-label text-left">Exam Description</label>
+                    <div class="input-group has-validation">
+                      <input class="form-control confirm_password rounded-0" type="password" name="confirm_password" id="yourConfirmPassword" readonly>
+                      <span class="input-group-text">
+                        <i class="ri-sticky-note-fill" id="toggleConfirmPassword" style="cursor: pointer"></i>
+                      </span>
+                    </div>
+                    <br/>
+                    <label for="yourConfirmPassword" class="form-label text-left">Exam Category</label>
+                    <div class="input-group has-validation">
+                      <input class="form-control confirm_password rounded-0" type="password" name="confirm_password" id="yourConfirmPassword" readonly>
+                      <span class="input-group-text">
+                        <i class="ri-twitch-line" id="toggleConfirmPassword" style="cursor: pointer"></i>
+                      </span>
+                    </div>
+
+                  </div>
+                  <div class="col-lg-1"></div>
                 </div>
                 <br/>
               </div>

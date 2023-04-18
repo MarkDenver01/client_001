@@ -339,7 +339,7 @@ function verify_otp_login($one_time_password) {
   global $session;
   $email_address = $_SESSION['key_session']['email_address'];
   $password = $_SESSION['key_session']['password'];
-  $otp = remove_junk($_POST[$one_time_password]);
+  $otp = $_POST[$one_time_password];
   $req_fields = array($email_address, $password, $otp);
   validate_fields($req_fields);
   if(empty($errors)) {
@@ -601,11 +601,12 @@ function check_user_level() {
   }
 }
 
-function create_exam($student_year, $title, $description, $image_file_path, $image_dir, $redirect_page) {
+function create_exam($student_year, $title, $description, $category, $image_file_path, $image_dir, $redirect_page) {
   global $session;
   $student_year = $_POST[$student_year];
   $title = $_POST[$title];
   $description = $_POST[$description];
+  $category = $_POST[$category];
   $created_at = date('Y-m-d h:i:s A');
 
   $img_file = $_FILES[$image_file_path]['name'];
@@ -626,10 +627,16 @@ function create_exam($student_year, $title, $description, $image_file_path, $ima
         if (move_uploaded_file($tmp_dir, $upload_dir.$generate_file_name)) {
           $dir = $upload_dir.$generate_file_name;
           if (empty($errors)) {
+
+            if ($category == 'Select exam category' || empty($category)) {
+              $category = 'N/A';
+            }
+            
             $data = array(
               'student_year' => $student_year,
               'exam_title' => $title,
               'exam_description' => $description,
+              'exam_category' => $category,
               'image_exam_path' => $dir,
               'created_at' => $created_at
             );

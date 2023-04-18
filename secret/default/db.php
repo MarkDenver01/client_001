@@ -191,9 +191,9 @@ $db_sql_10[] = "CREATE TABLE `exam_created` (
   `student_year` VARCHAR(255) NOT NULL,
   `exam_title` VARCHAR(255) NOT NULL,
   `exam_description` VARCHAR(255) NOT NULL,
+  `exam_category` VARCHAR(255) NOT NULL,
   `image_exam_path` VARCHAR(255) NOT NULL,
-  `created_at` datetime NOT NULL,
-  `exam_status` int(11) NOT NULL
+  `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
 
 $db_sql_10[] = "ALTER TABLE `exam_created`
@@ -216,7 +216,7 @@ $db_sql_11[] = "CREATE TABLE `exam_schedule` (
   `expired_on` datetime NOT NULL,
   `exam_duration` int(11) NOT NULL,
   `result_date_and_time` datetime NOT NULL,
-  `status` VARCHAR(255) NOT NULL
+  `exam_status` VARCHAR(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
 
 $db_sql_11[] = "ALTER TABLE `exam_schedule`
@@ -239,10 +239,9 @@ $db_sql_12[] = "CREATE TABLE `student_records` (
   `semester` VARCHAR(255) NOT NULL,
   `exam_title` VARCHAR(255) NOT NULL,
   `exam_description` VARCHAR(255) NOT NULL,
+  `exam_category` VARCHAR(255) NOT NULL,
   `finish_exam_date` datetime NOT NULL,
   `exam_status` VARCHAR(255) NOT NULL,
-  `correct_answer` int(55) NOT NULL,
-  `wrong_answer` int(55) NOT NULL,
   `total_items` int(55) NOT NULL,
   `total_average` int(11) NOT NULL,
   `status` VARCHAR(255) NOT NULL
@@ -287,3 +286,409 @@ ADD PRIMARY KEY(`id`)";
 
 $db_sql_14[] = "ALTER TABLE `exam_category` 
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT";
+
+// ===================(sub) reading - correct answer  ========================== //
+$db_sql_15[] = "DROP TABLE IF EXISTS `reading`";
+
+$db_sql_15[] = "CREATE TABLE `reading` (
+  `id` int(11) NOT NULL,
+  `correct_items` VARCHAR(255) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+$db_sql_15[] = "ALTER TABLE `reading`
+ADD PRIMARY KEY(`id`)";
+
+$db_sql_15[] = "ALTER TABLE `reading`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT";
+
+// ===================(sub) writing - correct answer  ========================== //
+$db_sql_16[] = "DROP TABLE IF EXISTS `writing`";
+
+$db_sql_16[] = "CREATE TABLE `writing` (
+  `id` int(11) NOT NULL,
+  `correct_items` VARCHAR(255) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+$db_sql_16[] = "ALTER TABLE `writing`
+ADD PRIMARY KEY(`id`)";
+
+$db_sql_16[] = "ALTER TABLE `writing`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT";
+
+// ===================(sub) speaking skills - correct answer  ========================== //
+$db_sql_17[] = "DROP TABLE IF EXISTS `speaking_skills`";
+
+$db_sql_17[] = "CREATE TABLE `speaking_skills` (
+  `id` int(11) NOT NULL,
+  `correct_items` VARCHAR(255) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+$db_sql_17[] = "ALTER TABLE `speaking_skills`
+ADD PRIMARY KEY(`id`)";
+
+$db_sql_17[] = "ALTER TABLE `speaking_skills`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT";
+
+// ===================(sub) listening skills - correct answer  ========================== //
+$db_sql_18[] = "DROP TABLE IF EXISTS `listening_skills`";
+
+$db_sql_18[] = "CREATE TABLE `listening_skills` (
+  `id` int(11) NOT NULL,
+  `correct_items` VARCHAR(255) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+$db_sql_18[] = "ALTER TABLE `listening_skills`
+ADD PRIMARY KEY(`id`)";
+
+$db_sql_18[] = "ALTER TABLE `listening_skills`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT";
+
+// ===================(sub) learning styles - correct answer  ========================== //
+$db_sql_19[] = "DROP TABLE IF EXISTS `learning_styles`";
+
+$db_sql_19[] = "CREATE TABLE `learning_styles` (
+  `id` int(11) NOT NULL,
+  `correct_items` VARCHAR(255) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+$db_sql_19[] = "ALTER TABLE `learning_styles`
+ADD PRIMARY KEY(`id`)";
+
+$db_sql_19[] = "ALTER TABLE `learning_styles`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT";
+
+// ===================(sub) memory - correct answer  ========================== //
+$db_sql_20[] = "DROP TABLE IF EXISTS `memory`";
+
+$db_sql_20[] = "CREATE TABLE `memory` (
+  `id` int(11) NOT NULL,
+  `correct_items` VARCHAR(255) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+$db_sql_20[] = "ALTER TABLE `memory`
+ADD PRIMARY KEY(`id`)";
+
+$db_sql_20[] = "ALTER TABLE `memory`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT";
+
+// ===================(sub) study skills - correct answer  ========================== //
+$db_sql_21[] = "DROP TABLE IF EXISTS `study_skills`";
+
+$db_sql_21[] = "CREATE TABLE `study_skills` (
+  `id` int(11) NOT NULL,
+  `correct_items` VARCHAR(255) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+$db_sql_21[] = "ALTER TABLE `study_skills`
+ADD PRIMARY KEY(`id`)";
+
+$db_sql_21[] = "ALTER TABLE `study_skills`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT";
+
+// ===================(sub) creating and critical thinknig skills - correct answer  ========================== //
+$db_sql_22[] = "DROP TABLE IF EXISTS `creative_and_thinking`";
+
+$db_sql_22[] = "CREATE TABLE `creative_and_thinking` (
+  `id` int(11) NOT NULL,
+  `correct_items` VARCHAR(255) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+$db_sql_22[] = "ALTER TABLE `creative_and_thinking`
+ADD PRIMARY KEY(`id`)";
+
+$db_sql_22[] = "ALTER TABLE `creative_and_thinking`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT";
+
+// ===================(sub) motivation - correct answer  ========================== //
+$db_sql_23[] = "DROP TABLE IF EXISTS `motivation`";
+
+$db_sql_23[] = "CREATE TABLE `motivation` (
+  `id` int(11) NOT NULL,
+  `correct_items` VARCHAR(255) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+$db_sql_23[] = "ALTER TABLE `motivation`
+ADD PRIMARY KEY(`id`)";
+
+$db_sql_23[] = "ALTER TABLE `motivation`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT";
+
+// ===================(sub) self-esteem - correct answer  ========================== //
+$db_sql_24[] = "DROP TABLE IF EXISTS `self_esteem`";
+
+$db_sql_24[] = "CREATE TABLE `self_esteem` (
+  `id` int(11) NOT NULL,
+  `correct_items` VARCHAR(255) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+$db_sql_24[] = "ALTER TABLE `self_esteem`
+ADD PRIMARY KEY(`id`)";
+
+$db_sql_24[] = "ALTER TABLE `self_esteem`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT";
+
+// ===================(sub) personal-relationship - correct answer  ========================== //
+$db_sql_25[] = "DROP TABLE IF EXISTS `personal_relationship`";
+
+$db_sql_25[] = "CREATE TABLE `personal_relationship` (
+  `id` int(11) NOT NULL,
+  `correct_items` VARCHAR(255) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+$db_sql_25[] = "ALTER TABLE `personal_relationship`
+ADD PRIMARY KEY(`id`)";
+
+$db_sql_25[] = "ALTER TABLE `personal_relationship`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT";
+
+// ===================(sub) conflict-relationships - correct answer  ========================== //
+$db_sql_26[] = "DROP TABLE IF EXISTS `conflict_resolutions`";
+
+$db_sql_26[] = "CREATE TABLE `conflict_resolutions` (
+  `id` int(11) NOT NULL,
+  `correct_items` VARCHAR(255) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+$db_sql_26[] = "ALTER TABLE `conflict_resolutions`
+ADD PRIMARY KEY(`id`)";
+
+$db_sql_26[] = "ALTER TABLE `conflict_resolutions`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT";
+
+// ===================(sub) health - correct answer  ========================== //
+$db_sql_27[] = "DROP TABLE IF EXISTS `health`";
+
+$db_sql_27[] = "CREATE TABLE `health` (
+  `id` int(11) NOT NULL,
+  `correct_items` VARCHAR(255) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+$db_sql_27[] = "ALTER TABLE `health`
+ADD PRIMARY KEY(`id`)";
+
+$db_sql_27[] = "ALTER TABLE `health`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT";
+
+// ===================(sub) time_management - correct answer  ========================== //
+$db_sql_28[] = "DROP TABLE IF EXISTS `time_management`";
+
+$db_sql_28[] = "CREATE TABLE `time_management` (
+  `id` int(11) NOT NULL,
+  `correct_items` VARCHAR(255) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+$db_sql_28[] = "ALTER TABLE `time_management`
+ADD PRIMARY KEY(`id`)";
+
+$db_sql_28[] = "ALTER TABLE `time_management`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT";
+
+// ===================(sub) money_management - correct answer  ========================== //
+$db_sql_29[] = "DROP TABLE IF EXISTS `money_management`";
+
+$db_sql_29[] = "CREATE TABLE `money_management` (
+  `id` int(11) NOT NULL,
+  `correct_items` VARCHAR(255) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+$db_sql_29[] = "ALTER TABLE `money_management`
+ADD PRIMARY KEY(`id`)";
+
+$db_sql_29[] = "ALTER TABLE `money_management`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT";
+
+// ===================(sub) personal_purpose - correct answer  ========================== //
+$db_sql_30[] = "DROP TABLE IF EXISTS `personal_purpose`";
+
+$db_sql_30[] = "CREATE TABLE `personal_purpose` (
+  `id` int(11) NOT NULL,
+  `correct_items` VARCHAR(255) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+$db_sql_30[] = "ALTER TABLE `personal_purpose`
+ADD PRIMARY KEY(`id`)";
+
+$db_sql_30[] = "ALTER TABLE `personal_purpose`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT";
+
+// ===================(sub) career_planning - correct answer  ========================== //
+$db_sql_31[] = "DROP TABLE IF EXISTS `career_planning`";
+
+$db_sql_31[] = "CREATE TABLE `career_planning` (
+  `id` int(11) NOT NULL,
+  `correct_items` VARCHAR(255) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+$db_sql_31[] = "ALTER TABLE `career_planning`
+ADD PRIMARY KEY(`id`)";
+
+$db_sql_31[] = "ALTER TABLE `career_planning`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT";
+
+// ===================(sub) support_resources - correct answer  ========================== //
+$db_sql_32[] = "DROP TABLE IF EXISTS `support_resources`";
+
+$db_sql_32[] = "CREATE TABLE `support_resources` (
+  `id` int(11) NOT NULL,
+  `correct_items` VARCHAR(255) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+$db_sql_32[] = "ALTER TABLE `support_resources`
+ADD PRIMARY KEY(`id`)";
+
+$db_sql_32[] = "ALTER TABLE `support_resources`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT";
+
+// ===================(sub) vocabulary - correct answer  ========================== //
+$db_sql_33[] = "DROP TABLE IF EXISTS `vocabulary`";
+
+$db_sql_33[] = "CREATE TABLE `vocabulary` (
+  `id` int(11) NOT NULL,
+  `correct_items` VARCHAR(255) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+$db_sql_33[] = "ALTER TABLE `vocabulary`
+ADD PRIMARY KEY(`id`)";
+
+$db_sql_33[] = "ALTER TABLE `vocabulary`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT";
+
+// ===================(sub) computation - correct answer  ========================== //
+$db_sql_34[] = "DROP TABLE IF EXISTS `computation`";
+
+$db_sql_34[] = "CREATE TABLE `computation` (
+  `id` int(11) NOT NULL,
+  `correct_items` VARCHAR(255) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+$db_sql_34[] = "ALTER TABLE `computation`
+ADD PRIMARY KEY(`id`)";
+
+$db_sql_34[] = "ALTER TABLE `computation`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT";
+
+// ===================(sub) spatial - correct answer  ========================== //
+$db_sql_35[] = "DROP TABLE IF EXISTS `spatial`";
+
+$db_sql_35[] = "CREATE TABLE `spatial` (
+  `id` int(11) NOT NULL,
+  `correct_items` VARCHAR(255) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+$db_sql_35[] = "ALTER TABLE `spatial`
+ADD PRIMARY KEY(`id`)";
+
+$db_sql_35[] = "ALTER TABLE `spatial`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT";
+
+// ===================(sub) work_comparison - correct answer  ========================== //
+$db_sql_36[] = "DROP TABLE IF EXISTS `work_comparison`";
+
+$db_sql_36[] = "CREATE TABLE `work_comparison` (
+  `id` int(11) NOT NULL,
+  `correct_items` VARCHAR(255) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+$db_sql_36[] = "ALTER TABLE `work_comparison`
+ADD PRIMARY KEY(`id`)";
+
+$db_sql_36[] = "ALTER TABLE `work_comparison`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT";
+
+// ===================(sub) marking_marks_pt_1 - correct answer  ========================== //
+$db_sql_37[] = "DROP TABLE IF EXISTS `marking_marks_pt_1`";
+
+$db_sql_37[] = "CREATE TABLE `marking_marks_pt_1` (
+  `id` int(11) NOT NULL,
+  `correct_items` VARCHAR(255) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+$db_sql_37[] = "ALTER TABLE `marking_marks_pt_1`
+ADD PRIMARY KEY(`id`)";
+
+$db_sql_37[] = "ALTER TABLE `marking_marks_pt_1`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT";
+
+// ===================(sub) marking_marks_pt_2 - correct answer  ========================== //
+$db_sql_38[] = "DROP TABLE IF EXISTS `marking_marks_pt_2`";
+
+$db_sql_38[] = "CREATE TABLE `marking_marks_pt_2` (
+  `id` int(11) NOT NULL,
+  `correct_items` VARCHAR(255) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+$db_sql_38[] = "ALTER TABLE `marking_marks_pt_2`
+ADD PRIMARY KEY(`id`)";
+
+$db_sql_38[] = "ALTER TABLE `marking_marks_pt_2`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT";
+
+// ===================(sub) baron_eq - correct answer  ========================== //
+$db_sql_39[] = "DROP TABLE IF EXISTS `baron_eq`";
+
+$db_sql_39[] = "CREATE TABLE `baron_eq` (
+  `id` int(11) NOT NULL,
+  `correct_items` VARCHAR(255) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+$db_sql_39[] = "ALTER TABLE `baron_eq`
+ADD PRIMARY KEY(`id`)";
+
+$db_sql_39[] = "ALTER TABLE `baron_eq`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT"; 
+
+// ===================(sub) keirsey_temerament_sorter - correct answer  ========================== //
+$db_sql_40[] = "DROP TABLE IF EXISTS `keirsey_temerament_sorter`";
+
+$db_sql_40[] = "CREATE TABLE `keirsey_temerament_sorter` (
+  `id` int(11) NOT NULL,
+  `correct_items` VARCHAR(255) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+$db_sql_40[] = "ALTER TABLE `keirsey_temerament_sorter`
+ADD PRIMARY KEY(`id`)";
+
+$db_sql_40[] = "ALTER TABLE `keirsey_temerament_sorter`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT"; 
+
+// ===================(sub) aptitude_j_and_c - correct answer  ========================== //
+$db_sql_41[] = "DROP TABLE IF EXISTS `aptitude_j_and_c`";
+
+$db_sql_41[] = "CREATE TABLE `aptitude_j_and_c` (
+  `id` int(11) NOT NULL,
+  `correct_items` VARCHAR(255) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+$db_sql_41[] = "ALTER TABLE `aptitude_j_and_c`
+ADD PRIMARY KEY(`id`)";
+
+$db_sql_41[] = "ALTER TABLE `aptitude_j_and_c`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT"; 
+
+// ===================(sub) esa - correct answer  ========================== //
+$db_sql_42[] = "DROP TABLE IF EXISTS `esa`";
+
+$db_sql_42[] = "CREATE TABLE `esa` (
+  `id` int(11) NOT NULL,
+  `correct_items` VARCHAR(255) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+$db_sql_42[] = "ALTER TABLE `esa`
+ADD PRIMARY KEY(`id`)";
+
+$db_sql_42[] = "ALTER TABLE `esa`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT"; 
+
+// ===================(sub) aptitude_verbal_and_numerical - correct answer  ========================== //
+$db_sql_43[] = "DROP TABLE IF EXISTS `aptitude_verbal_and_numerical`";
+
+$db_sql_43[] = "CREATE TABLE `aptitude_verbal_and_numerical` (
+  `id` int(11) NOT NULL,
+  `correct_items` VARCHAR(255) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+$db_sql_43[] = "ALTER TABLE `aptitude_verbal_and_numerical`
+ADD PRIMARY KEY(`id`)";
+
+$db_sql_43[] = "ALTER TABLE `aptitude_verbal_and_numerical`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT"; 
