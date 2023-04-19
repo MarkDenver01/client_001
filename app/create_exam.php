@@ -7,6 +7,7 @@
       "student_year", 
       "exam_title", 
       "exam_description", 
+      "exam_category",
       "ic_img_exam_path", 
       "../uploads/exam/",
       "create_exam"
@@ -28,7 +29,7 @@
     <section class="section profile">
       <div class="row">
           <div class="col-xl-12">
-              <div class="card">
+              <div class="card rounded-0">
                  
                  <div class="card-body">
                     <h5 class="card-title">
@@ -48,13 +49,13 @@
                             <img style="height:600px; " id="ic_img_exam" src="../uploads/exam/first_year_a/sample_1.png" alt="Profile" class="d-block w-100 border border-info">
                             <p class="small fst-italic text-center">(Attached Image of Exam)</p>
                           </label>
-                            <input id="ic_img_exam_path" type="file" name="ic_img_exam_path" class="form-control btn btn-primary rounded-pill btn-sm w-75"></input>
+                            <input id="ic_img_exam_path" type="file" name="ic_img_exam_path" class="form-control btn btn-primary rounded-0 btn-sm w-75"></input>
                         </div>
 
                         <div class="col-lg-6">
                           <label class="col-sm-5 col-form-label">Student Year Level</label>
                             <div class="col-sm-10">
-                              <select id="student_year" name="student_year" class="form-select" aria-label="Default select example">
+                              <select id="student_year" name="student_year" class="form-select rounded-0" aria-label="Default select example">
                                 <option selected>Select Year Level</option>
                                 <option value="First Year">First Year</option>
                                 <option value="Second Year">Second Year</option>
@@ -66,28 +67,34 @@
                           
                           <label class="col-sm-5 col-form-label">Exam Type</label>
                             <div class="col-sm-10">
-                              <select id="exam_title" name="exam_title" class="form-select" aria-label="Default select example">
+                              <select id="exam_title" name="exam_title" class="form-select rounded-0" aria-label="Default select example">
                                 <option selected>Select exam type</option>
                               </select>
                             </div>
                           
 
-                          <label class="col-sm-5 col-form-label">Exam descrition</label>
+                          <label class="col-sm-5 col-form-label">Exam description</label>
                             <div class="col-sm-10">
-                              <select id="exam_description" name="exam_description" class="form-select" aria-label="Default select example">
+                              <select id="exam_description" name="exam_description" class="form-select rounded-0" aria-label="Default select example">
                                 <option selected>Select exam description</option>
                               </select>
                             </div>
 
+                          <label  id="exam_category_label" class="col-sm-5 col-form-label">Exam Category</label>
+                            <div  id="exam_category_div" class="col-sm-10">
+                              <select id="exam_category" name="exam_category" class="form-select rounded-0" aria-label="Default select example">
+                                <option id="exam_category_value" selected>Select exam category</option>
+                              </select>
+                            </div>
+                          
                           <br/>
                             <div class="text-left">
-                              <button name="button_exam" style="width: 460px;" type="submit" class="btn btn-primary btn-sm">Upload Exam</button>
+                              <button name="button_exam" style="width: 460px;" type="submit" class="btn btn-primary btn-sm rounded-0">Upload Exam</button>
                             </div>
 
                           </div>
                         </form><!-- End floating Labels Form -->
                          
-
                 </div>
 
               </div>
@@ -182,7 +189,31 @@
             $('#exam_description').html(html);
           }
         });
-    });
+      });
+
+      $('#exam_description').on('change', function() {
+        $.ajax({
+          type: 'POST',
+          url: './ajax/exam_category_ajax_func.php',
+          data: {exam_description: $('#exam_description').val()},
+          success: function(html) {
+            if($('#exam_description').val() == "Academic Skills Development" 
+            || $('#exam_description').val() == "Study and Thinking Skills" 
+            || $('#exam_description').val() == "Personal Issues" 
+            || $('#exam_description').val() == "Planning for the future" 
+            || $('#exam_description').val() == "Resources needs"
+            || $('#exam_description').val() == "Aptitude J and C") {
+              $('#exam_category').html(html);
+              $('#exam_category').show();
+              $('#exam_category_label').show();
+            } else {
+              $('#exam_category').hide();
+              $('#exam_category_label').hide();
+            }
+          } 
+        })
+      });
+
   });
   </script>
   

@@ -11,8 +11,7 @@
     if (isset($_POST['button_submit'])) {
       post_announcements(
         "title",
-        "body_message",
-        "image_path"
+        "body_message"
       );
     }
   }
@@ -32,7 +31,7 @@
     <section class="section profile">
       <div class="row">
         <div class="col-xl-12">
-          <div class="card">
+          <div class="card rounded-0">
           <div class="card-body">
             <h5 class="card-title">Post an announcement</h5>
             <?php echo display_message($msg); ?>
@@ -40,24 +39,19 @@
               <form class="row g-3" action="", method="POST" enctype="multipart/form-data">
                 <div class="col-md-12">
                   <div class="form-floating">
-                    <input name="title" type="text" class="form-control" id="floatingName" placeholder="Your title">
+                    <input name="title" type="text" class="form-control rounded-0" id="floatingName" placeholder="Your title">
                     <label for="floatingName">Title</label>
                   </div>
                 </div>
                 <div class="col-12">
                   <div class="form-floating">
-                    <textarea name="body_message" class="form-control" placeholder="Your announcement" id="floatingTextarea" style="height: 100px;"></textarea>
+                    <textarea name="body_message" class="form-control rounded-0" placeholder="Your announcement" id="floatingTextarea" style="height: 100px;"></textarea>
                     <label for="floatingTextarea">Body Message</label>
                   </div>
                 </div>
-                <div class="col-md-6">
-                  <label for="ic_image_file_path">Attached Files</label>
-                  <input id="ic_image_file_path" type="file" name="image_path" class="form-control btn btn-primary rounded-pill btn-sm" ></input>
-                </div>
-
 
                 <div class="text-left">
-                  <button name="button_submit" type="submit" class="btn btn-primary">Submit</button>
+                  <button name="button_submit" type="submit" class="btn btn-primary rounded-0">Submit</button>
                 </div>
               </form><!-- End floating Labels Form -->
 

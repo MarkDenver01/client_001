@@ -26,8 +26,8 @@
 
  function find_by_student() {
    global $db;
-   $sql = "SELECT s.id, s.name, s.course, s.student_year, s.gender, s.age, s.birth_date, s.present_address, s.email_address, a.password AS studentInfo,";
-   $sql .= " a.user_level, a.image, a.status, a.is_logged_in AS studentAccount FROM ";
+   $sql = "SELECT s.id, s.name, s.course, s.student_year, s.semester, s.school_year, s.gender, s.age, s.birth_date, s.present_address, s.email_address, a.password AS studentInfo,";
+   $sql .= " a.user_level, a.status, a.is_logged_in AS studentAccount FROM ";
    $sql .= " student_info s LEFT JOIN user_account a ";
    $sql .= " ON s.email_address = a.email_address ORDER BY s.id DESC";
    return find_by_sql($sql);
@@ -36,7 +36,7 @@
  function find_by_guidance() {
    global $db;
    $sql = "SELECT g.id, g.name, g.gender, g.age, g.birth_date, g.present_address, g.email_address, a.password AS guidanceInfo,";
-   $sql .= " a.user_level, a.image, a.status, a.is_logged_in AS guidanceAccount FROM ";
+   $sql .= " a.user_level, a.status, a.is_logged_in AS guidanceAccount FROM ";
    $sql .= " guidance_info g LEFT JOIN user_account a ";
    $sql .= " ON g.email_address = a.email_address ORDER BY g.id DESC";
    return find_by_sql($sql);
@@ -118,7 +118,7 @@
    $sql = "SELECT `g`.`name` AS name, `g`.`gender` AS gender, `g`.`age` AS age,";
    $sql .=" `g`.`birth_date` AS birth_date, `g`.`present_address` AS present_address,";
    $sql .=" `u`.`email_address` AS email_address, `u`.`password` as password,";
-   $sql .=" `u`.`user_level` AS user_level, `u`.`image` AS image, `u`.`status` AS status,";
+   $sql .=" `u`.`user_level` AS user_level, `u`.`status` AS status,";
    $sql .=" `u`.`is_logged_in` AS is_logged_in";
    $sql .= " FROM `guidance_info` `g` LEFT JOIN `user_account` `u`";
    $sql .= " ON `g`.`email_address` = `u`.`email_address`";
@@ -167,11 +167,11 @@
  function find_student_login($email_address) {
    global $db;
    $email_address = $db->escape($email_address);
-   $sql ="SELECT `s`.`name` AS name, `s`.`course` AS course, `s`.`student_year` AS student_year,";
+   $sql ="SELECT `s`.`name` AS name, `s`.`course` AS course, `s`.`semester` AS semester, `s`.`school_year` AS school_year, `s`.`student_year` AS student_year,";
    $sql .=" `s`.`gender` AS gender, `s`.`age` AS age, `s`.`birth_date` AS birth_date,";
    $sql .=" `s`.`present_address` AS present_address, `u`.`email_address` AS email_address,";
    $sql .=" `u`.`password` AS password, `u`.`user_level` AS user_level,";
-   $sql .=" `u`.`image` AS image, `u`.`status` AS status, `u`.`is_logged_in` AS is_logged_in";
+   $sql .=" `u`.`status` AS status, `u`.`is_logged_in` AS is_logged_in";
    $sql .=" FROM `student_info` `s` LEFT JOIN `user_account` `u`";
    $sql .=" ON `s`.`email_address` = `u`.`email_address`";
    $sql .=" WHERE `u`.`email_address` ='{$email_address}' LIMIT 1";
@@ -239,17 +239,16 @@
    return ($result && $db->affected_rows() === 1 ? true : false);
  }
 
- function insertUserAccount($full_name, $email_address, $password, $level, $file_path_name) {
+ function insertUserAccount($full_name, $email_address, $password, $level) {
    global $db;
    $sql = "INSERT INTO `user_account`(
-     `name`,`email_address`,`password`,`user_level`,`image`,`status`)";
+     `name`,`email_address`,`password`,`user_level`,`status`)";
    $sql .= " VALUES ";
    $sql .= "(
      '{$full_name}',
      '{$email_address}',
      '{$password}',
      '{$level}',
-     '{$file_path_name}',
      '0')";
    $db->query($sql);
  }
@@ -292,11 +291,11 @@
  }
 
  function insertStudentAccount($full_name, $email_address, $course,
-     $year, $gender, $age, $birth_date, $present_address) {
+     $year, $semester, $school_year, $gender, $age, $birth_date, $present_address) {
      global $db;
 
        $sql = "INSERT INTO `student_info`(`name`,`email_address`,`course`
-         ,`student_year`,`gender`,`age`
+         ,`student_year`, `semester`,`school_year`,`gender`,`age`
          ,`birth_date`,`present_address`)";
        $sql .= " VALUES ";
        $sql .= "(
@@ -304,6 +303,8 @@
          '{$email_address}',
          '{$course}',
          '{$year}',
+         '{$semester}',
+         '{$school_year}',
          '{$gender}',
          '{$age}',
          '{$birth_date}',
@@ -397,17 +398,16 @@
    return false;
  }
 
- function updateUsertAccount($full_name, $email_address, $file_path_name) {
+ function updateUsertAccount($full_name, $email_address) {
    global $db;
    $sql = "UPDATE `user_account` SET
-   `name` ='{$full_name}',
-   `image` ='{$file_path_name}' WHERE `email_address`='{$email_address}'";
+   `name` ='{$full_name}' WHERE `email_address`='{$email_address}'";
    $result = $db->query($sql);
    return ($result && $db->affected_rows() === 1 ? true : false);
  }
 
  function updateStudentInfo($full_name, $email_address, $course,
-     $year, $gender, $age, $birth_date, $present_address) {
+     $year, $semester, $school_year, $gender, $age, $birth_date, $present_address) {
      global $db;
 
      $sql = "UPDATE `student_info` SET
@@ -415,6 +415,8 @@
       `email_address`='{$email_address}',
       `course` ='{$course}',
       `student_year` ='{$year}',
+      `semester` = '{$semester}',
+      `school_year` = '{$school_year}',
       `gender` ='{$gender}',
       `age` ='{$age}',
       `birth_date` ='{$birth_date}',
@@ -465,12 +467,14 @@
 
  function insert_new_exam(array $data) {
   global $db;
-  $sql ="INSERT INTO exam_created(student_year, exam_title, exam_description, image_exam_path, created_at) ";
+  $sql ="INSERT INTO exam_created(student_year, exam_title, exam_description, exam_category, image_exam_path, created_at, exam_status) ";
   $sql .="VALUES ('" .$data['student_year'];
   $sql .="','" .$data['exam_title'];
   $sql .="','" .$data['exam_description'];
+  $sql .="','" .$data['exam_category'];
   $sql .="','" .$data['image_exam_path'];
-  $sql .="','" .$data['created_at']. "')";
+  $sql .="','" .$data['created_at'];
+  $sql .="','" .$data['exam_status']. "')";
   $result = $db->query($sql);
   if ($result) {
     return true;
@@ -479,9 +483,16 @@
   }
  }
 
+ function update_created_exam($id, $status) {
+  global $db;
+  $sql = "UPDATE exam_created set exam_status ='" .$status. "' WHERE id ='" .$id. "'";
+  $result = $db->query($sql);
+  return ($result && $db->affected_rows() === 1 ? true : false);
+ }
+
  function insert_exam_schedule(array $data) {
   global $db;
-  $sql = "INSERT INTO exam_schedule(student_year, exam_title, created_on, expired_on, exam_duration, result_date_and_time, `status`) ";
+  $sql = "INSERT INTO exam_schedule(student_year, exam_title, created_on, expired_on, exam_duration, result_date_and_time, `exam_status`) ";
   $sql .="VALUES('" .$data['student_year'];
   $sql .="','" .$data['exam_title'];
   $sql .="','" .$data['created_at'];
@@ -511,6 +522,75 @@
   return find_by_sql($sql);
 }
 
+function find_by_exam_created_by_student_year($student_year) {
+  global $db;
+  $sql = "SELECT * FROM exam_created WHERE student_year ='" .$student_year. "'";
+  return find_by_sql($sql);
+}
+
+function find_by_exam_schedule_by_student_year($student_year) {
+  global $db;
+  $sql = "SELECT * FROM exam_schedule WHERE student_year ='" .$student_year. "'";
+  return find_by_sql($sql);
+}
+
+function fetch_exam_created($student_year, $paginationStart, $limit) {
+  global $db;
+  $sql = "SELECT * FROM exam_created WHERE student_year ='" .$student_year. "' LIMIT " .$paginationStart. ", " .$limit. "";
+  return find_by_sql($sql);
+}
+
+function get_exam_count_query($student_year, $semester) {
+  global $db;
+  if ($semester == 'First semester') {
+    $sql = "SELECT COUNT(*) AS `total_count` FROM `exam_created` WHERE";
+    $sql .=" `student_year` ='{$student_year}' AND";
+    $sql .=" `exam_title` ='Student Success Kit' AND";
+    $sql .=" `exam_status` ='1'";
+  } else {
+    $sql = "SELECT COUNT(*) AS `total_count` FROM `exam_created` WHERE";
+    $sql .=" `student_year` ='{$student_year}' AND ";
+    $sql .=" `exam_title` ='OASIS 3' AND ";
+    $sql .=" `exam_status` ='1'";
+  }
+
+  $result = $db->query($sql);
+  if ($db->num_rows($result)) {
+    $fetch = $db->fetch_assoc($result);
+    $total_count = $fetch['total_count'];
+    return $total_count;
+  }
+  return false;
+}
+
+function find_by_available_exam($student_year) {
+  global $db;
+  $sql ="SELECT * FROM exam_schedule WHERE student_year = '" .$student_year. "'";
+  $result = $db->query($sql);
+  if ($db->num_rows($result)) {
+    $student = $db->fetch_assoc($result);
+    return $student;
+  }
+  return false;
+}
+
+function get_exam_query($student_year) {
+  global $db;
+  $sql ="SELECT * FROM exam_created WHERE student_year = '" .$student_year. "'";
+  $result = $db->query($sql);
+  if ($db->num_rows($result)) {
+    $student = $db->fetch_assoc($result);
+    return $student;
+  }
+  return false;
+}
+
+function find_by_correct_answer_query($table) {
+  global $db;
+  $sql = "SELECT * FROM '{$table}' ORDER BY id DESC";
+  return find_by_sql($sql);
+}
+
 function find_by_exam_schedule() {
   global $db;
   $sql = "SELECT * FROM exam_schedule ORDER BY id DESC";
@@ -520,6 +600,14 @@ function find_by_exam_schedule() {
 function delete_exam_created($id) {
   global $db;
   $sql = "DELETE FROM exam_created";
+  $sql .= " WHERE id='" .$id. "'";
+  $db->query($sql);
+  return ($db->affected_rows() === 1) ? true : false;
+}
+
+function delete_exam_schedule($id) {
+  global $db;
+  $sql = "DELETE FROM exam_schedule";
   $sql .= " WHERE id='" .$id. "'";
   $db->query($sql);
   return ($db->affected_rows() === 1) ? true : false;
@@ -535,6 +623,18 @@ function find_all_student($student_year) {
     return $user;
   }
   return $user=[];
+}
+
+function check_exam_ids($table, $value) {
+  global $db;
+  if (table_exist($table)) {
+    $sql = $db->query("SELECT * FROm {$db->escape($table)} WHERE 'id' = '{$value}' LIMIT 1");
+    if ($result = $db->fetch_assoc($sql)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
 
 ?>

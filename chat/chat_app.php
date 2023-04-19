@@ -71,9 +71,9 @@
                 <div class="chat-message clearfix">
                     <div class="input-group mb-0">
                         <div class="input-group-prepend">
-                            <button id="sendBtn" type="submit" class="input-group-text btn btn-success"><i class="fa fa-send"></i></button>
+                            <button id="sendBtn" type="submit" class="input-group-text btn btn-success rounded-0"><i class="fa fa-send"></i></button>
                         </div>
-                        <textarea cols="3" id="message" type="text" class="form-control"></textarea>
+                        <textarea cols="3" id="message" type="text" class="form-control rounded-0"></textarea>
                     </div>
                 </div>
            </div>

@@ -2,6 +2,15 @@
 <?php include('../includes/load.php'); ?>
 <?php SET_NOT_LOGGED_IN(); ?>
 <?php if(isset($_POST['button_back'])) redirect('./exam_schedule', false); ?>
+<?php 
+  if (isset($_POST['button_schedule'])) {
+    redirect('exam_schedule', false);
+  }
+
+  if (isset($_POST['button_reload'])) {
+    redirect('./view_exam_schedule', false);
+  }
+?>
 <?php include('../start_menu_bar.php'); ?>
 
 <main id="main" class="main">
@@ -15,16 +24,50 @@
   </div><!-- End Page Title -->
 
 
-<section class="section">
+<section class="section" style="width: 1460px;">
     <div class="row">
       <!-- start create account -->
-      <div class="card">
+      <div class="card rounded-0">
+      </br>
+        <div class="row">
+          <div class="box">
+            <div class="box-body">
+            <form action="" method="POST">
+		          <div class="row">
+        	      <div class="col-sm-4">
+				          <!-- <button type="button" class="btn btn-secondary rounded-0 btn-sm"><i class="bi bi-printer-fill"></i> Print</button> -->
+			          </div>
+                
+			          <div class="form-group col-sm-4 text-center">
+                  <select id="student_year" name="student_year" class="form-select rounded-0" aria-label="Default select example">
+                    <option selected>Select Year Level</option>
+                    <option value="First Year">First Year</option>
+                    <option value="Second Year">Second Year</option>
+                    <option value="Third Year">Third Year</option>
+                    <option value="Fourth Year">Fourth Year</option>
+                  </select>
+                  <br/>
+                  <button name="button_filter" type="submit" class="btn btn-secondary text-white rounded-0 btn-sm w-100"><i class="bi bi-search"></i> </button>
+                </div>
+                <div class="col-sm-2"></div>
+			          <div class="col-sm-2">
+                  <form action="" method="POST">
+                  <button name="button_schedule" type="submit" class="btn btn-primary btn-sm rounded-0"><i class="bx bx-refresh"></i> Add Schedule</button>
+					          <button name="button_reload" type="submit" class="btn btn-success btn-sm rounded-0"><i class="bx bx-refresh"></i> Reload</button>
+                  </form>
+			          </div>
+		          </div>
+            </form>
+            </div>
+          </div>
+        <br/>
+      
         <div class="card-body">
           <br/>
           <!-- General Form Elements -->
           <form class="row g-3" method="POST" action="">
             <div class="col-md-12">
-              <div class="card">
+              <div class="card rounded-0">
                 <div class="card-body">
                   <!-- Table with hoverable rows -->
                   <table class="table table-sm table-hover datatable">
@@ -32,36 +75,47 @@
                       <tr>
                         <th scope="col" class="text-center" style="width: 20%;">Student Year</th>
                         <th scope="col" class="text-center" style="width: 20%;">Exam Type</th>
-                        <th scope="col" class="text-center" style="width: 20%;">Created On</th>
-                        <th scope="col" class="text-center" style="width: 20%;">Expired On</th>
+                        <th scope="col" class="text-center" style="width: 20%;">Time Limit (secs/min)</th>
+                        <th scope="col" class="text-center" style="width: 20%;">Expired At</th>
                         <th scope="col" class="text-center" style="width: 20%;">Action</th>
                       </tr>
                     </thead>
                     <tbody>
+                      <?php if (isset($_POST['button_filter'])) { ?>
+                      <?php $student_year = $_POST['student_year']; ?>  
+                      <?php $schedules = find_by_exam_schedule_by_student_year($student_year); ?>
+                      <?php foreach($schedules as $schedule): ?>
+                        <tr>
+                        <td id="<?php echo $schedule['id']; ?>" scope="row" class="text-center" hidden>
+                        <th data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $schedule['student_year']; ?></th>
+                        <td data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $schedule['exam_title']; ?></td>
+                        <td data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $schedule['exam_duration']; ?></td>
+                        <td data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $schedule['expired_on']; ?></td>
+                        <td class="text-center" style="width: 20%;">
+                            <a href="#" type="button" class="btn btn-primary rounded-pill btn-sm w-50">Manage</button>
+                            <a href="../includes/delete_exam_schedule?id=<?php echo $schedule['id']; ?>" type="button" class="btn btn-danger rounded-pill btn-sm w-50 text-light">Remove</a>
+                        </td>
+                      </tr>
+                      <?php endforeach; ?>
+                      <?php } else { ?>
                       <?php $schedules = find_by_exam_schedule(); ?>
                       <?php foreach($schedules as $schedule): ?>
                       <tr>
                         <td id="<?php echo $schedule['id']; ?>" scope="row" class="text-center" hidden>
                         <th data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $schedule['student_year']; ?></th>
                         <td data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $schedule['exam_title']; ?></td>
-                        <td data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $schedule['created_on']; ?></td>
+                        <td data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $schedule['exam_duration']; ?></td>
                         <td data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $schedule['expired_on']; ?></td>
-                
-
                         <td class="text-center" style="width: 20%;">
-                            <a href="#" type="button" class="btn btn-primary rounded-pill btn-sm w-50">EDIT</button>
-                            <a href="#" type="button" class="btn btn-danger rounded-pill btn-sm w-50">REMOVE</button>
+                            <a href="#" type="button" class="btn btn-primary rounded-pill btn-sm w-50">Manage</button>
+                            <a href="../includes/delete_exam_schedule?id=<?php echo $schedule['id']; ?>" type="button" class="btn btn-danger rounded-pill btn-sm w-50 text-light">Remove</a>
                         </td>
                       </tr>
                       <?php endforeach; ?>
+                      <?php } ?>
                     </tbody>
                   </table>
                   <!-- End Table with hoverable rows -->
-
-                  <div class="text-left">
-                    <button class="btn btn-secondary rounded-pill" type="submit" name="button_back">BACK</button>
-                  </div>
-
                 </div>
               </div>
 

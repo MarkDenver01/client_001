@@ -5,65 +5,44 @@ function onClickButton($button_name, $url) {
   }
 }
 
-function post_announcements($title, $body_message, $file_path_name) {
+function post_announcements($title, $body_message) {
   global $session;
   $req_fields = array(
     $title,
     $body_message,
-    $file_path_name,
     $from
   );
+
   validate_fields($req_fields);
-  $upload_file = $_FILES[$file_path_name]['name'];
-  $tmp_dir = $_FILES[$file_path_name]['tmp_name'];
-  $upload_size = $_FILES[$file_path_name]['size'];
 
-  $upload_dir = "../uploads/posts/";
-  $upload_ext = strtolower(pathinfo($upload_file, PATHINFO_EXTENSION));
-  $valid_extensions = array(
-    'jpeg',
-    'jpg',
-    'png',
-    'gif',
-    'pdf'
-  );
-  $upload_destination = rand(1000,1000000).".".$upload_ext;
-  if (in_array($upload_ext, $valid_extensions)) {
-    if ($upload_size < 10000000) {
-      if (move_uploaded_file($tmp_dir, $upload_dir.$upload_destination)) {
-        $dir = $upload_dir.$upload_destination;
-        if (empty($errors)) {
+  if (empty($errors)) {
 
-          $user_level = $_SESSION['key_session']['user_level'];
-          if ($user_level == '1') {
-            $user_level = 'Administrator';
-          } elseif ($user_level == '2') {
-            $user_level = 'Guidance';
-          }
-
-          insert_post_announcements(
-            remove_junk($_POST[$title]),
-            remove_junk($_POST[$body_message]),
-            $dir,
-            $user_level
-          );
-        } else {
-          $session->message("d", $errors);
-        }
-      } else {
-        $session->message("w", "Unable to upload the file");
-      }
-    } else {
-      $session->message("d", "The upload file size is too big. Please reduce the size of the file.");
+    $user_level = $_SESSION['key_session']['user_level'];
+    if ($user_level == '1') {
+      $user_level = 'Administrator';
+    } elseif ($user_level == '2') {
+      $user_level = 'Guidance';
     }
+
+    insert_post_announcements(
+      remove_junk($_POST[$title]),
+      remove_junk($_POST[$body_message]),
+      null,
+      $user_level
+    );
+  } else {
+    $session->message("d", $errors);
   }
+  
 }
 
-function addStudentAccount($file_path_name,
-                           $full_name,
+function addStudentAccount($full_name,
                            $email_address,
                            $course,
                            $year,
+                           $semester,
+                           $start_school_year,
+                           $end_school_year,
                            $gender,
                            $age,
                            $birth_date,
@@ -81,100 +60,73 @@ function addStudentAccount($file_path_name,
     );
     validate_fields($req_fields); // check if fields are not empty
 
-    $img_file = $_FILES[$file_path_name]['name'];
-    $tmp_dir = $_FILES[$file_path_name]['tmp_name'];
-    $img_size = $_FILES[$file_path_name]['size'];
+    $school_year = $_POST[$start_school_year].'-'.$_POST[$end_school_year];
+    $default_password = sha1("default");
+    
+    if (empty($errors)) {
+      insertUserAccount(
+        remove_junk($_POST[$full_name]),
+        remove_junk($_POST[$email_address]),
+        $default_password,
+        3
+      );
 
-    if (empty($img_file)) {
-      $session->message("d","Please select the image file...");
-    } else {
-      $upload_dir = '../uploads/students/';
-      $img_ext = strtolower(pathinfo($img_file, PATHINFO_EXTENSION)); // get image extensions
-      $valid_extensions = array('jpeg', 'jpg', 'png', 'gif'); // valid extensions
+      insertStudentAccount(
+        remove_junk($_POST[$full_name]),
+        remove_junk($_POST[$email_address]),
+        remove_junk($_POST[$course]),
+        remove_junk($_POST[$year]),
+        remove_junk($_POST[$semester]),
+        $school_year,
+        remove_junk($_POST[$gender]),
+        remove_junk($_POST[$age]),
+        remove_junk($_POST[$birth_date]),
+        remove_junk($_POST[$present_address])
+      );
 
-      // rename uploading image
-      $profile_pic = rand(1000,1000000).".".$img_ext;
-      // allow valid image file formats
-      if (in_array($img_ext, $valid_extensions)) {
-        // check file size '5MiB'
-        if ($img_size < 5000000) {
-          if (move_uploaded_file($tmp_dir, $upload_dir.$profile_pic)) {
-            $default_password = sha1("default");
-            $dir = $upload_dir.$profile_pic;
-            if (empty($errors)) {
-              insertUserAccount(
-                remove_junk($_POST[$full_name]),
-                remove_junk($_POST[$email_address]),
-                $default_password,
-                3,
-                $dir
-              );
+      $get_name = remove_junk($_POST[$full_name]);
+      $get_mail_address = remove_junk($_POST[$email_address]);
 
-              insertStudentAccount(
-                remove_junk($_POST[$full_name]),
-                remove_junk($_POST[$email_address]),
-                remove_junk($_POST[$course]),
-                remove_junk($_POST[$year]),
-                remove_junk($_POST[$gender]),
-                remove_junk($_POST[$age]),
-                remove_junk($_POST[$birth_date]),
-                remove_junk($_POST[$present_address])
-              );
+      $subject = "Your account has been created";
+      $content = 'Hi '.$get_name;
+      $content .= '<br/>';
+      $content .= 'Welcome to CESLICAM Portal!';
+      $content .= '<br/>';
+      $content .= '<br/>';
+      $content .= 'Your account has been created. Please change your default password for your security.';
+      $content .= '<br/>';
+      $content .= '---------------------------------------';
+      $content .= '<br/>';
+      $content .= 'Email address: '.$get_mail_address;
+      $content .= '<br/>';
+      $content .= 'Password: <b>default</b>';
+      $content .= '<br/>';
+      $content .= '---------------------------------------';
+      $content .= '<br/>';
+      $content .= '<br/>';
+      $content .= 'Thank you.';
 
-              $get_name = remove_junk($_POST[$full_name]);
-              $get_mail_address = remove_junk($_POST[$email_address]);
+      // send mail account created
+      $send = send_email(
+        $get_mail_address,
+        $get_name,
+        $subject,
+        $content
+      );
 
-              $subject = "Your account has been created";
-              $content = 'Hi '.$get_name;
-              $content .= '<br/>';
-              $content .= 'Welcome to CESLICAM Portal!';
-              $content .= '<br/>';
-              $content .= '<br/>';
-              $content .= 'Your account has been created. Please change your default password for your security.';
-              $content .= '<br/>';
-              $content .= '---------------------------------------';
-              $content .= '<br/>';
-              $content .= 'Email address: '.$get_mail_address;
-              $content .= '<br/>';
-              $content .= 'Password: <b>default</b>';
-              $content .= '<br/>';
-              $content .= '---------------------------------------';
-              $content .= '<br/>';
-              $content .= '<br/>';
-              $content .= 'Thank you.';
-
-              // send mail account created
-              $send = send_email(
-                $get_mail_address,
-                $get_name,
-                $subject,
-                $content
-              );
-
-              if ($send) {
-                redirect('./view_student_account', false);
-              } else {
-                $session->message("d", "Error occured during sending an email.");
-              }
-            } else {
-              $session->message("d", $errors);
-              redirect('./register_student_account', false);
-            }
-          } else {
-            $session->message("d","Cannot upload the image. Please try again.");
-            redirect('./register_student_account', false);
-          }
-        } else {
-          $session->message("w", "Please reduce the image size atleast 5Mb.");
-          redirect('./register_student_account', false);
-        }
+      if ($send) {
+        redirect('./view_student_account', false);
+      } else {
+        $session->message("d", "Error occured during sending an email.");
       }
+    } else {
+      $session->message("d", $errors);
+      redirect('./register_student_account', false);
     }
 }
 
 
-function addGuidanceAccount($file_path_name,
-                           $full_name,
+function addGuidanceAccount($full_name,
                            $email_address,
                            $gender,
                            $age,
@@ -191,93 +143,64 @@ function addGuidanceAccount($file_path_name,
     );
     validate_fields($req_fields); // check if fields are not empty
 
-    $img_file = $_FILES[$file_path_name]['name'];
-    $tmp_dir = $_FILES[$file_path_name]['tmp_name'];
-    $img_size = $_FILES[$file_path_name]['size'];
+    $default_password = sha1("default");
 
-    if (empty($img_file)) {
-      $session->message("d","Please select the image file...");
+    if (empty($errors)) {
+      insertUserAccount(
+        remove_junk($_POST[$full_name]),
+        remove_junk($_POST[$email_address]),
+        $default_password,
+        2,
+        $dir);
+
+      insertGuidanceAccount(
+        remove_junk($_POST[$full_name]),
+        remove_junk($_POST[$email_address]),
+        remove_junk($_POST[$gender]),
+        remove_junk($_POST[$age]),
+        remove_junk($_POST[$birth_date]),
+        remove_junk($_POST[$present_address])
+    );
+
+    $get_name = remove_junk($_POST[$full_name]);
+    $get_mail_address = remove_junk($_POST[$email_address]);
+
+    $subject = "Your account has been created";
+    $content = 'Hi '.$get_name;
+    $content .= '<br/>';
+    $content .= 'Welcome to CESLICAM Portal!';
+    $content .= '<br/>';
+    $content .= '<br/>';
+    $content .= 'Your account has been created. Please change your default password for your security.';
+    $content .= '<br/>';
+    $content .= '---------------------------------------';
+    $content .= '<br/>';
+    $content .= 'Email address: '.$get_mail_address;
+    $content .= '<br/>';
+    $content .= 'Password: <b>default</b>';
+    $content .= '<br/>';
+    $content .= '---------------------------------------';
+    $content .= '<br/>';
+    $content .= '<br/>';
+    $content .= 'Thank you.';
+
+    // send mail account created
+    $send = send_email(
+      $get_mail_address,
+      $get_name,
+      $subject,
+      $content
+    );
+
+    if ($send) {
+      redirect('./view_guidance_account', false);
     } else {
-      $upload_dir = '../uploads/users/';
-      $img_ext = strtolower(pathinfo($img_file, PATHINFO_EXTENSION)); // get image extensions
-      $valid_extensions = array('jpeg', 'jpg', 'png', 'gif'); // valid extensions
-
-      // rename uploading image
-      $profile_pic = rand(1000,1000000).".".$img_ext;
-
-      // allow valid image file formats
-      if (in_array($img_ext, $valid_extensions)) {
-        // check file size '5MiB'
-        if ($img_size < 5000000) {
-          if (move_uploaded_file($tmp_dir, $upload_dir.$profile_pic)) {
-            $default_password = sha1("default");
-            $dir = $upload_dir.$profile_pic;
-            if (empty($errors)) {
-                insertUserAccount(
-                  remove_junk($_POST[$full_name]),
-                  remove_junk($_POST[$email_address]),
-                  $default_password,
-                  2,
-                  $dir);
-
-                insertGuidanceAccount(
-                  remove_junk($_POST[$full_name]),
-                  remove_junk($_POST[$email_address]),
-                  remove_junk($_POST[$gender]),
-                  remove_junk($_POST[$age]),
-                  remove_junk($_POST[$birth_date]),
-                  remove_junk($_POST[$present_address])
-              );
-
-              $get_name = remove_junk($_POST[$full_name]);
-              $get_mail_address = remove_junk($_POST[$email_address]);
-
-              $subject = "Your account has been created";
-              $content = 'Hi '.$get_name;
-              $content .= '<br/>';
-              $content .= 'Welcome to CESLICAM Portal!';
-              $content .= '<br/>';
-              $content .= '<br/>';
-              $content .= 'Your account has been created. Please change your default password for your security.';
-              $content .= '<br/>';
-              $content .= '---------------------------------------';
-              $content .= '<br/>';
-              $content .= 'Email address: '.$get_mail_address;
-              $content .= '<br/>';
-              $content .= 'Password: <b>default</b>';
-              $content .= '<br/>';
-              $content .= '---------------------------------------';
-              $content .= '<br/>';
-              $content .= '<br/>';
-              $content .= 'Thank you.';
-
-              // send mail account created
-              $send = send_email(
-                $get_mail_address,
-                $get_name,
-                $subject,
-                $content
-              );
-
-              if ($send) {
-                redirect('./view_guidance_account', false);
-              } else {
-                $session->message("d", "Error occured during sending an email.");
-              }
-            } else {
-               $session->message("d", $errors);
-               redirect('./register_guidance_account', false);
-            }
-          } else {
-            $session->message("d","Cannot upload the image. Please try again.");
-            redirect('./register_guidance_account', false);
-          }
-        } else {
-          $session->message("w", "Please reduce the image size atleast 5Mb.");
-          redirect('./register_guidance_account', false);
-        }
-      }
+      $session->message("d", "Error occured during sending an email.");
     }
+  } else {
+     $session->message("d", $errors);
+     redirect('./register_guidance_account', false);
+  }
 }
 
 function one_time_password($email_address, $full_name, $password) {
@@ -364,11 +287,15 @@ function switch_user_level($email_address, $user_level) {
     case '3':
         // find info from student
         $student = find_student_login($email_address);
+        // find available exam
+        $exam = find_by_available_exam($student['student_year']);
         // create session with email address
         // pass the info that filtered by email to array list
         $arr = array(
           'name' => $student['name'],
           'course' => $student['course'],
+          'semester' => $student['semester'],
+          'school_year' => $student['school_year'],
           'student_year' => $student['student_year'],
           'gender' => $student['gender'],
           'age' => $student['age'],
@@ -377,7 +304,8 @@ function switch_user_level($email_address, $user_level) {
           'email_address' => $student['email_address'],
           'user_level' => $student['user_level'],
           'status' => $student['status'],
-          'is_logged_in' => $student['is_logged_in']
+          'is_logged_in' => $student['is_logged_in'],
+          'exam_status' => $exam['exam_status']
         );
         // then pass the array to session
         $session->login_session($arr);
@@ -393,7 +321,7 @@ function verify_otp_login($one_time_password) {
   global $session;
   $email_address = $_SESSION['key_session']['email_address'];
   $password = $_SESSION['key_session']['password'];
-  $otp = remove_junk($_POST[$one_time_password]);
+  $otp = $_POST[$one_time_password];
   $req_fields = array($email_address, $password, $otp);
   validate_fields($req_fields);
   if(empty($errors)) {
@@ -559,8 +487,34 @@ function SET_NOT_LOGGED_IN() {
   }
 }
 
+function IS_STUDENT_LEVEL() {
+  if (isset($_SESSION['key_session']['user_level'])) {
+    $user_level = $_SESSION['key_session']['user_level'];
+    if ($user_level != '3') {
+      redirect('./dashboard', false);
+    }
+  }
+}
+
+function IS_GUIDANCE_LEVEL() {
+  if (isset($_SESSION['key_session']['user_level'])) {
+    $user_level = $_SESSION['key_session']['user_level'];
+    if ($user_level != '2') {
+      redirect('./dashboard', false);
+    }
+  }
+}
+
+function IS_ADMIN_LEVEL() {
+  if (isset($_SESSION['key_session']['user_level'])) {
+    $user_level = $_SESSION['key_session']['user_level'];
+    if ($user_level != '1') {
+      redirect('./dashboard', false);
+    }
+  }
+}
+
 function update_guidance_account(
-  $file_path_name,
   $full_name,
   $email_address,
   $gender,
@@ -570,8 +524,7 @@ function update_guidance_account(
 ) {
   $is_user_account = updateUsertAccount(
     remove_junk($_POST[$full_name]),
-    remove_junk($_POST[$email_address]),
-    remove_junk($_POST[$file_path_name])
+    remove_junk($_POST[$email_address])
   );
 
   $is_guidance_info = updateGuidanceInfo(
@@ -591,11 +544,12 @@ function update_guidance_account(
 }
 
 function update_student_account(
-  $file_path_name,
   $full_name,
   $email_address,
   $course,
   $year,
+  $semester,
+  $school_year,
   $gender,
   $age,
   $birth_date,
@@ -603,8 +557,7 @@ function update_student_account(
 ) {
   $is_student_account = updateUsertAccount(
     remove_junk($_POST[$full_name]),
-    remove_junk($_POST[$email_address]),
-    remove_junk($_POST[$file_path_name])
+    remove_junk($_POST[$email_address])
   );
 
   $is_user_account = updateStudentInfo(
@@ -612,17 +565,15 @@ function update_student_account(
     remove_junk($_POST[$email_address]),
     remove_junk($_POST[$course]),
     remove_junk($_POST[$year]),
+    remove_junk($_POST[$semester]),
+    remove_junk($_POST[$school_year]),
     remove_junk($_POST[$gender]),
     remove_junk($_POST[$age]),
     remove_junk($_POST[$birth_date]),
     remove_junk($_POST[$present_address])
   );
 
-  if ($is_student_account && $is_user_account) {
-    redirect('../app/view_student_account', false);
-  } else {
-    redirect('../app/update_student_account', false);
-  }
+  redirect('../app/view_student_account', false);
 }
 
 
@@ -659,11 +610,12 @@ function check_user_level() {
   }
 }
 
-function create_exam($student_year, $title, $description, $image_file_path, $image_dir, $redirect_page) {
+function create_exam($student_year, $title, $description, $category, $image_file_path, $image_dir, $redirect_page) {
   global $session;
   $student_year = $_POST[$student_year];
   $title = $_POST[$title];
   $description = $_POST[$description];
+  $category = $_POST[$category];
   $created_at = date('Y-m-d h:i:s A');
 
   $img_file = $_FILES[$image_file_path]['name'];
@@ -684,12 +636,19 @@ function create_exam($student_year, $title, $description, $image_file_path, $ima
         if (move_uploaded_file($tmp_dir, $upload_dir.$generate_file_name)) {
           $dir = $upload_dir.$generate_file_name;
           if (empty($errors)) {
+
+            if ($category == 'Select exam category' || empty($category)) {
+              $category = 'N/A';
+            }
+            
             $data = array(
               'student_year' => $student_year,
               'exam_title' => $title,
               'exam_description' => $description,
+              'exam_category' => $category,
               'image_exam_path' => $dir,
-              'created_at' => $created_at
+              'created_at' => $created_at,
+              'exam_status' => '1'
             );
             // insert data
             insert_new_exam($data);
@@ -740,58 +699,66 @@ function create_exam_schedule($student_year, $exam_title, $created_at, $expired_
     $user_level = 'Guidance';
   }
 
-  $result = insert_exam_schedule($data);
-  if ($result) {
-    insert_post_announcements(
-      "Schedule of Exam - " .$student_year, 
-      "Exam title: " .$exam_title. "<br/>Exam will be closed at: " .$expired_at,
-      null, 
-      $user_level
-    );
-
-    $sql = "SELECT * FROM student_info WHERE student_year ='" .$student_year. "'";
-    $result = $db->query($sql);
-    while($users = mysqli_fetch_assoc($result)) {
-      $subject = "Exam Schedule has been posted";
-      $content = 'Hi Students';
-      $content .= '<br/>';
-      $content .= '<br/>';
-      $content .= 'This email has remind you that the schedule of exam has been posted in the website.';
-      $content .= '<br/>';
-      $content .= '---------------------------------------';
-      $content .= '<br/>';
-      $content .= 'Year level:' .$student_year;
-      $content .= '<br/>';
-      $content .= 'Exam Type:' .$exam_title;
-      $content .= '<br/>';
-      $content .= 'Exam started at: ' .$created_at;
-      $content .= '<br/>';
-      $content .= 'Exam will be ended at: ' .$expired_at;
-      $content .= '<br/>';
-      $content .= '---------------------------------------';
-      $content .= '<br/>';
-      $content .= '<br/>';
-      $content .= 'Thank you.';
-
-       // send mail account created
-      $send = send_email(
-        $users['email_address'],
-        $users['name'],
-        $subject,
-        $content
-      );
-    }
-
-    if ($send) {
-      $session->message('s', 'Exam schedule set up has been successful');
+  $sql = "SELECT * FROM student_info WHERE student_year ='" .$student_year. "'";
+  $result = $db->query($sql);
+    
+  while($users = mysqli_fetch_assoc($result)) {
+    if (empty($users['email_address'])) {
+      $session->message('s', 'There is/are no registered students. Please add first.');
       redirect('./exam_schedule', false);
     } else {
-      $session->message('d', 'The posted exam not send to the students');
-      redirect('./exam_schedule', false);
+
+        $success = insert_exam_schedule($data);
+        if ($success) {
+          insert_post_announcements(
+            "Schedule of Exam - " .$student_year, 
+            "Exam title: " .$exam_title. "<br/>Exam will be closed at: " .$expired_at,
+            null, 
+            $user_level
+          );
+
+        $subject = "Exam Schedule has been posted";
+        $content = 'Hi Students';
+        $content .= '<br/>';
+        $content .= '<br/>';
+        $content .= 'This email has remind you that the schedule of exam has been posted in the website.';
+        $content .= '<br/>';
+        $content .= '---------------------------------------';
+        $content .= '<br/>';
+        $content .= 'Year level:' .$student_year;
+        $content .= '<br/>';
+        $content .= 'Exam Type:' .$exam_title;
+        $content .= '<br/>';
+        $content .= 'Exam started at: ' .$created_at;
+        $content .= '<br/>';
+        $content .= 'Exam will be ended at: ' .$expired_at;
+        $content .= '<br/>';
+        $content .= '---------------------------------------';
+        $content .= '<br/>';
+        $content .= '<br/>';
+        $content .= 'Thank you.';
+  
+         // send mail account created
+        $send = send_email(
+          $users['email_address'],
+          $users['name'],
+          $subject,
+          $content
+        );
+
+        if ($send) {
+          $session->message('s', 'Exam schedule set up has been successful');
+          redirect('./exam_schedule', false);
+        } else {
+          $session->message('d', 'The posted exam not send to the students ');
+          redirect('./exam_schedule', false);
+        }
+
+      } else {
+        $session->message('d', 'Exam schedule set up has been failed');
+        redirect('./exam_schedule', false);
+      }
     }
-  } else {
-    $session->message('d', 'Exam schedule set up has been failed');
-    redirect('./exam_schedule', false);
   }
 }
 ?>

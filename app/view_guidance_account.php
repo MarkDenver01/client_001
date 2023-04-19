@@ -3,7 +3,7 @@
   ini_set('display_errors', '1');
 ?>
 <?php include('../header.php'); ?>
-<?php header("Refresh: 15"); ?>
+<?php header("Refresh: 30"); ?>
 <?php include('../includes/load.php'); ?>
 <?php SET_NOT_LOGGED_IN(); ?>
 <?php onClickButton("button_create", "./register_guidance_account"); ?>
@@ -21,17 +21,17 @@
   </div><!-- End Page Title -->
 
 
-<section class="section">
+<section class="section" style="width: 1260px;">
     <div class="row">
       <!-- start create account -->
-      <div class="card">
+      <div class="card rounded-0 bg-light">
         <div class="card-body">
           <h5 class="card-title">View guidance & Account information</h5>
 
           <!-- General Form Elements -->
           <form class="row g-3" method="POST" action="">
             <div class="col-md-12">
-              <div class="card">
+              <div class="card rounded-0">
                 <div class="card-body">
                   <!-- Table with hoverable rows -->
                   <table class="table table-sm table-hover datatable">
@@ -58,7 +58,7 @@
                         <td class="text-center" style="width: 10%;"><?php echo remove_junk($info['birth_date']); ?></td>
                         <td class="text-center" style="width: 10%;"><?php echo remove_junk($info['present_address']); ?></td>
                         <td class="text-center" style="width: 15%;">
-                          <button type="button" name="button_edit" class="btn btn-primary rounded-pill btn-sm w-50"  data-bs-toggle="modal" data-bs-target="#ExtralargeModal<?php echo $info['id']; ?>"><span></span>Edit</button>
+                          <button type="button" name="button_edit" class="btn btn-primary rounded-pill btn-sm w-25"  data-bs-toggle="modal" data-bs-target="#ExtralargeModal<?php echo $info['id']; ?>"><span></span>Edit</button>
                           <a href="../includes/delete_account?email_address=<?php echo secure::encrypt(remove_junk($info['email_address'])); ?>" type="button" class="btn btn-danger rounded-pill btn-sm">Delete</button>
                         </td>
                       </tr>
@@ -76,7 +76,7 @@
             </div>
 
             <div class="text-center">
-              <button type="submit" name="button_create" class="btn btn-success w-25" >Create new account</button>
+              <button type="submit" name="button_create" class="btn btn-success rounded-0 w-25" >Create new account</button>
             </div>
           </form><!-- End floating Labels Form -->
           <!-- End General Form Elements -->

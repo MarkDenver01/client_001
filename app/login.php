@@ -10,7 +10,7 @@
         <div class="row justify-content-center">
           <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
 
-            <div class="card mb-3">
+            <div class="card mb-3 rounded-0">
 
               <div class="card-body">
 
@@ -25,7 +25,7 @@
                   <div class="col-12">
                     <label for="yourUsername" class="form-label">Email address</label>
                     <div class="input-group has-validation">
-                      <input type="email" name="email_address" class="form-control" id="yourUsername" required>
+                      <input type="email" name="email_address" class="form-control rounded-0" id="yourUsername" required>
                       <span class="input-group-text">
                         <i class="ri-account-circle-fill" id="toggleCurrentPassword" style="cursor: pointer"></i>
                       </span>
@@ -35,7 +35,7 @@
                   <div class="col-12">
                     <label for="yourConfirmPassword" class="form-label">Password</label>
                     <div class="input-group has-validation">
-                      <input class="form-control confirm_password" type="password" name="password" id="yourConfirmPassword" required>
+                      <input class="form-control confirm_password rounded-0" type="password" name="password" id="yourConfirmPassword" required>
                       <span class="input-group-text">
                         <i class="bi bi-eye-slash-fill" id="toggleConfirmPassword" style="cursor: pointer"></i>
                       </span>
@@ -49,7 +49,7 @@
                   </div>
 
                   <div class="col-12">
-                    <button class="btn btn-primary w-100" name="button_login" type="submit">Login</button>
+                    <button class="btn btn-primary w-100 rounded-0" name="button_login" type="submit">Login</button>
                   </div>
                 </form>
               </div>

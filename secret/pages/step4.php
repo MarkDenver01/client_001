@@ -21,9 +21,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
       $name = $conn->real_escape_string($name);
       $email = $conn->real_escape_string($email);
       $last_login = date("d F Y, h:i:s A");
-      $default_image = "./app/assets/img/profile.png";
-      $sql_1 = "INSERT INTO `user_account` (`name`, `email_address`, `password`, `user_level`, `image`, `status`, `is_logged_in`, `last_login`)
-       VALUES ('{$name}', '{$email}', '{$encrypted_pasword}','1','{$default_image}','1','1','{$last_login}')";
+      $sql_1 = "INSERT INTO `user_account` (`name`, `email_address`, `password`, `user_level`, `status`, `is_logged_in`, `last_login`)
+       VALUES ('{$name}', '{$email}', '{$encrypted_pasword}','1','1','1','{$last_login}')";
       $insert_1 = $conn->query($sql_1);
 
       $sql_2 = "INSERT INTO `user_groups` (`email_address`, `user_types`, `user_level`, `user_status`)
@@ -46,6 +45,29 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
       $sql_3 .="INSERT INTO assign_exam_record (student_year, exam_title, exam_description) VALUES ('Fourth Year', 'Aptitude J and C', 'Aptitude J and C');";
       $sql_3 .="INSERT INTO assign_exam_record (student_year, exam_title, exam_description) VALUES ('Fourth Year', 'ESA', 'ESA');";
       $sql_3 .="INSERT INTO assign_exam_record (student_year, exam_title, exam_description) VALUES ('Fourth Year', 'Aptitude Verbal and Numerical', 'Aptitude Verbal and Numerical');";
+      $sql_3 .="INSERT INTO exam_category(exam_description, exam_category) VALUES('Academic Skills Development','Reading');";
+      $sql_3 .="INSERT INTO exam_category(exam_description, exam_category) VALUES('Academic Skills Development','Writing');";
+      $sql_3 .="INSERT INTO exam_category(exam_description, exam_category) VALUES('Academic Skills Development','Speaking Skills');";
+      $sql_3 .="INSERT INTO exam_category(exam_description, exam_category) VALUES('Academic Skills Development','Listening Skills');";
+      $sql_3 .="INSERT INTO exam_category(exam_description, exam_category) VALUES('Study and Thinking Skills','Learning Styles');";
+      $sql_3 .="INSERT INTO exam_category(exam_description, exam_category) VALUES('Study and Thinking Skills','Memory');";
+      $sql_3 .="INSERT INTO exam_category(exam_description, exam_category) VALUES('Study and Thinking Skills','Study Skills');";
+      $sql_3 .="INSERT INTO exam_category(exam_description, exam_category) VALUES('Study and Thinking Skills','Creative and Critical Thinking Skills');";
+      $sql_3 .="INSERT INTO exam_category(exam_description, exam_category) VALUES('Personal Issues','Motivation');";
+      $sql_3 .="INSERT INTO exam_category(exam_description, exam_category) VALUES('Personal Issues','Self-Esteem');";
+      $sql_3 .="INSERT INTO exam_category(exam_description, exam_category) VALUES('Personal Issues','Personal Relationships');";
+      $sql_3 .="INSERT INTO exam_category(exam_description, exam_category) VALUES('Personal Issues','Conflict Resolution');";
+      $sql_3 .="INSERT INTO exam_category(exam_description, exam_category) VALUES('Personal Issues','Health');";
+      $sql_3 .="INSERT INTO exam_category(exam_description, exam_category) VALUES('Planning for the future','Time Management');";
+      $sql_3 .="INSERT INTO exam_category(exam_description, exam_category) VALUES('Planning for the future','Money Management');";
+      $sql_3 .="INSERT INTO exam_category(exam_description, exam_category) VALUES('Planning for the future','Personal Purpose');";
+      $sql_3 .="INSERT INTO exam_category(exam_description, exam_category) VALUES('Planning for the future','Career Planning');";
+      $sql_3 .="INSERT INTO exam_category(exam_description, exam_category) VALUES('Resources needs','Support Resources');";
+      $sql_3 .="INSERT INTO exam_category(exam_description, exam_category) VALUES('Aptitude J and C','Test No 1');";
+      $sql_3 .="INSERT INTO exam_category(exam_description, exam_category) VALUES('Aptitude J and C','Test No 2');";
+      $sql_3 .="INSERT INTO exam_category(exam_description, exam_category) VALUES('Aptitude J and C','Test No 3');";
+      $sql_3 .="INSERT INTO exam_category(exam_description, exam_category) VALUES('Aptitude J and C','Test No 4');";
+      
       $insert_3 = $conn->multi_query($sql_3);
 
       if(!$insert_1 && !$insert_2 && !$insert_3){

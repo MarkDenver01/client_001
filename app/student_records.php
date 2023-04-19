@@ -22,7 +22,7 @@
 <section class="section">
     <div class="row">
       <!-- start create account -->
-      <div class="card">
+      <div class="card rounded-0">
         <div class="card-body">
           <br/>
           <!-- General Form Elements -->
@@ -91,7 +91,7 @@
             </div>
 
             <div class="text-left">
-              <button type="submit" name="button_back" class="btn btn-secondary w-25">Print</button>
+              <button type="submit" name="button_back" class="btn btn-secondary w-25 rounded-0">Print</button>
             </div>
           </form><!-- End floating Labels Form -->
           <!-- End General Form Elements -->

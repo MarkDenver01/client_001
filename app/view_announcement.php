@@ -6,8 +6,6 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-
-          <img src="<?php echo $key['attached_file_path']; ?>" style="width: 470px; height:300px;">
           <?php echo $key['body_message']; ?>
           <br/><br/><br/><br/>
           <span class="badge bg-secondary"><?php echo $new_format_date; ?> | Posted by <?php echo $key['from']; ?></span>

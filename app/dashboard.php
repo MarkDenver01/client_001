@@ -24,7 +24,7 @@
 
           <!-- Counseling Card -->
           <div class="col-xxl-6 col-md-6">
-            <div class="card info-card customers-card">
+            <div class="card info-card customers-card rounded-0">
               <div class="card-body">
                 <h5 class="card-title">Counseling <span>| cases</span></h5>
 
@@ -45,7 +45,7 @@
 
           <!-- Students Card -->
           <div class="col-xxl-6 col-md-6">
-            <div class="card info-card customers-card">
+            <div class="card info-card customers-card rounded-0">
               <?php global $db; ?>
               <?php 
                 $sql = "SELECT count(*) as total FROM student_info";
@@ -53,10 +53,10 @@
                 $read = mysqli_fetch_assoc($result);
                 $read_avg = $read['total'] * 2 / 5;
               ?>
-              <div class="card-body">
+              <div class="card-body ">
                 <h5 class="card-title">Students <span>| on Record</span></h5>
 
-                <div class="d-flex align-items-center">
+                <div class="d-flex align-items-center ">
                   <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                     <i class="ri-file-user-fill"></i>
                   </div>
@@ -74,7 +74,7 @@
           <!-- Number of visits Card -->
           <div class="col-xxl-6 col-md-6">
 
-            <div class="card info-card customers-card">
+            <div class="card info-card revenue-card rounded-0">
 
               <div class="card-body">
                 <h5 class="card-title">Exam Already Taken <span>| First Year</span></h5>
@@ -85,7 +85,7 @@
                   </div>
                   <div class="ps-3">
                     <h6>0</h6>
-                    <span class="text-danger small pt-1 fw-bold">0%</span> <span class="text-muted small pt-2 ps-1">result</span>
+                    <span class="text-success small pt-1 fw-bold">0%</span> <span class="text-muted small pt-2 ps-1">result</span>
 
                   </div>
                 </div>
@@ -98,7 +98,7 @@
           <!-- Number of visits Card -->
           <div class="col-xxl-6 col-md-6">
 
-            <div class="card info-card customers-card">
+            <div class="card info-card customers-card rounded-0">
 
               <div class="card-body">
                 <h5 class="card-title">Exam Not Already Taken <span>| First Year</span></h5>
@@ -123,7 +123,7 @@
                     <!-- Number of visits Card -->
                     <div class="col-xxl-6 col-md-6">
 
-<div class="card info-card customers-card">
+<div class="card info-card revenue-card rounded-0">
 
   <div class="card-body">
     <h5 class="card-title">Exam Already Taken <span>| Second Year</span></h5>
@@ -134,7 +134,7 @@
       </div>
       <div class="ps-3">
         <h6>0</h6>
-        <span class="text-danger small pt-1 fw-bold">0%</span> <span class="text-muted small pt-2 ps-1">result</span>
+        <span class="text-success small pt-1 fw-bold">0%</span> <span class="text-muted small pt-2 ps-1">result</span>
 
       </div>
     </div>
@@ -147,7 +147,7 @@
 <!-- Number of visits Card -->
 <div class="col-xxl-6 col-md-6">
 
-<div class="card info-card customers-card">
+<div class="card info-card customers-card rounded-0">
 
   <div class="card-body">
     <h5 class="card-title">Exam Not Already Taken <span>| Second Year</span></h5>
@@ -171,7 +171,7 @@
           <!-- Number of visits Card -->
           <div class="col-xxl-6 col-md-6">
 
-            <div class="card info-card customers-card">
+            <div class="card info-card revenue-card rounded-0">
 
               <div class="card-body">
                 <h5 class="card-title">Exam Already Taken <span>| Third Year</span></h5>
@@ -182,7 +182,7 @@
                   </div>
                   <div class="ps-3">
                     <h6>0</h6>
-                    <span class="text-danger small pt-1 fw-bold">0%</span> <span class="text-muted small pt-2 ps-1">result</span>
+                    <span class="text-success small pt-1 fw-bold">0%</span> <span class="text-muted small pt-2 ps-1">result</span>
 
                   </div>
                 </div>
@@ -195,7 +195,7 @@
           <!-- Number of visits Card -->
           <div class="col-xxl-6 col-md-6">
 
-            <div class="card info-card customers-card">
+            <div class="card info-card customers-card rounded-0">
 
               <div class="card-body">
                 <h5 class="card-title">Exam Not Already Taken <span>| Third Year</span></h5>
@@ -219,7 +219,7 @@
                     <!-- Number of visits Card -->
                     <div class="col-xxl-6 col-md-6">
 
-<div class="card info-card customers-card">
+<div class="card info-card revenue-card rounded-0">
 
   <div class="card-body">
     <h5 class="card-title">Exam Already Taken <span>| Fourth Year</span></h5>
@@ -230,7 +230,7 @@
       </div>
       <div class="ps-3">
         <h6>0</h6>
-        <span class="text-danger small pt-1 fw-bold">0%</span> <span class="text-muted small pt-2 ps-1">result</span>
+        <span class="text-success small pt-1 fw-bold">0%</span> <span class="text-muted small pt-2 ps-1">result</span>
 
       </div>
     </div>
@@ -243,7 +243,7 @@
 <!-- Number of visits Card -->
 <div class="col-xxl-6 col-md-6">
 
-<div class="card info-card customers-card">
+<div class="card info-card customers-card rounded-0">
 
   <div class="card-body">
     <h5 class="card-title">Exam Not Already Taken <span>| Fourth Year</span></h5>
@@ -266,7 +266,7 @@
 
           <!-- Reports -->
           <div class="col-12">
-            <div class="card">
+            <div class="card rounded-0">
 
               <div class="filter">
                 <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
