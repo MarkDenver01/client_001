@@ -287,11 +287,15 @@ function switch_user_level($email_address, $user_level) {
     case '3':
         // find info from student
         $student = find_student_login($email_address);
+        // find available exam
+        $exam = find_by_available_exam($student['student_year']);
         // create session with email address
         // pass the info that filtered by email to array list
         $arr = array(
           'name' => $student['name'],
           'course' => $student['course'],
+          'semester' => $student['semester'],
+          'school_year' => $student['school_year'],
           'student_year' => $student['student_year'],
           'gender' => $student['gender'],
           'age' => $student['age'],
@@ -300,7 +304,8 @@ function switch_user_level($email_address, $user_level) {
           'email_address' => $student['email_address'],
           'user_level' => $student['user_level'],
           'status' => $student['status'],
-          'is_logged_in' => $student['is_logged_in']
+          'is_logged_in' => $student['is_logged_in'],
+          'exam_status' => $exam['exam_status']
         );
         // then pass the array to session
         $session->login_session($arr);

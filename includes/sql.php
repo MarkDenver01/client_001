@@ -167,7 +167,7 @@
  function find_student_login($email_address) {
    global $db;
    $email_address = $db->escape($email_address);
-   $sql ="SELECT `s`.`name` AS name, `s`.`course` AS course, `s`.`student_year` AS student_year,";
+   $sql ="SELECT `s`.`name` AS name, `s`.`course` AS course, `s`.`semester` AS semester, `s`.`school_year` AS school_year, `s`.`student_year` AS student_year,";
    $sql .=" `s`.`gender` AS gender, `s`.`age` AS age, `s`.`birth_date` AS birth_date,";
    $sql .=" `s`.`present_address` AS present_address, `u`.`email_address` AS email_address,";
    $sql .=" `u`.`password` AS password, `u`.`user_level` AS user_level,";
@@ -530,8 +530,59 @@ function find_by_exam_created_by_student_year($student_year) {
 
 function find_by_exam_schedule_by_student_year($student_year) {
   global $db;
-  $sql = "SELECT * FROM exam_created WHERE student_year ='" .$student_year. "'";
+  $sql = "SELECT * FROM exam_schedule WHERE student_year ='" .$student_year. "'";
   return find_by_sql($sql);
+}
+
+function fetch_exam_created($student_year, $paginationStart, $limit) {
+  global $db;
+  $sql = "SELECT * FROM exam_created WHERE student_year ='" .$student_year. "' LIMIT " .$paginationStart. ", " .$limit. "";
+  return find_by_sql($sql);
+}
+
+function get_exam_count_query($student_year, $semester) {
+  global $db;
+  if ($semester == 'First semester') {
+    $sql = "SELECT COUNT(*) AS `total_count` FROM `exam_created` WHERE";
+    $sql .=" `student_year` ='{$student_year}' AND";
+    $sql .=" `exam_title` ='Student Success Kit' AND";
+    $sql .=" `exam_status` ='1'";
+  } else {
+    $sql = "SELECT COUNT(*) AS `total_count` FROM `exam_created` WHERE";
+    $sql .=" `student_year` ='{$student_year}' AND ";
+    $sql .=" `exam_title` ='OASIS 3' AND ";
+    $sql .=" `exam_status` ='1'";
+  }
+
+  $result = $db->query($sql);
+  if ($db->num_rows($result)) {
+    $fetch = $db->fetch_assoc($result);
+    $total_count = $fetch['total_count'];
+    return $total_count;
+  }
+  return false;
+}
+
+function find_by_available_exam($student_year) {
+  global $db;
+  $sql ="SELECT * FROM exam_schedule WHERE student_year = '" .$student_year. "'";
+  $result = $db->query($sql);
+  if ($db->num_rows($result)) {
+    $student = $db->fetch_assoc($result);
+    return $student;
+  }
+  return false;
+}
+
+function get_exam_query($student_year) {
+  global $db;
+  $sql ="SELECT * FROM exam_created WHERE student_year = '" .$student_year. "'";
+  $result = $db->query($sql);
+  if ($db->num_rows($result)) {
+    $student = $db->fetch_assoc($result);
+    return $student;
+  }
+  return false;
 }
 
 function find_by_correct_answer_query($table) {
