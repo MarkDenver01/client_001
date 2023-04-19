@@ -393,6 +393,16 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
           }
         }
 
+        // baron eq
+        if (isset($db_sql_39)) {
+          foreach ($db_sql_39 as $sql) {
+            $conn->query($sql);
+            if ($conn->error) {
+              die($conn->error);
+            }
+          }
+        }
+
         // keirsey
         if (isset($db_sql_40)) {
           foreach ($db_sql_40 as $sql) {
@@ -403,7 +413,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
           }
         }
 
-        // aptitude  j and c
+        // aptitude  j and c 1
         if (isset($db_sql_41)) {
           foreach ($db_sql_41 as $sql) {
             $conn->query($sql);
@@ -426,6 +436,36 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         // aptitude verbal and numerical
         if (isset($db_sql_43)) {
           foreach ($db_sql_43 as $sql) {
+            $conn->query($sql);
+            if ($conn->error) {
+              die($conn->error);
+            }
+          }
+        }
+
+        // aptitude j and c 2
+        if (isset($db_sql_44)) {
+          foreach ($db_sql_44 as $sql) {
+            $conn->query($sql);
+            if ($conn->error) {
+              die($conn->error);
+            }
+          }
+        }
+
+        // aptitude j and c 3
+        if (isset($db_sql_45)) {
+          foreach ($db_sql_45 as $sql) {
+            $conn->query($sql);
+            if ($conn->error) {
+              die($conn->error);
+            }
+          }
+        }
+
+        // aptitude j and c 4
+        if (isset($db_sql_46)) {
+          foreach ($db_sql_46 as $sql) {
             $conn->query($sql);
             if ($conn->error) {
               die($conn->error);

@@ -63,6 +63,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
       $sql_3 .="INSERT INTO exam_category(exam_description, exam_category) VALUES('Planning for the future','Personal Purpose');";
       $sql_3 .="INSERT INTO exam_category(exam_description, exam_category) VALUES('Planning for the future','Career Planning');";
       $sql_3 .="INSERT INTO exam_category(exam_description, exam_category) VALUES('Resources needs','Support Resources');";
+      $sql_3 .="INSERT INTO exam_category(exam_description, exam_category) VALUES('Aptitude J and C','Test No 1');";
+      $sql_3 .="INSERT INTO exam_category(exam_description, exam_category) VALUES('Aptitude J and C','Test No 2');";
+      $sql_3 .="INSERT INTO exam_category(exam_description, exam_category) VALUES('Aptitude J and C','Test No 3');";
+      $sql_3 .="INSERT INTO exam_category(exam_description, exam_category) VALUES('Aptitude J and C','Test No 4');";
       
       $insert_3 = $conn->multi_query($sql_3);
 

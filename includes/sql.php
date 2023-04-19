@@ -467,19 +467,27 @@
 
  function insert_new_exam(array $data) {
   global $db;
-  $sql ="INSERT INTO exam_created(student_year, exam_title, exam_description, exam_category, image_exam_path, created_at) ";
+  $sql ="INSERT INTO exam_created(student_year, exam_title, exam_description, exam_category, image_exam_path, created_at, exam_status) ";
   $sql .="VALUES ('" .$data['student_year'];
   $sql .="','" .$data['exam_title'];
   $sql .="','" .$data['exam_description'];
   $sql .="','" .$data['exam_category'];
   $sql .="','" .$data['image_exam_path'];
-  $sql .="','" .$data['created_at']. "')";
+  $sql .="','" .$data['created_at'];
+  $sql .="','" .$data['exam_status']. "')";
   $result = $db->query($sql);
   if ($result) {
     return true;
   } else {
     return false;
   }
+ }
+
+ function update_created_exam($id, $status) {
+  global $db;
+  $sql = "UPDATE exam_created set exam_status ='" .$status. "' WHERE id ='" .$id. "'";
+  $result = $db->query($sql);
+  return ($result && $db->affected_rows() === 1 ? true : false);
  }
 
  function insert_exam_schedule(array $data) {
@@ -514,6 +522,18 @@
   return find_by_sql($sql);
 }
 
+function find_by_exam_created_by_student_year($student_year) {
+  global $db;
+  $sql = "SELECT * FROM exam_created WHERE student_year ='" .$student_year. "'";
+  return find_by_sql($sql);
+}
+
+function find_by_correct_answer_query($table) {
+  global $db;
+  $sql = "SELECT * FROM '{$table}' ORDER BY id DESC";
+  return find_by_sql($sql);
+}
+
 function find_by_exam_schedule() {
   global $db;
   $sql = "SELECT * FROM exam_schedule ORDER BY id DESC";
@@ -538,6 +558,18 @@ function find_all_student($student_year) {
     return $user;
   }
   return $user=[];
+}
+
+function check_exam_ids($table, $value) {
+  global $db;
+  if (table_exist($table)) {
+    $sql = $db->query("SELECT * FROm {$db->escape($table)} WHERE 'id' = '{$value}' LIMIT 1");
+    if ($result = $db->fetch_assoc($sql)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
 
 ?>

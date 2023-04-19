@@ -193,7 +193,9 @@ $db_sql_10[] = "CREATE TABLE `exam_created` (
   `exam_description` VARCHAR(255) NOT NULL,
   `exam_category` VARCHAR(255) NOT NULL,
   `image_exam_path` VARCHAR(255) NOT NULL,
-  `created_at` datetime NOT NULL
+  `created_at` datetime NOT NULL,
+  `exam_status` int(11),
+  `
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
 
 $db_sql_10[] = "ALTER TABLE `exam_created`
@@ -651,18 +653,18 @@ ADD PRIMARY KEY(`id`)";
 $db_sql_40[] = "ALTER TABLE `keirsey_temerament_sorter`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT"; 
 
-// ===================(sub) aptitude_j_and_c - correct answer  ========================== //
-$db_sql_41[] = "DROP TABLE IF EXISTS `aptitude_j_and_c`";
+// ===================(sub) aptitude_j_and_c 1 - correct answer  ========================== //
+$db_sql_41[] = "DROP TABLE IF EXISTS `aptitude_j_and_c_1`";
 
-$db_sql_41[] = "CREATE TABLE `aptitude_j_and_c` (
+$db_sql_41[] = "CREATE TABLE `aptitude_j_and_c_1` (
   `id` int(11) NOT NULL,
   `correct_items` VARCHAR(255) NOT NULL
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
 
-$db_sql_41[] = "ALTER TABLE `aptitude_j_and_c`
+$db_sql_41[] = "ALTER TABLE `aptitude_j_and_c_1`
 ADD PRIMARY KEY(`id`)";
 
-$db_sql_41[] = "ALTER TABLE `aptitude_j_and_c`
+$db_sql_41[] = "ALTER TABLE `aptitude_j_and_c_1`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT"; 
 
 // ===================(sub) esa - correct answer  ========================== //
@@ -691,4 +693,46 @@ $db_sql_43[] = "ALTER TABLE `aptitude_verbal_and_numerical`
 ADD PRIMARY KEY(`id`)";
 
 $db_sql_43[] = "ALTER TABLE `aptitude_verbal_and_numerical`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT"; 
+
+// ===================(sub) aptitude_j_and_c 2 - correct answer  ========================== //
+$db_sql_44[] = "DROP TABLE IF EXISTS `aptitude_j_and_c_2`";
+
+$db_sql_44[] = "CREATE TABLE `aptitude_j_and_c_2` (
+  `id` int(11) NOT NULL,
+  `correct_items` VARCHAR(255) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+$db_sql_44[] = "ALTER TABLE `aptitude_j_and_c_2`
+ADD PRIMARY KEY(`id`)";
+
+$db_sql_44[] = "ALTER TABLE `aptitude_j_and_c_2`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT"; 
+
+// ===================(sub) aptitude_j_and_c 3 - correct answer  ========================== //
+$db_sql_45[] = "DROP TABLE IF EXISTS `aptitude_j_and_c_3`";
+
+$db_sql_45[] = "CREATE TABLE `aptitude_j_and_c_3` (
+  `id` int(11) NOT NULL,
+  `correct_items` VARCHAR(255) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+$db_sql_45[] = "ALTER TABLE `aptitude_j_and_c_3`
+ADD PRIMARY KEY(`id`)";
+
+$db_sql_45[] = "ALTER TABLE `aptitude_j_and_c_3`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT"; 
+
+// ===================(sub) aptitude_j_and_c 4 - correct answer  ========================== //
+$db_sql_46[] = "DROP TABLE IF EXISTS `aptitude_j_and_c_4`";
+
+$db_sql_46[] = "CREATE TABLE `aptitude_j_and_c_4` (
+  `id` int(11) NOT NULL,
+  `correct_items` VARCHAR(255) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+$db_sql_46[] = "ALTER TABLE `aptitude_j_and_c_4`
+ADD PRIMARY KEY(`id`)";
+
+$db_sql_46[] = "ALTER TABLE `aptitude_j_and_c_4`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT"; 

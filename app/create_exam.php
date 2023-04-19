@@ -201,7 +201,8 @@
             || $('#exam_description').val() == "Study and Thinking Skills" 
             || $('#exam_description').val() == "Personal Issues" 
             || $('#exam_description').val() == "Planning for the future" 
-            || $('#exam_description').val() == "Resources needs") {
+            || $('#exam_description').val() == "Resources needs"
+            || $('#exam_description').val() == "Aptitude J and C") {
               $('#exam_category').html(html);
               $('#exam_category').show();
               $('#exam_category_label').show();

@@ -505,6 +505,33 @@ function SET_NOT_LOGGED_IN() {
   }
 }
 
+function IS_STUDENT_LEVEL() {
+  if (isset($_SESSION['key_session']['user_level'])) {
+    $user_level = $_SESSION['key_session']['user_level'];
+    if ($user_level != '3') {
+      redirect('./dashboard', false);
+    }
+  }
+}
+
+function IS_GUIDANCE_LEVEL() {
+  if (isset($_SESSION['key_session']['user_level'])) {
+    $user_level = $_SESSION['key_session']['user_level'];
+    if ($user_level != '2') {
+      redirect('./dashboard', false);
+    }
+  }
+}
+
+function IS_ADMIN_LEVEL() {
+  if (isset($_SESSION['key_session']['user_level'])) {
+    $user_level = $_SESSION['key_session']['user_level'];
+    if ($user_level != '1') {
+      redirect('./dashboard', false);
+    }
+  }
+}
+
 function update_guidance_account(
   $full_name,
   $email_address,
@@ -638,7 +665,8 @@ function create_exam($student_year, $title, $description, $category, $image_file
               'exam_description' => $description,
               'exam_category' => $category,
               'image_exam_path' => $dir,
-              'created_at' => $created_at
+              'created_at' => $created_at,
+              'exam_status' => '1'
             );
             // insert data
             insert_new_exam($data);

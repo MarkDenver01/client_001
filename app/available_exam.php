@@ -5,6 +5,7 @@
 <?php include('../header.php'); ?>
 <?php include('../includes/load.php'); ?>
 <?php SET_NOT_LOGGED_IN(); ?>
+<?php IS_STUDENT_LEVEL(); ?>
 <?php include('../start_menu_bar.php'); ?>
 <script type="text/javascript" >
    function preventBack(){window.history.forward();}
