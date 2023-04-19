@@ -2,9 +2,9 @@
   ini_set('display_errors', '1');
   error_reporting(E_ALL);
 ?>
+<?php include('../header.php'); ?>
 <?php include_once('../includes/load.php'); ?>
 <?php SET_LOGGED_IN(); ?>
-<?php include('../header.php'); ?>
 <?php if (isset($_POST['button_submit'])) verify_otp_login("verification_code"); ?>
 <main style="background-image:url('./images/background_3.jpg');">
   <div class="container">

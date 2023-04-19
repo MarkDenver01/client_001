@@ -194,8 +194,7 @@ $db_sql_10[] = "CREATE TABLE `exam_created` (
   `exam_category` VARCHAR(255) NOT NULL,
   `image_exam_path` VARCHAR(255) NOT NULL,
   `created_at` datetime NOT NULL,
-  `exam_status` int(11),
-  `
+  `exam_status` int(11)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
 
 $db_sql_10[] = "ALTER TABLE `exam_created`
