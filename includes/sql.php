@@ -492,7 +492,7 @@
 
  function insert_exam_schedule(array $data) {
   global $db;
-  $sql = "INSERT INTO exam_schedule(student_year, exam_title, created_on, expired_on, exam_duration, result_date_and_time, `status`) ";
+  $sql = "INSERT INTO exam_schedule(student_year, exam_title, created_on, expired_on, exam_duration, result_date_and_time, `exam_status`) ";
   $sql .="VALUES('" .$data['student_year'];
   $sql .="','" .$data['exam_title'];
   $sql .="','" .$data['created_at'];
@@ -528,6 +528,12 @@ function find_by_exam_created_by_student_year($student_year) {
   return find_by_sql($sql);
 }
 
+function find_by_exam_schedule_by_student_year($student_year) {
+  global $db;
+  $sql = "SELECT * FROM exam_created WHERE student_year ='" .$student_year. "'";
+  return find_by_sql($sql);
+}
+
 function find_by_correct_answer_query($table) {
   global $db;
   $sql = "SELECT * FROM '{$table}' ORDER BY id DESC";
@@ -543,6 +549,14 @@ function find_by_exam_schedule() {
 function delete_exam_created($id) {
   global $db;
   $sql = "DELETE FROM exam_created";
+  $sql .= " WHERE id='" .$id. "'";
+  $db->query($sql);
+  return ($db->affected_rows() === 1) ? true : false;
+}
+
+function delete_exam_schedule($id) {
+  global $db;
+  $sql = "DELETE FROM exam_schedule";
   $sql .= " WHERE id='" .$id. "'";
   $db->query($sql);
   return ($db->affected_rows() === 1) ? true : false;

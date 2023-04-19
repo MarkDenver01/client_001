@@ -80,7 +80,7 @@
     </li>-->
 
     <li class="nav-item">
-      <a class="nav-link " href="./exam_schedule">
+      <a class="nav-link " href="./view_exam_schedule">
         <i class="ri-todo-fill"></i>
         <span>Manage Schedule Exam</span>
       </a>

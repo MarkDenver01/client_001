@@ -75,7 +75,7 @@ if (isset($_POST['button_schedule'])) {
 
                  <label for="inputNumber" class="col-sm-5 col-form-label">Created At</label>
                  <div class="col-sm-10">
-                   <input id="created_at" name="created_at" type="text" class="form-control rounded-0" readonly>
+                   <input id="created_at" name="created_at" type="text" class="form-control rounded-0 text-danger" value="<?php echo date('d/m/Y'); ?>" readonly>
                  </div>
 
                  <label for="inputNumber" class="col-sm-5 col-form-label">Expired At</label>
@@ -89,20 +89,20 @@ if (isset($_POST['button_schedule'])) {
                  <div class="col-sm-10">
                    <select name="exam_duration" id="course" class="form-select rounded-0">
                      <option selected>Select exam duration</option>
-                     <option value="30000">30 seconds</option>
-                     <option value="60000">1 minute</option>
-                     <option value="300000">5 minutes</option>
-                     <option value="480000">8 minutes</option>
-                     <option value="540000">9 minutes</option>
-                     <option value="600000">10 minutes</option>
-                     <option value="720000">12 minutes</option>
-                     <option value="1200000">20 minutes</option>
-                     <option value="1800000">30 minutes </option>
-                     <option value="2400000">40 minutes</option>
+                     <option value="0.50">30 seconds</option>
+                     <option value="1">1 minute</option>
+                     <option value="5">5 minutes</option>
+                     <option value="8">8 minutes</option>
+                     <option value="9">9 minutes</option>
+                     <option value="10">10 minutes</option>
+                     <option value="12">12 minutes</option>
+                     <option value="20">20 minutes</option>
+                     <option value="30">30 minutes </option>
+                     <option value="40">40 minutes</option>
                    </select>
                  </div>
 
-                 <label for="inputNumber" class="col-sm-5 col-form-label">Result Date</label>
+                 <label for="inputNumber" class="col-sm-5 col-form-label">Date of Exam Result</label>
                  <div class="col-sm-10">
                    <input name="result_date" type="date" class="form-control text-success rounded-0">
                  </div>
@@ -148,16 +148,6 @@ if (isset($_POST['button_schedule'])) {
         } else {
               $('#exam_title').html('<option value="">Select student year first</option>');
         }
-    });
-    $('#exam_title').on('change', function() {
-      $.ajax({
-        type: 'POST',
-        url: './ajax/exam_date_created_ajax_func.php',
-        data: {student_year: $('#student_year').val(), exam_title: $('#exam_title').val()},
-        success:function(data) {
-            $('#created_at').val(data);
-          }
-      });
     });
   });
  </script>

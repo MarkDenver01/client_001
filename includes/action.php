@@ -5,58 +5,35 @@ function onClickButton($button_name, $url) {
   }
 }
 
-function post_announcements($title, $body_message, $file_path_name) {
+function post_announcements($title, $body_message) {
   global $session;
   $req_fields = array(
     $title,
     $body_message,
-    $file_path_name,
     $from
   );
+
   validate_fields($req_fields);
-  $upload_file = $_FILES[$file_path_name]['name'];
-  $tmp_dir = $_FILES[$file_path_name]['tmp_name'];
-  $upload_size = $_FILES[$file_path_name]['size'];
 
-  $upload_dir = "../uploads/posts/";
-  $upload_ext = strtolower(pathinfo($upload_file, PATHINFO_EXTENSION));
-  $valid_extensions = array(
-    'jpeg',
-    'jpg',
-    'png',
-    'gif',
-    'pdf'
-  );
-  $upload_destination = rand(1000,1000000).".".$upload_ext;
-  if (in_array($upload_ext, $valid_extensions)) {
-    if ($upload_size < 10000000) {
-      if (move_uploaded_file($tmp_dir, $upload_dir.$upload_destination)) {
-        $dir = $upload_dir.$upload_destination;
-        if (empty($errors)) {
+  if (empty($errors)) {
 
-          $user_level = $_SESSION['key_session']['user_level'];
-          if ($user_level == '1') {
-            $user_level = 'Administrator';
-          } elseif ($user_level == '2') {
-            $user_level = 'Guidance';
-          }
-
-          insert_post_announcements(
-            remove_junk($_POST[$title]),
-            remove_junk($_POST[$body_message]),
-            $dir,
-            $user_level
-          );
-        } else {
-          $session->message("d", $errors);
-        }
-      } else {
-        $session->message("w", "Unable to upload the file");
-      }
-    } else {
-      $session->message("d", "The upload file size is too big. Please reduce the size of the file.");
+    $user_level = $_SESSION['key_session']['user_level'];
+    if ($user_level == '1') {
+      $user_level = 'Administrator';
+    } elseif ($user_level == '2') {
+      $user_level = 'Guidance';
     }
+
+    insert_post_announcements(
+      remove_junk($_POST[$title]),
+      remove_junk($_POST[$body_message]),
+      null,
+      $user_level
+    );
+  } else {
+    $session->message("d", $errors);
   }
+  
 }
 
 function addStudentAccount($full_name,
@@ -717,58 +694,66 @@ function create_exam_schedule($student_year, $exam_title, $created_at, $expired_
     $user_level = 'Guidance';
   }
 
-  $result = insert_exam_schedule($data);
-  if ($result) {
-    insert_post_announcements(
-      "Schedule of Exam - " .$student_year, 
-      "Exam title: " .$exam_title. "<br/>Exam will be closed at: " .$expired_at,
-      null, 
-      $user_level
-    );
-
-    $sql = "SELECT * FROM student_info WHERE student_year ='" .$student_year. "'";
-    $result = $db->query($sql);
-    while($users = mysqli_fetch_assoc($result)) {
-      $subject = "Exam Schedule has been posted";
-      $content = 'Hi Students';
-      $content .= '<br/>';
-      $content .= '<br/>';
-      $content .= 'This email has remind you that the schedule of exam has been posted in the website.';
-      $content .= '<br/>';
-      $content .= '---------------------------------------';
-      $content .= '<br/>';
-      $content .= 'Year level:' .$student_year;
-      $content .= '<br/>';
-      $content .= 'Exam Type:' .$exam_title;
-      $content .= '<br/>';
-      $content .= 'Exam started at: ' .$created_at;
-      $content .= '<br/>';
-      $content .= 'Exam will be ended at: ' .$expired_at;
-      $content .= '<br/>';
-      $content .= '---------------------------------------';
-      $content .= '<br/>';
-      $content .= '<br/>';
-      $content .= 'Thank you.';
-
-       // send mail account created
-      $send = send_email(
-        $users['email_address'],
-        $users['name'],
-        $subject,
-        $content
-      );
-    }
-
-    if ($send) {
-      $session->message('s', 'Exam schedule set up has been successful');
+  $sql = "SELECT * FROM student_info WHERE student_year ='" .$student_year. "'";
+  $result = $db->query($sql);
+    
+  while($users = mysqli_fetch_assoc($result)) {
+    if (empty($users['email_address'])) {
+      $session->message('s', 'There is/are no registered students. Please add first.');
       redirect('./exam_schedule', false);
     } else {
-      $session->message('d', 'The posted exam not send to the students');
-      redirect('./exam_schedule', false);
+
+        $success = insert_exam_schedule($data);
+        if ($success) {
+          insert_post_announcements(
+            "Schedule of Exam - " .$student_year, 
+            "Exam title: " .$exam_title. "<br/>Exam will be closed at: " .$expired_at,
+            null, 
+            $user_level
+          );
+
+        $subject = "Exam Schedule has been posted";
+        $content = 'Hi Students';
+        $content .= '<br/>';
+        $content .= '<br/>';
+        $content .= 'This email has remind you that the schedule of exam has been posted in the website.';
+        $content .= '<br/>';
+        $content .= '---------------------------------------';
+        $content .= '<br/>';
+        $content .= 'Year level:' .$student_year;
+        $content .= '<br/>';
+        $content .= 'Exam Type:' .$exam_title;
+        $content .= '<br/>';
+        $content .= 'Exam started at: ' .$created_at;
+        $content .= '<br/>';
+        $content .= 'Exam will be ended at: ' .$expired_at;
+        $content .= '<br/>';
+        $content .= '---------------------------------------';
+        $content .= '<br/>';
+        $content .= '<br/>';
+        $content .= 'Thank you.';
+  
+         // send mail account created
+        $send = send_email(
+          $users['email_address'],
+          $users['name'],
+          $subject,
+          $content
+        );
+
+        if ($send) {
+          $session->message('s', 'Exam schedule set up has been successful');
+          redirect('./exam_schedule', false);
+        } else {
+          $session->message('d', 'The posted exam not send to the students ');
+          redirect('./exam_schedule', false);
+        }
+
+      } else {
+        $session->message('d', 'Exam schedule set up has been failed');
+        redirect('./exam_schedule', false);
+      }
     }
-  } else {
-    $session->message('d', 'Exam schedule set up has been failed');
-    redirect('./exam_schedule', false);
   }
 }
 ?>
