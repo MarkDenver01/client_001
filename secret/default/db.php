@@ -213,9 +213,12 @@ $db_sql_11[] = "CREATE TABLE `exam_schedule` (
   `id` int(11) NOT NULL,
   `student_year` VARCHAR(255) NOT NULL,
   `exam_title` VARCHAR(255) NOT NULL,
+  `exam_description` VARCHAR(255) NOT NULL,
+  `exam_category` VARCHAR(255) NOT NULL,
   `created_on` datetime NOT NULL,
   `expired_on` datetime NOT NULL,
   `exam_duration` int(11) NOT NULL,
+  `exam_quest_limit` int(11) NOT NULL,
   `result_date_and_time` datetime NOT NULL,
   `exam_status` VARCHAR(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
@@ -735,3 +738,57 @@ ADD PRIMARY KEY(`id`)";
 
 $db_sql_46[] = "ALTER TABLE `aptitude_j_and_c_4`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT"; 
+
+// =================== examninee table ========================== //
+$db_sql_47[] = "DROP TABLE IF EXISTS `examinee`";
+
+$sql_db_47[] = "CREATE TABLE `examinee` (
+  `id` int(11) NOT NULL,
+  `name` VARCHAR(255) NOT NULL,
+  `email_address` VARCHAR(255) NOT NULL,
+  `gender` VARCHAR(255) NOT NULL,
+  `course` VARCHAR(255 NOT NULL,
+  `semester` VARCHAR(255) NOT NULL,
+  `school_year` VARCHAR(255) NOT NULL,
+  `student_year` VARCHAR(255) NOT NULL,
+  `exam_title` VARCHAR(255) NOT NULL,
+  `start_date_time_take_exam` datetime NOT NULL,
+  `remaining_time` int(11) NOT NULL,
+  `exam_average_result` VARCHAR(255) NOT NULL,
+  `exam_result_status` VARCHAR(255) NOT NULL,
+  `counselor_notify_status` VARCHAR(255) NOT NULL,
+  `examinee_status` VARCHAR(255) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+$sql_db_47[] = "ALTER TABLE `examinee` 
+ADD PRIMARY KEY(`id`)";
+
+$db_sql_47[] = "ALTER TABLE `examinee`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT";
+
+$db_sql_47[] = "ALTER TABLE `examinee`
+ADD INDEX email_address (`email_address`)";
+
+// =================== examninee table ========================== //
+$db_sql_48[] = "DROP TABLE IF EXISTS `examinee_answer`";
+
+$db_sql_48[] = "CREATE TABLE `examinee_answer` (
+  `id` int(11) NOT NULL,
+  `email_address` VARCHAR(255) NOT NULL,
+  `student_year` VARCHAR(255) NOT NULL,
+  `exam_title` VARCHAR(255) NOT NULL,
+  `exam_description` VARCHAR(255) NOT NULL,
+  `exam_category` VARCHAR(255) NOT NULL,
+  `exam_answer` VARCHAR(255) NOT NULL,
+  `exam_answer_status` VARCHAR(255) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+$db_sql_48[] = "ALTER TABLE `examinee_answer` 
+ADD PRIMARY KEY(`id`)";
+
+$db_sql_48[] = "ALTER TABLE `examinee_answer`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT";
+
+$db_sql_48[] = "ALTER TABLE `examinee_answer`
+ADD INDEX email_address (`email_address`)";
+

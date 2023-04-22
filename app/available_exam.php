@@ -6,6 +6,7 @@
 <?php include('../includes/load.php'); ?>
 <?php SET_NOT_LOGGED_IN(); ?>
 <?php IS_STUDENT_LEVEL(); ?>
+<?php CHECK_EXAM_AVAILABILITY(); ?>
 <?php include('../start_menu_bar.php'); ?>
 <script type="text/javascript" >
    function preventBack(){window.history.forward();}
@@ -26,8 +27,13 @@
       </nav>
     </div><!-- End Page Title -->
 
-    <section class="section profile" style="width: 1560px;">
+    <section class="section profile" style="width: 1460px;">
       <div class="row">
+      <?php 
+          $student_year = $_SESSION['key_session']['student_year']; 
+          $exam_id = $_GET['id'];
+          $exam = start_exam_by_query($student_year, $exam_id); 
+        ?>
         <?php $student = get_exam_query($_SESSION['key_session']['student_year']); ?>
         <div class="col-lg-12">
           <div class="card rounded-0 bg-white">
@@ -35,15 +41,16 @@
               <br/>
               <div class="border border-secondary text-center rounded-0 bg-light">
                 <br/>
-                <p class="text-uppercase text-success"> Time remaining </p>
-                <button id= "countdown" class="btn btn-outline-danger rounded-pill" style="width: 250px;"><span class="text-danger " disabled>00:00</span></button>
-                <br/>
+                <form name="cd">
+                  <input type="hidden" name="" id="timeExamLimit" value="<?php echo $exam['exam_duration']; ?>">
+                  <p class="text-uppercase text-success"> Time remaining </p>
+                  <input type="text" name="disp" id="txt" class="btn btn-outline-danger rounded-pill clock" style="width: 250px;" value="00:00">
+                </form>
                 <br/>
                 <div class="row">
                   <div class="col-sm-4"></div>
                   <div class="col-sm-4">
-                    <button id="gameStart" name="button_start" class="btn btn-success rounded-0 btn-sm w-25">START</button>
-                    <button name="button_stop" class="btn btn-danger rounded-0 btn-sm w-25">STOP</button>                 
+                    <button id="gameStart" name="button_start" class="btn btn-danger rounded-0 btn-sm w-50">RESET</button>             
                   </div>
                   <div class="col-sm-4"></div>
                 </div>
@@ -98,6 +105,7 @@
 
 
         <!-- center -->
+
         <div class="col-sm-7">
           <div class="card rounded-0">
             <div class="card-body">
@@ -377,7 +385,7 @@
 
   </main><!-- End #main -->
 
-<script>
+<!-- <script>
   document.getElementById("gameStart").addEventListener("click", function(){
     var timeleft = 60;
 
@@ -401,5 +409,5 @@
                 $('form').submit();
             })
         });
-</script>
+</script> -->
 <?php include('../footer.php'); ?>

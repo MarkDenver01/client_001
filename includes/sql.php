@@ -574,6 +574,17 @@ function find_by_available_exam($student_year) {
   return false;
 }
 
+function start_exam_by_query($student_year, $exam_title) {
+  global $db;
+  $sql = "SELECT * FROM exam_schedule WHERE student_year ='" .$student_year. "' AND exam_title ='" .$exam_title. "'";
+  $result = $db->query($sql);
+  if ($db->num_rows($result)) {
+    $exams = $db->fetch_assoc($result);
+    return $exams;
+  }
+  return $exams = [];
+}
+
 function get_exam_query($student_year) {
   global $db;
   $sql ="SELECT * FROM exam_created WHERE student_year = '" .$student_year. "'";
@@ -637,4 +648,22 @@ function check_exam_ids($table, $value) {
   }
 }
 
+function find_exam_menu($student_year, $exam_type) {
+  global $db;
+  $sql = "SELECT * FROM exam_created WHERE student_year ='" .$student_year. "' AND exam_title ='" .$exam_type. "' AND exam_status ='1'";
+  return find_by_sql($sql);
+}
+
+function insert_examinee(array $data) {
+  global $db;
+  $sql ="INSERT INTO examinee(`name`, email_address, gender, course, semester, school_year, student_year) ";
+  $sql .="VALUES('" .$data['name'];
+  $sql .="','" .$data['email_address'];
+  $sql .="','" .$data['gender'];
+  $sql .="','" .$data['course'];
+  $sql .="','" .$data['semester'];
+  $sql .="','" .$data['school_year'];
+  $sql .="','" .$data['student_year']. "')";
+  $result = $db->query($sql);
+}
 ?>

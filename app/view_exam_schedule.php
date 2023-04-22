@@ -24,7 +24,7 @@
   </div><!-- End Page Title -->
 
 
-<section class="section" style="width: 1460px;">
+<section class="section" style="width: 1560px;">
     <div class="row">
       <!-- start create account -->
       <div class="card rounded-0">
@@ -77,7 +77,8 @@
                         <th scope="col" class="text-center" style="width: 20%;">Exam Type</th>
                         <th scope="col" class="text-center" style="width: 20%;">Time Limit (secs/min)</th>
                         <th scope="col" class="text-center" style="width: 20%;">Expired At</th>
-                        <th scope="col" class="text-center" style="width: 20%;">Action</th>
+                        <th scope="col" class="text-center" style="width: 10%;">Exam Status</th>
+                        <th scope="col" class="text-center" style="width: 10%;">Action</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -91,9 +92,13 @@
                         <td data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $schedule['exam_title']; ?></td>
                         <td data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $schedule['exam_duration']; ?></td>
                         <td data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $schedule['expired_on']; ?></td>
-                        <td class="text-center" style="width: 20%;">
-                            <a href="#" type="button" class="btn btn-primary rounded-pill btn-sm w-50">Manage</button>
-                            <a href="../includes/delete_exam_schedule?id=<?php echo $schedule['id']; ?>" type="button" class="btn btn-danger rounded-pill btn-sm w-50 text-light">Remove</a>
+                          <?php if ($schedule['exam_status'] == 'Ready') { ?>
+                        <th data-target="name" scope="row" class="text-center text-success" style="width: 10%"?><?php echo $schedule['exam_status']; ?></th>
+                          <?php } else { ?>
+                        <th data-target="name" scope="row" class="text-center text-danger" style="width: 10%"?><?php echo $schedule['exam_status']; ?></th>
+                          <?php } ?>
+                        <td class="text-center" style="width: 10%;">
+                          <a href="#" type="button" class="btn btn-primary rounded-0 btn-sm w-50">Manage</button>
                         </td>
                       </tr>
                       <?php endforeach; ?>
@@ -106,9 +111,13 @@
                         <td data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $schedule['exam_title']; ?></td>
                         <td data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $schedule['exam_duration']; ?></td>
                         <td data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $schedule['expired_on']; ?></td>
-                        <td class="text-center" style="width: 20%;">
-                            <a href="#" type="button" class="btn btn-primary rounded-pill btn-sm w-50">Manage</button>
-                            <a href="../includes/delete_exam_schedule?id=<?php echo $schedule['id']; ?>" type="button" class="btn btn-danger rounded-pill btn-sm w-50 text-light">Remove</a>
+                          <?php if ($schedule['exam_status'] == 'Ready') { ?>
+                        <th data-target="name" scope="row" class="text-center text-success" style="width: 10%"?><?php echo $schedule['exam_status']; ?></th>
+                          <?php } else { ?>
+                        <th data-target="name" scope="row" class="text-center text-danger" style="width: 10%"?><?php echo $schedule['exam_status']; ?></th>
+                          <?php } ?>
+                        <td class="text-center" style="width: 10%;">
+                          <a href="#" type="button" class="btn btn-primary rounded-pill btn-sm w-100">Manage</button>
                         </td>
                       </tr>
                       <?php endforeach; ?>

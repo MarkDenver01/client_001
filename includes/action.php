@@ -305,7 +305,8 @@ function switch_user_level($email_address, $user_level) {
           'user_level' => $student['user_level'],
           'status' => $student['status'],
           'is_logged_in' => $student['is_logged_in'],
-          'exam_status' => $exam['exam_status']
+          'exam_status' => $exam['exam_status'],
+          'exam_title' => $exam['exam_title']
         );
         // then pass the array to session
         $session->login_session($arr);
@@ -511,6 +512,12 @@ function IS_ADMIN_LEVEL() {
     if ($user_level != '1') {
       redirect('./dashboard', false);
     }
+  }
+}
+
+function CHECK_EXAM_AVAILABILITY() {
+  if(isset($_SESSION['key_session']['exam_status']) && $_SESSION['key_session']['exam_status'] == 'Not Ready') {
+    redirect('./dashboard', false);
   }
 }
 
