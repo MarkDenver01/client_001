@@ -189,6 +189,8 @@ $db_sql_10[] = "DROP TABLE IF EXISTS `exam_created`";
 $db_sql_10[] = "CREATE TABLE `exam_created` (
   `id` int(11) NOT NULL,
   `student_year` VARCHAR(255) NOT NULL,
+  `semester` VARCHAR(255) NOT NULL,
+  `school_year` VARCHAR(255) NOT NULL,
   `exam_title` VARCHAR(255) NOT NULL,
   `exam_description` VARCHAR(255) NOT NULL,
   `exam_category` VARCHAR(255) NOT NULL,
@@ -212,13 +214,14 @@ $db_sql_11[] = "DROP TABLE IF EXISTS `exam_schedule`";
 $db_sql_11[] = "CREATE TABLE `exam_schedule` (
   `id` int(11) NOT NULL,
   `student_year` VARCHAR(255) NOT NULL,
+  `semester` VARCHAR(255) NOT NULL,
+  `school_year` VARCHAR(255) NOT NULL,
   `exam_title` VARCHAR(255) NOT NULL,
   `exam_description` VARCHAR(255) NOT NULL,
   `exam_category` VARCHAR(255) NOT NULL,
   `created_on` datetime NOT NULL,
   `expired_on` datetime NOT NULL,
   `exam_duration` int(11) NOT NULL,
-  `exam_quest_limit` int(11) NOT NULL,
   `result_date_and_time` datetime NOT NULL,
   `exam_status` VARCHAR(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
@@ -739,15 +742,15 @@ ADD PRIMARY KEY(`id`)";
 $db_sql_46[] = "ALTER TABLE `aptitude_j_and_c_4`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT"; 
 
-// =================== examninee table ========================== //
+// ===================(sub) aptitude_j_and_c 4 - correct answer  ========================== //
 $db_sql_47[] = "DROP TABLE IF EXISTS `examinee`";
 
-$sql_db_47[] = "CREATE TABLE `examinee` (
+$db_sql_47[] = "CREATE TABLE `examinee` (
   `id` int(11) NOT NULL,
   `name` VARCHAR(255) NOT NULL,
   `email_address` VARCHAR(255) NOT NULL,
   `gender` VARCHAR(255) NOT NULL,
-  `course` VARCHAR(255 NOT NULL,
+  `course` VARCHAR(255) NOT NULL,
   `semester` VARCHAR(255) NOT NULL,
   `school_year` VARCHAR(255) NOT NULL,
   `student_year` VARCHAR(255) NOT NULL,
@@ -760,11 +763,12 @@ $sql_db_47[] = "CREATE TABLE `examinee` (
   `examinee_status` VARCHAR(255) NOT NULL
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
 
-$sql_db_47[] = "ALTER TABLE `examinee` 
+$db_sql_47[] = "ALTER TABLE `examinee`
 ADD PRIMARY KEY(`id`)";
 
 $db_sql_47[] = "ALTER TABLE `examinee`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT";
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT"; 
+
 
 $db_sql_47[] = "ALTER TABLE `examinee`
 ADD INDEX email_address (`email_address`)";
@@ -776,6 +780,8 @@ $db_sql_48[] = "CREATE TABLE `examinee_answer` (
   `id` int(11) NOT NULL,
   `email_address` VARCHAR(255) NOT NULL,
   `student_year` VARCHAR(255) NOT NULL,
+  `semester` VARCHAR(255) NOT NULL,
+  `school_year` VARCHAR(255) NOT NULL,
   `exam_title` VARCHAR(255) NOT NULL,
   `exam_description` VARCHAR(255) NOT NULL,
   `exam_category` VARCHAR(255) NOT NULL,

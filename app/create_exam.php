@@ -5,6 +5,9 @@
   if (isset($_POST['button_exam'])) {
     create_exam(
       "student_year", 
+      "semester",
+      "school_year_start",
+      "school_year_end",
       "exam_title", 
       "exam_description", 
       "exam_category",
@@ -87,7 +90,28 @@
                               </select>
                             </div>
                           
-                          <br/>
+                          <label class="col-sm-5 col-form-label">Semester</label>
+                            <div  class="col-sm-10">
+                              <select name="semester" class="form-select rounded-0" aria-label="Default select example">
+                                <option selected disabled>Select semester</option>
+                                <option value="First semester">First semester</option>
+                                <option value="Second semester">Second semester</option>
+                                <option value="Summer">Summer</option>
+                              </select>
+                            </div>
+
+                          <label class="col-sm-5 col-form-label">Academic School Year</label>
+                            <div class="row mb-3">
+                              <div  class="col-sm-5">
+                                <input name="school_year_start" type="text" class="form-control rounded-0 text-danger" id="school_year_start" value="<?php echo date("Y"); ?>" readonly>
+                              </div>
+                               -
+                              <div  class="col-sm-5">
+                                <input name="school_year_end" type="text" class="form-control rounded-0 text-danger" id="school_year_start" value="<?php echo date("Y") + 1; ?>" readonly>
+                              </div>
+                            </div>
+ 
+                            <br/>
                             <div class="text-left">
                               <button name="button_exam" style="width: 460px;" type="submit" class="btn btn-primary btn-sm rounded-0">Upload Exam</button>
                             </div>

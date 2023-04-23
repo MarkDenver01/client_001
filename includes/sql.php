@@ -467,8 +467,10 @@
 
  function insert_new_exam(array $data) {
   global $db;
-  $sql ="INSERT INTO exam_created(student_year, exam_title, exam_description, exam_category, image_exam_path, created_at, exam_status) ";
+  $sql ="INSERT INTO exam_created(student_year, semester, school_year, exam_title, exam_description, exam_category, image_exam_path, created_at, exam_status) ";
   $sql .="VALUES ('" .$data['student_year'];
+  $sql .="','" .$data['semester'];
+  $sql .="','" .$data['school_year'];
   $sql .="','" .$data['exam_title'];
   $sql .="','" .$data['exam_description'];
   $sql .="','" .$data['exam_category'];
@@ -492,9 +494,13 @@
 
  function insert_exam_schedule(array $data) {
   global $db;
-  $sql = "INSERT INTO exam_schedule(student_year, exam_title, created_on, expired_on, exam_duration, result_date_and_time, `exam_status`) ";
+  $sql = "INSERT INTO exam_schedule(student_year, semester, school_year, exam_title, exam_description, exam_category, created_on, expired_on, exam_duration, result_date_and_time, `exam_status`) ";
   $sql .="VALUES('" .$data['student_year'];
+  $sql .="','" .$data['semester'];
+  $sql .="','" .$data['school_year'];
   $sql .="','" .$data['exam_title'];
+  $sql .="','" .$data['exam_description'];
+  $sql .="','" .$data['exam_category'];
   $sql .="','" .$data['created_at'];
   $sql .="','" .$data['expired_at'];
   $sql .="','" .$data['exam_duration'];
@@ -574,9 +580,31 @@ function find_by_available_exam($student_year) {
   return false;
 }
 
-function start_exam_by_query($student_year, $exam_title) {
+function start_exam_by_query($student_year, $id) {
   global $db;
-  $sql = "SELECT * FROM exam_schedule WHERE student_year ='" .$student_year. "' AND exam_title ='" .$exam_title. "'";
+  if ($id == 'Reading' || 
+      $id == 'Writing' || 
+      $id == 'Speaking Skills' || 
+      $id == 'Listening Skills' || 
+      $id == 'Learning Styles' || 
+      $id == 'Memory' || 
+      $id == 'Study Skills' || 
+      $id == 'Creative and Critical Thinking Skills' || 
+      $id == 'Motivation' || 
+      $id == 'Self-Esteem' || 
+      $id == 'Personal relationships' || 
+      $id == 'Conflict Resolution' || 
+      $id == 'Health' || 
+      $id == 'Time Management' || 
+      $id == 'Money Management' || 
+      $id == 'Personal Purpose' || 
+      $id == 'Career Planning' || 
+      $id == 'Support Resources') {
+    $sql = "SELECT * FROM exam_schedule WHERE student_year ='" .$student_year. "' AND exam_category ='" .$id. "'";
+  } else {
+    $sql = "SELECT * FROM exam_schedule WHERE student_year ='" .$student_year. "' AND exam_description ='" .$id. "'";
+  }
+  
   $result = $db->query($sql);
   if ($db->num_rows($result)) {
     $exams = $db->fetch_assoc($result);
@@ -648,22 +676,26 @@ function check_exam_ids($table, $value) {
   }
 }
 
-function find_exam_menu($student_year, $exam_type) {
+function find_exam_menu($student_year, $exam_type, $semester, $school_year) {
   global $db;
-  $sql = "SELECT * FROM exam_created WHERE student_year ='" .$student_year. "' AND exam_title ='" .$exam_type. "' AND exam_status ='1'";
+  $sql = "SELECT * FROM exam_schedule WHERE student_year ='" .$student_year. 
+  "' AND semester ='" .$semester. 
+  "' AND school_year ='" .$school_year.
+  "' AND exam_title ='" .$exam_type. 
+  "' AND exam_status ='Ready'";
   return find_by_sql($sql);
 }
 
-function insert_examinee(array $data) {
-  global $db;
-  $sql ="INSERT INTO examinee(`name`, email_address, gender, course, semester, school_year, student_year) ";
-  $sql .="VALUES('" .$data['name'];
-  $sql .="','" .$data['email_address'];
-  $sql .="','" .$data['gender'];
-  $sql .="','" .$data['course'];
-  $sql .="','" .$data['semester'];
-  $sql .="','" .$data['school_year'];
-  $sql .="','" .$data['student_year']. "')";
-  $result = $db->query($sql);
-}
+// function insert_examinee(array $data) {
+//   global $db;
+//   $sql ="INSERT INTO examinee(`name`, email_address, gender, course, semester, school_year, student_year) ";
+//   $sql .="VALUES('" .$data['name'];
+//   $sql .="','" .$data['email_address'];
+//   $sql .="','" .$data['gender'];
+//   $sql .="','" .$data['course'];
+//   $sql .="','" .$data['semester'];
+//   $sql .="','" .$data['school_year'];
+//   $sql .="','" .$data['student_year']. "')";
+//   $result = $db->query($sql);
+// }
 ?>

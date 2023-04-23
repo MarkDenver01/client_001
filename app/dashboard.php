@@ -367,6 +367,32 @@
       <div class="card info-card customers-card rounded-0">
         <?php global $db; ?>
         <?php 
+          $sql = "SELECT count(*) as total FROM exam_schedule WHERE student_year ='" .$_SESSION['key_session']['student_year']. 
+          "' AND semester ='" .$_SESSION['key_session']['semester']. 
+          "' AND school_year ='" .$_SESSION['key_session']['school_year'].
+          "' AND exam_status ='Ready'";
+          $result = $db->query($sql);
+          $read = mysqli_fetch_assoc($result);
+        ?>
+        <div class="card-body ">
+          <h5 class="card-title">Active Exam <span>| status</span></h5>
+
+          <div class="d-flex align-items-center ">
+            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+              <i class="ri-file-user-line"></i>
+            </div>
+            <div class="ps-3">
+              <h6><?php echo $read['total']; ?></h6>
+              <span class="text-success small pt-1 fw-bold"><?php echo $read['total']; ?></span> <span class="text-muted small pt-2 ps-1"> out of 18</span>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="card info-card customers-card rounded-0">
+        <?php global $db; ?>
+        <?php 
           $sql = "SELECT count(*) as total FROM student_info";
           $result = $db->query($sql);
           $read = mysqli_fetch_assoc($result);
@@ -388,6 +414,8 @@
         </div>
 
       </div>
+         
+      
     </div><!-- End Students Card -->
 
     <!-- Number of visits Card -->
