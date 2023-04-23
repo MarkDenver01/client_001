@@ -6,6 +6,13 @@
     </li><!-- End Dashboard Nav -->
 
     <li class="nav-item">
+      <a class="nav-link " href="./set_academic_settings">
+        <i class="bi bi-calendar-check"></i>
+        <span>Semester and School Year</span>
+      </a>
+    </li><!-- End Semester Nav -->
+
+    <li class="nav-item">
       <a class="nav-link " href="./student_records">
         <i class="ri-account-pin-circle-fill"></i>
         <span>Student Records</span>

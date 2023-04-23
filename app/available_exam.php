@@ -111,40 +111,15 @@
             <div class="card-body">
               <div class="row">
                 <?php 
-
-                  if (isset($_POST['records-limit'])) {
-                    $_SESSION['records-limit'] = $_POST['records-limit'];
-                  }
-
-                  $limit = isset($_SESSION['records-limit']) ? $_SESSION['records-limit'] : 1;
-                  $page = (isset($_GET['page']) && is_numeric($_GET['page']) ) ? $_GET['page'] : 1;
-                  $paginationStart = ($page - 1) * $limit;
-                  $result = fetch_exam_created($_SESSION['key_session']['student_year'], $paginationStart, $limit);
-                  $allRecords = get_exam_count_query($_SESSION['key_session']['student_year'], $_SESSION['key_session']['semester']);
-                  
-                  // calculate total pages
-                  $totalPages = ceil($allRecords / $limit);
-                  // prev + next
-                  $prev = $page - 1;
-                  $next = $page + 1;
+                  $result = fetch_exam_created(
+                    $_SESSION['key_session']['student_year'], 
+                    $_SESSION['key_session']['semester'],
+                    $_SESSION['key_session']['school_year'],
+                    $student['exam_title'],
+                    $student['exam_description'],
+                    $student['exam_category']
+                  );
                 ?>
-                <div class="col-lg-12">
-                <br/>
-                  <div class="d-flex flex-row-reverse bd-highlight mb-3">
-                    <form action="" method="post">
-                      <select name="records-limit" id="records-limit" class="form-select rounded-0" aria-label="Default select example">
-                        <option disabled selected>Records Limit</option>
-                          <?php foreach([1,2,3,5,7] as $limit): ?>
-                        <option
-                          <?php if(isset($_SESSION['records-limit']) && $_SESSION['records-limit'] == $limit) echo 'selected'; ?>
-                            value="<?= $limit; ?>">
-                          <?= $limit; ?>
-                        </option>
-                          <?php endforeach; ?>
-                      </select>
-                    </form>
-                  </div>
-                </div>
                 <div class="col-lg-12">
                   <br/>
                   <table class="table table-bordered mb-5">
@@ -152,31 +127,11 @@
                         <?php foreach($result as $display): ?>
                         <th scope="row" value="<?php echo $result['id']; ?>" hidden>
                         <tr>
-                          <img id="ic_image_file" style="width:800px; height: 760px;" src="<?php echo $display['image_exam_path']; ?>" class="d-block w-100 border border-secondary">
+                          <img id="ic_image_file" style="width:800px; height: 960px;" src="<?php echo $display['image_exam_path']; ?>" class="d-block w-100 border border-secondary">
                         </tr>
                         <?php endforeach; ?>
                     </tbody>
                   </table>
-                  <br/>
-                </div>
-                <div class="col-lg-12">
-                  <nav aria-label="Page navigation example">
-                    <ul class="pagination">
-                      <li class="page-item <?php if($page <= 1){ echo 'disabled'; } ?>">
-                        <a class="page-link"
-                          href="<?php if($page <= 1){ echo '#'; } else { echo "?page=" . $prev; } ?>">Previous</a>
-                      </li>
-                        <?php for($i = 1; $i <= $totalPages; $i++ ): ?>
-                      <li class="page-item <?php if($page == $i) {echo 'active'; } ?>">
-                        <a class="page-link" href="available_exam.php?page=<?= $i; ?>"> <?= $i; ?> </a>
-                      </li>
-                        <?php endfor; ?>
-                      <li class="page-item <?php if($page >= $totalPages) { echo 'disabled'; } ?>">
-                        <a class="page-link"
-                          href="<?php if($page >= $totalPages){ echo '#'; } else {echo "?page=". $next; } ?>">Next</a>
-                      </li>
-                    </ul>
-                  </nav><!-- End Basic Pagination -->
                 </div>
               </div>
             </div>

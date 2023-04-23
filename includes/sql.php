@@ -540,9 +540,18 @@ function find_by_exam_schedule_by_student_year($student_year) {
   return find_by_sql($sql);
 }
 
-function fetch_exam_created($student_year, $paginationStart, $limit) {
+// TODO
+function fetch_exam_created($student_year, $semester, $school_year, $exam_title, $exam_description, $exam_category) {
   global $db;
-  $sql = "SELECT * FROM exam_created WHERE student_year ='" .$student_year. "' LIMIT " .$paginationStart. ", " .$limit. "";
+  $sql = "SELECT `c`.`image_exam_path` AS image_exam_path";
+  $sql .= " FROM `exam_created` `c` LEFT JOIN `exam_schedule` `s`";
+  $sql .= " ON `c`.`student_year` = `s`.`student_year`";
+  $sql .= " WHERE `c`.`student_year` = '{$student_year}'";
+  $sql .= " AND `s`.`semester` ='{$semester}'";
+  $sql .= " AND `s`.`school_year` ='{$school_year}'";
+  $sql .= " AND `s`.`exam_title` ='{$exam_title}'";
+  $sql .= " AND `s`.`exam_description` ='{$exam_description}'";
+  $sql .= " AND `s`.`exam_category` ='{$exam_category}' LIMIT 1";
   return find_by_sql($sql);
 }
 
@@ -698,4 +707,37 @@ function find_exam_menu($student_year, $exam_type, $semester, $school_year) {
 //   $sql .="','" .$data['student_year']. "')";
 //   $result = $db->query($sql);
 // }
+
+
+
+function insert_academic_settings(array $data) {
+  global $db;
+  $is_set_academic_settings = check_academic_settings_query();
+  $is_check = false;
+  if ($is_set_academic_settings['id'] == '') {
+    $sql ="UPDATE academic_settings SET ";
+    $sql .="semester ='" .$data['semester'];
+    $sql .=",school_year ='" .$data['school_year'];
+    $sql .=" WHERE id='1'";
+    $result = $db->query($sql);
+    $is_check = $result && $db->affected_rows() === 1 ? true : false;
+  } else {
+    $sql ="INSERT INTO academic_settings(semester, school_year) ";
+    $sql .="VALUES('" .$semester. "','" .$school_year. "')";
+    $result = $db->query($sql);
+    $is_check = $result && $db->affected_rows() === 1 ? true : false;
+  }
+  return $is_check;
+}
+
+function check_academic_settings_query() {
+  global $db;
+  $sql = "SELECT * FROM academic_settings WHERE id='1'";
+  $result = $db->query($sql);
+  if ($db->num_rows($result)) {
+    $academic = $db->fetch_assoc($result);
+    return $academic;
+  }
+  return $academic=[];
+}
 ?>

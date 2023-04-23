@@ -798,3 +798,19 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT";
 $db_sql_48[] = "ALTER TABLE `examinee_answer`
 ADD INDEX email_address (`email_address`)";
 
+
+// =================== set semester and academic year ========================== //
+$db_sql_49[] = "DROP TABLE IF EXISTS `academic_settings`";
+
+$db_sql_49[] = "CREATE TABLE `academic_settings` (
+  `id` int(11) NOT NULL,
+  `semester` VARCHAR(255) NOT NULL,
+  `school_year` VARCHAR(255) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+$db_sql_49[] = "ALTER TABLE `academic_settings` 
+ADD PRIMARY KEY(`id`)";
+
+$db_sql_49[] = "ALTER TABLE `academic_settings` 
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT";
+

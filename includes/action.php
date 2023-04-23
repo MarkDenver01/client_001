@@ -783,5 +783,25 @@ function create_exam_schedule($student_year, $semester, $school_year_start, $sch
       redirect('./exam_schedule', false);
     }
   }
+
+  function set_academic_settings($semester, $start_school_year, $end_school_year) {
+    global $session;
+    $semester = $_POST[$semester];
+    $school_year = $_POST[$start_school_year]. "-" .$_POST[$end_school_year];
+
+    $data = array(
+      "semester" => $semester,
+      "school_year" => $school_year
+    );
+
+    $result = insert_academic_settings($data);
+    if ($result) {
+      $session->message('s', 'Semester and school year has been set.');
+      redirect('./set_academic_settings', false);
+    } else {
+      $session->message('w', 'Unexpected error occured. Please try again.');
+      redirect('./set_academic_settings', false);
+    }
+  }
 }
 ?>
