@@ -10,7 +10,7 @@
 <script src="./dropzone/dropzone.js"></script>
 <script type="text/javascript" src="./assets/js/sweet_alert.js"></script>
 <script type="text/javascript" src="./assets/js/exam_menu.js"></script>
-
+<script type="text/javascript" src="./assets/js/exam_timer.js"></script>
 <!-- Template Main JS File -->
 <script src="./assets/js/main.js"></script>
 

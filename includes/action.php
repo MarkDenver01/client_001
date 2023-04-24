@@ -41,8 +41,7 @@ function addStudentAccount($full_name,
                            $course,
                            $year,
                            $semester,
-                           $start_school_year,
-                           $end_school_year,
+                           $school_year,
                            $gender,
                            $age,
                            $birth_date,
@@ -58,9 +57,16 @@ function addStudentAccount($full_name,
       $birth_date,
       $present_address
     );
+
     validate_fields($req_fields); // check if fields are not empty
 
-    $school_year = $_POST[$start_school_year].'-'.$_POST[$end_school_year];
+    $is_check = check_academic();
+    if (!$is_check) {
+      $session->message("d", "Please set up the semester and school year first.");
+      redirect('./register_student_account', false);
+      return;
+    }
+
     $default_password = sha1("default");
     
     if (empty($errors)) {
@@ -77,7 +83,7 @@ function addStudentAccount($full_name,
         remove_junk($_POST[$course]),
         remove_junk($_POST[$year]),
         remove_junk($_POST[$semester]),
-        $school_year,
+        remove_junk($_POST[$school_year]),
         remove_junk($_POST[$gender]),
         remove_junk($_POST[$age]),
         remove_junk($_POST[$birth_date]),

@@ -1,4 +1,5 @@
 <div class="row">
+<hr/>
   <div class="col-lg-12">
     <p class=" text-center text-success"> :: Semester :: </p>
     <input type="text" name="disp" id="txt" class="btn btn-outline-success rounded-0 clock" style="width: 250px;" value="<?php echo $_SESSION['key_session']['academic_semester']; ?>" disabled>

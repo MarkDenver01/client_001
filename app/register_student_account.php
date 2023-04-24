@@ -15,8 +15,7 @@
         "course",
         "student-year",
         "semester",
-        "school_year_start",
-        "school_year_end",
+        "school_year",
         "gender",
         "age",
         "birth_date",
@@ -41,15 +40,16 @@
 
     <section class="section profile">
       <div class="row">
+      <?php $academic_settings = get_academic_settings(); ?>
       <form method="POST" action="" enctype="multipart/form-data">
         <div class="col-xl-12">
           <div class="card rounded-0">
             <div class="card-body pt-3">
+            <?php echo display_message($msg); ?>
               <!-- Bordered Tabs -->
               <ul class="nav nav-tabs nav-tabs-bordered">
                 <li class="nav-item">
                   <h5>Add Student Account</h5>
-                  <?php echo display_message($msg); ?>
                 </li>
               </ul>
                 <br/>
@@ -101,27 +101,16 @@
                     </div>
 
                     <div class="row mb-3">
-                      <label for="Semester" class="col-md-4 col-lg-3 col-form-label">Semester</label>
-                      <div class="col-md-4 col-lg-4">
-                        <select name="semester" id="inputState" class="form-select rounded-0">
-                          <option selected>Semester</option>
-                          <option value="First semester">First semester</option>
-                          <option value="Second semester">Second semester</option>
-                          <option value="Summer">Summer</option>
-                        </select>
+                      <label for="age" class="col-md-4 col-lg-3 col-form-label">Semester</label>
+                      <div class="col-md-8 col-lg-2">
+                        <input name="semester" type="text" class="form-control rounded-0" id="age" value="<?php echo $academic_settings['semester']; ?>" readonly>
                       </div>
                     </div>
 
                     <div class="row mb-3">
-                      <label for="school_year_start" class="col-md-4 col-lg-3 col-form-label">Academic School Year</label>
-                      <div class="col-md-5 col-lg-2">
-                        <input name="school_year_start" type="text" class="form-control rounded-0 text-danger" id="school_year_start" value="<?php echo date("Y"); ?>" readonly>
-                      </div>
-                      <div class="col-md-2 col-lg-1">
-                        <div class="text-center"><h3>-</h3></div>
-                      </div>
-                      <div class="col-md-5 col-lg-2">
-                        <input name="school_year_end" type="text" class="form-control rounded-0 text-danger" id="school_year_start" value="<?php echo date("Y") + 1; ?>" readonly>
+                      <label for="school_year" class="col-md-4 col-lg-3 col-form-label">Academic School Year</label>
+                      <div class="col-md-8 col-lg-2">
+                        <input name="school_year" type="text" class="form-control rounded-0" id="school_year" value="<?php echo $academic_settings['school_year']; ?>" readonly>
                       </div>
                     </div>
 

@@ -50,7 +50,7 @@
                 <div class="row">
                   <div class="col-sm-4"></div>
                   <div class="col-sm-4">
-                    <button id="gameStart" name="button_start" class="btn btn-danger rounded-0 btn-sm w-50">RESET</button>             
+                    <button id="resetExamFrm" name="button_start" class="btn btn-danger rounded-0 btn-sm w-50">RESET</button>             
                   </div>
                   <div class="col-sm-4"></div>
                 </div>
@@ -141,196 +141,252 @@
         <div class="col-sm-5">
           <div class="card rounded-0">
             <div class="card-body">
-                <br/>
-                <div class="text-center"><h4>Answer Sheet (<?php echo $student['exam_category']; ?>)</h4></div>
-                <hr/>
-                <div class="row mb-3">
+              <br/>
+              <div class="text-center"><h4>Answer Sheet (<?php echo $student['exam_category']; ?>)</h4></div>
+              <hr/>
+                <form action="POST" id="submitAnswerFrm">
+                  <input type="hidden" name="exam_id" id="exam_id" value="<?php echo $exam_id; ?>">
+                  <input type="hidden" name="examAction" id="examAction" >
 
-                  <div class="col-lg-6">
-                    <label for="inputNanme4" class="form-label">1.</label>
-                      <div id="file2" class="btn-group" data-toggle="buttons" >
-                        <label class="btn btn-light">
-                          <input type="radio" name="1_5" /> 5
-                        </label>
-                        <label class="btn btn-light">
-                            <input type="radio" name="1_4" /> 4
-                        </label>  
-                        <label class="btn btn-light">
-                            <input type="radio" name="1_3" /> 3
-                        </label>  
-                        <label class="btn btn-light">
-                            <input type="radio" name="1_2" /> 2
-                        </label>  
-                        <label class="btn btn-light">
-                            <input type="radio" name="1_1" /> 1
-                        </label>  
-                      </div>
+                  <div class="row mb-3">
+                    <div class="col-lg-12">
+
+                      <table class="table table-hover text-nowrap ">
+                        <tbody>
+                          <tr>
+                            <td>
+                              <p><b>Answer no. 1</b></p>
+                              <div class="row">
+
+                                <div id="file2" class="btn-group" data-toggle="buttons" >
+                                  <label class="btn btn-light">
+                                    <input type="radio" name="a_1_1" id="invalidCheck"/> 5
+                                  </label>
+                                  <label class="btn btn-light">
+                                    <input type="radio" name="a_1_2" id="invalidCheck"/> 4
+                                  </label>
+                                  <label class="btn btn-light">
+                                    <input type="radio" name="a_1_3" id="invalidCheck"/> 3
+                                  </label>
+                                  <label class="btn btn-light">
+                                    <input type="radio" name="a_1_4" id="invalidCheck"/> 2
+                                  </label>
+                                  <label class="btn btn-light">
+                                    <input type="radio" name="a_1_5" id="invalidCheck"/> 1
+                                  </label>
+                                </div>
+
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <p><b>Answer no. 2</b></p>
+                              <div class="row">
+
+                                <div id="file2" class="btn-group" data-toggle="buttons" >
+                                  <label class="btn btn-light">
+                                    <input type="radio" name="a_2_1" id="invalidCheck"/> 5
+                                  </label>
+                                  <label class="btn btn-light">
+                                    <input type="radio" name="a_2_2" id="invalidCheck"/> 4
+                                  </label>
+                                  <label class="btn btn-light">
+                                    <input type="radio" name="a_2_3" id="invalidCheck"/> 3
+                                  </label>
+                                  <label class="btn btn-light">
+                                    <input type="radio" name="a_2_4" id="invalidCheck"/> 2
+                                  </label>
+                                  <label class="btn btn-light">
+                                    <input type="radio" name="a_2_5" id="invalidCheck"/> 1
+                                  </label>
+                                </div>
+
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <p><b>Answer no. 3</b></p>
+                              <div class="row">
+
+                                <div id="file2" class="btn-group" data-toggle="buttons" >
+                                  <label class="btn btn-light">
+                                    <input type="radio" name="a_3_1" id="invalidCheck"/> 5
+                                  </label>
+                                  <label class="btn btn-light">
+                                    <input type="radio" name="a_3_2" id="invalidCheck"/> 4
+                                  </label>
+                                  <label class="btn btn-light">
+                                    <input type="radio" name="a_3_3" id="invalidCheck"/> 3
+                                  </label>
+                                  <label class="btn btn-light">
+                                    <input type="radio" name="a_3_4" id="invalidCheck"/> 2
+                                  </label>
+                                  <label class="btn btn-light">
+                                    <input type="radio" name="a_3_5" id="invalidCheck"/> 1
+                                  </label>
+                                </div>
+
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <p><b>Answer no. 4</b></p>
+                              <div class="row">
+
+                                <div id="file2" class="btn-group" data-toggle="buttons" >
+                                  <label class="btn btn-light">
+                                    <input type="radio" name="a_4_1" id="invalidCheck"/> 5
+                                  </label>
+                                  <label class="btn btn-light">
+                                    <input type="radio" name="a_4_2" id="invalidCheck"/> 4
+                                  </label>
+                                  <label class="btn btn-light">
+                                    <input type="radio" name="a_4_3" id="invalidCheck"/> 3
+                                  </label>
+                                  <label class="btn btn-light">
+                                    <input type="radio" name="a_4_4" id="invalidCheck"/> 2
+                                  </label>
+                                  <label class="btn btn-light">
+                                    <input type="radio" name="a_4_5" id="invalidCheck"/> 1
+                                  </label>
+                                </div>
+
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <p><b>Answer no. 5</b></p>
+                              <div class="row">
+
+                                <div id="file2" class="btn-group" data-toggle="buttons" >
+                                  <label class="btn btn-light">
+                                    <input type="radio" name="a_5_1" id="invalidCheck"/> 5
+                                  </label>
+                                  <label class="btn btn-light">
+                                    <input type="radio" name="a_5_2" id="invalidCheck"/> 4
+                                  </label>
+                                  <label class="btn btn-light">
+                                    <input type="radio" name="a_5_3" id="invalidCheck"/> 3
+                                  </label>
+                                  <label class="btn btn-light">
+                                    <input type="radio" name="a_5_4" id="invalidCheck"/> 2
+                                  </label>
+                                  <label class="btn btn-light">
+                                    <input type="radio" name="a_5_5" id="invalidCheck"/> 1
+                                  </label>
+                                </div>
+
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <p><b>Answer no. 6</b></p>
+                              <div class="row">
+
+                                <div id="file2" class="btn-group" data-toggle="buttons" >
+                                  <label class="btn btn-light">
+                                    <input type="radio" name="a_6_1" id="invalidCheck"/> 5
+                                  </label>
+                                  <label class="btn btn-light">
+                                    <input type="radio" name="a_6_2" id="invalidCheck"/> 4
+                                  </label>
+                                  <label class="btn btn-light">
+                                    <input type="radio" name="a_6_3" id="invalidCheck"/> 3
+                                  </label>
+                                  <label class="btn btn-light">
+                                    <input type="radio" name="a_6_4" id="invalidCheck"/> 2
+                                  </label>
+                                  <label class="btn btn-light">
+                                    <input type="radio" name="a_6_5" id="invalidCheck"/> 1
+                                  </label>
+                                </div>
+
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <p><b>Answer no. 7</b></p>
+                              <div class="row">
+
+                                <div id="file2" class="btn-group" data-toggle="buttons" >
+                                  <label class="btn btn-light">
+                                    <input type="radio" name="a_7_1" id="invalidCheck"/> 5
+                                  </label>
+                                  <label class="btn btn-light">
+                                    <input type="radio" name="a_7_2" id="invalidCheck"/> 4
+                                  </label>
+                                  <label class="btn btn-light">
+                                    <input type="radio" name="a_7_3" id="invalidCheck"/> 3
+                                  </label>
+                                  <label class="btn btn-light">
+                                    <input type="radio" name="a_7_4" id="invalidCheck"/> 2
+                                  </label>
+                                  <label class="btn btn-light">
+                                    <input type="radio" name="a_7_5" id="invalidCheck"/> 1
+                                  </label>
+                                </div>
+
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <p><b>Answer no. 8</b></p>
+                              <div class="row">
+                                <div class="col-lg-12 text-center">
+
+                                  <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="a" checked>
+                                    <label class="form-check-label" for="exampleRadios1">
+                                      5
+                                    </label>
+                                  </div>
+                                  <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="b">
+                                    <label class="form-check-label" for="exampleRadios2">
+                                      4
+                                    </label>
+                                  </div>
+                                  <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="c">
+                                    <label class="form-check-label" for="exampleRadios3">
+                                     3
+                                    </label>
+                                  </div>
+                                  <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios4" value="d">
+                                    <label class="form-check-label" for="exampleRadios4">
+                                      2
+                                    </label>
+                                  </div>
+                                  <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios4" value="d">
+                                    <label class="form-check-label" for="exampleRadios4">
+                                      1
+                                    </label>
+                                  </div>
+
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                    </div>
                   </div>
-                  <div class="col-lg-6">
-                    <label for="inputNanme4" class="form-label">2.</label>
-                      <div id="file2" class="btn-group" data-toggle="buttons" >
-                        <label class="btn btn-light">
-                          <input type="radio" name="2_5" /> 5
-                        </label>
-                        <label class="btn btn-light">
-                            <input type="radio" name="2_4" /> 4
-                        </label>  
-                        <label class="btn btn-light">
-                            <input type="radio" name="2_3" /> 3
-                        </label>  
-                        <label class="btn btn-light">
-                            <input type="radio" name="2_2" /> 2
-                        </label>  
-                        <label class="btn btn-light">
-                            <input type="radio" name="2_1" /> 1
-                        </label>  
-                      </div>
+
+                  <hr/>
+                  <div class="text-center">
+                    <button id="submitAnswerFrmBtn" name="button_exam" type="submit" class="btn btn-success btn-lg rounded-0 w-100">Submit</button>
                   </div>
-
-                </div>
-
-                <hr/>
-                <div class="row mb-3">
-
-                  <div class="col-lg-6">
-                    <label for="inputNanme4" class="form-label">3.</label>
-                      <div id="file2" class="btn-group" data-toggle="buttons" >
-                        <label class="btn btn-light">
-                          <input type="radio" name="1_5" /> 5
-                        </label>
-                        <label class="btn btn-light">
-                            <input type="radio" name="1_4" /> 4
-                        </label>  
-                        <label class="btn btn-light">
-                            <input type="radio" name="1_3" /> 3
-                        </label>  
-                        <label class="btn btn-light">
-                            <input type="radio" name="1_2" /> 2
-                        </label>  
-                        <label class="btn btn-light">
-                            <input type="radio" name="1_1" /> 1
-                        </label>  
-                      </div>
-                  </div>
-                  <div class="col-lg-6">
-                    <label for="inputNanme4" class="form-label">4.</label>
-                      <div id="file2" class="btn-group" data-toggle="buttons" >
-                        <label class="btn btn-light">
-                          <input type="radio" name="2_5" /> 5
-                        </label>
-                        <label class="btn btn-light">
-                            <input type="radio" name="2_4" /> 4
-                        </label>  
-                        <label class="btn btn-light">
-                            <input type="radio" name="2_3" /> 3
-                        </label>  
-                        <label class="btn btn-light">
-                            <input type="radio" name="2_2" /> 2
-                        </label>  
-                        <label class="btn btn-light">
-                            <input type="radio" name="2_1" /> 1
-                        </label>  
-                      </div>
-                  </div>
-
-                </div>
-
-                <hr/>
-                <div class="row mb-3">
-
-                  <div class="col-lg-6">
-                    <label for="inputNanme4" class="form-label">5.</label>
-                      <div id="file2" class="btn-group" data-toggle="buttons" >
-                        <label class="btn btn-light">
-                          <input type="radio" name="1_5" /> 5
-                        </label>
-                        <label class="btn btn-light">
-                            <input type="radio" name="1_4" /> 4
-                        </label>  
-                        <label class="btn btn-light">
-                            <input type="radio" name="1_3" /> 3
-                        </label>  
-                        <label class="btn btn-light">
-                            <input type="radio" name="1_2" /> 2
-                        </label>  
-                        <label class="btn btn-light">
-                            <input type="radio" name="1_1" /> 1
-                        </label>  
-                      </div>
-                  </div>
-                  <div class="col-lg-6">
-                    <label for="inputNanme4" class="form-label">6.</label>
-                      <div id="file2" class="btn-group" data-toggle="buttons" >
-                        <label class="btn btn-light">
-                          <input type="radio" name="2_5" /> 5
-                        </label>
-                        <label class="btn btn-light">
-                            <input type="radio" name="2_4" /> 4
-                        </label>  
-                        <label class="btn btn-light">
-                            <input type="radio" name="2_3" /> 3
-                        </label>  
-                        <label class="btn btn-light">
-                            <input type="radio" name="2_2" /> 2
-                        </label>  
-                        <label class="btn btn-light">
-                            <input type="radio" name="2_1" /> 1
-                        </label>  
-                      </div>
-                  </div>
-
-                </div>
-
-                <hr/>
-                <div class="row mb-3">
-
-                  <div class="col-lg-6">
-                    <label for="inputNanme4" class="form-label">7.</label>
-                      <div id="file2" class="btn-group" data-toggle="buttons" >
-                        <label class="btn btn-light">
-                          <input type="radio" name="1_5" /> 5
-                        </label>
-                        <label class="btn btn-light">
-                            <input type="radio" name="1_4" /> 4
-                        </label>  
-                        <label class="btn btn-light">
-                            <input type="radio" name="1_3" /> 3
-                        </label>  
-                        <label class="btn btn-light">
-                            <input type="radio" name="1_2" /> 2
-                        </label>  
-                        <label class="btn btn-light">
-                            <input type="radio" name="1_1" /> 1
-                        </label>  
-                      </div>
-                  </div>
-                  <div class="col-lg-6">
-                    <label for="inputNanme4" class="form-label">8.</label>
-                      <div id="file2" class="btn-group" data-toggle="buttons" >
-                        <label class="btn btn-light">
-                          <input type="radio" name="2_5" /> 5
-                        </label>
-                        <label class="btn btn-light">
-                            <input type="radio" name="2_4" /> 4
-                        </label>  
-                        <label class="btn btn-light">
-                            <input type="radio" name="2_3" /> 3
-                        </label>  
-                        <label class="btn btn-light">
-                            <input type="radio" name="2_2" /> 2
-                        </label>  
-                        <label class="btn btn-light">
-                            <input type="radio" name="2_1" /> 1
-                        </label>  
-                      </div>
-                  </div>
-
-                </div>
-                <hr/>
-                <div class="text-center">
-                  <button name="button_exam" type="submit" class="btn btn-primary btn-sm rounded-0 w-25">Next</button>
-                </div>
-
+                </form>
             </div>  
           </div>
         </div>
