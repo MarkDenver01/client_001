@@ -75,7 +75,7 @@
     </li><!-- End Generate Reports Nav -->
 
     <li class="nav-item">
-      <a class="nav-link " href="#">
+      <a class="nav-link " href="./generate_reports">
         <i class="ri-file-3-fill"></i>
         <span>Generate Reports</span>
       </a>
@@ -83,14 +83,14 @@
 
 
     <li class="nav-item">
-      <a class="nav-link " href="#">
+      <a class="nav-link " href="./counseling_progress">
         <i class="ri-group-fill"></i>
         <span>Counseling Progress</span>
       </a>
     </li><!-- End Student Counseling Progress Nav -->
 
     <li class="nav-item">
-      <a class="nav-link " href="#">
+      <a class="nav-link " href="./scheduling">
         <i class="ri-calendar-2-fill"></i>
         <span>Scheduling</span>
       </a>

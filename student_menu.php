@@ -36,7 +36,7 @@
 <?php } ?>
 
 <li class="nav-item">
-  <a class="nav-link " href="#">
+  <a class="nav-link " href="../app/student_counseling_progress">
     <i class="ri-group-fill"></i>
     <span>Student Counseling Progress</span>
   </a>
