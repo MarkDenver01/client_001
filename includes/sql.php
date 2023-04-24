@@ -622,15 +622,36 @@ function start_exam_by_query($student_year, $id) {
   return $exams = [];
 }
 
-function get_exam_query($student_year) {
+function get_exam_query($student_year, $id) {
   global $db;
-  $sql ="SELECT * FROM exam_created WHERE student_year = '" .$student_year. "'";
+  if ($id == 'Reading' || 
+  $id == 'Writing' || 
+  $id == 'Speaking Skills' || 
+  $id == 'Listening Skills' || 
+  $id == 'Learning Styles' || 
+  $id == 'Memory' || 
+  $id == 'Study Skills' || 
+  $id == 'Creative and Critical Thinking Skills' || 
+  $id == 'Motivation' || 
+  $id == 'Self-Esteem' || 
+  $id == 'Personal relationships' || 
+  $id == 'Conflict Resolution' || 
+  $id == 'Health' || 
+  $id == 'Time Management' || 
+  $id == 'Money Management' || 
+  $id == 'Personal Purpose' || 
+  $id == 'Career Planning' || 
+  $id == 'Support Resources') {
+    $sql = "SELECT * FROM exam_schedule WHERE student_year ='" .$student_year. "' AND exam_category ='" .$id. "'";
+  } else {
+    $sql = "SELECT * FROM exam_schedule WHERE student_year ='" .$student_year. "' AND exam_description ='" .$id. "'";
+  }
   $result = $db->query($sql);
   if ($db->num_rows($result)) {
     $student = $db->fetch_assoc($result);
     return $student;
   }
-  return false;
+  return $student = [];
 }
 
 function find_by_correct_answer_query($table) {

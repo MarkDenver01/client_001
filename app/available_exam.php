@@ -34,7 +34,7 @@
           $exam_id = $_GET['id'];
           $exam = start_exam_by_query($student_year, $exam_id); 
         ?>
-        <?php $student = get_exam_query($_SESSION['key_session']['student_year']); ?>
+        <?php $student = get_exam_query($_SESSION['key_session']['student_year'], $exam_id); ?>
         <div class="col-lg-12">
           <div class="card rounded-0 bg-white">
             <div class="card-body">

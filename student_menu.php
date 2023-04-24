@@ -1,3 +1,15 @@
+<div class="row">
+  <div class="col-lg-12">
+    <p class=" text-center text-success"> :: Semester :: </p>
+    <input type="text" name="disp" id="txt" class="btn btn-outline-success rounded-0 clock" style="width: 250px;" value="<?php echo $_SESSION['key_session']['academic_semester']; ?>" disabled>
+    <br/>  <br/> 
+  </div>
+  <div class="col-lg-12">
+    <p class=" text-center text-success"> :: Academic School Year :: </p>
+    <input type="text" name="disp" id="txt" class="btn btn-outline-success rounded-0 clock" style="width: 250px;" value="<?php echo $_SESSION['key_session']['academic_school_year']; ?>" disabled>
+  </div>
+</div>
+<hr/>
 <li class="nav-item">
   <a class="nav-link " href="./dashboard">
     <i class="ri-dashboard-fill"></i>
