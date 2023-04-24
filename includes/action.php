@@ -289,6 +289,8 @@ function switch_user_level($email_address, $user_level) {
         $student = find_student_login($email_address);
         // find available exam
         $exam = find_by_available_exam($student['student_year']);
+        // set academic settings
+        $academic_settings = get_academic_settings();
         // create session with email address
         // pass the info that filtered by email to array list
         $arr = array(
@@ -306,7 +308,9 @@ function switch_user_level($email_address, $user_level) {
           'status' => $student['status'],
           'is_logged_in' => $student['is_logged_in'],
           'exam_status' => $exam['exam_status'],
-          'exam_title' => $exam['exam_title']
+          'exam_title' => $exam['exam_title'],
+          'academic_semester' => $academic_settings['semester'],
+          'academic_school_year' => $academic_settings['school_year']
         );
         // then pass the array to session
         $session->login_session($arr);
@@ -617,11 +621,11 @@ function check_user_level() {
   }
 }
 
-function create_exam($student_year, $semester, $school_year_start, $school_year_end, $title, $description, $category, $image_file_path, $image_dir, $redirect_page) {
+function create_exam($student_year, $semester, $school_year, $title, $description, $category, $image_file_path, $image_dir, $redirect_page) {
   global $session;
   $student_year = $_POST[$student_year];
   $semester = $_POST[$semester];
-  $school_year = $_POST[$school_year_start]. "-" .$_POST[$school_year_end];
+  $school_year = $_POST[$school_year];
   $title = $_POST[$title];
   $description = $_POST[$description];
   $category = $_POST[$category];
@@ -649,22 +653,29 @@ function create_exam($student_year, $semester, $school_year_start, $school_year_
             if ($category == 'Select exam category' || empty($category)) {
               $category = 'N/A';
             }
-            
-            $data = array(
-              'student_year' => $student_year,
-              'semester' => $semester,
-              'school_year' => $school_year,
-              'exam_title' => $title,
-              'exam_description' => $description,
-              'exam_category' => $category,
-              'image_exam_path' => $dir,
-              'created_at' => $created_at,
-              'exam_status' => '1'
-            );
-            // insert data
-            insert_new_exam($data);
-            $session->message('s', 'Exam has been uploaded');
-            redirect($redirect_page, false);
+
+            $is_check = check_academic();
+
+            if ($is_check) {
+              $data = array(
+                'student_year' => $student_year,
+                'semester' => $semester,
+                'school_year' => $school_year,
+                'exam_title' => $title,
+                'exam_description' => $description,
+                'exam_category' => $category,
+                'image_exam_path' => $dir,
+                'created_at' => $created_at,
+                'exam_status' => '1'
+              );
+              // insert data
+              insert_new_exam($data);
+              $session->message('s', 'Exam has been uploaded');
+              redirect($redirect_page, false);
+            } else {
+              $session->message('w', 'Please set up the semester and school year first.');
+              redirect($redirect_page, false);
+            }  
           } else {
             $session->message('d', $errors);
             redirect($redirect_page, false);
@@ -682,12 +693,12 @@ function create_exam($student_year, $semester, $school_year_start, $school_year_
 }
 
 # TODO : add validation for schedule of exam
-function create_exam_schedule($student_year, $semester, $school_year_start, $school_year_end, $exam_title, $exam_description, $exam_category, $expired_at, $exam_duration, $result_date, $exam_status) {
+function create_exam_schedule($student_year, $semester, $school_year, $exam_title, $exam_description, $exam_category, $expired_at, $exam_duration, $result_date, $exam_status) {
   global $db;
   global $session;
   $student_year = $_POST[$student_year];
   $semester = $_POST[$semester];
-  $school_year = $_POST[$school_year_start]. "-" .$_POST[$school_year_end];
+  $school_year = $_POST[$school_year];
   $exam_title = $_POST[$exam_title];
   $exam_description = $_POST[$exam_description];
   $exam_category = $_POST[$exam_category];
@@ -725,6 +736,13 @@ function create_exam_schedule($student_year, $semester, $school_year_start, $sch
     $user_level = 'Administrator';
   } elseif ($user_level == '2') {
     $user_level = 'Guidance';
+  }
+
+  $is_check = check_academic();
+  if (!$is_check) {
+    $session->message('w', 'Please set the semester and school year first.');
+    redirect('./exam_schedule', false);
+    return;
   }
 
   $result = find_all_student($student_year);
@@ -771,7 +789,7 @@ function create_exam_schedule($student_year, $semester, $school_year_start, $sch
       );
 
       if ($send) {
-        $session->message('s', 'Exam schedule set up has been successful');
+        $session->message('s', 'Exam has been posted');
         redirect('./exam_schedule', false);
       } else {
         $session->message('d', 'The posted exam not send to the students ');
@@ -783,8 +801,9 @@ function create_exam_schedule($student_year, $semester, $school_year_start, $sch
       redirect('./exam_schedule', false);
     }
   }
+}
 
-  function set_academic_settings($semester, $start_school_year, $end_school_year) {
+function set_academic($semester, $start_school_year, $end_school_year) {
     global $session;
     $semester = $_POST[$semester];
     $school_year = $_POST[$start_school_year]. "-" .$_POST[$end_school_year];
@@ -794,14 +813,13 @@ function create_exam_schedule($student_year, $semester, $school_year_start, $sch
       "school_year" => $school_year
     );
 
-    $result = insert_academic_settings($data);
-    if ($result) {
-      $session->message('s', 'Semester and school year has been set.');
-      redirect('./set_academic_settings', false);
+    $is_check = check_academic();
+    if ($is_check) {
+      update_academic_settings($data);
     } else {
-      $session->message('w', 'Unexpected error occured. Please try again.');
-      redirect('./set_academic_settings', false);
+      insert_academic_settings($data);
     }
-  }
+    $session->message('s', 'Semester and school year has been set.');
+    redirect('./set_academic_settings', false);
 }
 ?>

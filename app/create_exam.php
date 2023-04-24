@@ -6,8 +6,7 @@
     create_exam(
       "student_year", 
       "semester",
-      "school_year_start",
-      "school_year_end",
+      "school_year",
       "exam_title", 
       "exam_description", 
       "exam_category",
@@ -38,12 +37,11 @@
                     <h5 class="card-title">
                       REMINDER ON UPLOADING THE FILE
                     </h5>
-                    
+                    <?php $academic_settings = get_academic_settings(); ?>
                     <!-- <p id='citation_desc' class="small fst-italic">
                       The ideas and many of the questions for the Pre-Assesment survey were dericed from "Becoming a Master Student" 7th 
                       and 8th editions [1994 and 1998] Davis Ellis, Houghton Mifflin Co., Boston, MA.
                     </p> -->
-
                      <!-- Floating Labels Form -->
                      <form class="row g-3" action="" method="POST" enctype="multipart/form-data">
                         <?php echo display_message($msg); ?>
@@ -90,30 +88,19 @@
                               </select>
                             </div>
                           
-                          <label class="col-sm-5 col-form-label">Semester</label>
-                            <div  class="col-sm-10">
-                              <select name="semester" class="form-select rounded-0" aria-label="Default select example">
-                                <option selected disabled>Select semester</option>
-                                <option value="First semester">First semester</option>
-                                <option value="Second semester">Second semester</option>
-                                <option value="Summer">Summer</option>
-                              </select>
+                          <label for="age" class="col-md-4 col-lg-3 col-form-label">Semester</label>
+                            <div class="col-md-8 col-lg-10">
+                              <input name="semester" type="text" class="form-control rounded-0" value="<?php echo $academic_settings['semester']; ?>" readonly>
                             </div>
-
-                          <label class="col-sm-5 col-form-label">Academic School Year</label>
-                            <div class="row mb-3">
-                              <div  class="col-sm-5">
-                                <input name="school_year_start" type="text" class="form-control rounded-0 text-danger" id="school_year_start" value="<?php echo date("Y"); ?>" readonly>
-                              </div>
-                               -
-                              <div  class="col-sm-5">
-                                <input name="school_year_end" type="text" class="form-control rounded-0 text-danger" id="school_year_start" value="<?php echo date("Y") + 1; ?>" readonly>
-                              </div>
+                   
+                          <label for="age" class="col-md-4 col-lg-3 col-form-label">School Year</label>
+                            <div class="col-md-8 col-lg-10">
+                              <input name="school_year" type="text" class="form-control rounded-0" value="<?php echo $academic_settings['school_year']; ?>" readonly>
                             </div>
  
                             <br/>
                             <div class="text-left">
-                              <button name="button_exam" style="width: 460px;" type="submit" class="btn btn-primary btn-sm rounded-0">Upload Exam</button>
+                              <button name="button_exam" style="width: 630px;" type="submit" class="btn btn-primary btn-lg rounded-0">Upload Exam</button>
                             </div>
 
                           </div>

@@ -712,32 +712,37 @@ function find_exam_menu($student_year, $exam_type, $semester, $school_year) {
 
 function insert_academic_settings(array $data) {
   global $db;
-  $is_set_academic_settings = check_academic_settings_query();
-  $is_check = false;
-  if ($is_set_academic_settings['id'] == '') {
-    $sql ="UPDATE academic_settings SET ";
-    $sql .="semester ='" .$data['semester'];
-    $sql .=",school_year ='" .$data['school_year'];
-    $sql .=" WHERE id='1'";
-    $result = $db->query($sql);
-    $is_check = $result && $db->affected_rows() === 1 ? true : false;
-  } else {
-    $sql ="INSERT INTO academic_settings(semester, school_year) ";
-    $sql .="VALUES('" .$semester. "','" .$school_year. "')";
-    $result = $db->query($sql);
-    $is_check = $result && $db->affected_rows() === 1 ? true : false;
-  }
-  return $is_check;
+  $sql ="INSERT INTO academic_settings(semester, school_year) ";
+  $sql .="VALUES('" .$data['semester']. "','" .$data['school_year']. "')";
+  $db->query($sql);
 }
 
-function check_academic_settings_query() {
+function update_academic_settings(array $data) {
   global $db;
-  $sql = "SELECT * FROM academic_settings WHERE id='1'";
+  $sql = "UPDATE academic_settings SET semester='" .$data['semester']. "', school_year ='" .$data['school_year']. "' WHERE id ='1'";
+  $db->query($sql);
+}
+
+function check_academic() {
+  global $db;
+  $id = '1';
+  $sql = $db->query("SELECT * FROM academic_settings WHERE id='{$id}' LIMIT 1");
+  if ($result = $db->fetch_assoc($sql)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function get_academic_settings() {
+  global $db;
+  $id = '1';
+  $sql = "SELECT * FROM academic_settings WHERE id='{$id}' LIMIT 1";
   $result = $db->query($sql);
   if ($db->num_rows($result)) {
     $academic = $db->fetch_assoc($result);
     return $academic;
   }
-  return $academic=[];
+  return false;
 }
 ?>
