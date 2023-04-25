@@ -13,7 +13,7 @@ $(document).on('submit', '#submitAnswerFrm', function(){
         confirmButtonText: 'OK!'
     }).then((result) => {
     if (result.value) {
-        $.post("query/submitAnswerExe.php", $(this).serialize(), function(data){
+        $.post("../app/ajax/submit_answer_ajax_func.php", $(this).serialize(), function(data){
         if(data.res == "alreadyTaken") {
             Swal.fire(
             'Already Taken',
@@ -58,7 +58,7 @@ $(document).on('submit', '#submitAnswerFrm', function(){
   }).then((result) => {
   if (result.value) {
   
-     $.post("query/submitAnswerExe.php", $(this).serialize(), function(data){
+     $.post("../app/ajax/select_exam_ajax_func.php", $(this).serialize(), function(data){
   
       if(data.res == "alreadyTaken")
       {

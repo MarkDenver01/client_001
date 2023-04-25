@@ -785,8 +785,11 @@ $db_sql_48[] = "CREATE TABLE `examinee_answer` (
   `exam_title` VARCHAR(255) NOT NULL,
   `exam_description` VARCHAR(255) NOT NULL,
   `exam_category` VARCHAR(255) NOT NULL,
+  `exam_no` int(11) NOT NULL,
+  `exam_correct_answer` VARCHAR(255) NOT NULL,
   `exam_answer` VARCHAR(255) NOT NULL,
-  `exam_answer_status` VARCHAR(255) NOT NULL
+  `exam_answer_status` VARCHAR(255) NOT NULL,
+  `exam_submitted` datetime NOT NULL
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
 
 $db_sql_48[] = "ALTER TABLE `examinee_answer` 

@@ -46,14 +46,6 @@
                   <p class="text-uppercase text-success"> Time remaining </p>
                   <input type="text" name="disp" id="txt" class="btn btn-outline-danger rounded-pill clock" style="width: 250px;" value="00:00">
                 </form>
-                <br/>
-                <div class="row">
-                  <div class="col-sm-4"></div>
-                  <div class="col-sm-4">
-                    <button id="resetExamFrm" name="button_start" class="btn btn-danger rounded-0 btn-sm w-50">RESET</button>             
-                  </div>
-                  <div class="col-sm-4"></div>
-                </div>
                 <hr/>
                 <div class="row">
                   <div class="col-lg-1"></div>
@@ -158,23 +150,23 @@
                               <p><b>Answer no. 1</b></p>
                               <div class="row">
 
-                                <div id="file2" class="btn-group" data-toggle="buttons" >
-                                  <label class="btn btn-light">
-                                    <input type="radio" name="a_1_1" id="invalidCheck"/> 5
-                                  </label>
-                                  <label class="btn btn-light">
-                                    <input type="radio" name="a_1_2" id="invalidCheck"/> 4
-                                  </label>
-                                  <label class="btn btn-light">
-                                    <input type="radio" name="a_1_3" id="invalidCheck"/> 3
-                                  </label>
-                                  <label class="btn btn-light">
-                                    <input type="radio" name="a_1_4" id="invalidCheck"/> 2
-                                  </label>
-                                  <label class="btn btn-light">
-                                    <input type="radio" name="a_1_5" id="invalidCheck"/> 1
-                                  </label>
-                                </div>
+                                  <div class="btn-group">                                   
+                                    <label class="btn btn-light" for="exampleRadios1_5">
+                                      <input type="radio" name="exampleRadios1" id="exampleRadios1_5" value="5"> 5</input>
+                                    </label>    
+                                    <label class="btn btn-light" for="exampleRadios1_4">
+                                      <input type="radio" name="exampleRadios1" id="exampleRadios1_4" value="4"> 4</input>
+                                    </label>
+                                    <label class="btn btn-light" for="exampleRadios1_3">
+                                      <input type="radio" name="exampleRadios1" id="exampleRadios1_3" value="3"> 3</input>
+                                    </label>
+                                    <label class="btn btn-light" for="exampleRadios1_2">
+                                      <input type="radio" name="exampleRadios1" id="exampleRadios1_2" value="2"> 2</input>
+                                    </label>
+                                    <label class="btn btn-light" for="exampleRadios1_1">
+                                      <input type="radio" name="exampleRadios1" id="exampleRadios1_1" value="1"> 1</input>
+                                    </label>
+                                  </div>
 
                               </div>
                             </td>
@@ -184,23 +176,23 @@
                               <p><b>Answer no. 2</b></p>
                               <div class="row">
 
-                                <div id="file2" class="btn-group" data-toggle="buttons" >
-                                  <label class="btn btn-light">
-                                    <input type="radio" name="a_2_1" id="invalidCheck"/> 5
-                                  </label>
-                                  <label class="btn btn-light">
-                                    <input type="radio" name="a_2_2" id="invalidCheck"/> 4
-                                  </label>
-                                  <label class="btn btn-light">
-                                    <input type="radio" name="a_2_3" id="invalidCheck"/> 3
-                                  </label>
-                                  <label class="btn btn-light">
-                                    <input type="radio" name="a_2_4" id="invalidCheck"/> 2
-                                  </label>
-                                  <label class="btn btn-light">
-                                    <input type="radio" name="a_2_5" id="invalidCheck"/> 1
-                                  </label>
-                                </div>
+                                  <div class="btn-group">                                   
+                                    <label class="btn btn-light" for="exampleRadios2_5">
+                                      <input type="radio" name="exampleRadios2" id="exampleRadios2_5" value="5"> 5</input>
+                                    </label>    
+                                    <label class="btn btn-light" for="exampleRadios2_4">
+                                      <input type="radio" name="exampleRadios2" id="exampleRadios2_4" value="4"> 4</input>
+                                    </label>
+                                    <label class="btn btn-light" for="exampleRadios2_3">
+                                      <input type="radio" name="exampleRadios2" id="exampleRadios2_3" value="3"> 3</input>
+                                    </label>
+                                    <label class="btn btn-light" for="exampleRadios2_2">
+                                      <input type="radio" name="exampleRadios2" id="exampleRadios2_2" value="2"> 2</input>
+                                    </label>
+                                    <label class="btn btn-light" for="exampleRadios2_1">
+                                      <input type="radio" name="exampleRadios2" id="exampleRadios2_1" value="1"> 1</input>
+                                    </label>
+                                  </div>
 
                               </div>
                             </td>
@@ -210,23 +202,23 @@
                               <p><b>Answer no. 3</b></p>
                               <div class="row">
 
-                                <div id="file2" class="btn-group" data-toggle="buttons" >
-                                  <label class="btn btn-light">
-                                    <input type="radio" name="a_3_1" id="invalidCheck"/> 5
-                                  </label>
-                                  <label class="btn btn-light">
-                                    <input type="radio" name="a_3_2" id="invalidCheck"/> 4
-                                  </label>
-                                  <label class="btn btn-light">
-                                    <input type="radio" name="a_3_3" id="invalidCheck"/> 3
-                                  </label>
-                                  <label class="btn btn-light">
-                                    <input type="radio" name="a_3_4" id="invalidCheck"/> 2
-                                  </label>
-                                  <label class="btn btn-light">
-                                    <input type="radio" name="a_3_5" id="invalidCheck"/> 1
-                                  </label>
-                                </div>
+                                  <div class="btn-group">                                   
+                                    <label class="btn btn-light" for="exampleRadios3_5">
+                                      <input type="radio" name="exampleRadios3" id="exampleRadios3_5" value="5"> 5</input>
+                                    </label>    
+                                    <label class="btn btn-light" for="exampleRadios3_4">
+                                      <input type="radio" name="exampleRadios3" id="exampleRadios3_4" value="4"> 4</input>
+                                    </label>
+                                    <label class="btn btn-light" for="exampleRadios3_3">
+                                      <input type="radio" name="exampleRadios3" id="exampleRadios3_3" value="3"> 3</input>
+                                    </label>
+                                    <label class="btn btn-light" for="exampleRadios3_2">
+                                      <input type="radio" name="exampleRadios3" id="exampleRadios3_2" value="2"> 2</input>
+                                    </label>
+                                    <label class="btn btn-light" for="exampleRadios3_1">
+                                      <input type="radio" name="exampleRadios3" id="exampleRadios3_1" value="1"> 1</input>
+                                    </label>
+                                  </div>
 
                               </div>
                             </td>
@@ -236,23 +228,23 @@
                               <p><b>Answer no. 4</b></p>
                               <div class="row">
 
-                                <div id="file2" class="btn-group" data-toggle="buttons" >
-                                  <label class="btn btn-light">
-                                    <input type="radio" name="a_4_1" id="invalidCheck"/> 5
-                                  </label>
-                                  <label class="btn btn-light">
-                                    <input type="radio" name="a_4_2" id="invalidCheck"/> 4
-                                  </label>
-                                  <label class="btn btn-light">
-                                    <input type="radio" name="a_4_3" id="invalidCheck"/> 3
-                                  </label>
-                                  <label class="btn btn-light">
-                                    <input type="radio" name="a_4_4" id="invalidCheck"/> 2
-                                  </label>
-                                  <label class="btn btn-light">
-                                    <input type="radio" name="a_4_5" id="invalidCheck"/> 1
-                                  </label>
-                                </div>
+                                  <div class="btn-group">                                   
+                                    <label class="btn btn-light" for="exampleRadios4_5">
+                                      <input type="radio" name="exampleRadios4" id="exampleRadios4_5" value="5"> 5</input>
+                                    </label>    
+                                    <label class="btn btn-light" for="exampleRadios4_4">
+                                      <input type="radio" name="exampleRadios4" id="exampleRadios4_4" value="4"> 4</input>
+                                    </label>
+                                    <label class="btn btn-light" for="exampleRadios4_3">
+                                      <input type="radio" name="exampleRadios4" id="exampleRadios4_3" value="3"> 3</input>
+                                    </label>
+                                    <label class="btn btn-light" for="exampleRadios4_2">
+                                      <input type="radio" name="exampleRadios4" id="exampleRadios4_2" value="2"> 2</input>
+                                    </label>
+                                    <label class="btn btn-light" for="exampleRadios4_1">
+                                      <input type="radio" name="exampleRadios4" id="exampleRadios4_1" value="1"> 1</input>
+                                    </label>
+                                  </div>
 
                               </div>
                             </td>
@@ -262,23 +254,23 @@
                               <p><b>Answer no. 5</b></p>
                               <div class="row">
 
-                                <div id="file2" class="btn-group" data-toggle="buttons" >
-                                  <label class="btn btn-light">
-                                    <input type="radio" name="a_5_1" id="invalidCheck"/> 5
-                                  </label>
-                                  <label class="btn btn-light">
-                                    <input type="radio" name="a_5_2" id="invalidCheck"/> 4
-                                  </label>
-                                  <label class="btn btn-light">
-                                    <input type="radio" name="a_5_3" id="invalidCheck"/> 3
-                                  </label>
-                                  <label class="btn btn-light">
-                                    <input type="radio" name="a_5_4" id="invalidCheck"/> 2
-                                  </label>
-                                  <label class="btn btn-light">
-                                    <input type="radio" name="a_5_5" id="invalidCheck"/> 1
-                                  </label>
-                                </div>
+                                  <div class="btn-group">                                   
+                                    <label class="btn btn-light" for="exampleRadios5_5">
+                                      <input type="radio" name="exampleRadios5" id="exampleRadios5_5" value="5"> 5</input>
+                                    </label>    
+                                    <label class="btn btn-light" for="exampleRadios5_4">
+                                      <input type="radio" name="exampleRadios5" id="exampleRadios5_4" value="4"> 4</input>
+                                    </label>
+                                    <label class="btn btn-light" for="exampleRadios5_3">
+                                      <input type="radio" name="exampleRadios5" id="exampleRadios5_3" value="3"> 3</input>
+                                    </label>
+                                    <label class="btn btn-light" for="exampleRadios5_2">
+                                      <input type="radio" name="exampleRadios5" id="exampleRadios5_2" value="2"> 2</input>
+                                    </label>
+                                    <label class="btn btn-light" for="exampleRadios5_1">
+                                      <input type="radio" name="exampleRadios5" id="exampleRadios5_1" value="1"> 1</input>
+                                    </label>
+                                  </div>
 
                               </div>
                             </td>
@@ -288,23 +280,23 @@
                               <p><b>Answer no. 6</b></p>
                               <div class="row">
 
-                                <div id="file2" class="btn-group" data-toggle="buttons" >
-                                  <label class="btn btn-light">
-                                    <input type="radio" name="a_6_1" id="invalidCheck"/> 5
-                                  </label>
-                                  <label class="btn btn-light">
-                                    <input type="radio" name="a_6_2" id="invalidCheck"/> 4
-                                  </label>
-                                  <label class="btn btn-light">
-                                    <input type="radio" name="a_6_3" id="invalidCheck"/> 3
-                                  </label>
-                                  <label class="btn btn-light">
-                                    <input type="radio" name="a_6_4" id="invalidCheck"/> 2
-                                  </label>
-                                  <label class="btn btn-light">
-                                    <input type="radio" name="a_6_5" id="invalidCheck"/> 1
-                                  </label>
-                                </div>
+                                  <div class="btn-group">                                   
+                                    <label class="btn btn-light" for="exampleRadios6_5">
+                                      <input type="radio" name="exampleRadios6" id="exampleRadios6_5" value="5"> 5</input>
+                                    </label>    
+                                    <label class="btn btn-light" for="exampleRadios6_4">
+                                      <input type="radio" name="exampleRadios6" id="exampleRadios6_4" value="4"> 4</input>
+                                    </label>
+                                    <label class="btn btn-light" for="exampleRadios6_3">
+                                      <input type="radio" name="exampleRadios6" id="exampleRadios6_3" value="3"> 3</input>
+                                    </label>
+                                    <label class="btn btn-light" for="exampleRadios6_2">
+                                      <input type="radio" name="exampleRadios6" id="exampleRadios6_2" value="2"> 2</input>
+                                    </label>
+                                    <label class="btn btn-light" for="exampleRadios6_1">
+                                      <input type="radio" name="exampleRadios6" id="exampleRadios6_1" value="1"> 1</input>
+                                    </label>
+                                  </div>
 
                               </div>
                             </td>
@@ -314,23 +306,23 @@
                               <p><b>Answer no. 7</b></p>
                               <div class="row">
 
-                                <div id="file2" class="btn-group" data-toggle="buttons" >
-                                  <label class="btn btn-light">
-                                    <input type="radio" name="a_7_1" id="invalidCheck"/> 5
-                                  </label>
-                                  <label class="btn btn-light">
-                                    <input type="radio" name="a_7_2" id="invalidCheck"/> 4
-                                  </label>
-                                  <label class="btn btn-light">
-                                    <input type="radio" name="a_7_3" id="invalidCheck"/> 3
-                                  </label>
-                                  <label class="btn btn-light">
-                                    <input type="radio" name="a_7_4" id="invalidCheck"/> 2
-                                  </label>
-                                  <label class="btn btn-light">
-                                    <input type="radio" name="a_7_5" id="invalidCheck"/> 1
-                                  </label>
-                                </div>
+                                  <div class="btn-group">                                   
+                                    <label class="btn btn-light" for="exampleRadios7_5">
+                                      <input type="radio" name="exampleRadios7" id="exampleRadios7_5" value="5"> 5</input>
+                                    </label>    
+                                    <label class="btn btn-light" for="exampleRadios7_4">
+                                      <input type="radio" name="exampleRadios7" id="exampleRadios7_4" value="4"> 4</input>
+                                    </label>
+                                    <label class="btn btn-light" for="exampleRadios7_3">
+                                      <input type="radio" name="exampleRadios7" id="exampleRadios7_3" value="3"> 3</input>
+                                    </label>
+                                    <label class="btn btn-light" for="exampleRadios7_2">
+                                      <input type="radio" name="exampleRadios7" id="exampleRadios7_2" value="2"> 2</input>
+                                    </label>
+                                    <label class="btn btn-light" for="exampleRadios7_1">
+                                      <input type="radio" name="exampleRadios7" id="exampleRadios7_1" value="1"> 1</input>
+                                    </label>
+                                  </div>
 
                               </div>
                             </td>
@@ -339,40 +331,25 @@
                             <td>
                               <p><b>Answer no. 8</b></p>
                               <div class="row">
-                                <div class="col-lg-12 text-center">
 
-                                  <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="a" checked>
-                                    <label class="form-check-label" for="exampleRadios1">
-                                      5
+                                  <div class="btn-group">                                   
+                                    <label class="btn btn-light" for="exampleRadios8_5">
+                                      <input type="radio" name="exampleRadios8" id="exampleRadios8_5" value="5"> 5</input>
+                                    </label>    
+                                    <label class="btn btn-light" for="exampleRadios8_4">
+                                      <input type="radio" name="exampleRadios8" id="exampleRadios8_4" value="4"> 4</input>
                                     </label>
-                                  </div>
-                                  <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="b">
-                                    <label class="form-check-label" for="exampleRadios2">
-                                      4
+                                    <label class="btn btn-light" for="exampleRadios8_3">
+                                      <input type="radio" name="exampleRadios8" id="exampleRadios8_3" value="3"> 3</input>
                                     </label>
-                                  </div>
-                                  <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="c">
-                                    <label class="form-check-label" for="exampleRadios3">
-                                     3
+                                    <label class="btn btn-light" for="exampleRadios8_2">
+                                      <input type="radio" name="exampleRadios8" id="exampleRadios8_2" value="2"> 2</input>
                                     </label>
-                                  </div>
-                                  <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios4" value="d">
-                                    <label class="form-check-label" for="exampleRadios4">
-                                      2
-                                    </label>
-                                  </div>
-                                  <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios4" value="d">
-                                    <label class="form-check-label" for="exampleRadios4">
-                                      1
+                                    <label class="btn btn-light" for="exampleRadios8_1">
+                                      <input type="radio" name="exampleRadios8" id="exampleRadios8_1" value="1"> 1</input>
                                     </label>
                                   </div>
 
-                                </div>
                               </div>
                             </td>
                           </tr>
@@ -383,9 +360,22 @@
                   </div>
 
                   <hr/>
-                  <div class="text-center">
-                    <button id="submitAnswerFrmBtn" name="button_exam" type="submit" class="btn btn-success btn-lg rounded-0 w-100">Submit</button>
+                  <div class="row">
+                    <div class="col-lg-12">
+                     <div class="text-center">
+                        <button id="submitAnswerFrmBtn" name="button_exam" type="submit" class="btn btn-success btn-lg rounded-0 w-100">Submit</button>      
+                      </div>
+                    </div>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <div class="col-lg-12">
+                      <div class="text-center">
+                       <button id="resetExamFrm" name="button_start" class="btn btn-danger rounded-0 btn-lg w-100">Reset</button>     
+                      </div>
+                    </div>
                   </div>
+                  
                 </form>
             </div>  
           </div>
