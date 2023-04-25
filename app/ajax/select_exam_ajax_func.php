@@ -5,7 +5,35 @@
     $exam_title = $_SESSION['key_session']['exam_title'];
     $student_year = $_SESSION['key_session']['student_year'];
     extract($_POST);
-    $sql = "SELECT * FROM exam_created WHERE student_year ='$student_year' AND exam_title='$thisId'";
+    if ($exam_title == 'Reading' || 
+        $exam_title == 'Writing' || 
+        $exam_title == 'Speaking Skills' || 
+        $exam_title == 'Listening Skills' || 
+        $exam_title == 'Learning Styles' || 
+        $exam_title == 'Memory' || 
+        $exam_title == 'Study Skills' || 
+        $exam_title == 'Creative and Critical Thinking Skills' || 
+        $exam_title == 'Motivation' || 
+        $exam_title == 'Self-Esteem' || 
+        $exam_title == 'Personal relationships' || 
+        $exam_title == 'Conflict Resolution' || 
+        $exam_title == 'Health' || 
+        $exam_title == 'Time Management' || 
+        $exam_title == 'Money Management' || 
+        $exam_title == 'Personal Purpose' || 
+        $exam_title == 'Career Planning' || 
+        $exam_title == 'Support Resources') {
+        $sql = "SELECT * FROM examinee_answer WHERE email_address = '$email_address' 
+        AND student_year = '$student_year' 
+        AND exam_category = '$exam_title'  
+        AND exam_answer_status ='$exam_answer_status'";
+    } else {
+        $sql = "SELECT * FROM examinee_answer WHERE email_address = '$email_address' 
+        AND student_year = '$student_year' 
+        AND exa = '$exam_title' 
+        AND exam_answer_status ='$exam_answer_status'";
+    }
+    
     $result = $db->query($sql);
     if ($result->num_rows > 0) {
         $json_result = array(
