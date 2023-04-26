@@ -55,7 +55,7 @@
 
                         <div class="col-lg-6">
                           <label class="col-sm-5 col-form-label">Student Year Level</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-12">
                               <select id="student_year" name="student_year" class="form-select rounded-0" aria-label="Default select example">
                                 <option selected>Select Year Level</option>
                                 <option value="First Year">First Year</option>
@@ -67,7 +67,7 @@
 
                           
                           <label class="col-sm-5 col-form-label">Exam Type</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-12">
                               <select id="exam_title" name="exam_title" class="form-select rounded-0" aria-label="Default select example">
                                 <option selected>Select exam type</option>
                               </select>
@@ -75,32 +75,32 @@
                           
 
                           <label class="col-sm-5 col-form-label">Exam description</label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-12">
                               <select id="exam_description" name="exam_description" class="form-select rounded-0" aria-label="Default select example">
                                 <option selected>Select exam description</option>
                               </select>
                             </div>
 
                           <label  id="exam_category_label" class="col-sm-5 col-form-label">Exam Category</label>
-                            <div  id="exam_category_div" class="col-sm-10">
+                            <div  id="exam_category_div" class="col-sm-12">
                               <select id="exam_category" name="exam_category" class="form-select rounded-0" aria-label="Default select example">
                                 <option id="exam_category_value" selected>Select exam category</option>
                               </select>
                             </div>
                           
                           <label for="age" class="col-md-4 col-lg-3 col-form-label">Semester</label>
-                            <div class="col-md-8 col-lg-10">
+                            <div class="col-md-8 col-lg-12">
                               <input name="semester" type="text" class="form-control rounded-0" value="<?php echo $academic_settings['semester']; ?>" readonly>
                             </div>
                    
                           <label for="age" class="col-md-4 col-lg-3 col-form-label">School Year</label>
-                            <div class="col-md-8 col-lg-10">
+                            <div class="col-md-8 col-lg-12">
                               <input name="school_year" type="text" class="form-control rounded-0" value="<?php echo $academic_settings['school_year']; ?>" readonly>
                             </div>
  
                             <br/>
-                            <div class="text-left">
-                              <button name="button_exam" style="width: 630px;" type="submit" class="btn btn-primary btn-lg rounded-0">Upload Exam</button>
+                            <div class="text-center">
+                              <button name="button_exam"  type="submit" class="btn btn-primary btn-lg rounded-0 w-75">Upload Exam</button>
                             </div>
 
                           </div>
