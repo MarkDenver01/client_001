@@ -27,7 +27,7 @@ if (result.value) {
           }
           else if(data.res == "takeNow")
           {
-            window.location.href="available_exam?id="+thisId;
+            window.location.href="available_exam.php?id="+thisId;
             return false;
           }
         },

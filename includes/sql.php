@@ -578,9 +578,9 @@ function get_exam_count_query($student_year, $semester) {
   return false;
 }
 
-function find_by_available_exam($student_year) {
+function find_by_available_exam($student_year, $semester, $school_year) {
   global $db;
-  $sql ="SELECT * FROM exam_schedule WHERE student_year = '" .$student_year. "'";
+  $sql ="SELECT * FROM exam_schedule WHERE student_year = '" .$student_year. "' AND semester ='" .$semester. "' AND school_year ='" .$school_year. "'";
   $result = $db->query($sql);
   if ($db->num_rows($result)) {
     $student = $db->fetch_assoc($result);
@@ -765,5 +765,15 @@ function get_academic_settings() {
     return $academic;
   }
   return false;
+}
+
+function check_examinee_answer($email_address) {
+  global $db;
+  $sql = $db->query("SELECT * FROM examinee_answer WHERE email_address ='{$email_address}'");
+  if ($result = $db->fetch_assoc($sql)) {
+    return true;
+  } else {
+    return false;
+  }
 }
 ?>

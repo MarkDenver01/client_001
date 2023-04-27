@@ -1,8 +1,8 @@
 <?php $exam_menus = find_exam_menu(
     $_SESSION['key_session']['student_year'], 
     $_SESSION['key_session']['exam_title'], 
-    $_SESSION['key_session']['semester'],
-    $_SESSION['key_session']['school_year']
+    $_SESSION['key_session']['academic_semester'],
+    $_SESSION['key_session']['academic_school_year']
 );  
 ?>
 <?php foreach($exam_menus as $exam_menu): ?>

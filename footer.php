@@ -8,9 +8,9 @@
 <script src="./assets/vendor/tinymce/tinymce.min.js"></script>
 <script src="./assets/vendor/php-email-form/validate.js"></script>
 <script src="./dropzone/dropzone.js"></script>
-<script type="text/javascript" src="./assets/js/sweet_alert.js"></script>
-<script type="text/javascript" src="./assets/js/exam_menu.js"></script>
-<script type="text/javascript" src="./assets/js/exam_timer.js"></script>
+<script src="./assets/js/sweet_alert.js"></script>
+<script src="./assets/js/exam_timer.js"></script>
+<script src="./assets/js/exam_menu.js"></script>
 <!-- Template Main JS File -->
 <script src="./assets/js/main.js"></script>
 
