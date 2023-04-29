@@ -34,7 +34,13 @@
             <div class="box-body">
             <form action="" method="POST">
 		          <div class="row">
-        	      <div class="col-sm-4">
+                <div class="col-sm-2">
+                  <form action="" method="POST">
+                    <button name="button_schedule" type="submit" class="btn btn-primary btn-sm rounded-0"><i class="bx bx-refresh"></i> Add Schedule</button>
+					          <button name="button_reload" type="submit" class="btn btn-success btn-sm rounded-0"><i class="bx bx-refresh"></i> Reload</button>
+                  </form>
+                </div>
+        	      <div class="col-sm-2">
 				          <!-- <button type="button" class="btn btn-secondary rounded-0 btn-sm"><i class="bi bi-printer-fill"></i> Print</button> -->
 			          </div>
                 
@@ -50,12 +56,7 @@
                   <button name="button_filter" type="submit" class="btn btn-secondary text-white rounded-0 btn-sm w-100"><i class="bi bi-search"></i> </button>
                 </div>
                 <div class="col-sm-2"></div>
-			          <div class="col-sm-2">
-                  <form action="" method="POST">
-                  <button name="button_schedule" type="submit" class="btn btn-primary btn-sm rounded-0"><i class="bx bx-refresh"></i> Add Schedule</button>
-					          <button name="button_reload" type="submit" class="btn btn-success btn-sm rounded-0"><i class="bx bx-refresh"></i> Reload</button>
-                  </form>
-			          </div>
+			          <div class="col-sm-2"></div>
 		          </div>
             </form>
             </div>

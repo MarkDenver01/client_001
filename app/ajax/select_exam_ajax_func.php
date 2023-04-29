@@ -3,9 +3,9 @@
 <?php 
     $db = mysqli_connect($_ENV['DB_HOST'], $_ENV['DB_USERNAME'], $_ENV['DB_PASSWORD'], $_ENV['DB_NAME']); ?>
 <?php 
+    $student_id = $_SESSION['key_session']['student_id'];
     $email_address = $_SESSION['key_session']['email_address'];
     $student_year = $_SESSION['key_session']['student_year'];
-    $is_student_success_kit = false;
     extract($_POST);
 
     if ($thisId == 'Reading' || 
@@ -26,18 +26,42 @@
         $thisId == 'Personal Purpose' || 
         $thisId == 'Career Planning' || 
         $thisId == 'Support Resources') {
+
+        // $sql_exam ="SELECT * FROM exam_schedule WHERE exam_category ='$thisId' 
+        // AND exam_status ='Ready'";
+        // $result_exam = $db->query($sql_exam);
+        // if ($result_exam->num_rows > 0) {
+        //     while($row = $result_exam->fetch_assoc()) {
+        //         $exam_id = $row['id'];
+        //     }
+        // }
+
+        $sql = "SELECT * FROM examinee_answer_v2 WHERE student_id ='$student_id' 
+        AND exam_id ='$thisId' AND exam_answer_status ='Completed'";
+    
         
-        $is_student_success_kit = true;
-        $sql = "SELECT * FROM examinee_answer WHERE email_address ='$email_address' 
-        AND student_year ='$student_year' 
-        AND exam_category ='$thisId' 
-        AND exam_answer_status ='Completed'";
+        // $sql = "SELECT * FROM examinee_answer WHERE email_address ='$email_address' 
+        // AND student_year ='$student_year' 
+        // AND exam_category ='$thisId' 
+        // AND exam_answer_status ='Completed'";
     } else {
-        $is_student_success_kit = false;
-        $sql = "SELECT * FROM examinee_answer WHERE email_address ='$email_address' 
-        AND student_year ='$student_year' 
-        AND exam_description ='$thisId' 
-        AND exam_answer_status ='Completed'";
+        // $sql_exam ="SELECT * FROM exam_schedule WHERE exam_category ='$thisId' 
+        // AND exam_status ='Ready'";
+        // $result_exam = $db->query($sql_exam);
+        // if ($result_exam->num_rows > 0) {
+        //     while($row = $result_exam->fetch_assoc()) {
+        //         $exam_id = $row['id'];
+        //     }
+        // }
+
+
+        $sql = "SELECT * FROM examinee_answer_v2 WHERE student_id ='$student_id' 
+        AND exam_id ='$thisId' AND exam_answer_status ='Completed'";
+        
+        // $sql = "SELECT * FROM examinee_answer WHERE email_address ='$email_address' 
+        // AND student_year ='$student_year' 
+        // AND exam_description ='$thisId' 
+        // AND exam_answer_status ='Completed'";
     } 
     $result = $db->query($sql);
     if ($result->num_rows > 0) {
@@ -47,4 +71,4 @@
     }
 
     echo json_encode($res);
-?>
+?> 

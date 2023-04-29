@@ -303,6 +303,7 @@ function switch_user_level($email_address, $user_level) {
         // create session with email address
         // pass the info that filtered by email to array list
         $arr = array(
+          'student_id' => $student['id'],
           'name' => $student['name'],
           'course' => $student['course'],
           'semester' => $student['semester'],
@@ -677,6 +678,14 @@ function create_exam($student_year, $semester, $school_year, $title, $descriptio
                 'created_at' => $created_at,
                 'exam_status' => '1'
               );
+              $check_new_exam = check_create_exam($title, $description, $category);
+
+              if ($check_new_exam) {
+                $session->message('w', 'Exam already exist');
+                redirect($redirect_page, false);
+                return;
+              }
+
               // insert data
               insert_new_exam($data);
               $session->message('s', 'Exam has been uploaded');
@@ -759,6 +768,14 @@ function create_exam_schedule($student_year, $semester, $school_year, $exam_titl
     $session->message('w', 'There is/are no registered students. Please add the student information first.');
     redirect('./exam_schedule', false);
   } else {
+
+    $check_exam_if_exist = check_exam_schedule($exam_title, $exam_description, $exam_category);
+    if ($check_exam_if_exist) {
+      $session->message('w', 'Exam has been already scheduled. Please try again.');
+      redirect('./exam_schedule', false);
+      return;
+    }
+
     $success = insert_exam_schedule($data);
       if ($success) {
         insert_post_announcements(

@@ -167,7 +167,7 @@
  function find_student_login($email_address) {
    global $db;
    $email_address = $db->escape($email_address);
-   $sql ="SELECT `s`.`name` AS name, `s`.`course` AS course, `s`.`semester` AS semester, `s`.`school_year` AS school_year, `s`.`student_year` AS student_year,";
+   $sql ="SELECT `s`.`id` AS id, `s`.`name` AS name, `s`.`course` AS course, `s`.`semester` AS semester, `s`.`school_year` AS school_year, `s`.`student_year` AS student_year,";
    $sql .=" `s`.`gender` AS gender, `s`.`age` AS age, `s`.`birth_date` AS birth_date,";
    $sql .=" `s`.`present_address` AS present_address, `u`.`email_address` AS email_address,";
    $sql .=" `u`.`password` AS password, `u`.`user_level` AS user_level,";
@@ -609,9 +609,9 @@ function start_exam_by_query($student_year, $id) {
       $id == 'Personal Purpose' || 
       $id == 'Career Planning' || 
       $id == 'Support Resources') {
-    $sql = "SELECT * FROM exam_schedule WHERE student_year ='" .$student_year. "' AND exam_category ='" .$id. "'";
+    $sql = "SELECT * FROM exam_schedule WHERE student_year ='" .$student_year. "' AND id ='" .$id. "'";
   } else {
-    $sql = "SELECT * FROM exam_schedule WHERE student_year ='" .$student_year. "' AND exam_description ='" .$id. "'";
+    $sql = "SELECT * FROM exam_schedule WHERE student_year ='" .$student_year. "' AND id ='" .$id. "'";
   }
   
   $result = $db->query($sql);
@@ -642,9 +642,9 @@ function get_exam_query($student_year, $id) {
   $id == 'Personal Purpose' || 
   $id == 'Career Planning' || 
   $id == 'Support Resources') {
-    $sql = "SELECT * FROM exam_schedule WHERE student_year ='" .$student_year. "' AND exam_category ='" .$id. "'";
+    $sql = "SELECT * FROM exam_schedule WHERE student_year ='" .$student_year. "' AND id ='" .$id. "'";
   } else {
-    $sql = "SELECT * FROM exam_schedule WHERE student_year ='" .$student_year. "' AND exam_description ='" .$id. "'";
+    $sql = "SELECT * FROM exam_schedule WHERE student_year ='" .$student_year. "' AND id ='" .$id. "'";
   }
   $result = $db->query($sql);
   if ($db->num_rows($result)) {
@@ -774,6 +774,38 @@ function check_examinee_answer($email_address) {
     return true;
   } else {
     return false;
+  }
+}
+
+function check_create_exam($exam_title, $exam_description, $exam_category) {
+  global $db;
+  $sql = $db->query("SELECT * FROM exam_created WHERE exam_title ='{$exam_title}' 
+  AND exam_description ='{$exam_description}' 
+  AND exam_category='{$exam_category}'");
+  if ($result =$db->fetch_assoc($sql)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function check_exam_schedule($exam_title, $exam_description, $exam_category) {
+  global $db;
+  $sql = $db->query("SELECT * FROM exam_schedule WHERE exam_title ='{$exam_title}' 
+  AND exam_description ='{$exam_description}' 
+  AND exam_category = '{$exam_category}'");
+  if ($result = $db->fetch_assoc($sql)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function find_correct_answer_by_table($table) {
+  global $db;
+  if (table_exist($table)) {
+    $sql = "SELECT * FROM  ".$db->escape($table);
+    return find_by_sql($sql);
   }
 }
 ?>

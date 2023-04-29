@@ -8,11 +8,11 @@
 <?php foreach($exam_menus as $exam_menu): ?>
     <li>
         <?php if ($exam_menu['exam_title'] == 'Student Success Kit') { ?>
-            <a href="#" id="start_quiz" data-id="<?php echo $exam_menu['exam_category']; ?>" >
+            <a href="#" id="start_quiz" data-id="<?php echo $exam_menu['id']; ?>" >
                 <i class="bi bi-circle"></i><span><?php echo $exam_menu['exam_category']; ?></span>
             </a>
         <?php } else { ?>
-            <a href="#" id="start_quiz" data-id="<?php echo $exam_menu['exam_description']; ?>" >
+            <a href="#" id="start_quiz" data-id="<?php echo $exam_menu['id']; ?>" >
                 <i class="bi bi-circle"></i><span><?php echo $exam_menu['exam_description']; ?></span>
             </a>
         <?php } ?>
