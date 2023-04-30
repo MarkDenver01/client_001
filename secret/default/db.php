@@ -859,3 +859,20 @@ ADD PRIMARY KEY(`attempt_id`)";
 
 $db_sql_51[] = "ALTER TABLE `examinee_attempt` 
 MODIFY  `attempt_id` int(255) NOT NULL AUTO_INCREMENT";
+
+// =================== notify ========================== //
+$db_sql_52[] = "DROP TABLE IF EXISTS `notify_student`";
+
+$db_sql_52[] = "CREATE TABLE `notify_student` (
+  `notify_id` int(255) NOT NULL,
+  `student_id` int(255) NOT NULL,
+  `message` VARCHAR(255) NOT NULL,
+  `notify_date` VARCHAR(255) NOT NULL,
+  `notify_status` VARCHAR(255) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+$db_sql_52[] = "ALTER TABLE `notify_student` 
+ADD PRIMARY KEY(`notify_id`)";
+
+$db_sql_52[] = "ALTER TABLE `notify_student` 
+MODIFY  `notify_id` int(255) NOT NULL AUTO_INCREMENT";

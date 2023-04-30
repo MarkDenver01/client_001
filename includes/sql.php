@@ -835,4 +835,17 @@ function find_examinee_complete($student_id, $semester, $school_year) {
   return $examinee=[];
 }
 
+function count_notification($student_id) {
+  global $db;
+  $sql = "SELECT COUNT(*) AS total_count FROM notify_student WHERE student_id='$student_id' AND notify_status='unread'";
+
+  $result = $db->query($sql);
+  if ($db->num_rows($result)) {
+    $check = $db->fetch_assoc($result);
+    $total_count = $check['total_count'];
+    return $total_count;
+  }
+  return false;
+}
+
 ?>
