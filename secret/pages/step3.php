@@ -282,6 +282,16 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             }
           }
         }
+      
+        // health
+        if (isset($db_sql_27)) {
+          foreach ($db_sql_27 as $sql) {
+            $conn->query($sql);
+            if ($conn->error) {
+              die($conn->error);
+            }
+          }
+        }
 
         // time management
         if (isset($db_sql_28)) {

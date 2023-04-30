@@ -529,6 +529,17 @@
   return find_by_sql($sql);
 }
 
+function find_by_exam_created_by_id($id) {
+  global $db;
+  $sql = "SELECT * FROM exam_created WHERE id ='" .$id. "'";
+  $result = $db->query($sql);
+  if ($db->num_rows($result)) {
+    $data = $db->fetch_assoc($result);
+    return $data;
+  }
+  return $data = [];
+}
+
 function find_by_exam_created_by_student_year($student_year) {
   global $db;
   $sql = "SELECT * FROM exam_created WHERE student_year ='" .$student_year. "'";
