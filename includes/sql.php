@@ -467,7 +467,7 @@
 
  function insert_new_exam(array $data) {
   global $db;
-  $sql ="INSERT INTO exam_created(student_year, semester, school_year, exam_title, exam_description, exam_category, image_exam_path, created_at, exam_status) ";
+  $sql ="INSERT INTO exam_created(student_year, semester, school_year, exam_title, exam_description, exam_category, image_exam_path, created_at, exam_status, updated_answer) ";
   $sql .="VALUES ('" .$data['student_year'];
   $sql .="','" .$data['semester'];
   $sql .="','" .$data['school_year'];
@@ -476,7 +476,8 @@
   $sql .="','" .$data['exam_category'];
   $sql .="','" .$data['image_exam_path'];
   $sql .="','" .$data['created_at'];
-  $sql .="','" .$data['exam_status']. "')";
+  $sql .="','" .$data['exam_status'];
+  $sql .="','0')";
   $result = $db->query($sql);
   if ($result) {
     return true;

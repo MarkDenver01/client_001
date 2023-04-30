@@ -26,42 +26,11 @@
         $thisId == 'Personal Purpose' || 
         $thisId == 'Career Planning' || 
         $thisId == 'Support Resources') {
-
-        // $sql_exam ="SELECT * FROM exam_schedule WHERE exam_category ='$thisId' 
-        // AND exam_status ='Ready'";
-        // $result_exam = $db->query($sql_exam);
-        // if ($result_exam->num_rows > 0) {
-        //     while($row = $result_exam->fetch_assoc()) {
-        //         $exam_id = $row['id'];
-        //     }
-        // }
-
         $sql = "SELECT * FROM examinee_answer_v2 WHERE student_id ='$student_id' 
         AND exam_id ='$thisId' AND exam_answer_status ='Completed'";
-    
-        
-        // $sql = "SELECT * FROM examinee_answer WHERE email_address ='$email_address' 
-        // AND student_year ='$student_year' 
-        // AND exam_category ='$thisId' 
-        // AND exam_answer_status ='Completed'";
     } else {
-        // $sql_exam ="SELECT * FROM exam_schedule WHERE exam_category ='$thisId' 
-        // AND exam_status ='Ready'";
-        // $result_exam = $db->query($sql_exam);
-        // if ($result_exam->num_rows > 0) {
-        //     while($row = $result_exam->fetch_assoc()) {
-        //         $exam_id = $row['id'];
-        //     }
-        // }
-
-
         $sql = "SELECT * FROM examinee_answer_v2 WHERE student_id ='$student_id' 
         AND exam_id ='$thisId' AND exam_answer_status ='Completed'";
-        
-        // $sql = "SELECT * FROM examinee_answer WHERE email_address ='$email_address' 
-        // AND student_year ='$student_year' 
-        // AND exam_description ='$thisId' 
-        // AND exam_answer_status ='Completed'";
     } 
     $result = $db->query($sql);
     if ($result->num_rows > 0) {

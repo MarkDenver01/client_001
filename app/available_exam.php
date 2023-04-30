@@ -148,12 +148,44 @@
                     $main_exam = 'reading';
                   } elseif ($main_exam_id == 'Writing') {
                     $main_exam = 'writing';
+                  } elseif ($main_exam_id == 'Speaking Skills') {
+                    $main_exam = 'speaking_skills';
+                  } elseif ($main_exam_id == 'Listening Skills') {
+                    $main_exam = 'listening_skills';
+                  } elseif ($main_exam_id == 'Learning Styles') {
+                    $main_exam = 'learning_styles';
+                  } elseif ($main_exam_id == 'Memory') {
+                    $main_exam = 'memory';
+                  } elseif ($main_exam_id == 'Study Skills') {
+                    $main_exam = 'study_skills';
+                  } elseif ($main_exam_id == 'Creative and Critical Thinking Skills') {
+                    $main_exam = 'creative_and_thinking';
+                  } elseif ($main_exam_id == 'Motivation') {
+                    $main_exam = 'motivation';
+                  } elseif ($main_exam_id == 'Self-Esteem') {
+                    $main_exam = 'self_esteem';
+                  } elseif ($main_exam_id == 'Personal Relationships') {
+                    $main_exam = 'personal_relationship';
+                  } elseif ($main_exam_id == 'Conflict Resolution') {
+                    $main_exam = 'conflict_resolutions';
+                  } elseif ($main_exam_id == 'Health') {
+                    $main_exam = 'health';
+                  } elseif ($main_exam_id == 'Time Management') {
+                    $main_exam = 'time_management';
+                  } elseif ($main_exam_id == 'Money Management') {
+                    $main_exam = 'money_management';
+                  } elseif ($main_exam_id == 'Personal Purpose') {
+                    $main_exam = 'personal_purpose';
+                  } elseif ($main_exam_id == 'Career Planning') {
+                    $main_exam = 'career_planning';
+                  } elseif ($main_exam_id == 'Support Resources') {
+                    $main_exam = 'support_resources';
                   }
                 ?>
                 )</h4></div>
               <hr/>
                 <form action="POST" id="submitAnswerFrm">
-                  <input type="text" name="main_exam" value="<?php echo $main_exam; ?>">
+                  <input type="hidden" name="main_exam" value="<?php echo $main_exam; ?>">
                   <input type="hidden" name="exam_id" id="exam_id" value="<?php echo $exam_id; ?>">
                   <input type="hidden" name="examAction" id="examAction" >
 
@@ -169,247 +201,35 @@
                               <td>
                                 <p><b>Answer No. <?php echo $i++; ?></b></p>
                                 <div class="row">
+                                  <input type="hidden" name="answer[<?php echo ($i - 1); ?>][item_correct]" value="<?php echo $row['correct_items']; ?>">
                                   <div class="btn-group">                                   
                                     <label class="btn btn-light" for="exampleRadios<?php echo ($i-1); ?>_5">
-                                      <input type="radio" name="answer[ch_<?php echo ($i -1). "_" .$row['id']; ?>]" id="exampleRadios<?php echo ($i-1); ?>_5" value="5"> 5</input>
+                                      <input type="radio" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_5" value="5"> 5</input>
                                     </label>    
                                     <label class="btn btn-light" for="exampleRadios<?php echo ($i-1); ?>_4">
-                                      <input type="radio" name="answer[ch_<?php echo ($i -1). "_" .$row['id']; ?>]" id="exampleRadios<?php echo ($i-1); ?>_4" value="4"> 4</input>
+                                      <input type="radio" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_4" value="4"> 4</input>
                                     </label>
                                     <label class="btn btn-light" for="exampleRadios<?php echo ($i-1); ?>_3">
-                                      <input type="radio" name="answer[ch_<?php echo ($i -1). "_" .$row['id']; ?>]" id="exampleRadios<?php echo ($i-1); ?>_3" value="3"> 3</input>
+                                      <input type="radio" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_3" value="3"> 3</input>
                                     </label>
                                     <label class="btn btn-light" for="exampleRadios<?php echo ($i-1); ?>_2">
-                                      <input type="radio" name="answer[ch_<?php echo ($i -1). "_" .$row['id']; ?>]" id="exampleRadios<?php echo ($i-1); ?>_2" value="2"> 2</input>
+                                      <input type="radio" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_2" value="2"> 2</input>
                                     </label>
                                     <label class="btn btn-light" for="exampleRadios<?php echo ($i-1); ?>_1">
-                                      <input type="radio" name="answer[ch_<?php echo ($i -1). "_" .$row['id']; ?>]" id="exampleRadios<?php echo ($i-1); ?>_1" value="1"> 1</input>
+                                      <input type="radio" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_1" value="1"> 1</input>
                                     </label>
                                   </div>
-
                                 </div>
                               </td>
                             </tr>
                           <?php } ?>
                           <?php } else { ?>
                           <?php  echo "Answer sheet not available."; ?>
-                          <?php } ?>
-                          <!-- <tr>
-                            <td>
-                              <p><b>Answer no. 1</b></p>
-                              <div class="row">
-
-                                  <div class="btn-group">                                   
-                                    <label class="btn btn-light" for="exampleRadios1_5">
-                                      <input type="radio" name="exampleRadios1" id="exampleRadios1_5" value="5"> 5</input>
-                                    </label>    
-                                    <label class="btn btn-light" for="exampleRadios1_4">
-                                      <input type="radio" name="exampleRadios1" id="exampleRadios1_4" value="4"> 4</input>
-                                    </label>
-                                    <label class="btn btn-light" for="exampleRadios1_3">
-                                      <input type="radio" name="exampleRadios1" id="exampleRadios1_3" value="3"> 3</input>
-                                    </label>
-                                    <label class="btn btn-light" for="exampleRadios1_2">
-                                      <input type="radio" name="exampleRadios1" id="exampleRadios1_2" value="2"> 2</input>
-                                    </label>
-                                    <label class="btn btn-light" for="exampleRadios1_1">
-                                      <input type="radio" name="exampleRadios1" id="exampleRadios1_1" value="1"> 1</input>
-                                    </label>
-                                  </div>
-
-
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <p><b>Answer no. 2</b></p>
-                              <div class="row">
-
-                                  <div class="btn-group">                                   
-                                    <label class="btn btn-light" for="exampleRadios2_5">
-                                      <input type="radio" name="exampleRadios2" id="exampleRadios2_5" value="5"> 5</input>
-                                    </label>    
-                                    <label class="btn btn-light" for="exampleRadios2_4">
-                                      <input type="radio" name="exampleRadios2" id="exampleRadios2_4" value="4"> 4</input>
-                                    </label>
-                                    <label class="btn btn-light" for="exampleRadios2_3">
-                                      <input type="radio" name="exampleRadios2" id="exampleRadios2_3" value="3"> 3</input>
-                                    </label>
-                                    <label class="btn btn-light" for="exampleRadios2_2">
-                                      <input type="radio" name="exampleRadios2" id="exampleRadios2_2" value="2"> 2</input>
-                                    </label>
-                                    <label class="btn btn-light" for="exampleRadios2_1">
-                                      <input type="radio" name="exampleRadios2" id="exampleRadios2_1" value="1"> 1</input>
-                                    </label>
-                                  </div>
-
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <p><b>Answer no. 3</b></p>
-                              <div class="row">
-
-                                  <div class="btn-group">                                   
-                                    <label class="btn btn-light" for="exampleRadios3_5">
-                                      <input type="radio" name="exampleRadios3" id="exampleRadios3_5" value="5"> 5</input>
-                                    </label>    
-                                    <label class="btn btn-light" for="exampleRadios3_4">
-                                      <input type="radio" name="exampleRadios3" id="exampleRadios3_4" value="4"> 4</input>
-                                    </label>
-                                    <label class="btn btn-light" for="exampleRadios3_3">
-                                      <input type="radio" name="exampleRadios3" id="exampleRadios3_3" value="3"> 3</input>
-                                    </label>
-                                    <label class="btn btn-light" for="exampleRadios3_2">
-                                      <input type="radio" name="exampleRadios3" id="exampleRadios3_2" value="2"> 2</input>
-                                    </label>
-                                    <label class="btn btn-light" for="exampleRadios3_1">
-                                      <input type="radio" name="exampleRadios3" id="exampleRadios3_1" value="1"> 1</input>
-                                    </label>
-                                  </div>
-
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <p><b>Answer no. 4</b></p>
-                              <div class="row">
-
-                                  <div class="btn-group">                                   
-                                    <label class="btn btn-light" for="exampleRadios4_5">
-                                      <input type="radio" name="exampleRadios4" id="exampleRadios4_5" value="5"> 5</input>
-                                    </label>    
-                                    <label class="btn btn-light" for="exampleRadios4_4">
-                                      <input type="radio" name="exampleRadios4" id="exampleRadios4_4" value="4"> 4</input>
-                                    </label>
-                                    <label class="btn btn-light" for="exampleRadios4_3">
-                                      <input type="radio" name="exampleRadios4" id="exampleRadios4_3" value="3"> 3</input>
-                                    </label>
-                                    <label class="btn btn-light" for="exampleRadios4_2">
-                                      <input type="radio" name="exampleRadios4" id="exampleRadios4_2" value="2"> 2</input>
-                                    </label>
-                                    <label class="btn btn-light" for="exampleRadios4_1">
-                                      <input type="radio" name="exampleRadios4" id="exampleRadios4_1" value="1"> 1</input>
-                                    </label>
-                                  </div>
-
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <p><b>Answer no. 5</b></p>
-                              <div class="row">
-
-                                  <div class="btn-group">                                   
-                                    <label class="btn btn-light" for="exampleRadios5_5">
-                                      <input type="radio" name="exampleRadios5" id="exampleRadios5_5" value="5"> 5</input>
-                                    </label>    
-                                    <label class="btn btn-light" for="exampleRadios5_4">
-                                      <input type="radio" name="exampleRadios5" id="exampleRadios5_4" value="4"> 4</input>
-                                    </label>
-                                    <label class="btn btn-light" for="exampleRadios5_3">
-                                      <input type="radio" name="exampleRadios5" id="exampleRadios5_3" value="3"> 3</input>
-                                    </label>
-                                    <label class="btn btn-light" for="exampleRadios5_2">
-                                      <input type="radio" name="exampleRadios5" id="exampleRadios5_2" value="2"> 2</input>
-                                    </label>
-                                    <label class="btn btn-light" for="exampleRadios5_1">
-                                      <input type="radio" name="exampleRadios5" id="exampleRadios5_1" value="1"> 1</input>
-                                    </label>
-                                  </div>
-
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <p><b>Answer no. 6</b></p>
-                              <div class="row">
-
-                                  <div class="btn-group">                                   
-                                    <label class="btn btn-light" for="exampleRadios6_5">
-                                      <input type="radio" name="exampleRadios6" id="exampleRadios6_5" value="5"> 5</input>
-                                    </label>    
-                                    <label class="btn btn-light" for="exampleRadios6_4">
-                                      <input type="radio" name="exampleRadios6" id="exampleRadios6_4" value="4"> 4</input>
-                                    </label>
-                                    <label class="btn btn-light" for="exampleRadios6_3">
-                                      <input type="radio" name="exampleRadios6" id="exampleRadios6_3" value="3"> 3</input>
-                                    </label>
-                                    <label class="btn btn-light" for="exampleRadios6_2">
-                                      <input type="radio" name="exampleRadios6" id="exampleRadios6_2" value="2"> 2</input>
-                                    </label>
-                                    <label class="btn btn-light" for="exampleRadios6_1">
-                                      <input type="radio" name="exampleRadios6" id="exampleRadios6_1" value="1"> 1</input>
-                                    </label>
-                                  </div>
-
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <p><b>Answer no. 7</b></p>
-                              <div class="row">
-
-                                  <div class="btn-group">                                   
-                                    <label class="btn btn-light" for="exampleRadios7_5">
-                                      <input type="radio" name="exampleRadios7" id="exampleRadios7_5" value="5"> 5</input>
-                                    </label>    
-                                    <label class="btn btn-light" for="exampleRadios7_4">
-                                      <input type="radio" name="exampleRadios7" id="exampleRadios7_4" value="4"> 4</input>
-                                    </label>
-                                    <label class="btn btn-light" for="exampleRadios7_3">
-                                      <input type="radio" name="exampleRadios7" id="exampleRadios7_3" value="3"> 3</input>
-                                    </label>
-                                    <label class="btn btn-light" for="exampleRadios7_2">
-                                      <input type="radio" name="exampleRadios7" id="exampleRadios7_2" value="2"> 2</input>
-                                    </label>
-                                    <label class="btn btn-light" for="exampleRadios7_1">
-                                      <input type="radio" name="exampleRadios7" id="exampleRadios7_1" value="1"> 1</input>
-                                    </label>
-                                  </div>
-
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <p><b>Answer no. 8</b></p>
-                              <div class="row">
-
-                                  <div class="btn-group">                                   
-                                    <label class="btn btn-light" for="exampleRadios8_5">
-                                      <input type="radio" name="exampleRadios8" id="exampleRadios8_5" value="5"> 5</input>
-                                    </label>    
-                                    <label class="btn btn-light" for="exampleRadios8_4">
-                                      <input type="radio" name="exampleRadios8" id="exampleRadios8_4" value="4"> 4</input>
-                                    </label>
-                                    <label class="btn btn-light" for="exampleRadios8_3">
-                                      <input type="radio" name="exampleRadios8" id="exampleRadios8_3" value="3"> 3</input>
-                                    </label>
-                                    <label class="btn btn-light" for="exampleRadios8_2">
-                                      <input type="radio" name="exampleRadios8" id="exampleRadios8_2" value="2"> 2</input>
-                                    </label>
-                                    <label class="btn btn-light" for="exampleRadios8_1">
-                                      <input type="radio" name="exampleRadios8" id="exampleRadios8_1" value="1"> 1</input>
-                                    </label>
-                                  </div>
-
-                              </div>
-                            </td>
-                          </tr> -->
+                          <?php } ?> 
                         </tbody>
                       </table>
-
                     </div>
                   </div>
-
-                  <hr/>
                   <div class="row">
                     <div class="col-lg-12">
                      <div class="text-center">
