@@ -29,7 +29,7 @@
 
     <section class="section profile" style="width: 1460px;">
       <div class="row">
-      <?php 
+        <?php 
           $student_year = $_SESSION['key_session']['student_year']; 
           $exam_id = $_GET['id'];
           $exam = start_exam_by_query($student_year, $exam_id); 
@@ -182,7 +182,11 @@
                     $main_exam = 'support_resources';
                   }
                 ?>
-                )</h4></div>
+                )
+              <input type="hidden" id="main_exam_id" name="exam_temp_title" value="<?php echo $main_exam_id; ?>">
+              <input type="hidden" id="main_exam_desc" name="main_exam_desc" value="<?php echo $student['exam_description']; ?>">
+              <input type="hidden" id="main_exam_title" name="main_exam_title" value="<?php echo $student['exam_title']; ?>">
+              </h4></div>
               <hr/>
                 <form action="POST" id="submitAnswerFrm">
                   <input type="hidden" name="main_exam" value="<?php echo $main_exam; ?>">

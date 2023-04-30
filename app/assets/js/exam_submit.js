@@ -31,7 +31,10 @@ $(document).on('submit','#submitAnswerFrm', function(){
                             if (result.value) {
                                 $('#submitAnswerFrm')[0].reset();
                                 var exam_id = $('#exam_id').val();
-                                window.location.href='../app/exam_result.php?id='+exam_id;
+                                var exam_type =$('#main_exam_id').val();
+                                var exam_desc =$('#main_exam_desc').val();
+                                var exam_title =$('#main_exam_title').val();
+                                window.location.href='../app/exam_result.php?exam_id='+exam_id+'&exam_type='+exam_type+'&exam_desc='+exam_desc+'&exam_title='+exam_title;
                             }
                         });
                     } else if (data.res == "failed") {
@@ -74,7 +77,10 @@ $(document).on('submit','#submitAnswerFrm', function(){
                         }).then((result) => {
                             $('#submitAnswerFrm')[0].reset();
                             var exam_id = $('#exam_id').val();
-                            window.location.href="../app/exam_result.php?id="+exam_id;
+                            var exam_type =$('#main_exam_id').val();
+                            var exam_desc =$('#main_exam_desc').val();
+                            var exam_title =$('#main_exam_title').val();
+                            window.location.href='../app/exam_result.php?exam_id='+exam_id+'&exam_type='+exam_type+'&exam_desc='+exam_desc+'&exam_title='+exam_title;
                         });
                     } else if(data.res == "failed") {
                         Swal.fire(

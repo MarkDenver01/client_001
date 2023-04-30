@@ -820,4 +820,19 @@ function find_correct_answer_by_table($table) {
     return find_by_sql($sql);
   }
 }
+
+function find_examinee_complete($student_id, $semester, $school_year) {
+  global $db;
+  $sql = "SELECT * FROM examinee WHERE student_id ='" .$student_id. 
+  "' AND semester ='" .$semester. 
+  "' AND school_year ='" .$school_year.
+  "' AND exam_result_status ='Done'";
+  $result = $db->query($sql);
+  if ($db->num_rows($result)) {
+    $examinee = $db->fetch_assoc($result);
+    return $examinee;
+  }
+  return $examinee=[];
+}
+
 ?>

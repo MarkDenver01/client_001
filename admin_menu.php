@@ -93,12 +93,13 @@
       </a>
     </li><!-- End Generate Reports Nav -->
 
-    <li class="nav-item">
+    <!-- <li class="nav-item">
       <a class="nav-link " href="./generate_reports">
         <i class="ri-file-3-fill"></i>
         <span>Generate Reports</span>
       </a>
-    </li><!-- End Generate Reports Nav -->
+    </li> -->
+    <!-- End Generate Reports Nav -->
 
 
     <li class="nav-item">
@@ -108,12 +109,13 @@
       </a>
     </li><!-- End Student Counseling Progress Nav -->
 
-    <li class="nav-item">
+    <!-- <li class="nav-item">
       <a class="nav-link " href="./scheduling">
         <i class="ri-calendar-2-fill"></i>
         <span>Scheduling</span>
       </a>
-    </li><!-- End Student Scheduling Progress Nav -->
+    </li> -->
+    <!-- End Student Scheduling Progress Nav -->
 
     <li class="nav-item">
       <a class="nav-link " href="./post_announcement">

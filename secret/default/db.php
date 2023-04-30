@@ -743,11 +743,13 @@ ADD PRIMARY KEY(`id`)";
 $db_sql_46[] = "ALTER TABLE `aptitude_j_and_c_4`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT"; 
 
-// ===================(sub) aptitude_j_and_c 4 - correct answer  ========================== //
+// =================== examinee  ========================== //
 $db_sql_47[] = "DROP TABLE IF EXISTS `examinee`";
 
 $db_sql_47[] = "CREATE TABLE `examinee` (
-  `id` int(11) NOT NULL,
+  `examinee_id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `exam_id` int(11) NOT NULL,
   `name` VARCHAR(255) NOT NULL,
   `email_address` VARCHAR(255) NOT NULL,
   `gender` VARCHAR(255) NOT NULL,
@@ -756,19 +758,21 @@ $db_sql_47[] = "CREATE TABLE `examinee` (
   `school_year` VARCHAR(255) NOT NULL,
   `student_year` VARCHAR(255) NOT NULL,
   `exam_title` VARCHAR(255) NOT NULL,
-  `start_date_time_take_exam` datetime NOT NULL,
-  `remaining_time` int(11) NOT NULL,
-  `exam_average_result` VARCHAR(255) NOT NULL,
+  `exam_description` VARCHAR(255) NOT NULL,
+  `exam_category` VARCHAR(255) NOT NULL,
+  `start_exam_date` datetime NOT NULL,
+  `exam_answer` VARCHAR(255) NOT NULL,
+  `total_answer` VARCHAR(255) NOT NULL,
+  `total_score` VARCHAR(255) NOT NULL,
   `exam_result_status` VARCHAR(255) NOT NULL,
-  `counselor_notify_status` VARCHAR(255) NOT NULL,
-  `examinee_status` VARCHAR(255) NOT NULL
+  `counselor_notify_status` VARCHAR(255) NOT NULL
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
 
 $db_sql_47[] = "ALTER TABLE `examinee`
-ADD PRIMARY KEY(`id`)";
+ADD PRIMARY KEY(`examinee_id`)";
 
 $db_sql_47[] = "ALTER TABLE `examinee`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT"; 
+MODIFY `examinee_id` int(11) NOT NULL AUTO_INCREMENT"; 
 
 
 $db_sql_47[] = "ALTER TABLE `examinee`
