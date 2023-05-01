@@ -17,6 +17,10 @@
 if (isset($_POST['button_upload'])) {
     redirect('./monitoring',false);
 }
+
+if(isset($_POST['button_counseling'])) {
+  redirect('./counseling', false);
+}
 ?>
 <?php include('../start_menu_bar.php'); ?>
 <script type="text/javascript" >
@@ -157,7 +161,11 @@ if (isset($_POST['button_upload'])) {
                                     <div class="d-flex align-items-center">
                                       <div class="text-center">
                                         <h3>
+                                            <?php if ($counselour_stats == 'Completed') { ?>
+                                            <?php echo $counselour_stats; ?>
+                                            <?php } else { ?>
                                             <?php echo $msg; ?>
+                                            <?php } ?>
                                         </h3>
                                       </div>
                                     </div>
@@ -252,7 +260,11 @@ if (isset($_POST['button_upload'])) {
 
                         <form action ="" method="POST">
                         <?php if ($check_monitor) { ?>
-                            <button name="button_upload" type="submit" class="btn btn-success btn-lg rounded-0 w-100">Upload</button>
+                            <?php if($counselour_stats != 'Completed') { ?>
+                                <button name="button_upload" type="submit" class="btn btn-success btn-lg rounded-0 w-100">Upload</button>
+                            <?php } ?>
+                        <?php } else { ?>
+                            <button name="button_counseling" type="submit" class="btn btn-success btn-lg rounded-0 w-100">Apply Counseling Schedule</button>
                         <?php } ?>
                         </form>
                       </div>
