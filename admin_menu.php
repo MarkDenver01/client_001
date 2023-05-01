@@ -34,7 +34,7 @@
     <li class="nav-item">
       <a class="nav-link " href="./student_records">
         <i class="ri-account-pin-circle-fill"></i>
-        <span>Student Records</span>
+        <span>Student Counseling Records</span>
       </a>
     </li><!-- End Student Records Nav -->
 
@@ -102,12 +102,13 @@
     <!-- End Generate Reports Nav -->
 
 
-    <li class="nav-item">
+    <!-- <li class="nav-item">
       <a class="nav-link " href="./counseling_progress">
         <i class="ri-group-fill"></i>
         <span>Counseling Progress</span>
       </a>
-    </li><!-- End Student Counseling Progress Nav -->
+    </li> -->
+    <!-- End Student Counseling Progress Nav -->
 
     <!-- <li class="nav-item">
       <a class="nav-link " href="./scheduling">

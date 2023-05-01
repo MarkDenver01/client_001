@@ -384,7 +384,7 @@
             </div>
             <div class="ps-3">
               <h6><?php echo $read['total']; ?></h6>
-              <span class="text-success small pt-1 fw-bold"><?php echo $read['total']; ?></span> <span class="text-muted small pt-2 ps-1"> out of 18</span>
+              <span class="text-success small pt-1 fw-bold"><?php echo $read['total']; ?></span> <span class="text-muted small pt-2 ps-1"> out of <?php echo $read['total']; ?></span>
 
             </div>
           </div>

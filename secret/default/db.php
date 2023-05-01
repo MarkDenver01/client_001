@@ -864,7 +864,7 @@ MODIFY  `attempt_id` int(255) NOT NULL AUTO_INCREMENT";
 $db_sql_52[] = "DROP TABLE IF EXISTS `notify_student`";
 
 $db_sql_52[] = "CREATE TABLE `notify_student` (
-  `notify_id` int(255) NOT NULL,
+  `id` int(255) NOT NULL,
   `student_id` int(255) NOT NULL,
   `message` VARCHAR(255) NOT NULL,
   `notify_date` VARCHAR(255) NOT NULL,
@@ -872,10 +872,10 @@ $db_sql_52[] = "CREATE TABLE `notify_student` (
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
 
 $db_sql_52[] = "ALTER TABLE `notify_student` 
-ADD PRIMARY KEY(`notify_id`)";
+ADD PRIMARY KEY(`id`)";
 
 $db_sql_52[] = "ALTER TABLE `notify_student` 
-MODIFY  `notify_id` int(255) NOT NULL AUTO_INCREMENT";
+MODIFY  `id` int(255) NOT NULL AUTO_INCREMENT";
 
 // =================== notify ========================== //
 $db_sql_53[] = "DROP TABLE IF EXISTS `monitoring_student`";
@@ -889,7 +889,7 @@ $db_sql_53[] = "CREATE TABLE `monitoring_student` (
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
 
 $db_sql_53[] = "ALTER TABLE `monitoring_student` 
-ADD PRIMARY KEY(`notify_id`)";
+ADD PRIMARY KEY(`monitoring_id`)";
 
 $db_sql_53[] = "ALTER TABLE `monitoring_student` 
 MODIFY  `monitoring_id` int(255) NOT NULL AUTO_INCREMENT";

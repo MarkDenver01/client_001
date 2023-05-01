@@ -12,6 +12,34 @@
         '$submitted',
         'unread')");
         if ($sqlInsert) {
+
+            // $sqlSelect = "SELECT * FROM examinee WHERE student_id ='$thisId'";
+            // $result = $db->query($sqlSelect);
+            // if ($db->num_rows($result)) {
+            //      $exams = $db->fetch_assoc($result);
+            //      $get_mail_address = $exams['email_address'];
+            //      $get_name = $exams['name'];
+            // }
+
+            // $subject = "You've received an email from Guidance Counselor";
+            // $content = 'Hi ' .$get_name;
+            // $content .= '<br/>';
+            // $content .= 'We would like to inform you that you need to go in Guidance office for counseling. Thank you!';
+            // $content .= '<br/>';
+
+            // // send mail account created
+            // $send = send_email(
+            //   $get_mail_address,
+            //   $get_name,
+            //   $subject,
+            //   $content
+            // );
+      
+            // if ($send) {
+            //     $res = array("res" => "success");
+            // } else {
+            //     $res = array("res" => "failed");
+            // }
             $res = array("res" => "success");
         } else {
             $res = array("res" => "failed");

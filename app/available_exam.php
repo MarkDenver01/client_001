@@ -7,6 +7,7 @@
 <?php SET_NOT_LOGGED_IN(); ?>
 <?php IS_STUDENT_LEVEL(); ?>
 <?php CHECK_EXAM_AVAILABILITY(); ?>
+<?php $exam_id = $_GET['id']; ?>
 <?php include('../start_menu_bar.php'); ?>
 <script type="text/javascript" >
    function preventBack(){window.history.forward();}
@@ -31,7 +32,6 @@
       <div class="row">
         <?php 
           $student_year = $_SESSION['key_session']['student_year']; 
-          $exam_id = $_GET['id'];
           $exam = start_exam_by_query($student_year, $exam_id); 
         ?>
         <?php $student = get_exam_query($_SESSION['key_session']['student_year'], $exam_id); ?>
@@ -119,7 +119,7 @@
                         <?php foreach($result as $display): ?>
                         <th scope="row" value="<?php echo $result['id']; ?>" hidden>
                         <tr>
-                          <img id="ic_image_file" style="width:800px; height: 960px;" src="<?php echo $display['image_exam_path']; ?>" class="d-block w-100 border border-secondary">
+                          <img id="ic_image_file" style="width:800px; height: 960px;" src="../uploads/exam/first_year_a/sample_1.png" class="d-block w-100 border border-secondary">
                         </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -226,7 +226,7 @@
                   <div class="row mb-3">
                     <div class="col-lg-12">
                       
-                      <?php if($student['exam_title'] == 'Student Success ') { ?>
+                      <?php if($student['exam_title'] == 'Student Success Kit') { ?>
 
                         <table class="table table-hover text-nowrap " id="tableList">
                         <tbody>
