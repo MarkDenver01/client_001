@@ -134,13 +134,15 @@ if ($db->num_rows($result)) {
 
 <?php } ?>
 
+
+<?php $sql = "SELECT exam_title FROM examinee WHERE student_year ='$student_year' 
+AND semester ='$semester' AND school_year ='$school_year' AND exam_result_status='Done' GROUP BY exam_title"?>
 <?php 
-  $examinee = find_examinee_complete(
-    $_SESSION['key_session']['student_id'],
-    $_SESSION['key_session']['academic_semester'],
-    $_SESSION['key_session']['academic_school_year']
-  );
+$result = $db->query($sql);
+if ($db->num_rows($result)) {
+  while ($examinee = $result->fetch_assoc()) {
 ?>
+
 <?php if ($examinee['exam_title'] == 'Student Success Kit') { ?>
 <li class="nav-item">
   <a class="nav-link " href="../app/student_success_kit_result">
@@ -196,3 +198,7 @@ if ($db->num_rows($result)) {
     <span class="text-danger">Not Available</span>
 </li>  
 <?php } ?>
+
+<?php } ?>
+<?php } ?>
+
