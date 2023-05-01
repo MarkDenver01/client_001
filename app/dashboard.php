@@ -396,25 +396,53 @@
           $student_id = $_SESSION['key_session']['student_id'];
           $semester = $_SESSION['key_session']['academic_semester'];
           $school_year = $_SESSION['key_session']['academic_school_year']; 
+          $exam_title = $_SESSION['key_session']['exam_title'];
         ?>
         <?php global $db; ?>
+        <?php global $session; ?>
         <?php 
-        
-        $sql = "SELECT exam_answer,counselor_notify_status, COUNT(exam_answer) AS total FROM examinee WHERE student_id ='$student_id' 
-        AND semester ='$semester' AND school_year ='$school_year' GROUP BY exam_answer ORDER BY COUNT(exam_answer) DESC LIMIT 1";
-          $result = $db->query($sql);
-          if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-              $highest_prob = $row['exam_answer'];
-              $data = $row['total'] / 18 * 40;
-            }
-          }
-          if ($data >= 40 && $data <= 25) {
-            $msg = "Monitoring(Upload the grades at the end of semester.)";
-          } else if($data <= 20) {
-            $msg = "For Counselor Scheduling";
-         } 
-        ?>
+                                $check_monitor = false;
+                            $sql = "SELECT exam_answer,counselor_notify_status, SUM(total_score) AS total FROM examinee WHERE student_id ='$student_id' 
+                                AND semester ='$semester' AND school_year ='$school_year' AND exam_title = '$exam_title'";
+                                if ($exam_title == 'Student Success Kit') {
+                                  $result = $db->query($sql);
+                                  if ($result->num_rows > 0) {
+                                      while ($row = $result->fetch_assoc()) {
+                                          $highest_prob = $row['exam_answer'];
+                                          $data = $row['total'] / 18;
+                                          $counselour_stats = $row['counselor_notify_status'];
+                                      }
+                                  }
+                                  switch($data) {
+                                    case $data >= 25 and $data <= 40:
+                                        $check_monitor = true;
+                                        $msg = "Monitoring";
+                                        if ($counselour_stats == "Pending") {
+                                          for($i = 0; $i < $data; $i++) {
+                                            $sql = "UPDATE examinee SET counselor_notify_status='$msg' WHERE student_id ='$student_id'";
+                                            $db->query($sql);
+                                          }
+                                        }
+                                      break;
+                                    case $data >= 0 and $data <= 20:
+                                        $check_monitor = false;
+                                        $msg = "Counseling";
+                                        if ($counselour_stats == 'Pending') {
+                                          for($i = 0; $i < $data; $i++) {
+                                            $sql = "UPDATE examinee SET counselor_notify_status='$msg' WHERE student_id ='$student_id'";
+                                            $db->query($sql);
+                                          }
+                                        }
+                                      break;
+                                      default:
+                                        $msg = "Not in range";
+                                  }
+                                } else {
+                                  $dev_msg = "Dev is still fixing this issue. Pls. wait.";
+                                }
+                                
+                               
+                            ?>
         <div class="card-body ">
           <h5 class="card-title">Exam Result <span>| status</span></h5>
 
@@ -423,8 +451,15 @@
               <i class="ri-file-user-line"></i>
             </div>
             <div class="ps-3">
-              <h6><?php echo $data."%"; ?></h6>
-              <span class="text-success small pt-1 fw-bold"><?php echo $msg; ?></span> 
+              <?php if ($exam_title == 'Student Success Kit') { ?>
+                <h6><?php echo $data."%"; ?></h6>
+                <span class="text-success small pt-1 fw-bold"><?php echo $msg; ?></span> 
+               
+              <?php } else { ?>
+                <h6><?php echo $dev_msg; ?></h6>
+                <span class="text-success small pt-1 fw-bold"><?php echo $dev_msg; ?></span>
+              <?php } ?>
+             
 
             </div>
           </div>
