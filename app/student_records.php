@@ -68,6 +68,8 @@
                           <a href="#" class="btn btn-danger rounded-0  btn-sm w-100 disabled">On-Going</a>
                         <?php } elseif ($counseling_status =='Notified') { ?>
                           <a href="#" class="btn btn-info rounded-0  btn-sm w-100 disabled">Notified</a>
+                        <?php } elseif ($counseling_status == 'Completed') { ?>
+                          <a href="#" class="btn btn-success rounded-0  btn-sm w-100 disabled">Completed</a>
                         <?php } ?>
                         </td>
                       </tr>

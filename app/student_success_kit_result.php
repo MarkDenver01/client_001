@@ -13,6 +13,11 @@
     $semester = $_SESSION['key_session']['academic_semester'];
     $school_year = $_SESSION['key_session']['academic_school_year']; 
 ?>
+<?php 
+if (isset($_POST['button_upload'])) {
+    redirect('./monitoring',false);
+}
+?>
 <?php include('../start_menu_bar.php'); ?>
 <script type="text/javascript" >
    function preventBack(){window.history.forward();}
@@ -234,7 +239,7 @@
 
                         <form action ="" method="POST">
                         <?php if ($check_monitor) { ?>
-                            <button id="submitAnswerFrmBtn" name="button_upload" type="submit" class="btn btn-success btn-lg rounded-0 w-100">Upload</button>
+                            <button name="button_upload" type="submit" class="btn btn-success btn-lg rounded-0 w-100">Upload</button>
                         <?php } ?>
                         </form>
                       </div>

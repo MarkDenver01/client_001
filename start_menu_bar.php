@@ -1,7 +1,6 @@
 <?php require_once('../lib/class.environment.php'); ?>
 <?php include_once('../includes/load.php'); ?>
 <?php delete_announcement_after_a_days(); ?>
-<?php $student_id = $_SESSION['key_session']['student_id']; ?>
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
 
@@ -18,7 +17,18 @@
   <?php
       $user_level = $_SESSION['key_session']['user_level'];
       if ($user_level == '3') {  ?>
-      
+      <?php global $db; ?>
+      <?php $student_id = $_SESSION['key_session']['student_id']; ?>
+      <?php 
+        if (isset($_POST["button_update"])) {
+          $sql = $db->query("UPDATE notify_student SET notify_status='read' WHERE student_id='$student_id'");
+          if($sql) {
+            redirect('https://gmail.com/', false);
+          } else {
+            redirect('../app/dashboard', false);
+          }
+        }
+      ?>
       <?php $notify_count = count_notification($_SESSION['key_session']['student_id']); ?>
     <li class="nav-item dropdown">
         <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
@@ -28,12 +38,16 @@
 
         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
           <li class="dropdown-header">
+            <form action="" method="post">
             You have <?php echo $notify_count; ?> new notifications
-            <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+            <?php if($notify_count > 0) { ?>
+              <button name="button_update" type="submit" class="badge rounded-pill bg-primary p-2 ms-2">View all</button>
+            <?php } ?>
+            </form>
           </li>
           <?php global $db; ?>
           <?php 
-            $sql = "SELECT * FROM notify_student WHERE student_id='$student_id'";
+            $sql = "SELECT * FROM notify_student WHERE student_id='$student_id' AND notify_status='unread'";
             $result = $db->query($sql);
             if ($result->num_rows > 0) {
               while ($row = $result->fetch_assoc()) { ?>
@@ -50,8 +64,19 @@
           </li>
           <?php
               }
-            }
+            } else {
           ?>
+             <li>
+            <hr class="dropdown-divider">
+          </li>
+
+          <li class="notification-item">
+            <i class="bi bi-exclamation-circle text-success"></i>
+            <div>
+              <h4>No notification is <b>unread</b></span>
+            </div>
+          </li>
+          <?php } ?>
           
         </ul><!-- End Notification Dropdown Items -->
 

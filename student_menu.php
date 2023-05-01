@@ -97,9 +97,3 @@
     <span class="text-danger">Not Available</span>
 </li>  
 <?php } ?>
-<li class="nav-item">
-  <a class="nav-link " href="../app/student_counseling_progress">
-    <i class="ri-group-fill"></i>
-    <span>Student Counseling Progress</span>
-  </a>
-</li><!-- End Student Counseling Progress Nav -->

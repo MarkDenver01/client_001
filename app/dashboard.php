@@ -1,6 +1,7 @@
 <?php include('../header.php'); ?>
 <?php include('../includes/load.php'); ?>
 <?php SET_NOT_LOGGED_IN(); ?>
+
 <?php include('../start_menu_bar.php'); ?>
 
 <main id="main" class="main">
@@ -391,12 +392,28 @@
 
       </div>
       <div class="card info-card customers-card rounded-0">
+        <?php  
+          $student_id = $_SESSION['key_session']['student_id'];
+          $semester = $_SESSION['key_session']['academic_semester'];
+          $school_year = $_SESSION['key_session']['academic_school_year']; 
+        ?>
         <?php global $db; ?>
         <?php 
-          $sql = "SELECT count(*) as total FROM student_info";
+        
+        $sql = "SELECT exam_answer,counselor_notify_status, COUNT(exam_answer) AS total FROM examinee WHERE student_id ='$student_id' 
+        AND semester ='$semester' AND school_year ='$school_year' GROUP BY exam_answer ORDER BY COUNT(exam_answer) DESC LIMIT 1";
           $result = $db->query($sql);
-          $read = mysqli_fetch_assoc($result);
-          $read_avg = $read['total'] * 2 / 5;
+          if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+              $highest_prob = $row['exam_answer'];
+              $data = $row['total'] / 18 * 40;
+            }
+          }
+          if ($data >= 40 && $data <= 25) {
+            $msg = "Monitoring(Upload the grades at the end of semester.)";
+          } else if($data <= 20) {
+            $msg = "For Counselor Scheduling";
+         } 
         ?>
         <div class="card-body ">
           <h5 class="card-title">Exam Result <span>| status</span></h5>
@@ -406,8 +423,8 @@
               <i class="ri-file-user-line"></i>
             </div>
             <div class="ps-3">
-              <h6><?php echo $read['total']; ?></h6>
-              <span class="text-success small pt-1 fw-bold"><?php echo $read_avg.'%'; ?></span> <span class="text-muted small pt-2 ps-1">FAILED</span>
+              <h6><?php echo $data."%"; ?></h6>
+              <span class="text-success small pt-1 fw-bold"><?php echo $msg; ?></span> 
 
             </div>
           </div>
@@ -420,7 +437,7 @@
 
     <!-- Number of visits Card -->
     <div class="col-xxl-12 col-md-12">
-
+    <?php $notify_count = count_notification($_SESSION['key_session']['student_id']); ?>
       <div class="card info-card revenue-card rounded-0">
 
         <div class="card-body">
@@ -431,7 +448,7 @@
               <i class="ri-chat-check-line"></i>
             </div>
             <div class="ps-3">
-              <h6>0</h6>
+              <h6><?php echo $notify_count; ?></h6>
               <span class="text-muted small pt-2 ps-1">Notification</span>
 
             </div>
@@ -443,70 +460,6 @@
     </div><!-- End number of visits Card -->
 
 
-    <!-- Reports -->
-    <div class="col-12">
-      <div class="card rounded-0">
-
-        <div class="card-body">
-          <h5 class="card-title">Student Exam Summary <span>/Result</span></h5>
-
-           <!-- Pie Chart -->
-           <div id="pieChart" style="min-height: 400px;" class="echart"></div>
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    echarts.init(document.querySelector("#pieChart")).setOption({
-      title: {
-        text: 'Student Success Kit',
-        subtext: 'Academic Skills Development',
-        left: 'center'
-      },
-      tooltip: {
-        trigger: 'item'
-      },
-      legend: {
-        orient: 'vertical',
-        left: 'left'
-      },
-      series: [{
-        name: 'Access From',
-        type: 'pie',
-        radius: '50%',
-        data: [{
-            value: 1048,
-            name: 'Reading'
-          },
-          {
-            value: 735,
-            name: 'Writing'
-          },
-          {
-            value: 580,
-            name: 'Speaking'
-          },
-          {
-            value: 484,
-            name: 'Listening'
-          }
-        ],
-        emphasis: {
-          itemStyle: {
-            shadowBlur: 10,
-            shadowOffsetX: 0,
-            shadowColor: 'rgba(0, 0, 0, 0.5)'
-          }
-        }
-      }]
-    });
-  });
-</script>
-<!-- End Pie Chart -->
-
-          
-        </div>
-
-      </div>
-    </div><!-- End Reports -->
 
     
 
