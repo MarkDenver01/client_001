@@ -59,7 +59,7 @@ if (isset($_POST['button_upload'])) {
                     </thead>
                     <tbody>                   
                     <?php       
-                      $sql = "SELECT * FROM examinee WHERE student_id ='$student_id'";
+                      $sql = "SELECT * FROM examinee WHERE student_id ='$student_id' AND exam_title = 'Student Success Kit'";
                       $result = $db->query($sql);
                       if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
@@ -96,7 +96,7 @@ if (isset($_POST['button_upload'])) {
                             <?php 
                                 $check_monitor = false;
                                 $sql = "SELECT exam_answer,counselor_notify_status, COUNT(exam_answer) AS total FROM examinee WHERE student_id ='$student_id' 
-                                AND semester ='$semester' AND school_year ='$school_year' GROUP BY exam_answer ORDER BY COUNT(exam_answer) DESC LIMIT 1";
+                                AND semester ='$semester' AND school_year ='$school_year' AND exam_title = 'Student Success Kit' GROUP BY exam_answer ORDER BY COUNT(exam_answer) DESC LIMIT 1";
                                 $result = $db->query($sql);
                                 if ($result->num_rows > 0) {
                                     while ($row = $result->fetch_assoc()) {
@@ -160,7 +160,7 @@ if (isset($_POST['button_upload'])) {
                         <!-- Line Chart -->
                         <canvas class="border border-danger" id="lineChart" style="max-height: 400px; background-image: linear-gradient(#FFFADA, #FDF6E4);"></canvas>
                             <?php 
-                            $sql = "SELECT * FROM examinee WHERE student_id='$student_id'";
+                            $sql = "SELECT * FROM examinee WHERE student_id='$student_id' AND exam_title = 'Student Success Kit'";
                             $run_query = $db->query($sql);
                             $data_chart = array();
                             foreach ($run_query as $row) {

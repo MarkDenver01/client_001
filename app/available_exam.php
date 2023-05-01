@@ -191,6 +191,16 @@
                     $main_exam = 'spatial';
                   } elseif ($main_exam_id == 'Word Comparison') {
                     $main_exam = 'work_comparison';
+                  } elseif ($main_exam_id == 'BarOn EQ-i:S') {
+                    $main_exam = 'baron_eq';
+                  } elseif ($main_exam_id == 'The Keirsey Temerament Sorter') {
+                    $main_exam = 'keirsey_temerament_sorter';
+                  } elseif ($main_exam_id == 'Aptitude J and C') {
+                    $main_exam = 'aptitude_j_and_c_1';
+                  } elseif ($main_exam_id == 'ESA') {
+                    $main_exam = 'esa';
+                  } elseif ($main_exam_id == 'Aptitude Verbal and Numerical') {
+                    $main_exam = 'aptitude_verbal_and_numerical';
                   }
                 ?>
                 )
@@ -408,6 +418,150 @@
                         <?php } ?>
 
 
+                      <?php } elseif ($student['exam_title'] == 'BarOn EQ-i:S') { ?>
+                        
+                        <table class="table table-hover text-nowrap " id="tableList">
+                            <tbody>
+                              <?php $sql = $db->query("SELECT * FROM $main_exam"); ?>
+                              <?php if($sql->num_rows > 0) { ?>
+                              <?php $i = 1; ?>
+                              <?php while($row = $sql->fetch_assoc()) { ?>
+                              <tr>
+                                <td>
+                                <p><b>Answer No. <?php echo $i++; ?></b></p>
+                                <div class="row">
+                                  <input type="hidden" name="answer[<?php echo ($i - 1); ?>][item_correct]" value="<?php echo $row['correct_items']; ?>">
+                                  <div class="btn-group">                                   
+                                    <label class="btn btn-light" for="exampleRadios<?php echo ($i-1); ?>_5">
+                                      <input type="radio" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_5" value="a"> A</input>
+                                    </label>    
+                                    <label class="btn btn-light" for="exampleRadios<?php echo ($i-1); ?>_4">
+                                      <input type="radio" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_4" value="b"> B</input>
+                                    </label>
+                                    <label class="btn btn-light" for="exampleRadios<?php echo ($i-1); ?>_3">
+                                      <input type="radio" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_3" value="c"> C</input>
+                                    </label>
+                                    <label class="btn btn-light" for="exampleRadios<?php echo ($i-1); ?>_2">
+                                      <input type="radio" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_2" value="d"> D</input>
+                                    </label>
+                                    <label class="btn btn-light" for="exampleRadios<?php echo ($i-1); ?>_1">
+                                      <input type="radio" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_1" value="d"> D</input>
+                                    </label>
+                                    <label class="btn btn-light" for="exampleRadios<?php echo ($i-1); ?>_0">
+                                      <input type="text" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_0" value="e"> E</input>
+                                    </label>
+                                  </div>
+                                </div>
+                                </td>
+                              </tr>
+                              <?php } ?>
+                              <?php } else { ?>
+                              <?php  echo "Answer sheet not available."; ?>
+                              <?php } ?> 
+                            </tbody>
+                          </table>
+
+                      <?php } elseif ($student['exam_title'] == 'The Keirsey Temperament Sorter') { ?>
+
+                        <table class="table table-hover text-nowrap " id="tableList">
+                            <tbody>
+                              <?php $sql = $db->query("SELECT * FROM $main_exam"); ?>
+                              <?php if($sql->num_rows > 0) { ?>
+                              <?php $i = 1; ?>
+                              <?php while($row = $sql->fetch_assoc()) { ?>
+                              <tr>
+                                <td>
+                                <p><b>Answer No. <?php echo $i++; ?></b></p>
+                                <div class="row">
+                                  <input type="hidden" name="answer[<?php echo ($i - 1); ?>][item_correct]" value="<?php echo $row['correct_items']; ?>">
+                                  <div class="btn-group">                                   
+                                    <label class="btn btn-light" for="exampleRadios<?php echo ($i-1); ?>_5">
+                                      <input type="radio" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_5" value="a"> a</input>
+                                    </label>    
+                                    <label class="btn btn-light" for="exampleRadios<?php echo ($i-1); ?>_4">
+                                      <input type="radio" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_4" value="b"> b</input>
+                                    </label>
+                                  </div>
+                                </div>
+                                </td>
+                              </tr>
+                              <?php } ?>
+                              <?php } else { ?>
+                              <?php  echo "Answer sheet not available."; ?>
+                              <?php } ?> 
+                            </tbody>
+                          </table>
+
+                      <?php } elseif ($student['exam_title'] == 'ESA') { ?>
+
+
+                        <table class="table table-hover text-nowrap " id="tableList">
+                            <tbody>
+                              <?php $sql = $db->query("SELECT * FROM $main_exam"); ?>
+                              <?php if($sql->num_rows > 0) { ?>
+                              <?php $i = 1; ?>
+                              <?php while($row = $sql->fetch_assoc()) { ?>
+                              <tr>
+                                <td>
+                                <p><b>Answer No. <?php echo $i++; ?></b></p>
+                                <div class="row">
+                                  <input type="hidden" name="answer[<?php echo ($i - 1); ?>][item_correct]" value="<?php echo $row['correct_items']; ?>">
+                                  <div class="btn-group">                                   
+                                    <label class="btn btn-light" for="exampleRadios<?php echo ($i-1); ?>_5">
+                                      <input type="radio" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_5" value="1"> 1</input>
+                                    </label>    
+                                    <label class="btn btn-light" for="exampleRadios<?php echo ($i-1); ?>_4">
+                                      <input type="radio" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_4" value="2"> 2</input>
+                                    </label>
+                                    <label class="btn btn-light" for="exampleRadios<?php echo ($i-1); ?>_3">
+                                      <input type="radio" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_3" value="3"> 3</input>
+                                    </label>
+                                    <label class="btn btn-light" for="exampleRadios<?php echo ($i-1); ?>_2">
+                                      <input type="radio" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_2" value="4"> 4</input>
+                                    </label>
+                                    <label class="btn btn-light" for="exampleRadios<?php echo ($i-1); ?>_1">
+                                      <input type="radio" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_1" value="5"> 5</input>
+                                    </label>
+                                  </div>
+                                </div>
+                                </td>
+                              </tr>
+                              <?php } ?>
+                              <?php } else { ?>
+                              <?php  echo "Answer sheet not available."; ?>
+                              <?php } ?> 
+                            </tbody>
+                          </table>
+
+                        
+                      <?php } elseif ($student['exam_title'] == 'Aptitude Verbal and Numerical') { ?>
+
+                        <table class="table table-hover text-nowrap " id="tableList">
+                            <tbody>
+                              <?php $sql = $db->query("SELECT * FROM $main_exam"); ?>
+                              <?php if($sql->num_rows > 0) { ?>
+                              <?php $i = 1; ?>
+                              <?php while($row = $sql->fetch_assoc()) { ?>
+                              <tr>
+                                <td>
+                                <p><b>Answer No. <?php echo $i++; ?></b></p>
+                                <div class="row">
+                                  <input type="hidden" name="answer[<?php echo ($i - 1); ?>][item_correct]" value="<?php echo $row['correct_items']; ?>">
+                                  <div class="btn-group">                                   
+                                    <label class="btn btn-light" for="exampleRadios<?php echo ($i-1); ?>_5">
+                                      <input type="text" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_5" > </input>
+                                    </label>    
+                                  </div>
+                                </div>
+                                </td>
+                              </tr>
+                              <?php } ?>
+                              <?php } else { ?>
+                              <?php  echo "Answer sheet not available."; ?>
+                              <?php } ?> 
+                            </tbody>
+                          </table>
+                        
                       <?php } ?>
                       
                     </div>

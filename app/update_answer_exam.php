@@ -305,7 +305,7 @@ if (isset($_POST["button_update"])) {
                     $sql2 = $db->query("INSERT INTO aptitude_j_and_c_2(correct_items) VALUES('$value')");
                 }
 
-                if ($sql12) {
+                if ($sql2) {
                     redirect('./view_exam', false);
                 } else {
                     redirect('./view_exam', false);

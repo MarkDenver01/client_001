@@ -66,7 +66,11 @@
       'Done',
       'Pending')");
       if($sql) {
-        redirect('./student_success_kit_result', false);
+        if ($exam_title == "Student Success Kit") {
+          redirect('./student_success_kit_result', false);
+        } elseif ($exam_title == "OASIS 3") {
+          redirect('./oassis_result.php');
+        }
       }
   }
 ?>
@@ -106,6 +110,9 @@
                       <tr>
                         <td class="bg-success text-white"><h3>Exam Item No</h3></td>
                         <td class="bg-success text-white"><h3>Exam Answer</h3></td>
+                        <?php if($exam_title == 'OASIS 3') { ?>
+                          <td class="bg-danger text-white"><h3>Correct Answer</h3></td>
+                        <?php } ?>
                       </tr>
                     </thead>
                     <tbody>                   
@@ -118,13 +125,30 @@
                     ?>
                       <tr>
                         <td><h3><?php echo $row['exam_item_no']; ?></h3></td>
-                        <td><h3><?php echo $row['exam_answer']; ?></h3></td>
+                        <?php if ($exam_title == "Student Success Kit") { ?>
+
+                          <td><h3><?php echo $row['exam_answer']; ?></h3></td>
+
+                        <?php } elseif($exam_title == "OASIS 3") { ?>
+
+                            <?php if($row['exam_answer'] === $row['exam_correct_answer']) { ?>
+                              <td style="background-image: linear-gradient(#d9534f, #AB274F);" class="text-white"><h3><?php echo $row['exam_answer']; ?></h3></td>
+                              <td style="background-image: linear-gradient(#d9534f, #AB274F);" class="text-white"><h3><?php echo $row['exam_correct_answer']; ?></h3></td>
+                            <?php } else { ?>
+                              <td ><h3><?php echo $row['exam_answer']; ?></h3></td>
+                              <td class="bg-light text-dark"><h3><?php echo $row['exam_correct_answer']; ?></h3></td>
+                            <?php } ?>
+                          
+
+                        <?php } ?>
                       </tr>
                     <?php
                         }
                       }
                     ?> 
                     <?php 
+                     if ($exam_title =="Student Success Kit") {
+                      
                       $sql = "SELECT exam_answer, COUNT(exam_answer) AS total FROM examinee_answer_v2 WHERE student_id ='$student_id' AND exam_id ='$exam_id' 
                       AND semester ='$semester' AND school_year ='$school_year' GROUP BY exam_answer ORDER BY COUNT(exam_answer) DESC LIMIT 1";
                       $result = $db->query($sql);
@@ -135,20 +159,59 @@
                           $data = $row['total'] / 8 * 40;
                         }
                       }
+
+                     } elseif ($exam_title == "OASIS 3") {
+                      $counter = 0;
+                      $sql = "SELECT * FROM examinee_answer_v2 WHERE student_id ='$student_id' AND exam_id ='$exam_id' 
+                      AND semester ='$semester' AND school_year ='$school_year'";
+                      $result = $db->query($sql);
+                      if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                          if ($row['exam_correct_answer'] == $row['exam_answer']) {
+                            $exam_answer = "0";
+                            if ($exam_desc == "Vocabulary") {
+                              $total_answer = "40";
+                            } elseif ($exam_desc == "Computation") {
+                              $total_answer = "30";
+                            } elseif ($exam_desc == "Spatial") {
+                              $total_answer = "20";
+                            } elseif ($exam_desc == "World Comparison") {
+                              $total_answer = "100";
+                            }
+                            $counter = $counter + 1;
+                          }
+                        }
+                      }
+
+                     }
                     ?>         
                       <tr>
-                        <td class="text-success"><h3>Total Score</h3></td>
-                        <td class="text-success"><h3><b>
-                          <?php echo $data; ?>
-                          
-                    </b></h3></td>
+                        <?php if($exam_title == "Student Success Kit") { ?>
+                          <td class="text-success"><h3>Total Score</h3></td>
+                          <td class="text-success"><h3><b><?php echo $data; ?></b></h3></td>
+                        <?php } elseif ($exam_title == "OASIS 3") { ?>
+                          <td class="text-success"><h3>Total Score</h3></td>
+                          <td class="text-success"><h3><b><?php echo $counter; ?></b></h3></td>
+                          <td class="text-success"><h3><b>
+                            <?php 
+                            
+                              echo "Remarks: -" ; 
+                            ?>
+                          </b></h3></td>
+                        <?php } ?>
                       </tr>
                     </tbody>
                   </table>
                   <form action="" method="POST">
-                    <input type="hidden" name="exam_answer" value="<?php echo $exam_answer; ?>">
-                    <input type="hidden"  name="total_answer" value="<?php echo $total_answer; ?>">
-                    <input type="hidden" name="total_score" value="<?php echo $data; ?>">
+                   <?php if ($exam_title == "Student Success Kit") { ?>
+                      <input type="hidden" name="exam_answer" value="<?php echo $exam_answer; ?>">
+                      <input type="hidden"  name="total_answer" value="<?php echo $total_answer; ?>">
+                      <input type="hidden" name="total_score" value="<?php echo $data; ?>">
+                   <?php } elseif ($exam_title == "OASIS 3") { ?>
+                      <input type="hidden" name="exam_answer" value="<?php echo $exam_answer; ?>">
+                      <input type="hidden"  name="total_answer" value="<?php echo $total_answer; ?>">
+                      <input type="hidden" name="total_score" value="<?php echo $counter; ?>">
+                  <?php } ?>
                     <button class="btn btn-success rounded-0 w-100 btn-lg" name="button_submit" type="submit">Submit</button>
                   </form>
                   </div>
