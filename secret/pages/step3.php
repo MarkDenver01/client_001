@@ -282,6 +282,16 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             }
           }
         }
+      
+        // health
+        if (isset($db_sql_27)) {
+          foreach ($db_sql_27 as $sql) {
+            $conn->query($sql);
+            if ($conn->error) {
+              die($conn->error);
+            }
+          }
+        }
 
         // time management
         if (isset($db_sql_28)) {
@@ -466,6 +476,76 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         // aptitude j and c 4
         if (isset($db_sql_46)) {
           foreach ($db_sql_46 as $sql) {
+            $conn->query($sql);
+            if ($conn->error) {
+              die($conn->error);
+            }
+          }
+        }
+
+        // examinee
+        if (isset($db_sql_47)) {
+          foreach ($db_sql_47 as $sql) {
+            $conn->query($sql);
+            if ($conn->error) {
+              die($conn->error);
+            }
+          }
+        }
+
+        // examinee answer
+        if (isset($db_sql_48)) {
+          foreach ($db_sql_48 as $sql) {
+            $conn->query($sql);
+            if ($conn->error) {
+              die($conn->error);
+            }
+          }
+        }
+
+        // academic settings
+        if (isset($db_sql_49)) {
+          foreach ($db_sql_49 as $sql) {
+            $conn->query($sql);
+            if ($conn->error) {
+              die($conn->error);
+            }
+          }
+        }
+
+        // examinee answer v2
+        if (isset($db_sql_50)) {
+          foreach ($db_sql_50 as $sql) {
+            $conn->query($sql);
+            if ($conn->error) {
+              die($conn->error);
+            }
+          }
+        }
+
+        // exam attempts
+        if (isset($db_sql_51)) {
+          foreach ($db_sql_51 as $sql) {
+            $conn->query($sql);
+            if ($conn->error) {
+              die($conn->error);
+            }
+          }
+        }
+
+        // noify student
+        if (isset($db_sql_52)) {
+          foreach ($db_sql_52 as $sql) {
+            $conn->query($sql);
+            if ($conn->error) {
+              die($conn->error);
+            }
+          }
+        }
+
+        // monitoring student
+        if (isset($db_sql_53)) {
+          foreach ($db_sql_53 as $sql) {
             $conn->query($sql);
             if ($conn->error) {
               die($conn->error);

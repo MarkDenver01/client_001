@@ -41,8 +41,7 @@ function addStudentAccount($full_name,
                            $course,
                            $year,
                            $semester,
-                           $start_school_year,
-                           $end_school_year,
+                           $school_year,
                            $gender,
                            $age,
                            $birth_date,
@@ -58,9 +57,16 @@ function addStudentAccount($full_name,
       $birth_date,
       $present_address
     );
+
     validate_fields($req_fields); // check if fields are not empty
 
-    $school_year = $_POST[$start_school_year].'-'.$_POST[$end_school_year];
+    $is_check = check_academic();
+    if (!$is_check) {
+      $session->message("d", "Please set up the semester and school year first.");
+      redirect('./register_student_account', false);
+      return;
+    }
+
     $default_password = sha1("default");
     
     if (empty($errors)) {
@@ -77,7 +83,7 @@ function addStudentAccount($full_name,
         remove_junk($_POST[$course]),
         remove_junk($_POST[$year]),
         remove_junk($_POST[$semester]),
-        $school_year,
+        remove_junk($_POST[$school_year]),
         remove_junk($_POST[$gender]),
         remove_junk($_POST[$age]),
         remove_junk($_POST[$birth_date]),
@@ -287,11 +293,17 @@ function switch_user_level($email_address, $user_level) {
     case '3':
         // find info from student
         $student = find_student_login($email_address);
+        // set academic settings
+        $academic_settings = get_academic_settings();
         // find available exam
-        $exam = find_by_available_exam($student['student_year']);
+        $exam = find_by_available_exam(
+          $student['student_year'], 
+          $academic_settings['semester'], 
+          $academic_settings['school_year']);
         // create session with email address
         // pass the info that filtered by email to array list
         $arr = array(
+          'student_id' => $student['id'],
           'name' => $student['name'],
           'course' => $student['course'],
           'semester' => $student['semester'],
@@ -305,7 +317,10 @@ function switch_user_level($email_address, $user_level) {
           'user_level' => $student['user_level'],
           'status' => $student['status'],
           'is_logged_in' => $student['is_logged_in'],
-          'exam_status' => $exam['exam_status']
+          'exam_status' => $exam['exam_status'],
+          'exam_title' => $exam['exam_title'],
+          'academic_semester' => $academic_settings['semester'],
+          'academic_school_year' => $academic_settings['school_year']
         );
         // then pass the array to session
         $session->login_session($arr);
@@ -465,6 +480,26 @@ function change_password($new_password, $confirm_password) {
     }
 }
 
+function change_password_v2($new_password, $confirm_password) {
+  global $session;
+  $new_password = remove_junk($_POST[$new_password]);
+  $confirm_password = remove_junk($_POST[$confirm_password]);
+  if (empty($errors)) {
+    if ($new_password == $confirm_password) {
+      if ($new_password == "default" || $confirm_password == "default") {
+        $session->message('w', 'Please change your default password.');
+        redirect('account_settings', false);
+      } else {
+        change_password_by_query($_SESSION['key_session']['email_address'], $new_password);
+        redirect('account_settings', false);
+      }
+    } else {
+      $session->message('w', 'Password does not match. Please try again');
+      redirect('account_settings', false);
+    }
+  }
+}
+
 function SET_LOGGED_IN() {
   global $session;
   if ($_ENV['SITE_INSTALLATION_COMPLETED'] == false) {
@@ -511,6 +546,12 @@ function IS_ADMIN_LEVEL() {
     if ($user_level != '1') {
       redirect('./dashboard', false);
     }
+  }
+}
+
+function CHECK_EXAM_AVAILABILITY() {
+  if(isset($_SESSION['key_session']['exam_status']) && $_SESSION['key_session']['exam_status'] == 'Not Ready') {
+    redirect('./dashboard', false);
   }
 }
 
@@ -610,9 +651,11 @@ function check_user_level() {
   }
 }
 
-function create_exam($student_year, $title, $description, $category, $image_file_path, $image_dir, $redirect_page) {
+function create_exam($student_year, $semester, $school_year, $title, $description, $category, $image_file_path, $image_dir, $redirect_page) {
   global $session;
   $student_year = $_POST[$student_year];
+  $semester = $_POST[$semester];
+  $school_year = $_POST[$school_year];
   $title = $_POST[$title];
   $description = $_POST[$description];
   $category = $_POST[$category];
@@ -640,20 +683,37 @@ function create_exam($student_year, $title, $description, $category, $image_file
             if ($category == 'Select exam category' || empty($category)) {
               $category = 'N/A';
             }
-            
-            $data = array(
-              'student_year' => $student_year,
-              'exam_title' => $title,
-              'exam_description' => $description,
-              'exam_category' => $category,
-              'image_exam_path' => $dir,
-              'created_at' => $created_at,
-              'exam_status' => '1'
-            );
-            // insert data
-            insert_new_exam($data);
-            $session->message('s', 'Exam has been uploaded');
-            redirect($redirect_page, false);
+
+            $is_check = check_academic();
+
+            if ($is_check) {
+              $data = array(
+                'student_year' => $student_year,
+                'semester' => $semester,
+                'school_year' => $school_year,
+                'exam_title' => $title,
+                'exam_description' => $description,
+                'exam_category' => $category,
+                'image_exam_path' => $dir,
+                'created_at' => $created_at,
+                'exam_status' => '1'
+              );
+              $check_new_exam = check_create_exam($title, $description, $category);
+
+              if ($check_new_exam) {
+                $session->message('w', 'Exam already exist');
+                redirect($redirect_page, false);
+                return;
+              }
+
+              // insert data
+              insert_new_exam($data);
+              $session->message('s', 'Exam has been uploaded');
+              redirect($redirect_page, false);
+            } else {
+              $session->message('w', 'Please set up the semester and school year first.');
+              redirect($redirect_page, false);
+            }  
           } else {
             $session->message('d', $errors);
             redirect($redirect_page, false);
@@ -671,21 +731,37 @@ function create_exam($student_year, $title, $description, $category, $image_file
 }
 
 # TODO : add validation for schedule of exam
-function create_exam_schedule($student_year, $exam_title, $created_at, $expired_at, $exam_duration, $result_date, $exam_status) {
+function create_exam_schedule($student_year, $semester, $school_year, $exam_title, $exam_description, $exam_category, $expired_at, $exam_duration, $result_date, $exam_status) {
   global $db;
   global $session;
   $student_year = $_POST[$student_year];
+  $semester = $_POST[$semester];
+  $school_year = $_POST[$school_year];
   $exam_title = $_POST[$exam_title];
-  $created_at = $_POST[$created_at];
+  $exam_description = $_POST[$exam_description];
+  $exam_category = $_POST[$exam_category];
+  $created_at =  date('d/m/Y');
   $expired_at = $_POST[$expired_at];
   $exam_duration = $_POST[$exam_duration];
   $result_date = $_POST[$result_date];
   $exam_status  = $_POST[$exam_status];
 
+  if ($exam_title == 'OASIS 3' || 
+  $exam_title == 'BarOn EQ-i:S' || 
+  $exam_title == 'The Keirsey Temperament Sorter' || 
+  $exam_title == 'ESA' || 
+  $exam_title == 'Aptitude Verbal and Numerical') {
+    $exam_category = "N/A";
+  }
+
   $data = array(
     'student_year' => $student_year,
+    'semester' => $semester,
+    'school_year' => $school_year,
     'exam_title' => $exam_title,
-    'created_at' => $created_at,
+    'exam_description' => $exam_description,
+    'exam_category' => $exam_category,
+    'created_at' => $_GET[$created_at],
     'expired_at' => $expired_at,
     'exam_duration' => $exam_duration,
     'result_date' => $result_date,
@@ -699,66 +775,96 @@ function create_exam_schedule($student_year, $exam_title, $created_at, $expired_
     $user_level = 'Guidance';
   }
 
-  $sql = "SELECT * FROM student_info WHERE student_year ='" .$student_year. "'";
-  $result = $db->query($sql);
-    
-  while($users = mysqli_fetch_assoc($result)) {
-    if (empty($users['email_address'])) {
-      $session->message('s', 'There is/are no registered students. Please add first.');
+  $is_check = check_academic();
+  if (!$is_check) {
+    $session->message('w', 'Please set the semester and school year first.');
+    redirect('./exam_schedule', false);
+    return;
+  }
+
+  $result = find_all_student($student_year);
+  if ($result['email_address'] == '') {
+    $session->message('w', 'There is/are no registered students. Please add the student information first.');
+    redirect('./exam_schedule', false);
+  } else {
+
+    $check_exam_if_exist = check_exam_schedule($exam_title, $exam_description, $exam_category);
+    if ($check_exam_if_exist) {
+      $session->message('w', 'Exam has been already scheduled. Please try again.');
       redirect('./exam_schedule', false);
-    } else {
+      return;
+    }
 
-        $success = insert_exam_schedule($data);
-        if ($success) {
-          insert_post_announcements(
-            "Schedule of Exam - " .$student_year, 
-            "Exam title: " .$exam_title. "<br/>Exam will be closed at: " .$expired_at,
-            null, 
-            $user_level
-          );
-
-        $subject = "Exam Schedule has been posted";
-        $content = 'Hi Students';
-        $content .= '<br/>';
-        $content .= '<br/>';
-        $content .= 'This email has remind you that the schedule of exam has been posted in the website.';
-        $content .= '<br/>';
-        $content .= '---------------------------------------';
-        $content .= '<br/>';
-        $content .= 'Year level:' .$student_year;
-        $content .= '<br/>';
-        $content .= 'Exam Type:' .$exam_title;
-        $content .= '<br/>';
-        $content .= 'Exam started at: ' .$created_at;
-        $content .= '<br/>';
-        $content .= 'Exam will be ended at: ' .$expired_at;
-        $content .= '<br/>';
-        $content .= '---------------------------------------';
-        $content .= '<br/>';
-        $content .= '<br/>';
-        $content .= 'Thank you.';
-  
-         // send mail account created
-        $send = send_email(
-          $users['email_address'],
-          $users['name'],
-          $subject,
-          $content
+    $success = insert_exam_schedule($data);
+      if ($success) {
+        insert_post_announcements(
+          "Schedule of Exam - " .$student_year, 
+          "Exam title: " .$exam_title. "<br/>Exam will be closed at: " .$expired_at,
+          null, 
+          $user_level
         );
 
-        if ($send) {
-          $session->message('s', 'Exam schedule set up has been successful');
-          redirect('./exam_schedule', false);
-        } else {
-          $session->message('d', 'The posted exam not send to the students ');
-          redirect('./exam_schedule', false);
-        }
+      $subject = "Exam Schedule has been posted";
+      $content = 'Hi Students';
+      $content .= '<br/>';
+      $content .= '<br/>';
+      $content .= 'This email has remind you that the schedule of exam has been posted in the website.';
+      $content .= '<br/>';
+      $content .= '---------------------------------------';
+      $content .= '<br/>';
+      $content .= 'Year level:' .$student_year;
+      $content .= '<br/>';
+      $content .= 'Exam Type:' .$exam_title;
+      $content .= '<br/>';
+      $content .= 'Exam started at: ' .$created_at;
+      $content .= '<br/>';
+      $content .= 'Exam will be ended at: ' .$expired_at;
+      $content .= '<br/>';
+      $content .= '---------------------------------------';
+      $content .= '<br/>';
+      $content .= '<br/>';
+      $content .= 'Thank you.';
 
+       // send mail account created
+      $send = send_email(
+        $result['email_address'],
+        $result['name'],
+        $subject,
+        $content
+      );
+
+      if ($send) {
+        $session->message('s', 'Exam has been posted');
+        redirect('./exam_schedule', false);
       } else {
-        $session->message('d', 'Exam schedule set up has been failed');
+        $session->message('d', 'The posted exam not send to the students ');
         redirect('./exam_schedule', false);
       }
+
+    } else {
+      $session->message('d', 'Exam schedule set up has been failed');
+      redirect('./exam_schedule', false);
     }
   }
+}
+
+function set_academic($semester, $start_school_year, $end_school_year) {
+    global $session;
+    $semester = $_POST[$semester];
+    $school_year = $_POST[$start_school_year]. "-" .$_POST[$end_school_year];
+
+    $data = array(
+      "semester" => $semester,
+      "school_year" => $school_year
+    );
+
+    $is_check = check_academic();
+    if ($is_check) {
+      update_academic_settings($data);
+    } else {
+      insert_academic_settings($data);
+    }
+    $session->message('s', 'Semester and school year has been set.');
+    redirect('./set_academic_settings', false);
 }
 ?>

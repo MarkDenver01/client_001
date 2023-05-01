@@ -1,6 +1,7 @@
 <?php include('../header.php'); ?>
 <?php include('../includes/load.php'); ?>
 <?php SET_NOT_LOGGED_IN(); ?>
+
 <?php include('../start_menu_bar.php'); ?>
 
 <main id="main" class="main">
@@ -367,11 +368,81 @@
       <div class="card info-card customers-card rounded-0">
         <?php global $db; ?>
         <?php 
-          $sql = "SELECT count(*) as total FROM student_info";
+          $sql = "SELECT count(*) as total FROM exam_schedule WHERE student_year ='" .$_SESSION['key_session']['student_year']. 
+          "' AND semester ='" .$_SESSION['key_session']['semester']. 
+          "' AND school_year ='" .$_SESSION['key_session']['school_year'].
+          "' AND exam_status ='Ready'";
           $result = $db->query($sql);
           $read = mysqli_fetch_assoc($result);
-          $read_avg = $read['total'] * 2 / 5;
         ?>
+        <div class="card-body ">
+          <h5 class="card-title">Active Exam <span>| status</span></h5>
+
+          <div class="d-flex align-items-center ">
+            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+              <i class="ri-file-user-line"></i>
+            </div>
+            <div class="ps-3">
+              <h6><?php echo $read['total']; ?></h6>
+              <span class="text-success small pt-1 fw-bold"><?php echo $read['total']; ?></span> <span class="text-muted small pt-2 ps-1"> out of <?php echo $read['total']; ?></span>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="card info-card customers-card rounded-0">
+        <?php  
+          $student_id = $_SESSION['key_session']['student_id'];
+          $semester = $_SESSION['key_session']['academic_semester'];
+          $school_year = $_SESSION['key_session']['academic_school_year']; 
+          $exam_title = $_SESSION['key_session']['exam_title'];
+        ?>
+        <?php global $db; ?>
+        <?php global $session; ?>
+        <?php 
+                                $check_monitor = false;
+                            $sql = "SELECT exam_answer,counselor_notify_status, SUM(total_score) AS total FROM examinee WHERE student_id ='$student_id' 
+                                AND semester ='$semester' AND school_year ='$school_year' AND exam_title = '$exam_title'";
+                                if ($exam_title == 'Student Success Kit') {
+                                  $result = $db->query($sql);
+                                  if ($result->num_rows > 0) {
+                                      while ($row = $result->fetch_assoc()) {
+                                          $highest_prob = $row['exam_answer'];
+                                          $data = $row['total'] / 18;
+                                          $counselour_stats = $row['counselor_notify_status'];
+                                      }
+                                  }
+                                  switch($data) {
+                                    case $data >= 25 and $data <= 40:
+                                        $check_monitor = true;
+                                        $msg = "Monitoring";
+                                        if ($counselour_stats == "Pending") {
+                                          for($i = 0; $i < $data; $i++) {
+                                            $sql = "UPDATE examinee SET counselor_notify_status='$msg' WHERE student_id ='$student_id'";
+                                            $db->query($sql);
+                                          }
+                                        }
+                                      break;
+                                    case $data >= 0 and $data <= 20:
+                                        $check_monitor = false;
+                                        $msg = "Counseling";
+                                        if ($counselour_stats == 'Pending') {
+                                          for($i = 0; $i < $data; $i++) {
+                                            $sql = "UPDATE examinee SET counselor_notify_status='$msg' WHERE student_id ='$student_id'";
+                                            $db->query($sql);
+                                          }
+                                        }
+                                      break;
+                                      default:
+                                        $msg = "Not in range";
+                                  }
+                                } else {
+                                  $dev_msg = "Dev is still fixing this issue. Pls. wait.";
+                                }
+                                
+                               
+                            ?>
         <div class="card-body ">
           <h5 class="card-title">Exam Result <span>| status</span></h5>
 
@@ -380,19 +451,28 @@
               <i class="ri-file-user-line"></i>
             </div>
             <div class="ps-3">
-              <h6><?php echo $read['total']; ?></h6>
-              <span class="text-success small pt-1 fw-bold"><?php echo $read_avg.'%'; ?></span> <span class="text-muted small pt-2 ps-1">FAILED</span>
+              <?php if ($exam_title == 'Student Success Kit') { ?>
+                <h6><?php echo $data."%"; ?></h6>
+                <span class="text-success small pt-1 fw-bold"><?php echo $msg; ?></span> 
+               
+              <?php } else { ?>
+                <h6><?php echo $dev_msg; ?></h6>
+                <span class="text-success small pt-1 fw-bold"><?php echo $dev_msg; ?></span>
+              <?php } ?>
+             
 
             </div>
           </div>
         </div>
 
       </div>
+         
+      
     </div><!-- End Students Card -->
 
     <!-- Number of visits Card -->
     <div class="col-xxl-12 col-md-12">
-
+    <?php $notify_count = count_notification($_SESSION['key_session']['student_id']); ?>
       <div class="card info-card revenue-card rounded-0">
 
         <div class="card-body">
@@ -403,7 +483,7 @@
               <i class="ri-chat-check-line"></i>
             </div>
             <div class="ps-3">
-              <h6>0</h6>
+              <h6><?php echo $notify_count; ?></h6>
               <span class="text-muted small pt-2 ps-1">Notification</span>
 
             </div>
@@ -415,70 +495,6 @@
     </div><!-- End number of visits Card -->
 
 
-    <!-- Reports -->
-    <div class="col-12">
-      <div class="card rounded-0">
-
-        <div class="card-body">
-          <h5 class="card-title">Student Exam Summary <span>/Result</span></h5>
-
-           <!-- Pie Chart -->
-           <div id="pieChart" style="min-height: 400px;" class="echart"></div>
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    echarts.init(document.querySelector("#pieChart")).setOption({
-      title: {
-        text: 'Student Success Kit',
-        subtext: 'Academic Skills Development',
-        left: 'center'
-      },
-      tooltip: {
-        trigger: 'item'
-      },
-      legend: {
-        orient: 'vertical',
-        left: 'left'
-      },
-      series: [{
-        name: 'Access From',
-        type: 'pie',
-        radius: '50%',
-        data: [{
-            value: 1048,
-            name: 'Reading'
-          },
-          {
-            value: 735,
-            name: 'Writing'
-          },
-          {
-            value: 580,
-            name: 'Speaking'
-          },
-          {
-            value: 484,
-            name: 'Listening'
-          }
-        ],
-        emphasis: {
-          itemStyle: {
-            shadowBlur: 10,
-            shadowOffsetX: 0,
-            shadowColor: 'rgba(0, 0, 0, 0.5)'
-          }
-        }
-      }]
-    });
-  });
-</script>
-<!-- End Pie Chart -->
-
-          
-        </div>
-
-      </div>
-    </div><!-- End Reports -->
 
     
 

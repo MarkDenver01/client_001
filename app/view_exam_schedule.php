@@ -24,7 +24,7 @@
   </div><!-- End Page Title -->
 
 
-<section class="section" style="width: 1460px;">
+<section class="section" style="width: 1560px;">
     <div class="row">
       <!-- start create account -->
       <div class="card rounded-0">
@@ -34,7 +34,13 @@
             <div class="box-body">
             <form action="" method="POST">
 		          <div class="row">
-        	      <div class="col-sm-4">
+                <div class="col-sm-2">
+                  <form action="" method="POST">
+                    <button name="button_schedule" type="submit" class="btn btn-primary btn-sm rounded-0"><i class="bx bx-refresh"></i> Add Schedule</button>
+					          <button name="button_reload" type="submit" class="btn btn-success btn-sm rounded-0"><i class="bx bx-refresh"></i> Reload</button>
+                  </form>
+                </div>
+        	      <div class="col-sm-2">
 				          <!-- <button type="button" class="btn btn-secondary rounded-0 btn-sm"><i class="bi bi-printer-fill"></i> Print</button> -->
 			          </div>
                 
@@ -50,12 +56,7 @@
                   <button name="button_filter" type="submit" class="btn btn-secondary text-white rounded-0 btn-sm w-100"><i class="bi bi-search"></i> </button>
                 </div>
                 <div class="col-sm-2"></div>
-			          <div class="col-sm-2">
-                  <form action="" method="POST">
-                  <button name="button_schedule" type="submit" class="btn btn-primary btn-sm rounded-0"><i class="bx bx-refresh"></i> Add Schedule</button>
-					          <button name="button_reload" type="submit" class="btn btn-success btn-sm rounded-0"><i class="bx bx-refresh"></i> Reload</button>
-                  </form>
-			          </div>
+			          <div class="col-sm-2"></div>
 		          </div>
             </form>
             </div>
@@ -70,14 +71,16 @@
               <div class="card rounded-0">
                 <div class="card-body">
                   <!-- Table with hoverable rows -->
-                  <table class="table table-sm table-hover datatable">
+                  <table class="table table-sm table-hover datatable text-nowrap">
                     <thead>
                       <tr>
-                        <th scope="col" class="text-center" style="width: 20%;">Student Year</th>
-                        <th scope="col" class="text-center" style="width: 20%;">Exam Type</th>
-                        <th scope="col" class="text-center" style="width: 20%;">Time Limit (secs/min)</th>
-                        <th scope="col" class="text-center" style="width: 20%;">Expired At</th>
-                        <th scope="col" class="text-center" style="width: 20%;">Action</th>
+                        <th scope="col" class="text-center" style="width: 10%;">Student Year</th>
+                        <th scope="col" class="text-center" style="width: 20%;">Type</th>
+                        <th scope="col" class="text-center" style="width: 20%;">Description</th>
+                        <th scope="col" class="text-center" style="width: 20%;">Category</th>
+                        <th scope="col" class="text-center" style="width: 5%;">Time Limit</th>
+                        <th scope="col" class="text-center" style="width: 10%;">Expired At</th>
+                        <th scope="col" class="text-center" style="width: 5%;">Exam Status</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -87,14 +90,17 @@
                       <?php foreach($schedules as $schedule): ?>
                         <tr>
                         <td id="<?php echo $schedule['id']; ?>" scope="row" class="text-center" hidden>
-                        <th data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $schedule['student_year']; ?></th>
+                        <th data-target="name" scope="row" class="text-center" style="width: 10%;"><?php echo $schedule['student_year']; ?></th>
                         <td data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $schedule['exam_title']; ?></td>
-                        <td data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $schedule['exam_duration']; ?></td>
-                        <td data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $schedule['expired_on']; ?></td>
-                        <td class="text-center" style="width: 20%;">
-                            <a href="#" type="button" class="btn btn-primary rounded-pill btn-sm w-50">Manage</button>
-                            <a href="../includes/delete_exam_schedule?id=<?php echo $schedule['id']; ?>" type="button" class="btn btn-danger rounded-pill btn-sm w-50 text-light">Remove</a>
-                        </td>
+                        <td data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $schedule['exam_description']; ?></td>
+                        <td data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $schedule['exam_category']; ?></td>
+                        <td data-target="name" scope="row" class="text-center" style="width: 5%;"><?php echo $schedule['exam_duration']; ?></td>
+                        <td data-target="name" scope="row" class="text-center" style="width: 10%;"><?php echo $schedule['expired_on']; ?></td>
+                          <?php if ($schedule['exam_status'] == 'Ready') { ?>
+                        <th data-target="name" scope="row" class="text-center text-success" style="width: 5%"?><?php echo $schedule['exam_status']; ?></th>
+                          <?php } else { ?>
+                        <th data-target="name" scope="row" class="text-center text-danger" style="width: 5%"?><?php echo $schedule['exam_status']; ?></th>
+                          <?php } ?>
                       </tr>
                       <?php endforeach; ?>
                       <?php } else { ?>
@@ -102,14 +108,17 @@
                       <?php foreach($schedules as $schedule): ?>
                       <tr>
                         <td id="<?php echo $schedule['id']; ?>" scope="row" class="text-center" hidden>
-                        <th data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $schedule['student_year']; ?></th>
+                        <th data-target="name" scope="row" class="text-center" style="width: 10%;"><?php echo $schedule['student_year']; ?></th>
                         <td data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $schedule['exam_title']; ?></td>
-                        <td data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $schedule['exam_duration']; ?></td>
-                        <td data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $schedule['expired_on']; ?></td>
-                        <td class="text-center" style="width: 20%;">
-                            <a href="#" type="button" class="btn btn-primary rounded-pill btn-sm w-50">Manage</button>
-                            <a href="../includes/delete_exam_schedule?id=<?php echo $schedule['id']; ?>" type="button" class="btn btn-danger rounded-pill btn-sm w-50 text-light">Remove</a>
-                        </td>
+                        <td data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $schedule['exam_description']; ?></td>
+                        <td data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $schedule['exam_category']; ?></td>
+                        <td data-target="name" scope="row" class="text-center" style="width: 5%;"><?php echo $schedule['exam_duration']; ?></td>
+                        <td data-target="name" scope="row" class="text-center" style="width: 10%;"><?php echo $schedule['expired_on']; ?></td>
+                          <?php if ($schedule['exam_status'] == 'Ready') { ?>
+                        <th data-target="name" scope="row" class="text-center text-success" style="width: 5%"?><?php echo $schedule['exam_status']; ?></th>
+                          <?php } else { ?>
+                        <th data-target="name" scope="row" class="text-center text-danger" style="width: 5%"?><?php echo $schedule['exam_status']; ?></th>
+                          <?php } ?>
                       </tr>
                       <?php endforeach; ?>
                       <?php } ?>

@@ -12,8 +12,11 @@
 if (isset($_POST['button_schedule'])) {
   create_exam_schedule(
     "student_year",
+    "semester",
+    "school_year",
     "exam_title",
-    "created_at",
+    "exam_description",
+    "exam_category",
     "expired_at",
     "exam_duration",
     "result_date",
@@ -43,6 +46,7 @@ if (isset($_POST['button_schedule'])) {
               Manage Exam Schedule and Send Notification
             </h5>
             <hr/>
+            <?php $academic_settings = get_academic_settings(); ?>
             <form class="row g-3" action="" method="POST" enctype="multipart/form-data">
                <?php echo display_message($msg); ?>
                <div class="col-lg-6">
@@ -73,9 +77,23 @@ if (isset($_POST['button_schedule'])) {
                    </select>
                  </div>
 
+                 <label for="inputNumber" class="col-sm-5 col-form-label">Exam Description</label>
+                 <div class="col-sm-10">
+                   <select id="exam_description" name="exam_description" class="form-select rounded-0">
+                     <option selected>Select exam description</option>
+                   </select>
+                 </div>
+
+                 <label id="exam_category_label" for="inputNumber" class="col-sm-5 col-form-label">Exam Category</label>
+                 <div class="col-sm-10">
+                   <select id="exam_category" name="exam_category" class="form-select rounded-0">
+                     <option selected>Select exam category</option>
+                   </select>
+                 </div>
+
                  <label for="inputNumber" class="col-sm-5 col-form-label">Created At</label>
                  <div class="col-sm-10">
-                   <input id="created_at" name="created_at" type="text" class="form-control rounded-0 text-danger" value="<?php echo date('d/m/Y'); ?>" readonly>
+                   <input id="created_at" type="text" class="form-control rounded-0 text-danger" value="<?php echo date('d/m/Y'); ?>" readonly>
                  </div>
 
                  <label for="inputNumber" class="col-sm-5 col-form-label">Expired At</label>
@@ -105,6 +123,16 @@ if (isset($_POST['button_schedule'])) {
                  <label for="inputNumber" class="col-sm-5 col-form-label">Date of Exam Result</label>
                  <div class="col-sm-10">
                    <input name="result_date" type="date" class="form-control text-success rounded-0">
+                 </div>
+          
+                <label for="inputNumber" class="col-sm-5 col-form-label">Semester</label>
+                 <div class="col-sm-10">
+                   <input name="semester" type="text" class="form-control text-success rounded-0" value="<?php echo $academic_settings['semester']; ?>" readonly>
+                 </div>
+
+                <label for="inputNumber" class="col-sm-5 col-form-label">School Year</label>
+                 <div class="col-sm-10">
+                   <input name="school_year" type="text" class="form-control text-danger rounded-0" value="<?php echo $academic_settings['school_year']; ?>" readonly>
                  </div>
 
                  <label for="inputNumber" class="col-sm-5 col-form-label">Exam Status</label>
@@ -149,6 +177,48 @@ if (isset($_POST['button_schedule'])) {
               $('#exam_title').html('<option value="">Select student year first</option>');
         }
     });
+
+    $('#exam_title').on('change', function() {
+        $.ajax({
+          type: 'POST',
+          url: './ajax/exam_sched_desc_ajax_func.php',
+          data: {
+            student_year: $('#student_year').val(), 
+            exam_title: $('#exam_title').val()
+          }, 
+          success:function(html) {
+            $('#exam_description').html(html);
+          }
+        });
+      });
+
+    $('#exam_description').on('change', function() {
+        $.ajax({
+          type: 'POST',
+          url: './ajax/exam_sched_category_ajax_func.php',
+          data: {
+            student_year: $('#student_year').val(),
+            exam_title: $('#exam_title').val(), 
+            exam_description: $('#exam_description').val()
+          },
+          success: function(html) {
+            if($('#exam_description').val() == "Academic Skills Development" 
+            || $('#exam_description').val() == "Study and Thinking Skills" 
+            || $('#exam_description').val() == "Personal Issues" 
+            || $('#exam_description').val() == "Planning for the future" 
+            || $('#exam_description').val() == "Resources needs"
+            || $('#exam_description').val() == "Aptitude J and C") {
+              $('#exam_category').html(html);
+              $('#exam_category').show();
+              $('#exam_category_label').show();
+            } else {
+              $('#exam_category').hide();
+              $('#exam_category_label').hide();
+            }
+          } 
+        })
+      });
+
   });
  </script>
 <?php include('../footer.php'); ?>

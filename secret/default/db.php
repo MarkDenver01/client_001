@@ -189,12 +189,15 @@ $db_sql_10[] = "DROP TABLE IF EXISTS `exam_created`";
 $db_sql_10[] = "CREATE TABLE `exam_created` (
   `id` int(11) NOT NULL,
   `student_year` VARCHAR(255) NOT NULL,
+  `semester` VARCHAR(255) NOT NULL,
+  `school_year` VARCHAR(255) NOT NULL,
   `exam_title` VARCHAR(255) NOT NULL,
   `exam_description` VARCHAR(255) NOT NULL,
   `exam_category` VARCHAR(255) NOT NULL,
   `image_exam_path` VARCHAR(255) NOT NULL,
   `created_at` datetime NOT NULL,
-  `exam_status` int(11)
+  `exam_status` int(11) NOT NULL,
+  `updated_answer` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
 
 $db_sql_10[] = "ALTER TABLE `exam_created`
@@ -212,7 +215,11 @@ $db_sql_11[] = "DROP TABLE IF EXISTS `exam_schedule`";
 $db_sql_11[] = "CREATE TABLE `exam_schedule` (
   `id` int(11) NOT NULL,
   `student_year` VARCHAR(255) NOT NULL,
+  `semester` VARCHAR(255) NOT NULL,
+  `school_year` VARCHAR(255) NOT NULL,
   `exam_title` VARCHAR(255) NOT NULL,
+  `exam_description` VARCHAR(255) NOT NULL,
+  `exam_category` VARCHAR(255) NOT NULL,
   `created_on` datetime NOT NULL,
   `expired_on` datetime NOT NULL,
   `exam_duration` int(11) NOT NULL,
@@ -735,3 +742,154 @@ ADD PRIMARY KEY(`id`)";
 
 $db_sql_46[] = "ALTER TABLE `aptitude_j_and_c_4`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT"; 
+
+// =================== examinee  ========================== //
+$db_sql_47[] = "DROP TABLE IF EXISTS `examinee`";
+
+$db_sql_47[] = "CREATE TABLE `examinee` (
+  `examinee_id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `exam_id` int(11) NOT NULL,
+  `name` VARCHAR(255) NOT NULL,
+  `email_address` VARCHAR(255) NOT NULL,
+  `gender` VARCHAR(255) NOT NULL,
+  `course` VARCHAR(255) NOT NULL,
+  `semester` VARCHAR(255) NOT NULL,
+  `school_year` VARCHAR(255) NOT NULL,
+  `student_year` VARCHAR(255) NOT NULL,
+  `exam_title` VARCHAR(255) NOT NULL,
+  `exam_description` VARCHAR(255) NOT NULL,
+  `exam_category` VARCHAR(255) NOT NULL,
+  `start_exam_date` datetime NOT NULL,
+  `exam_answer` VARCHAR(255) NOT NULL,
+  `total_answer` VARCHAR(255) NOT NULL,
+  `total_score` VARCHAR(255) NOT NULL,
+  `exam_result_status` VARCHAR(255) NOT NULL,
+  `counselor_notify_status` VARCHAR(255) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+$db_sql_47[] = "ALTER TABLE `examinee`
+ADD PRIMARY KEY(`examinee_id`)";
+
+$db_sql_47[] = "ALTER TABLE `examinee`
+MODIFY `examinee_id` int(11) NOT NULL AUTO_INCREMENT"; 
+
+
+$db_sql_47[] = "ALTER TABLE `examinee`
+ADD INDEX email_address (`email_address`)";
+
+// =================== examninee table ========================== //
+$db_sql_48[] = "DROP TABLE IF EXISTS `examinee_answer`";
+
+$db_sql_48[] = "CREATE TABLE `examinee_answer` (
+  `id` int(11) NOT NULL,
+  `email_address` VARCHAR(255) NOT NULL,
+  `student_year` VARCHAR(255) NOT NULL,
+  `semester` VARCHAR(255) NOT NULL,
+  `school_year` VARCHAR(255) NOT NULL,
+  `exam_title` VARCHAR(255) NOT NULL,
+  `exam_description` VARCHAR(255) NOT NULL,
+  `exam_category` VARCHAR(255) NOT NULL,
+  `exam_no` int(11) NOT NULL,
+  `exam_correct_answer` VARCHAR(255) NOT NULL,
+  `exam_answer` VARCHAR(255) NOT NULL,
+  `exam_answer_status` VARCHAR(255) NOT NULL,
+  `exam_submitted` datetime NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+$db_sql_48[] = "ALTER TABLE `examinee_answer` 
+ADD PRIMARY KEY(`id`)";
+
+$db_sql_48[] = "ALTER TABLE `examinee_answer`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT";
+
+$db_sql_48[] = "ALTER TABLE `examinee_answer`
+ADD INDEX email_address (`email_address`)";
+
+
+// =================== set semester and academic year ========================== //
+$db_sql_49[] = "DROP TABLE IF EXISTS `academic_settings`";
+
+$db_sql_49[] = "CREATE TABLE `academic_settings` (
+  `id` int(11) NOT NULL,
+  `semester` VARCHAR(255) NOT NULL,
+  `school_year` VARCHAR(255) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+$db_sql_49[] = "ALTER TABLE `academic_settings` 
+ADD PRIMARY KEY(`id`)";
+
+$db_sql_49[] = "ALTER TABLE `academic_settings` 
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT";
+
+// =================== examinee answer v2 ========================== //
+$db_sql_50[] = "DROP TABLE IF EXISTS `examinee_answer_v2`";
+
+$db_sql_50[] = "CREATE TABLE `examinee_answer_v2` (
+  `examinee_id` int(255) NOT NULL,
+  `student_id` int(255) NOT NULL,
+  `exam_id` int(255) NOT NULL,
+  `semester` VARCHAR(255) NOT NULL,
+  `school_year` VARCHAR(255) NOT NULL,
+  `exam_item_no` int(255) NOT NULL,
+  `exam_correct_answer` VARCHAR(255) NOT NULL,
+  `exam_answer` VARCHAR(255) NOT NULL,
+  `exam_answer_status` VARCHAR(255) NOT NULL,
+  `exam_submitted` datetime NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+$db_sql_50[] = "ALTER TABLE `examinee_answer_v2` 
+ADD PRIMARY KEY(`examinee_id`)";
+
+$db_sql_50[] = "ALTER TABLE `examinee_answer_v2` 
+MODIFY `examinee_id` int(255) NOT NULL AUTO_INCREMENT";
+
+// =================== exam attempt ========================== //
+$db_sql_51[] = "DROP TABLE IF EXISTS `examinee_attempt`";
+
+$db_sql_51[] = "CREATE TABLE `examinee_attempt` (
+  `attempt_id` int(255) NOT NULL,
+  `student_id` int(255) NOT NULL,
+  `exam_id` int(255) NOT NULL,
+  `exam_attempt_status` VARCHAR(255) NOT NULL 
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+$db_sql_51[] = "ALTER TABLE `examinee_attempt` 
+ADD PRIMARY KEY(`attempt_id`)";
+
+$db_sql_51[] = "ALTER TABLE `examinee_attempt` 
+MODIFY  `attempt_id` int(255) NOT NULL AUTO_INCREMENT";
+
+// =================== notify ========================== //
+$db_sql_52[] = "DROP TABLE IF EXISTS `notify_student`";
+
+$db_sql_52[] = "CREATE TABLE `notify_student` (
+  `id` int(255) NOT NULL,
+  `student_id` int(255) NOT NULL,
+  `message` VARCHAR(255) NOT NULL,
+  `notify_date` VARCHAR(255) NOT NULL,
+  `notify_status` VARCHAR(255) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+$db_sql_52[] = "ALTER TABLE `notify_student` 
+ADD PRIMARY KEY(`id`)";
+
+$db_sql_52[] = "ALTER TABLE `notify_student` 
+MODIFY  `id` int(255) NOT NULL AUTO_INCREMENT";
+
+// =================== notify ========================== //
+$db_sql_53[] = "DROP TABLE IF EXISTS `monitoring_student`";
+
+$db_sql_53[] = "CREATE TABLE `monitoring_student` (
+  `monitoring_id` int(255) NOT NULL,
+  `student_id` int(255) NOT NULL,
+  `attached_grade_file` VARCHAR(255) NOT NULL,
+  `school_year` VARCHAR(255) NOT NULL,
+  `semester` VARCHAR(255) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+$db_sql_53[] = "ALTER TABLE `monitoring_student` 
+ADD PRIMARY KEY(`monitoring_id`)";
+
+$db_sql_53[] = "ALTER TABLE `monitoring_student` 
+MODIFY  `monitoring_id` int(255) NOT NULL AUTO_INCREMENT";

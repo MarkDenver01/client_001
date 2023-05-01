@@ -6,6 +6,13 @@
     </li><!-- End Dashboard Nav -->
 
     <li class="nav-item">
+      <a class="nav-link " href="./set_academic_settings">
+        <i class="bi bi-calendar-check"></i>
+        <span>Semester and School Year</span>
+      </a>
+    </li><!-- End Semester Nav -->
+
+    <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
         <i class="ri-map-pin-user-fill"></i>
         <span>Manage Accounts</span><i class="bi bi-chevron-down ms-auto"></i>
@@ -27,7 +34,7 @@
     <li class="nav-item">
       <a class="nav-link " href="./student_records">
         <i class="ri-account-pin-circle-fill"></i>
-        <span>Student Records</span>
+        <span>Student Counseling Records</span>
       </a>
     </li><!-- End Student Records Nav -->
 
@@ -86,27 +93,30 @@
       </a>
     </li><!-- End Generate Reports Nav -->
 
-    <li class="nav-item">
-      <a class="nav-link " href="#">
+    <!-- <li class="nav-item">
+      <a class="nav-link " href="./generate_reports">
         <i class="ri-file-3-fill"></i>
         <span>Generate Reports</span>
       </a>
-    </li><!-- End Generate Reports Nav -->
+    </li> -->
+    <!-- End Generate Reports Nav -->
 
 
-    <li class="nav-item">
-      <a class="nav-link " href="#">
+    <!-- <li class="nav-item">
+      <a class="nav-link " href="./counseling_progress">
         <i class="ri-group-fill"></i>
         <span>Counseling Progress</span>
       </a>
-    </li><!-- End Student Counseling Progress Nav -->
+    </li> -->
+    <!-- End Student Counseling Progress Nav -->
 
-    <li class="nav-item">
-      <a class="nav-link " href="#">
+    <!-- <li class="nav-item">
+      <a class="nav-link " href="./scheduling">
         <i class="ri-calendar-2-fill"></i>
         <span>Scheduling</span>
       </a>
-    </li><!-- End Student Scheduling Progress Nav -->
+    </li> -->
+    <!-- End Student Scheduling Progress Nav -->
 
     <li class="nav-item">
       <a class="nav-link " href="./post_announcement">

@@ -167,7 +167,7 @@
  function find_student_login($email_address) {
    global $db;
    $email_address = $db->escape($email_address);
-   $sql ="SELECT `s`.`name` AS name, `s`.`course` AS course, `s`.`semester` AS semester, `s`.`school_year` AS school_year, `s`.`student_year` AS student_year,";
+   $sql ="SELECT `s`.`id` AS id, `s`.`name` AS name, `s`.`course` AS course, `s`.`semester` AS semester, `s`.`school_year` AS school_year, `s`.`student_year` AS student_year,";
    $sql .=" `s`.`gender` AS gender, `s`.`age` AS age, `s`.`birth_date` AS birth_date,";
    $sql .=" `s`.`present_address` AS present_address, `u`.`email_address` AS email_address,";
    $sql .=" `u`.`password` AS password, `u`.`user_level` AS user_level,";
@@ -257,7 +257,7 @@
    global $db;
    $current_date = date("Y-m-d H:i:s", strtotime('9 day'));
    $sql = sprintf("SELECT * FROM `announcement_logs` WHERE `date_posted` <
-   '%s' ORDER BY `id` DESC", $current_date);
+   '%s' GROUP BY `from` ORDER BY `id` DESC", $current_date);
    return find_by_sql($sql);
  }
 
@@ -467,14 +467,17 @@
 
  function insert_new_exam(array $data) {
   global $db;
-  $sql ="INSERT INTO exam_created(student_year, exam_title, exam_description, exam_category, image_exam_path, created_at, exam_status) ";
+  $sql ="INSERT INTO exam_created(student_year, semester, school_year, exam_title, exam_description, exam_category, image_exam_path, created_at, exam_status, updated_answer) ";
   $sql .="VALUES ('" .$data['student_year'];
+  $sql .="','" .$data['semester'];
+  $sql .="','" .$data['school_year'];
   $sql .="','" .$data['exam_title'];
   $sql .="','" .$data['exam_description'];
   $sql .="','" .$data['exam_category'];
   $sql .="','" .$data['image_exam_path'];
   $sql .="','" .$data['created_at'];
-  $sql .="','" .$data['exam_status']. "')";
+  $sql .="','" .$data['exam_status'];
+  $sql .="','0')";
   $result = $db->query($sql);
   if ($result) {
     return true;
@@ -492,9 +495,13 @@
 
  function insert_exam_schedule(array $data) {
   global $db;
-  $sql = "INSERT INTO exam_schedule(student_year, exam_title, created_on, expired_on, exam_duration, result_date_and_time, `exam_status`) ";
+  $sql = "INSERT INTO exam_schedule(student_year, semester, school_year, exam_title, exam_description, exam_category, created_on, expired_on, exam_duration, result_date_and_time, `exam_status`) ";
   $sql .="VALUES('" .$data['student_year'];
+  $sql .="','" .$data['semester'];
+  $sql .="','" .$data['school_year'];
   $sql .="','" .$data['exam_title'];
+  $sql .="','" .$data['exam_description'];
+  $sql .="','" .$data['exam_category'];
   $sql .="','" .$data['created_at'];
   $sql .="','" .$data['expired_at'];
   $sql .="','" .$data['exam_duration'];
@@ -522,6 +529,17 @@
   return find_by_sql($sql);
 }
 
+function find_by_exam_created_by_id($id) {
+  global $db;
+  $sql = "SELECT * FROM exam_created WHERE id ='" .$id. "'";
+  $result = $db->query($sql);
+  if ($db->num_rows($result)) {
+    $data = $db->fetch_assoc($result);
+    return $data;
+  }
+  return $data = [];
+}
+
 function find_by_exam_created_by_student_year($student_year) {
   global $db;
   $sql = "SELECT * FROM exam_created WHERE student_year ='" .$student_year. "'";
@@ -534,9 +552,18 @@ function find_by_exam_schedule_by_student_year($student_year) {
   return find_by_sql($sql);
 }
 
-function fetch_exam_created($student_year, $paginationStart, $limit) {
+// TODO
+function fetch_exam_created($student_year, $semester, $school_year, $exam_title, $exam_description, $exam_category) {
   global $db;
-  $sql = "SELECT * FROM exam_created WHERE student_year ='" .$student_year. "' LIMIT " .$paginationStart. ", " .$limit. "";
+  $sql = "SELECT `c`.`image_exam_path` AS image_exam_path";
+  $sql .= " FROM `exam_created` `c` LEFT JOIN `exam_schedule` `s`";
+  $sql .= " ON `c`.`student_year` = `s`.`student_year`";
+  $sql .= " WHERE `c`.`student_year` = '{$student_year}'";
+  $sql .= " AND `s`.`semester` ='{$semester}'";
+  $sql .= " AND `s`.`school_year` ='{$school_year}'";
+  $sql .= " AND `s`.`exam_title` ='{$exam_title}'";
+  $sql .= " AND `s`.`exam_description` ='{$exam_description}'";
+  $sql .= " AND `s`.`exam_category` ='{$exam_category}' LIMIT 1";
   return find_by_sql($sql);
 }
 
@@ -563,9 +590,9 @@ function get_exam_count_query($student_year, $semester) {
   return false;
 }
 
-function find_by_available_exam($student_year) {
+function find_by_available_exam($student_year, $semester, $school_year) {
   global $db;
-  $sql ="SELECT * FROM exam_schedule WHERE student_year = '" .$student_year. "'";
+  $sql ="SELECT * FROM exam_schedule WHERE student_year = '" .$student_year. "' AND semester ='" .$semester. "' AND school_year ='" .$school_year. "'";
   $result = $db->query($sql);
   if ($db->num_rows($result)) {
     $student = $db->fetch_assoc($result);
@@ -574,15 +601,69 @@ function find_by_available_exam($student_year) {
   return false;
 }
 
-function get_exam_query($student_year) {
+function start_exam_by_query($student_year, $id) {
   global $db;
-  $sql ="SELECT * FROM exam_created WHERE student_year = '" .$student_year. "'";
+  if ($id == 'Reading' || 
+      $id == 'Writing' || 
+      $id == 'Speaking Skills' || 
+      $id == 'Listening Skills' || 
+      $id == 'Learning Styles' || 
+      $id == 'Memory' || 
+      $id == 'Study Skills' || 
+      $id == 'Creative and Critical Thinking Skills' || 
+      $id == 'Motivation' || 
+      $id == 'Self-Esteem' || 
+      $id == 'Personal relationships' || 
+      $id == 'Conflict Resolution' || 
+      $id == 'Health' || 
+      $id == 'Time Management' || 
+      $id == 'Money Management' || 
+      $id == 'Personal Purpose' || 
+      $id == 'Career Planning' || 
+      $id == 'Support Resources') {
+    $sql = "SELECT * FROM exam_schedule WHERE student_year ='" .$student_year. "' AND id ='" .$id. "'";
+  } else {
+    $sql = "SELECT * FROM exam_schedule WHERE student_year ='" .$student_year. "' AND id ='" .$id. "'";
+  }
+  
+  $result = $db->query($sql);
+  if ($db->num_rows($result)) {
+    $exams = $db->fetch_assoc($result);
+    return $exams;
+  }
+  return $exams = [];
+}
+
+function get_exam_query($student_year, $id) {
+  global $db;
+  if ($id == 'Reading' || 
+  $id == 'Writing' || 
+  $id == 'Speaking Skills' || 
+  $id == 'Listening Skills' || 
+  $id == 'Learning Styles' || 
+  $id == 'Memory' || 
+  $id == 'Study Skills' || 
+  $id == 'Creative and Critical Thinking Skills' || 
+  $id == 'Motivation' || 
+  $id == 'Self-Esteem' || 
+  $id == 'Personal relationships' || 
+  $id == 'Conflict Resolution' || 
+  $id == 'Health' || 
+  $id == 'Time Management' || 
+  $id == 'Money Management' || 
+  $id == 'Personal Purpose' || 
+  $id == 'Career Planning' || 
+  $id == 'Support Resources') {
+    $sql = "SELECT * FROM exam_schedule WHERE student_year ='" .$student_year. "' AND id ='" .$id. "'";
+  } else {
+    $sql = "SELECT * FROM exam_schedule WHERE student_year ='" .$student_year. "' AND id ='" .$id. "'";
+  }
   $result = $db->query($sql);
   if ($db->num_rows($result)) {
     $student = $db->fetch_assoc($result);
     return $student;
   }
-  return false;
+  return $student = [];
 }
 
 function find_by_correct_answer_query($table) {
@@ -635,6 +716,136 @@ function check_exam_ids($table, $value) {
       return false;
     }
   }
+}
+
+function find_exam_menu($student_year, $semester, $school_year, $exam_title) {
+  global $db;
+  $sql = "SELECT * FROM exam_schedule WHERE student_year ='" .$student_year. 
+  "' AND semester ='" .$semester. 
+  "' AND school_year ='" .$school_year.
+  "' AND exam_title ='" .$exam_title.
+  "' AND exam_status ='Ready'";
+  return find_by_sql($sql);
+}
+
+// function insert_examinee(array $data) {
+//   global $db;
+//   $sql ="INSERT INTO examinee(`name`, email_address, gender, course, semester, school_year, student_year) ";
+//   $sql .="VALUES('" .$data['name'];
+//   $sql .="','" .$data['email_address'];
+//   $sql .="','" .$data['gender'];
+//   $sql .="','" .$data['course'];
+//   $sql .="','" .$data['semester'];
+//   $sql .="','" .$data['school_year'];
+//   $sql .="','" .$data['student_year']. "')";
+//   $result = $db->query($sql);
+// }
+
+
+
+function insert_academic_settings(array $data) {
+  global $db;
+  $sql ="INSERT INTO academic_settings(semester, school_year) ";
+  $sql .="VALUES('" .$data['semester']. "','" .$data['school_year']. "')";
+  $db->query($sql);
+}
+
+function update_academic_settings(array $data) {
+  global $db;
+  $sql = "UPDATE academic_settings SET semester='" .$data['semester']. "', school_year ='" .$data['school_year']. "' WHERE id ='1'";
+  $db->query($sql);
+}
+
+function check_academic() {
+  global $db;
+  $id = '1';
+  $sql = $db->query("SELECT * FROM academic_settings WHERE id='{$id}' LIMIT 1");
+  if ($result = $db->fetch_assoc($sql)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function get_academic_settings() {
+  global $db;
+  $id = '1';
+  $sql = "SELECT * FROM academic_settings WHERE id='{$id}' LIMIT 1";
+  $result = $db->query($sql);
+  if ($db->num_rows($result)) {
+    $academic = $db->fetch_assoc($result);
+    return $academic;
+  }
+  return false;
+}
+
+function check_examinee_answer($email_address) {
+  global $db;
+  $sql = $db->query("SELECT * FROM examinee_answer WHERE email_address ='{$email_address}'");
+  if ($result = $db->fetch_assoc($sql)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function check_create_exam($exam_title, $exam_description, $exam_category) {
+  global $db;
+  $sql = $db->query("SELECT * FROM exam_created WHERE exam_title ='{$exam_title}' 
+  AND exam_description ='{$exam_description}' 
+  AND exam_category='{$exam_category}'");
+  if ($result =$db->fetch_assoc($sql)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function check_exam_schedule($exam_title, $exam_description, $exam_category) {
+  global $db;
+  $sql = $db->query("SELECT * FROM exam_schedule WHERE exam_title ='{$exam_title}' 
+  AND exam_description ='{$exam_description}' 
+  AND exam_category = '{$exam_category}'");
+  if ($result = $db->fetch_assoc($sql)) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function find_correct_answer_by_table($table) {
+  global $db;
+  if (table_exist($table)) {
+    $sql = "SELECT * FROM  ".$db->escape($table);
+    return find_by_sql($sql);
+  }
+}
+
+function find_examinee_complete($student_id, $semester, $school_year) {
+  global $db;
+  $sql = "SELECT * FROM examinee WHERE student_id ='" .$student_id. 
+  "' AND semester ='" .$semester. 
+  "' AND school_year ='" .$school_year.
+  "' AND exam_result_status ='Done'";
+  $result = $db->query($sql);
+  if ($db->num_rows($result)) {
+    $examinee = $db->fetch_assoc($result);
+    return $examinee;
+  }
+  return $examinee=[];
+}
+
+function count_notification($student_id) {
+  global $db;
+  $sql = "SELECT COUNT(*) AS total_count FROM notify_student WHERE student_id='$student_id' AND notify_status='unread'";
+
+  $result = $db->query($sql);
+  if ($db->num_rows($result)) {
+    $check = $db->fetch_assoc($result);
+    $total_count = $check['total_count'];
+    return $total_count;
+  }
+  return false;
 }
 
 ?>

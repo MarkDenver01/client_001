@@ -93,14 +93,20 @@
                         <td id="exam_description" data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $created['exam_description']; ?></td>
                         <td id="exam_category" data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $created['exam_category']; ?></td>
 
-                        <td id="exam_action" class="text-center" style="width: 20%;">                         
-                            <?php if ($created['exam_status'] == 0) { ?>
-                              <button name="button_update" type="button" class="btn btn-success rounded-pill btn-sm w-50" data-bs-toggle="modal" data-bs-target="#ExtralargeModal<?php echo $created['id']; ?>" disabled>Update Answer</button>
+                        <td id="exam_action" class="text-center" style="width: 20%;"> 
+                          <?php if ($created['exam_status'] == 0) { ?>
+                              <a href="./update_answer_exam?id=<?php echo $created['id']; ?>&category=<?php echo $created['exam_category']; ?>" name="button_update" type="button" class="btn btn-success rounded-pill btn-sm w-50 disabled">Add Answer</button>
                               <a href="../includes/update_exam_func?id=<?php echo $created['id']; ?>&exam_status=<?php echo $created['exam_status']; ?>" type="button" class="btn btn-warning rounded-pill btn-sm w-50 text-light">Activate Exam</a>
-                            <?php } else { ?>
-                              <button name="button_update" type="button" class="btn btn-success rounded-pill btn-sm w-50" data-bs-toggle="modal" data-bs-target="#ExtralargeModal<?php echo $created['id']; ?>">Update Answer</button>
+                          <?php } else { ?>
+                              <?php if ($created['student_year'] == 'First Year' && $created['exam_title'] == 'Student Success Kit') { ?>
+                                <a href="./update_answer_exam?id=<?php echo $created['id']; ?>&category=<?php echo $created['exam_category']; ?>" name="button_update" type="button" class="btn btn-success rounded-pill btn-sm w-50 disabled">Not Available</button>
+                              <?php } elseif ($created['updated_answer'] == 1) { ?>
+                                <a href="./update_answer_exam?id=<?php echo $created['id']; ?>&category=<?php echo $created['exam_category']; ?>" name="button_update" type="button" class="btn btn-success rounded-pill btn-sm w-50 disabled">Updated</button>
+                              <?php } else { ?>
+                                <a href="./update_answer_exam?id=<?php echo $created['id']; ?>&category=<?php echo $created['exam_category']; ?>" name="button_update" type="button" class="btn btn-success rounded-pill btn-sm w-50">Add Answer</button>
+                              <?php } ?>
                               <a href="../includes/update_exam_func?id=<?php echo $created['id']; ?>&exam_status=<?php echo $created['exam_status']; ?>" type="button" class="btn btn-danger rounded-pill btn-sm w-50 text-light">Deactivate Exam</a>
-                            <?php } ?>
+                          <?php } ?>
                         </td>
                       </tr>
                       <?php include('./update_answer.php'); ?>
@@ -115,17 +121,23 @@
                         <td id="exam_description" data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $created['exam_description']; ?></td>
                         <td id="exam_category" data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $created['exam_category']; ?></td>
 
-                        <td id="exam_action" class="text-center" style="width: 20%;">                         
-                            <?php if ($created['exam_status'] == 0) { ?>
-                              <button name="button_update" type="button" class="btn btn-success rounded-pill btn-sm w-50" data-bs-toggle="modal" data-bs-target="#ExtralargeModal<?php echo $created['id']; ?>" disabled>Update Answer</button>
+
+                        <td id="exam_action" class="text-center" style="width: 20%;"> 
+                          <?php if ($created['exam_status'] == 0) { ?>
+                              <a href="./update_answer_exam?id=<?php echo $created['id']; ?>&category=<?php echo $created['exam_category']; ?>" name="button_update" type="button" class="btn btn-success rounded-pill btn-sm w-50 disabled">Add Answer</button>
                               <a href="../includes/update_exam_func?id=<?php echo $created['id']; ?>&exam_status=<?php echo $created['exam_status']; ?>" type="button" class="btn btn-warning rounded-pill btn-sm w-50 text-light">Activate Exam</a>
-                            <?php } else { ?>
-                              <button name="button_update" type="button" class="btn btn-success rounded-pill btn-sm w-50" data-bs-toggle="modal" data-bs-target="#ExtralargeModal<?php echo $created['id']; ?>">Update Answer</button>
+                          <?php } else { ?>
+                              <?php if ($created['student_year'] == 'First Year' && $created['exam_title'] == 'Student Success Kit') { ?>
+                                <a href="./update_answer_exam?id=<?php echo $created['id']; ?>&category=<?php echo $created['exam_category']; ?>" name="button_update" type="button" class="btn btn-success rounded-pill btn-sm w-50 disabled">Not Available</button>
+                              <?php } elseif ($created['updated_answer'] == 1) { ?>
+                                <a href="./update_answer_exam?id=<?php echo $created['id']; ?>&category=<?php echo $created['exam_category']; ?>" name="button_update" type="button" class="btn btn-success rounded-pill btn-sm w-50 disabled">Updated</button>
+                              <?php } else { ?>
+                                <a href="./update_answer_exam?id=<?php echo $created['id']; ?>&category=<?php echo $created['exam_category']; ?>" name="button_update" type="button" class="btn btn-success rounded-pill btn-sm w-50">Add Answer</button>
+                              <?php } ?>
                               <a href="../includes/update_exam_func?id=<?php echo $created['id']; ?>&exam_status=<?php echo $created['exam_status']; ?>" type="button" class="btn btn-danger rounded-pill btn-sm w-50 text-light">Deactivate Exam</a>
-                            <?php } ?>
+                          <?php } ?>
                         </td>
                       </tr>
-                      <?php include('./update_answer.php'); ?>
                       <?php endforeach; ?>
                       <?php } ?>
                     </tbody>

@@ -1,7 +1,6 @@
 <?php require_once('../lib/class.environment.php'); ?>
 <?php include_once('../includes/load.php'); ?>
 <?php delete_announcement_after_a_days(); ?>
-
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
 
@@ -14,19 +13,44 @@
   </div><!-- End Logo -->
 
   <nav class="header-nav ms-auto">
-    <ul class="d-flex align-items-center">
-
+  <ul class="d-flex align-items-center">
+  <?php
+      $user_level = $_SESSION['key_session']['user_level'];
+      if ($user_level == '3') {  ?>
+      <?php global $db; ?>
+      <?php $student_id = $_SESSION['key_session']['student_id']; ?>
+      <?php 
+        if (isset($_POST["button_update"])) {
+          $sql = $db->query("UPDATE notify_student SET notify_status='read' WHERE student_id='$student_id'");
+          if($sql) {
+            redirect('https://gmail.com/', false);
+          } else {
+            redirect('../app/dashboard', false);
+          }
+        }
+      ?>
+      <?php $notify_count = count_notification($_SESSION['key_session']['student_id']); ?>
     <li class="nav-item dropdown">
         <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
           <i class="bi bi-bell"></i>
-          <span class="badge bg-primary badge-number">4</span>
+          <span class="badge badge-number"  style="background-image: linear-gradient(#d9534f, #AB274F);"><?php echo $notify_count; ?> Notification</span>
         </a><!-- End Notification Icon -->
 
         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
           <li class="dropdown-header">
-            You have 4 new notifications
-            <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+            <form action="" method="post">
+            You have <?php echo $notify_count; ?> new notifications
+            <?php if($notify_count > 0) { ?>
+              <button name="button_update" type="submit" class="badge rounded-pill bg-primary p-2 ms-2">View all</button>
+            <?php } ?>
+            </form>
           </li>
+          <?php global $db; ?>
+          <?php 
+            $sql = "SELECT * FROM notify_student WHERE student_id='$student_id' AND notify_status='unread'";
+            $result = $db->query($sql);
+            if ($result->num_rows > 0) {
+              while ($row = $result->fetch_assoc()) { ?>
           <li>
             <hr class="dropdown-divider">
           </li>
@@ -34,62 +58,32 @@
           <li class="notification-item">
             <i class="bi bi-exclamation-circle text-warning"></i>
             <div>
-              <h4>Lorem Ipsum</h4>
-              <p>Quae dolorem earum veritatis oditseno</p>
-              <p>30 min. ago</p>
+              <h4>From Guidance Counselor | </h4><span><?php echo $row['notify_date']; ?></span>
+              <p><?php echo $row['message']; ?></p>
             </div>
           </li>
-
-          <li>
+          <?php
+              }
+            } else {
+          ?>
+             <li>
             <hr class="dropdown-divider">
           </li>
 
           <li class="notification-item">
-            <i class="bi bi-x-circle text-danger"></i>
+            <i class="bi bi-exclamation-circle text-success"></i>
             <div>
-              <h4>Atque rerum nesciunt</h4>
-              <p>Quae dolorem earum veritatis oditseno</p>
-              <p>1 hr. ago</p>
+              <h4>No notification is <b>unread</b></span>
             </div>
           </li>
-
-          <li>
-            <hr class="dropdown-divider">
-          </li>
-
-          <li class="notification-item">
-            <i class="bi bi-check-circle text-success"></i>
-            <div>
-              <h4>Sit rerum fuga</h4>
-              <p>Quae dolorem earum veritatis oditseno</p>
-              <p>2 hrs. ago</p>
-            </div>
-          </li>
-
-          <li>
-            <hr class="dropdown-divider">
-          </li>
-
-          <li class="notification-item">
-            <i class="bi bi-info-circle text-primary"></i>
-            <div>
-              <h4>Dicta reprehenderit</h4>
-              <p>Quae dolorem earum veritatis oditseno</p>
-              <p>4 hrs. ago</p>
-            </div>
-          </li>
-
-          <li>
-            <hr class="dropdown-divider">
-          </li>
-          <li class="dropdown-footer">
-            <a href="#">Show all notifications</a>
-          </li>
-
+          <?php } ?>
+          
         </ul><!-- End Notification Dropdown Items -->
 
       </li><!-- End Notification Nav -->
-
+  <?php
+      } ?>
+      
       <li class="nav-item dropdown">
 
         <a class="nav-link nav-icon" href="../chat/chat_app">
@@ -132,18 +126,21 @@
             <hr class="dropdown-divider">
           </li>
 
-          <li>
-            <a class='dropdown-item d-flex align-items-center' href='users-profile.html'>
-              <i class='bi bi-person'></i>
-              <span>My Profile</span>
-            </a>
-          </li>
-          <li>
-            <hr class='dropdown-divider'>
-          </li>
+          <?php if ($_SESSION['key_session']['user_level'] == '2' || $_SESSION['key_session']['user_level'] == '3') { ?>
+            <li>
+              <a class='dropdown-item d-flex align-items-center' href='../app/profile'>
+                <i class='bi bi-person'></i>
+                <span>My Profile</span>
+              </a>
+            </li>
+            <li>
+              <hr class='dropdown-divider'>
+            </li>
 
+          <?php } ?>
+         
           <li>
-            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+            <a class="dropdown-item d-flex align-items-center" href="../app/account_settings">
               <i class="bi bi-gear"></i>
               <span>Account Settings</span>
             </a>
