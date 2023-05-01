@@ -718,12 +718,12 @@ function check_exam_ids($table, $value) {
   }
 }
 
-function find_exam_menu($student_year, $exam_type, $semester, $school_year) {
+function find_exam_menu($student_year, $semester, $school_year, $exam_title) {
   global $db;
   $sql = "SELECT * FROM exam_schedule WHERE student_year ='" .$student_year. 
   "' AND semester ='" .$semester. 
   "' AND school_year ='" .$school_year.
-  "' AND exam_title ='" .$exam_type. 
+  "' AND exam_title ='" .$exam_title.
   "' AND exam_status ='Ready'";
   return find_by_sql($sql);
 }

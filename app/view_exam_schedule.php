@@ -71,15 +71,16 @@
               <div class="card rounded-0">
                 <div class="card-body">
                   <!-- Table with hoverable rows -->
-                  <table class="table table-sm table-hover datatable">
+                  <table class="table table-sm table-hover datatable text-nowrap">
                     <thead>
                       <tr>
-                        <th scope="col" class="text-center" style="width: 20%;">Student Year</th>
-                        <th scope="col" class="text-center" style="width: 20%;">Exam Type</th>
-                        <th scope="col" class="text-center" style="width: 20%;">Time Limit (secs/min)</th>
-                        <th scope="col" class="text-center" style="width: 20%;">Expired At</th>
-                        <th scope="col" class="text-center" style="width: 10%;">Exam Status</th>
-                        <th scope="col" class="text-center" style="width: 10%;">Action</th>
+                        <th scope="col" class="text-center" style="width: 10%;">Student Year</th>
+                        <th scope="col" class="text-center" style="width: 20%;">Type</th>
+                        <th scope="col" class="text-center" style="width: 20%;">Description</th>
+                        <th scope="col" class="text-center" style="width: 20%;">Category</th>
+                        <th scope="col" class="text-center" style="width: 5%;">Time Limit</th>
+                        <th scope="col" class="text-center" style="width: 10%;">Expired At</th>
+                        <th scope="col" class="text-center" style="width: 5%;">Exam Status</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -89,18 +90,17 @@
                       <?php foreach($schedules as $schedule): ?>
                         <tr>
                         <td id="<?php echo $schedule['id']; ?>" scope="row" class="text-center" hidden>
-                        <th data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $schedule['student_year']; ?></th>
+                        <th data-target="name" scope="row" class="text-center" style="width: 10%;"><?php echo $schedule['student_year']; ?></th>
                         <td data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $schedule['exam_title']; ?></td>
-                        <td data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $schedule['exam_duration']; ?></td>
-                        <td data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $schedule['expired_on']; ?></td>
+                        <td data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $schedule['exam_description']; ?></td>
+                        <td data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $schedule['exam_category']; ?></td>
+                        <td data-target="name" scope="row" class="text-center" style="width: 5%;"><?php echo $schedule['exam_duration']; ?></td>
+                        <td data-target="name" scope="row" class="text-center" style="width: 10%;"><?php echo $schedule['expired_on']; ?></td>
                           <?php if ($schedule['exam_status'] == 'Ready') { ?>
-                        <th data-target="name" scope="row" class="text-center text-success" style="width: 10%"?><?php echo $schedule['exam_status']; ?></th>
+                        <th data-target="name" scope="row" class="text-center text-success" style="width: 5%"?><?php echo $schedule['exam_status']; ?></th>
                           <?php } else { ?>
-                        <th data-target="name" scope="row" class="text-center text-danger" style="width: 10%"?><?php echo $schedule['exam_status']; ?></th>
+                        <th data-target="name" scope="row" class="text-center text-danger" style="width: 5%"?><?php echo $schedule['exam_status']; ?></th>
                           <?php } ?>
-                        <td class="text-center" style="width: 10%;">
-                          <a href="#" type="button" class="btn btn-primary rounded-0 btn-sm w-50">Manage</button>
-                        </td>
                       </tr>
                       <?php endforeach; ?>
                       <?php } else { ?>
@@ -108,18 +108,17 @@
                       <?php foreach($schedules as $schedule): ?>
                       <tr>
                         <td id="<?php echo $schedule['id']; ?>" scope="row" class="text-center" hidden>
-                        <th data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $schedule['student_year']; ?></th>
+                        <th data-target="name" scope="row" class="text-center" style="width: 10%;"><?php echo $schedule['student_year']; ?></th>
                         <td data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $schedule['exam_title']; ?></td>
-                        <td data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $schedule['exam_duration']; ?></td>
-                        <td data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $schedule['expired_on']; ?></td>
+                        <td data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $schedule['exam_description']; ?></td>
+                        <td data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $schedule['exam_category']; ?></td>
+                        <td data-target="name" scope="row" class="text-center" style="width: 5%;"><?php echo $schedule['exam_duration']; ?></td>
+                        <td data-target="name" scope="row" class="text-center" style="width: 10%;"><?php echo $schedule['expired_on']; ?></td>
                           <?php if ($schedule['exam_status'] == 'Ready') { ?>
-                        <th data-target="name" scope="row" class="text-center text-success" style="width: 10%"?><?php echo $schedule['exam_status']; ?></th>
+                        <th data-target="name" scope="row" class="text-center text-success" style="width: 5%"?><?php echo $schedule['exam_status']; ?></th>
                           <?php } else { ?>
-                        <th data-target="name" scope="row" class="text-center text-danger" style="width: 10%"?><?php echo $schedule['exam_status']; ?></th>
+                        <th data-target="name" scope="row" class="text-center text-danger" style="width: 5%"?><?php echo $schedule['exam_status']; ?></th>
                           <?php } ?>
-                        <td class="text-center" style="width: 10%;">
-                          <a href="#" type="button" class="btn btn-primary rounded-pill btn-sm w-100">Manage</button>
-                        </td>
                       </tr>
                       <?php endforeach; ?>
                       <?php } ?>

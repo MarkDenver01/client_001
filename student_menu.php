@@ -17,24 +17,60 @@
     <span>Dashboard</span>
   </a>
 </li><!-- End Dashboard Nav -->
-<?php if(isset($_SESSION['key_session']['exam_status']) && $_SESSION['key_session']['exam_status'] == 'Ready') { ?>
+
+
+<?php global $db; ?>
+<?php 
+  $student_year = $_SESSION['key_session']['student_year'];
+  $semester = $_SESSION['key_session']['academic_semester'];
+  $school_year = $_SESSION['key_session']['academic_school_year'];
+?>
+<?php $sql = "SELECT exam_title FROM exam_schedule WHERE student_year ='$student_year' 
+AND semester ='$semester' AND school_year ='$school_year' AND exam_status='Ready' GROUP BY exam_title"; ?>
+<?php 
+$result = $db->query($sql);
+if ($db->num_rows($result)) {
+  while ($row = $result->fetch_assoc()) {
+?>
+<?php if ($row['exam_title'] == 'Student Success Kit') { ?>
+
 <li class="nav-item">
-  <a class="nav-link " href="./available_exam" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+  <a class="nav-link " href="./available_exam" data-bs-target="#forms1-nav" data-bs-toggle="collapse" href="#">
     <i class="ri-todo-fill"></i>
-    <span><?php echo $_SESSION['key_session']['exam_title']; ?></span><i class="bi bi-chevron-down ms-auto"></i>
+    <span><?php echo $row['exam_title']; ?></span><i class="bi bi-chevron-down ms-auto"></i>
   </a>
-  <ul id="forms-nav" class="nav-content collapsed" data-bs-parent="#sidebar-nav">
-    <?php include_once('exam_menu.php'); ?>
+  <ul id="forms1-nav" class="nav-content collapsed" data-bs-parent="#sidebar-nav">
+    <?php include_once('kit_exam_menu.php'); ?>
   </ul>
 </li><!-- End Test Questionaires Nav -->
-<?php  } else { ?>
+
+<?php } elseif ($row['exam_title'] == 'OASIS 3') { ?>
+
+<li class="nav-item">
+  <a class="nav-link " href="./available_exam" data-bs-target="#forms2-nav" data-bs-toggle="collapse" href="#">
+    <i class="ri-todo-fill"></i>
+    <span><?php echo $row['exam_title']; ?></span><i class="bi bi-chevron-down ms-auto"></i>
+  </a>
+  <ul id="forms2-nav" class="nav-content collapsed" data-bs-parent="#sidebar-nav">
+    <?php include_once('oasis_exam_menu.php'); ?>
+  </ul>
+</li><!-- End Test Questionaires Nav -->
+
+<?php } ?>
+
+
+<?php } ?>
+<?php } else { ?>
+
 <li class="nav-item">
   <div class="nav-link text-danger">
     <i class="ri-todo-fill text-danger"></i>
     <span>Exam not available</span>
   </div>
 </li><!-- End Test Questionaires Nav -->
+
 <?php } ?>
+
 <?php 
   $examinee = find_examinee_complete(
     $_SESSION['key_session']['student_id'],

@@ -241,7 +241,7 @@ if (isset($_POST["button_update"])) {
 
             foreach ($_REQUEST['answer'] as $key => $value) {
                 $value = $value['items'];
-                $sql = $db->query("INSERT INTO spatial(correct_items) VALUES('$value')");
+                $sql = $db->query("INSERT INTO `spatial`(correct_items) VALUES('$value')");
             }
             if ($sql) {
                 redirect('./view_exam', false);

@@ -480,6 +480,26 @@ function change_password($new_password, $confirm_password) {
     }
 }
 
+function change_password_v2($new_password, $confirm_password) {
+  global $session;
+  $new_password = remove_junk($_POST[$new_password]);
+  $confirm_password = remove_junk($_POST[$confirm_password]);
+  if (empty($errors)) {
+    if ($new_password == $confirm_password) {
+      if ($new_password == "default" || $confirm_password == "default") {
+        $session->message('w', 'Please change your default password.');
+        redirect('account_settings', false);
+      } else {
+        change_password_by_query($_SESSION['key_session']['email_address'], $new_password);
+        redirect('account_settings', false);
+      }
+    } else {
+      $session->message('w', 'Password does not match. Please try again');
+      redirect('account_settings', false);
+    }
+  }
+}
+
 function SET_LOGGED_IN() {
   global $session;
   if ($_ENV['SITE_INSTALLATION_COMPLETED'] == false) {

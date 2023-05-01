@@ -126,18 +126,21 @@
             <hr class="dropdown-divider">
           </li>
 
-          <li>
-            <a class='dropdown-item d-flex align-items-center' href='../profile'>
-              <i class='bi bi-person'></i>
-              <span>My Profile</span>
-            </a>
-          </li>
-          <li>
-            <hr class='dropdown-divider'>
-          </li>
+          <?php if ($_SESSION['key_session']['user_level'] == '2' || $_SESSION['key_session']['user_level'] == '3') { ?>
+            <li>
+              <a class='dropdown-item d-flex align-items-center' href='../app/profile'>
+                <i class='bi bi-person'></i>
+                <span>My Profile</span>
+              </a>
+            </li>
+            <li>
+              <hr class='dropdown-divider'>
+            </li>
 
+          <?php } ?>
+         
           <li>
-            <a class="dropdown-item d-flex align-items-center" href="../account_settings">
+            <a class="dropdown-item d-flex align-items-center" href="../app/account_settings">
               <i class="bi bi-gear"></i>
               <span>Account Settings</span>
             </a>

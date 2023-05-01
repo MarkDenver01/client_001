@@ -1,7 +1,8 @@
 <?php $exam_menus = find_exam_menu(
     $_SESSION['key_session']['student_year'], 
     $_SESSION['key_session']['academic_semester'],
-    $_SESSION['key_session']['academic_school_year']
+    $_SESSION['key_session']['academic_school_year'],
+    "Student Success Kit"
 );  
 ?>
 <?php foreach($exam_menus as $exam_menu): ?>
