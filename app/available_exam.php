@@ -142,6 +142,9 @@
                   } elseif ($student['exam_title'] == 'OASIS 3') {
                     $main_exam_id = $student['exam_description'];
                     echo $student['exam_description'];
+                  } elseif ($student['exam_title'] == 'Aptitude J and C') {
+                    $main_exam_id = $student['exam_category'];
+                    echo $student['exam_category']; 
                   } else {
                     $main_exam_id = $student['exam_description'];
                     echo $student['exam_description'];
@@ -195,12 +198,18 @@
                     $main_exam = 'baron_eq';
                   } elseif ($main_exam_id == 'The Keirsey Temerament Sorter') {
                     $main_exam = 'keirsey_temerament_sorter';
-                  } elseif ($main_exam_id == 'Aptitude J and C') {
-                    $main_exam = 'aptitude_j_and_c_1';
-                  } elseif ($main_exam_id == 'ESA') {
+                  }  elseif ($main_exam_id == 'ESA') {
                     $main_exam = 'esa';
                   } elseif ($main_exam_id == 'Aptitude Verbal and Numerical') {
                     $main_exam = 'aptitude_verbal_and_numerical';
+                  } elseif ($main_exam_id == 'Test No 1') {
+                    $main_exam = 'aptitude_j_and_c_1';
+                  } elseif ($main_exam_id == 'Test No 2') {
+                    $main_exam = 'aptitude_j_and_c_2';
+                  } elseif ($main_exam_id == 'Test No 3') {
+                    $main_exam = 'aptitude_j_and_c_3';
+                  } elseif ( $main_exam_id == 'Test No 4') {
+                    $main_exam = 'aptitude_j_and_c_4';
                   }
                 ?>
                 )
@@ -562,7 +571,148 @@
                             </tbody>
                           </table>
                         
-                      <?php } ?>
+                      <?php } elseif ($main_exam_id == 'Test No 1') { ?>
+
+                        <table class="table table-hover text-nowrap " id="tableList">
+                            <tbody>
+                              <?php $sql = $db->query("SELECT * FROM $main_exam"); ?>
+                              <?php if($sql->num_rows > 0) { ?>
+                              <?php $i = 1; ?>
+                              <?php while($row = $sql->fetch_assoc()) { ?>
+                              <tr>
+                                <td>
+                                <p><b>Answer No. <?php echo $i++; ?></b></p>
+                                <div class="row">
+                                  <input type="hidden" name="answer[<?php echo ($i - 1); ?>][item_correct]" value="<?php echo $row['correct_items']; ?>">
+                                  <div class="btn-group">                                   
+                                    <label class="btn btn-light" for="exampleRadios<?php echo ($i-1); ?>_5">
+                                      <input type="text" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_5" > </input>
+                                    </label>    
+                                  </div>
+                                </div>
+                                </td>
+                              </tr>
+                              <?php } ?>
+                              <?php } else { ?>
+                              <?php  echo "Answer sheet not available."; ?>
+                              <?php } ?> 
+                            </tbody>
+                          </table>
+                        
+                     <?php } elseif ($main_exam_id == 'Test No 1') { ?>
+
+                        <table class="table table-hover text-nowrap " id="tableList">
+                            <tbody>
+                              <?php $sql = $db->query("SELECT * FROM $main_exam"); ?>
+                              <?php if($sql->num_rows > 0) { ?>
+                              <?php $i = 1; ?>
+                              <?php while($row = $sql->fetch_assoc()) { ?>
+                              <tr>
+                                <td>
+                                <p><b>Answer No. <?php echo $i++; ?></b></p>
+                                <div class="row">
+                                  <input type="hidden" name="answer[<?php echo ($i - 1); ?>][item_correct]" value="<?php echo $row['correct_items']; ?>">
+                                  <div class="btn-group">                                   
+                                    <label class="btn btn-light" for="exampleRadios<?php echo ($i-1); ?>_5">
+                                      <input type="text" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_5" > </input>
+                                    </label>    
+                                  </div>
+                                </div>
+                                </td>
+                              </tr>
+                              <?php } ?>
+                              <?php } else { ?>
+                              <?php  echo "Answer sheet not available."; ?>
+                              <?php } ?> 
+                            </tbody>
+                          </table>
+                        
+                     <?php } elseif ($main_exam_id == 'Test No 2') { ?>
+
+                      <table class="table table-hover text-nowrap " id="tableList">
+                            <tbody>
+                              <?php $sql = $db->query("SELECT * FROM $main_exam"); ?>
+                              <?php if($sql->num_rows > 0) { ?>
+                              <?php $i = 1; ?>
+                              <?php while($row = $sql->fetch_assoc()) { ?>
+                              <tr>
+                                <td>
+                                <p><b>Answer No. <?php echo $i++; ?></b></p>
+                                <div class="row">
+                                  <input type="hidden" name="answer[<?php echo ($i - 1); ?>][item_correct]" value="<?php echo $row['correct_items']; ?>">
+                                  <div class="btn-group">                                   
+                                    <label class="btn btn-light" for="exampleRadios<?php echo ($i-1); ?>_5">
+                                      <input type="text" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_5" > </input>
+                                    </label>    
+                                  </div>
+                                </div>
+                                </td>
+                              </tr>
+                              <?php } ?>
+                              <?php } else { ?>
+                              <?php  echo "Answer sheet not available."; ?>
+                              <?php } ?> 
+                            </tbody>
+                          </table>
+
+                     <?php } elseif ($main_exam_id == 'Test No 3') { ?>
+                      
+
+                          <table class="table table-hover text-nowrap " id="tableList">
+                            <tbody>
+                              <?php $sql = $db->query("SELECT * FROM $main_exam"); ?>
+                              <?php if($sql->num_rows > 0) { ?>
+                              <?php $i = 1; ?>
+                              <?php while($row = $sql->fetch_assoc()) { ?>
+                              <tr>
+                                <td>
+                                <p><b>Answer No. <?php echo $i++; ?></b></p>
+                                <div class="row">
+                                  <input type="hidden" name="answer[<?php echo ($i - 1); ?>][item_correct]" value="<?php echo $row['correct_items']; ?>">
+                                  <div class="btn-group">                                   
+                                    <label class="btn btn-light" for="exampleRadios<?php echo ($i-1); ?>_5">
+                                      <input type="text" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_5" > </input>
+                                    </label>    
+                                  </div>
+                                </div>
+                                </td>
+                              </tr>
+                              <?php } ?>
+                              <?php } else { ?>
+                              <?php  echo "Answer sheet not available."; ?>
+                              <?php } ?> 
+                            </tbody>
+                          </table>
+
+                     <?php } elseif ($main_exam_id == 'Test No 4') { ?>
+
+                          <table class="table table-hover text-nowrap " id="tableList">
+                            <tbody>
+                              <?php $sql = $db->query("SELECT * FROM $main_exam"); ?>
+                              <?php if($sql->num_rows > 0) { ?>
+                              <?php $i = 1; ?>
+                              <?php while($row = $sql->fetch_assoc()) { ?>
+                              <tr>
+                                <td>
+                                <p><b>Answer No. <?php echo $i++; ?></b></p>
+                                <div class="row">
+                                  <input type="hidden" name="answer[<?php echo ($i - 1); ?>][item_correct]" value="<?php echo $row['correct_items']; ?>">
+                                  <div class="btn-group">                                   
+                                    <label class="btn btn-light" for="exampleRadios<?php echo ($i-1); ?>_5">
+                                      <input type="text" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_5" > </input>
+                                    </label>    
+                                  </div>
+                                </div>
+                                </td>
+                              </tr>
+                              <?php } ?>
+                              <?php } else { ?>
+                              <?php  echo "Answer sheet not available."; ?>
+                              <?php } ?> 
+                            </tbody>
+                          </table>
+                      
+                    <?php } ?>
                       
                     </div>
                   </div>

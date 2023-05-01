@@ -9,7 +9,7 @@
     <li>
         <?php if ($exam_menu['exam_title'] == 'Aptitude J and C') { ?>
             <a href="#" id="start_quiz" data-id="<?php echo $exam_menu['id']; ?>" >
-                <i class="bi bi-circle"></i><span><?php echo $exam_menu['exam_description']; ?></span>
+                <i class="bi bi-circle"></i><span><?php echo $exam_menu['exam_category']; ?></span>
             </a>
         <?php } ?>
     </li>

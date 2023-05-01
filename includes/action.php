@@ -749,7 +749,6 @@ function create_exam_schedule($student_year, $semester, $school_year, $exam_titl
   if ($exam_title == 'OASIS 3' || 
   $exam_title == 'BarOn EQ-i:S' || 
   $exam_title == 'The Keirsey Temperament Sorter' || 
-  $exam_title == 'Aptitude J and C' || 
   $exam_title == 'ESA' || 
   $exam_title == 'Aptitude Verbal and Numerical') {
     $exam_category = "N/A";
