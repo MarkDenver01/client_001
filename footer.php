@@ -13,6 +13,7 @@
 <script src="./assets/js/exam_submit.js"></script>
 <script src="./assets/js/scheduling.js"></script>
 <script src="./assets/js/exam_oasis.js"></script>
+<script src="./assets/js/create_exam.js"></script>
 <!-- Template Main JS File -->
 <script src="./assets/js/main.js"></script>
 

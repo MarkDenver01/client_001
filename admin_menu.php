@@ -52,7 +52,7 @@
       </a>
       <ul id="icons-nav" class="nav-content collapsed" data-bs-parent="#sidebar-nav">
         <li>
-          <a href="./create_exam">
+          <a href="#" id="created_exam">
             <i class="bi bi-circle"></i><span>Create an exam</span>
           </a>
         </li>

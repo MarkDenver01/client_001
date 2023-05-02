@@ -29,7 +29,11 @@
 <?php 
   if (isset($_POST['button_submit'])) {
 
-    $sqlExist = $db->query("SELECT * FROM examinee WHERE student_id ='$student_id'");
+    $sqlExist = $db->query("SELECT * FROM examinee WHERE student_id ='$student_id' 
+    AND exam_id='$exam_id' 
+    AND exam_title='$exam_title' 
+    AND exam_description ='$exam_desc' 
+    AND exam_category ='$exam_type'");
     if($sqlExist->num_rows > 0) {
       $sqlUpdate = $db->query("UPDATE examinee SET 
       start_exam_date='$start_date', 
@@ -45,7 +49,7 @@
         if ($exam_title == "Student Success Kit") {
           redirect('./student_success_kit_result', false);
         } elseif ($exam_title == "OASIS 3") {
-          redirect('./oassis_result.php');
+          redirect('./oasis_result.php');
         } else {
           redirect('./student_success_kit_result', false);
         }
@@ -94,7 +98,7 @@
         if ($exam_title == "Student Success Kit") {
           redirect('./student_success_kit_result', false);
         } elseif ($exam_title == "OASIS 3") {
-          redirect('./oassis_result.php');
+          redirect('./oasis_result.php');
         } else {
           redirect('./student_success_kit_result', false);
         }

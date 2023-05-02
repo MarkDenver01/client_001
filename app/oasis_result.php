@@ -12,10 +12,15 @@
     $student_id = $_SESSION['key_session']['student_id'];
     $semester = $_SESSION['key_session']['academic_semester'];
     $school_year = $_SESSION['key_session']['academic_school_year']; 
+    $student_name = $_SESSION['key_session']['name'];
 ?>
 <?php 
 if (isset($_POST['button_upload'])) {
     redirect('./monitoring',false);
+}
+
+if(isset($_POST['button_counseling'])) {
+  redirect('./counseling', false);
 }
 ?>
 <?php include('../start_menu_bar.php'); ?>
@@ -95,27 +100,40 @@ if (isset($_POST['button_upload'])) {
                         <tbody>
                             <?php 
                                 $check_monitor = false;
-                                $sql = "SELECT exam_answer,counselor_notify_status, COUNT(exam_answer) AS total FROM examinee WHERE student_id ='$student_id' 
-                                AND semester ='$semester' AND school_year ='$school_year' AND exam_title = 'OASIS 3' GROUP BY exam_answer ORDER BY COUNT(exam_answer) DESC LIMIT 1";
+                                $sql = "SELECT exam_answer,counselor_notify_status, SUM(total_score) AS total FROM examinee WHERE student_id ='$student_id' 
+                                AND semester ='$semester' AND school_year ='$school_year' AND exam_title = 'OASIS 3'";
                                 $result = $db->query($sql);
                                 if ($result->num_rows > 0) {
                                     while ($row = $result->fetch_assoc()) {
                                         $highest_prob = $row['exam_answer'];
-                                        $data = $row['total'] / 4 * 20;
+                                        $data = $row['total'] / 18;
                                         $counselour_stats = $row['counselor_notify_status'];
                                     }
                                 }
-                                if ($data >= 40 && $data <= 25) {
-                                    $check_monitor = true;
-                                    $msg = "Monitoring(Upload the grades at the end of semester.)";
-                                } else if($data <= 20) {
-                                    $check_monitor = false;
-                                    $msg = "For Counselor Scheduling";
-                                    if ($counselour_stats == "Pending") {
-                                        $sql = "UPDATE examinee SET counselor_notify_status='Counseling' WHERE student_id ='$student_id'";
-                                        $db->query($sql);
-                                    }
-                                } 
+                                switch($data) {
+                                  case $data >= 25 and $data <= 40:
+                                      $check_monitor = true;
+                                      $msg = "Monitoring";
+                                      if ($counselour_stats == "Pending") {
+                                        for($i = 0; $i < $data; $i++) {
+                                          $sql = "UPDATE examinee SET counselor_notify_status='$msg' WHERE student_id ='$student_id'";
+                                          $db->query($sql);
+                                        }
+                                      }
+                                    break;
+                                  case $data >= 0 and $data <= 20:
+                                      $check_monitor = false;
+                                      $msg = "Counseling";
+                                      if ($counselour_stats == 'Pending') {
+                                        for($i = 0; $i < $data; $i++) {
+                                          $sql = "UPDATE examinee SET counselor_notify_status='$msg' WHERE student_id ='$student_id'";
+                                          $db->query($sql);
+                                        }
+                                      }
+                                    break;
+                                    default:
+                                      $msg = "Not in range";
+                                }
                             ?>    
                             <tr>
                               <td>
@@ -144,7 +162,11 @@ if (isset($_POST['button_upload'])) {
                                     <div class="d-flex align-items-center">
                                       <div class="text-center">
                                         <h3>
+                                            <?php if ($counselour_stats == 'Completed') { ?>
+                                            <?php echo $counselour_stats; ?>
+                                            <?php } else { ?>
                                             <?php echo $msg; ?>
+                                            <?php } ?>
                                         </h3>
                                       </div>
                                     </div>
@@ -211,7 +233,11 @@ if (isset($_POST['button_upload'])) {
 
                         <form action ="" method="POST">
                         <?php if ($check_monitor) { ?>
-                            <button name="button_upload" type="submit" class="btn btn-success btn-lg rounded-0 w-100">Upload</button>
+                            <?php if($counselour_stats != 'Completed') { ?>
+                                <button name="button_upload" type="submit" class="btn btn-success btn-lg rounded-0 w-100">Upload</button>
+                            <?php } ?>
+                        <?php } else { ?>
+                            <a href="./counseling?student_id=<?php echo $student_id; ?>&name=<?php echo $student_name; ?>" name="button_counseling" type="submit" class="btn btn-success btn-lg rounded-0 w-100">Apply Counseling Schedule</a>
                         <?php } ?>
                         </form>
                       </div>
