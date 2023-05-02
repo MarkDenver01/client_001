@@ -33,7 +33,7 @@
             $sqlInsert = $db->query("INSERT INTO counseling_appointment(student_name, appointment_date, slots_available) VALUES('$name','$date_appointment_formatted','1')");
             if($sqlInsert) {
 
-              $sqlUpdate = $db->query("UPDATE examinee SET counselor_notify_status='Counseling Appointment' WHERE student_id ='$id'");
+              $sqlUpdate = $db->query("UPDATE examinee SET counselor_notify_status='Counseling' WHERE student_id ='$id'");
               if($sqlUpdate) {
 
                 $session->message('s', 'Appointment Success!');
@@ -55,7 +55,7 @@
         if(!$sqlExist->num_rows > 0) {
           $sqlInsert = $db->query("INSERT INTO counseling_appointment(student_name, appointment_date, slots_available) VALUES('$name','$date_appointment_formatted','1')");
           if($sqlInsert) {
-           $sqlUpdate = $db->query("UPDATE examinee SET counselor_notify_status='Counseling Appointment' WHERE student_id ='$id'");
+           $sqlUpdate = $db->query("UPDATE examinee SET counselor_notify_status='Counseling' WHERE student_id ='$id'");
               if($sqlUpdate) {
                 $session->message('s', 'Appointment Success!');
                 redirect('./counseling', false);
