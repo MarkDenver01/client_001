@@ -12,6 +12,7 @@
     $student_id = $_SESSION['key_session']['student_id'];
     $semester = $_SESSION['key_session']['academic_semester'];
     $school_year = $_SESSION['key_session']['academic_school_year']; 
+    $student_name = $_SESSION['key_session']['name'];
 ?>
 <?php 
 if (isset($_POST['button_upload'])) {
@@ -264,7 +265,7 @@ if(isset($_POST['button_counseling'])) {
                                 <button name="button_upload" type="submit" class="btn btn-success btn-lg rounded-0 w-100">Upload</button>
                             <?php } ?>
                         <?php } else { ?>
-                            <button name="button_counseling" type="submit" class="btn btn-success btn-lg rounded-0 w-100">Apply Counseling Schedule</button>
+                            <a href="./counseling?student_id=<?php echo $student_id; ?>&name=<?php echo $student_name; ?>" name="button_counseling" type="submit" class="btn btn-success btn-lg rounded-0 w-100">Apply Counseling Schedule</a>
                         <?php } ?>
                         </form>
                       </div>

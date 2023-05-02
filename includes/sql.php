@@ -553,7 +553,7 @@ function find_by_exam_schedule_by_student_year($student_year) {
 }
 
 // TODO
-function fetch_exam_created($student_year, $semester, $school_year, $exam_title, $exam_description, $exam_category) {
+function fetch_exam_created($student_year, $semester, $school_year, $exam_title, $exam_description, $exam_category, $id) {
   global $db;
   $sql = "SELECT `c`.`image_exam_path` AS image_exam_path";
   $sql .= " FROM `exam_created` `c` LEFT JOIN `exam_schedule` `s`";
@@ -563,7 +563,8 @@ function fetch_exam_created($student_year, $semester, $school_year, $exam_title,
   $sql .= " AND `s`.`school_year` ='{$school_year}'";
   $sql .= " AND `s`.`exam_title` ='{$exam_title}'";
   $sql .= " AND `s`.`exam_description` ='{$exam_description}'";
-  $sql .= " AND `s`.`exam_category` ='{$exam_category}' LIMIT 1";
+  $sql .= " AND `s`.`exam_category` ='{$exam_category}'";
+  $sql .= " AND `c`.`id` = '{$id}' LIMIT 1";
   return find_by_sql($sql);
 }
 

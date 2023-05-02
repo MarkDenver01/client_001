@@ -743,7 +743,7 @@ function create_exam_schedule($student_year, $semester, $school_year, $exam_titl
   $created_at =  date('d/m/Y');
   $expired_at = $_POST[$expired_at];
   $exam_duration = $_POST[$exam_duration];
-  $result_date = $_POST[$result_date];
+  $result_date = date('d/m/Y');;
   $exam_status  = $_POST[$exam_status];
 
   if ($exam_title == 'OASIS 3' || 

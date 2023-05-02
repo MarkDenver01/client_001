@@ -34,6 +34,13 @@
     <li class="nav-item">
       <a class="nav-link " href="./student_records">
         <i class="ri-account-pin-circle-fill"></i>
+        <span>Manage Counseling Records</span>
+      </a>
+    </li><!-- End Student Records Nav -->
+
+    <li class="nav-item">
+      <a class="nav-link " href="./counseling_records">
+        <i class="ri-account-pin-circle-fill"></i>
         <span>Student Counseling Records</span>
       </a>
     </li><!-- End Student Records Nav -->
