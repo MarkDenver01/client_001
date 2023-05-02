@@ -62,7 +62,7 @@
                         <td scope="row" class="text-center" style="width: 20%;"><?php echo $gender; ?></td>
                         <td scope="row" class="text-center" style="width: 10%;">
                         <?php if ($counseling_status == "Counseling") { ?>
-                          <a href="#" id="schedule" data-id="<?php echo $student_id; ?>" class="btn btn-success rounded-0  btn-sm w-100 ">Counseling</a>
+                          <a href="#" id="schedule" data-id="<?php echo $student_id; ?>" class="btn btn-success rounded-0  btn-sm w-100 ">Notify & Re-take Exam</a>
                         <?php } elseif($counseling_status == "Monitoring") {  ?>
                           <a href="#" class="btn btn-warning rounded-0  btn-sm w-100 disabled">Monitoring</a>
                         <?php } elseif($counseling_status == "Pending") { ?>
