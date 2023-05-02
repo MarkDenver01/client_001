@@ -109,7 +109,8 @@
                     $_SESSION['key_session']['school_year'],
                     $student['exam_title'],
                     $student['exam_description'],
-                    $student['exam_category']
+                    $student['exam_category'],
+                    $_GET['id']
                   );
                 ?>
                 <div class="col-lg-12">
@@ -119,7 +120,7 @@
                         <?php foreach($result as $display): ?>
                         <th scope="row" value="<?php echo $result['id']; ?>" hidden>
                         <tr>
-                          <img id="ic_image_file" style="width:800px; height: 960px;" src="../uploads/exam/first_year_a/sample_1.png" class="d-block w-100 border border-secondary">
+                          <img id="ic_image_file" style="width:800px; height: 960px;" src="<?php echo $display['image_exam_path']; ?>" class="d-block w-100 border border-secondary">
                         </tr>
                         <?php endforeach; ?>
                     </tbody>

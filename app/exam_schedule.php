@@ -107,7 +107,6 @@ if (isset($_POST['button_schedule'])) {
                  <div class="col-sm-10">
                    <select name="exam_duration" id="course" class="form-select rounded-0">
                      <option selected>Select exam duration</option>
-                     <option value="0.50">30 seconds</option>
                      <option value="1">1 minute</option>
                      <option value="5">5 minutes</option>
                      <option value="8">8 minutes</option>
@@ -120,9 +119,9 @@ if (isset($_POST['button_schedule'])) {
                    </select>
                  </div>
 
-                 <label for="inputNumber" class="col-sm-5 col-form-label">Date of Exam Result</label>
+                 <label for="inputNumber" class="col-sm-5 col-form-label" hidden>Date of Exam Result</label>
                  <div class="col-sm-10">
-                   <input name="result_date" type="date" class="form-control text-success rounded-0">
+                   <input name="result_date" type="date" class="form-control text-success rounded-0" hidden>
                  </div>
           
                 <label for="inputNumber" class="col-sm-5 col-form-label">Semester</label>
