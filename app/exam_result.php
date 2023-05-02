@@ -28,50 +28,78 @@
 ?>
 <?php 
   if (isset($_POST['button_submit'])) {
-    $sql = $db->query("INSERT INTO examinee(
-      student_id, 
-      exam_id, 
-      name, 
-      email_address, 
-      gender, 
-      course, 
-      semester, 
-      school_year, 
-      student_year, 
-      exam_title, 
-      exam_description, 
-      exam_category, 
-      start_exam_date, 
-      exam_answer,
-      total_answer,
-      total_score, 
-      exam_result_status, 
-      counselor_notify_status) VALUES(
-      '$student_id',
-      '$exam_id',
-      '$name',
-      '$email_address',
-      '$gender',
-      '$course',
-      '$semester',
-      '$school_year',
-      '$student_year',
-      '$exam_title',
-      '$exam_desc',
-      '$exam_type',
-      '$start_date',
-      '$exam_answers',
-      '$total_answers',
-      '$total_score',
-      'Done',
-      'Pending')");
+
+    $sqlExist = $db->query("SELECT * FROM examinee WHERE student_id ='$student_id'");
+    if($sqlExist->num_rows > 0) {
+      $sqlUpdate = $db->query("UPDATE examinee SET 
+      start_exam_date='$start_date', 
+      exam_answer='$exam_answers', 
+      total_answer='$total_answers', 
+      total_score='$total_score' WHERE student_id='$student_id' 
+      AND exam_id='$exam_id' 
+      AND exam_title ='$exam_title' 
+      AND exam_description='$exam_desc' 
+      AND exam_category ='$exam_type'");
+
+      if($sqlUpdate) {
+        if ($exam_title == "Student Success Kit") {
+          redirect('./student_success_kit_result', false);
+        } elseif ($exam_title == "OASIS 3") {
+          redirect('./oassis_result.php');
+        } else {
+          redirect('./student_success_kit_result', false);
+        }
+      }
+
+    } else {
+      $sql = $db->query("INSERT INTO examinee(
+        student_id, 
+        exam_id, 
+        name, 
+        email_address, 
+        gender, 
+        course, 
+        semester, 
+        school_year, 
+        student_year, 
+        exam_title, 
+        exam_description, 
+        exam_category, 
+        start_exam_date, 
+        exam_answer,
+        total_answer,
+        total_score, 
+        exam_result_status, 
+        counselor_notify_status) VALUES(
+        '$student_id',
+        '$exam_id',
+        '$name',
+        '$email_address',
+        '$gender',
+        '$course',
+        '$semester',
+        '$school_year',
+        '$student_year',
+        '$exam_title',
+        '$exam_desc',
+        '$exam_type',
+        '$start_date',
+        '$exam_answers',
+        '$total_answers',
+        '$total_score',
+        'Done',
+        'Pending')");
+
       if($sql) {
         if ($exam_title == "Student Success Kit") {
           redirect('./student_success_kit_result', false);
         } elseif ($exam_title == "OASIS 3") {
           redirect('./oassis_result.php');
+        } else {
+          redirect('./student_success_kit_result', false);
         }
       }
+    }
   }
 ?>
 <?php include('../start_menu_bar.php'); ?>

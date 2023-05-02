@@ -57,6 +57,12 @@ $(document).on("click", "#schedule", function() {
                             'Unexpected error occured during the operation. Please try again!',
                             'error'
                         )
+                    } else if(data.res == "appointment") {
+                        Swal.fire(
+                            'Warning',
+                            'Student doesnt set an apppointment yet!',
+                            'warning'
+                        )
                     }
                 },
                 error: function(xhr, ErrorStatus, error) {

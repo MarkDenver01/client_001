@@ -48,8 +48,21 @@
               redirect('./counseling', false);
             }
           } else {
-            $session->message('w', 'Already exist');
-            redirect('./counseling', false);
+            $sqlUpdateExist = $db->query("UPDATE counseling_appointment SET student_name ='$name', appointment_date ='$date_appointment_formatted', slots_available ='1' WHERE student_id='$id'");
+            if ($sqlUpdateExist) {
+              $sqlUpdateAgain = $db->query("UPDATE examinee SET counselor_notify_status='Counseling' WHERE student_id ='$id'");
+              if ($sqlUpdateAgain) {
+                $session->message('s', 'Appointment Success!');
+                redirect('./counseling', false);
+              } else {
+                $session->message('d', 'Unexpected issued occour');
+                redirect('./counseling', false);
+              }
+             
+            } else {
+              $session->message('d', 'Unexpected issued occour');
+              redirect('./counseling', false);
+            }    
           }
       } elseif($slots_available <= 5) {
         if(!$sqlExist->num_rows > 0) {
@@ -68,8 +81,20 @@
             redirect('./counseling', false);
           }
         } else {
-          $session->message('w', 'Already exist');
-          redirect('./counseling', false);
+            $sqlUpdateExist = $db->query("UPDATE counseling_appointment SET student_name ='$name', appointment_date ='$date_appointment_formatted', slots_available ='1' WHERE student_id='$id'");
+            if ($sqlUpdateExist) {
+              $sqlUpdateAgain = $db->query("UPDATE examinee SET counselor_notify_status='Counseling' WHERE student_id ='$id'");
+              if ($sqlUpdateAgain) {
+                $session->message('s', 'Appointment Success!');
+                redirect('./counseling', false);
+              } else {
+                $session->message('d', 'Unexpected issued occour');
+                redirect('./counseling', false);
+              }
+            } else {
+              $session->message('d', 'Unexpected issued occour');
+              redirect('./counseling', false);
+            }   
         }
       } else {
         $session->message('w', 'Not available');

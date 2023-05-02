@@ -43,12 +43,12 @@
 
             $sqlTruncate1 = $db->query("TRUNCATE TABLE examinee_attempt");
             $sqlRetake = $db->query("TRUNCATE TABLE examinee_answer_v2");
-
             if($sqlTruncate1 && $sqlRetake ) {
                 $res = array("res" => "success");
             } else {
                 $res = array("res" => "failed");
             }     
+            
         } else {
             $res = array("res" => "failed");
         }
