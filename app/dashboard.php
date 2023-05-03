@@ -5,7 +5,7 @@
 <?php include('../start_menu_bar.php'); ?>
 <?php global $db; ?>
 <?php global $session; ?>
-<?php $developer = true; ?>
+<?php $developer = false; ?>
 <?php 
 if($developer) {
   if(isset($_POST['developer_button'])) {
