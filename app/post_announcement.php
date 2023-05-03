@@ -11,7 +11,8 @@
     if (isset($_POST['button_submit'])) {
       post_announcements(
         "title",
-        "body_message"
+        "body_message",
+        "image_path"
       );
     }
   }
@@ -48,6 +49,10 @@
                     <textarea name="body_message" class="form-control rounded-0" placeholder="Your announcement" id="floatingTextarea" style="height: 100px;"></textarea>
                     <label for="floatingTextarea">Body Message</label>
                   </div>
+                </div>
+                <div class="col-md-6">
+                  <label for="ic_image_file_path">Attached Files</label>
+                  <input id="ic_image_file_path" type="file" name="image_path" class="form-control btn btn-primary rounded-0 btn-sm" ></input>
                 </div>
 
                 <div class="text-left">
