@@ -2,7 +2,7 @@ $(document).on("click", "#schedule", function() {
     var thisId = $(this).data('id');
     Swal.fire({
         title: 'Guidance Prior Action',
-        text: 'Would you like to monitor or notify the student? Click YES if monitor then NO if notify the student',
+        text: 'Would you like to monitor or notify the student? Click YES if monitor then NO if notify and retake the exam of the student',
         icon: 'warning',
         showCancelButton: true,
         allowOutsideClick: true,
@@ -48,7 +48,7 @@ $(document).on("click", "#schedule", function() {
                     if (data.res == "success") {
                         Swal.fire(
                             'Success',
-                            'Notification has sent to this student',
+                            'Notification has sent to this student and can now retake the exam',
                             'success'
                         )
                     } else if(data.res == "failed") {
@@ -56,6 +56,12 @@ $(document).on("click", "#schedule", function() {
                             'Error',
                             'Unexpected error occured during the operation. Please try again!',
                             'error'
+                        )
+                    } else if(data.res == "appointment") {
+                        Swal.fire(
+                            'Warning',
+                            'Student doesnt set an apppointment yet!',
+                            'warning'
                         )
                     }
                 },

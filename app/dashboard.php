@@ -3,7 +3,21 @@
 <?php SET_NOT_LOGGED_IN(); ?>
 
 <?php include('../start_menu_bar.php'); ?>
-
+<?php global $db; ?>
+<?php global $session; ?>
+<?php $developer = true; ?>
+<?php 
+if($developer) {
+  if(isset($_POST['developer_button'])) {
+    $sql1 = $db->query("TRUNCATE TABLE examinee");
+    $sql2= $db->query("TRUNCATE TABLE examinee_answer_v2");
+    $sql3 = $db->query("TRUNCATE TABLE examinee_attempt");
+    $sql4 = $db->query("TRUNCATE TABLE counseling_appointment");
+    $sql5 = $db->query("TRUNCATE TABLE exam_created");
+    $session->message('s', 'DBs Truncated...');
+  }
+}
+?>
 <main id="main" class="main">
 
   <div class="pagetitle">
@@ -23,6 +37,19 @@
 <!-- Left side columns -->
 <div class="col-lg-8">
   <div class="row">
+  <div class="col-lg-12">
+  <?php echo display_message($msg); ?>
+    <?php if($developer) { ?>
+      <form method="POST">
+    <button name="developer_button" class="btn btn-lg btn-success rounded-0">DEVELOPER SIDE</button>
+    </form>
+    <?php } ?>
+  </div>
+  </div>
+
+
+
+  <div class="row"> 
 
     <!-- Counseling Card -->
     <div class="col-xxl-6 col-md-6">

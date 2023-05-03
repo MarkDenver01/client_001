@@ -51,11 +51,17 @@
         <span>Manage Exam</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
       <ul id="icons-nav" class="nav-content collapsed" data-bs-parent="#sidebar-nav">
+        <!-- <li>
+          <a href="#" id="created_exam">
+            <i class="bi bi-circle"></i><span>Create an exam</span>
+          </a>
+        </li> -->
         <li>
           <a href="./create_exam">
             <i class="bi bi-circle"></i><span>Create an exam</span>
           </a>
         </li>
+        <li>
         <li>
           <a href="./view_exam">
             <i class="bi bi-circle"></i><span>View exam record</span>
