@@ -242,7 +242,7 @@
  function insertUserAccount($full_name, $email_address, $password, $level, $file_path_name) {
    global $db;
    $sql = "INSERT INTO `user_account`(
-     `name`,`email_address`,`password`,`user_level`,`image`,`status`,`image`)";
+     `name`,`email_address`,`password`,`user_level`,`image`,`status`)";
    $sql .= " VALUES ";
    $sql .= "(
      '{$full_name}',

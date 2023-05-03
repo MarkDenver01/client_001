@@ -112,7 +112,8 @@ function addStudentAccount($file_path_name,
               remove_junk($_POST[$full_name]),
               remove_junk($_POST[$email_address]),
               $default_password,
-              3
+              3,
+              $dir
             );
       
             insertStudentAccount(
