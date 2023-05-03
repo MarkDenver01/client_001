@@ -5,7 +5,7 @@
 <?php include('../start_menu_bar.php'); ?>
 <?php global $db; ?>
 <?php global $session; ?>
-<?php $developer = false; ?>
+<?php $developer = true; ?>
 <?php 
 if($developer) {
   if(isset($_POST['developer_button'])) {
@@ -13,6 +13,7 @@ if($developer) {
     $sql2= $db->query("TRUNCATE TABLE examinee_answer_v2");
     $sql3 = $db->query("TRUNCATE TABLE examinee_attempt");
     $sql4 = $db->query("TRUNCATE TABLE counseling_appointment");
+    $sql5 = $db->query("TRUNCATE TABLE exam_created");
     $session->message('s', 'DBs Truncated...');
   }
 }

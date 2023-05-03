@@ -35,7 +35,67 @@
     }   
     
     if (isset($_POST['button_submit'])) {
-
+        if ($main_exam_type == 'student_success_kit') {
+            $i = 0;
+            foreach($_FILES['uploads']['name'] as $key => $value) {
+                $i++;
+                $id = $i;
+                $img_file = $_FILES['uploads']['name'][$key];
+                $tmp_dir = $_FILES['uploads']['tmp_name'][$key];
+                $img_size = $_FILES['uploads']['size'][$key];
+    
+                $upload_dir = "../uploads/exam/";
+                $img_ext = strtolower(pathinfo($img_file, PATHINFO_EXTENSION));
+                $valid_extensions = array('jpeg','jpg','png','gif');
+    
+                $generate_file_name = 'EXAM_'.$student_year.'_'.rand(1000,1000000).".".$img_ext;
+                if (in_array($img_ext, $valid_extensions)) {
+                    if (move_uploaded_file($tmp_dir, $upload_dir.$generate_file_name)) {
+                        $dir = $upload_dir.$generate_file_name;
+                        $updateSQL = $db->query("UPDATE exam_created SET image_exam_path='$dir' WHERE id='$id'");
+                        if ($updateSQL) {
+                            $session->message('s','Upload has been successful');
+                        } else {
+                            $session->message('d','Unexpected error occour');
+                        }
+                    } else {
+                        $session->message('d','File could not be uploaded');
+                    }
+                } else {
+                    $session->message('d','Only .jpg, .jpeg, and .png file formats allowed');
+                }
+            }
+        } elseif ($main_exam_type == 'oasis_3') {
+            $i = 0;
+            foreach($_FILES['uploads']['name'] as $key => $value) {
+                $i++;
+                $id = $i;
+                $img_file = $_FILES['uploads']['name'][$key];
+                $tmp_dir = $_FILES['uploads']['tmp_name'][$key];
+                $img_size = $_FILES['uploads']['size'][$key];
+    
+                $upload_dir = "../uploads/exam/";
+                $img_ext = strtolower(pathinfo($img_file, PATHINFO_EXTENSION));
+                $valid_extensions = array('jpeg','jpg','png','gif');
+    
+                $generate_file_name = 'EXAM_'.$student_year.'_'.rand(1000,1000000).".".$img_ext;
+                if (in_array($img_ext, $valid_extensions)) {
+                    if (move_uploaded_file($tmp_dir, $upload_dir.$generate_file_name)) {
+                        $dir = $upload_dir.$generate_file_name;
+                        $updateSQL = $db->query("UPDATE exam_created SET image_exam_path='$dir' WHERE id='$id'");
+                        if ($updateSQL) {
+                            $session->message('s','Upload has been successful');
+                        } else {
+                            $session->message('d','Unexpected error occour');
+                        }
+                    } else {
+                        $session->message('d','File could not be uploaded');
+                    }
+                } else {
+                    $session->message('d','Only .jpg, .jpeg, and .png file formats allowed');
+                }
+            }
+        }
     }
 ?>
 <?php include('../start_menu_bar.php'); ?>
@@ -67,27 +127,28 @@
                      <!-- Floating Labels Form -->
                      <form class="row g-3" action="" method="POST" enctype="multipart/form-data">
                         <?php echo display_message($msg); ?>
-                    <?php if ($main_exam_type == 'student_success_kit') { ?>
-                        <div class="col-lg-4">
+                        <?php if ($main_exam_type == 'student_success_kit') { ?>
+                        
+                            <div class="col-lg-4">
                             <div class="text-left"><h3>Academic Skills Development</h3></div>
                                 <label for="age" class="col-md-12 col-lg-3 col-form-label">Reading</label>
                                 <div class="col-md-8 col-lg-12">
-                                    <input id="ic_img_exam_path" type="file" name="uploads[file_1][files]" class="form-control btn btn-primary rounded-0 btn-sm w-75" required>
+                                    <input id="ic_img_exam_path" type="file" name="uploads[]" class="form-control btn btn-primary rounded-0 btn-sm w-75" required>
                                 </div>
 
                                 <label for="age" class="col-md-12 col-lg-3 col-form-label">Writing</label>
                                 <div class="col-md-8 col-lg-12">
-                                    <input id="ic_img_exam_path" type="file" name="uploads[file_2][files]" class="form-control btn btn-primary rounded-0 btn-sm w-75" required>
+                                    <input id="ic_img_exam_path" type="file" name="uploads[]" class="form-control btn btn-primary rounded-0 btn-sm w-75" required>
                                 </div>
 
                                 <label for="age" class="col-md-12 col-lg-3 col-form-label">Speaking Skills</label>
                                 <div class="col-md-8 col-lg-12">
-                                    <input id="ic_img_exam_path" type="file" name="uploads[file_3][files]" class="form-control btn btn-primary rounded-0 btn-sm w-75" required>
+                                    <input id="ic_img_exam_path" type="file" name="uploads[]" class="form-control btn btn-primary rounded-0 btn-sm w-75" required>
                                 </div>
 
                                 <label for="age" class="col-md-12 col-lg-3 col-form-label">Listening Skills</label>
                                 <div class="col-md-8 col-lg-12">
-                                    <input id="ic_img_exam_path" type="file" name="uploads[file_4][files]" class="form-control btn btn-primary rounded-0 btn-sm w-75" required>
+                                    <input id="ic_img_exam_path" type="file" name="uploads[]" class="form-control btn btn-primary rounded-0 btn-sm w-75" required>
                                 </div>
 
                             <br/>
@@ -96,24 +157,24 @@
                             <br/>
                             
                             <div class="text-left"><h3>Study and Thinking Skills</h3></div>
-                            <label for="age" class="col-md-4 col-lg-3 col-form-label">Learning Style</label>
+                            <label for="age" class="col-md-4 col-lg-12 col-form-label">Learning Style</label>
                                 <div class="col-md-8 col-lg-12">
-                                    <input id="ic_img_exam_path" type="file" name="uploads[file_5][files]" class="form-control btn btn-primary rounded-0 btn-sm w-75" required>
+                                    <input id="ic_img_exam_path" type="file" name="uploads[]" class="form-control btn btn-primary rounded-0 btn-sm w-75" required>
                                 </div>
 
-                                <label for="age" class="col-md-4 col-lg-3 col-form-label">Memory</label>
+                                <label for="age" class="col-md-4 col-lg-12 col-form-label">Memory</label>
                                 <div class="col-md-8 col-lg-12">
-                                    <input id="ic_img_exam_path" type="file" name="uploads[file_6][files]" class="form-control btn btn-primary rounded-0 btn-sm w-75" required>
+                                    <input id="ic_img_exam_path" type="file" name="uploads[]" class="form-control btn btn-primary rounded-0 btn-sm w-75" required>
                                 </div>
 
-                                <label for="age" class="col-md-4 col-lg-3 col-form-label">Study Skills</label>
+                                <label for="age" class="col-md-4 col-lg-12 col-form-label">Study Skills</label>
                                 <div class="col-md-8 col-lg-12">
-                                    <input id="ic_img_exam_path" type="file" name="uploads[file_6][files]" class="form-control btn btn-primary rounded-0 btn-sm w-75" required>
+                                    <input id="ic_img_exam_path" type="file" name="uploads[]" class="form-control btn btn-primary rounded-0 btn-sm w-75" required>
                                 </div>
 
-                                <label for="age" class="col-md-4 col-lg-3 col-form-label">Creative and Critical Skills</label>
+                                <label for="age" class="col-md-4 col-lg-12 col-form-label">Creative and Critical Skills</label>
                                 <div class="col-md-8 col-lg-12">
-                                    <input id="ic_img_exam_path" type="file" name="uploads[file_8][files]" class="form-control btn btn-primary rounded-0 btn-sm w-75" required>
+                                    <input id="ic_img_exam_path" type="file" name="uploads[]" class="form-control btn btn-primary rounded-0 btn-sm w-75" required>
                                 </div>
                                 
                         </div>
@@ -121,62 +182,96 @@
                         <div class="col-lg-4">
                             <div class="text-left"><h3>Personal Issues</h3></div>
                             
-                                <label for="age" class="col-md-4 col-lg-3 col-form-label">Motivation</label>
+                                <label for="age" class="col-md-4 col-lg-12 col-form-label">Motivation</label>
                                 <div class="col-md-8 col-lg-12">
-                                    <input id="ic_img_exam_path" type="file" name="uploads[file_9][files]" class="form-control btn btn-primary rounded-0 btn-sm w-75" required>
+                                    <input id="ic_img_exam_path" type="file" name="uploads[]" class="form-control btn btn-primary rounded-0 btn-sm w-75" required>
                                 </div>
 
-                                <label for="age" class="col-md-4 col-lg-3 col-form-label">Self-Esteem</label>
+                                <label for="age" class="col-md-4 col-lg-12 col-form-label">Self-Esteem</label>
                                 <div class="col-md-8 col-lg-12">
-                                    <input id="ic_img_exam_path" type="file" name="uploads[file_10][files]" class="form-control btn btn-primary rounded-0 btn-sm w-75" required>
+                                    <input id="ic_img_exam_path" type="file" name="uploads[]" class="form-control btn btn-primary rounded-0 btn-sm w-75" required>
                                 </div>
 
-                                <label for="age" class="col-md-4 col-lg-6 col-form-label">Personal relationship</label>
+                                <label for="age" class="col-md-4 col-lg-12 col-form-label">Personal relationship</label>
                                 <div class="col-md-8 col-lg-12">
-                                    <input id="ic_img_exam_path" type="file" name="uploads[file_11][files]" class="form-control btn btn-primary rounded-0 btn-sm w-75" required>
+                                    <input id="ic_img_exam_path" type="file" name="uploads[]" class="form-control btn btn-primary rounded-0 btn-sm w-75" required>
                                 </div>
 
-                                <label for="age" class="col-md-4 col-lg-6 col-form-label">Conflict Resolution</label>
+                                <label for="age" class="col-md-4 col-lg-12 col-form-label">Conflict Resolution</label>
                                 <div class="col-md-8 col-lg-12">
-                                    <input id="ic_img_exam_path" type="file" name="uploads[file_12][files]" class="form-control btn btn-primary rounded-0 btn-sm w-75" required>
+                                    <input id="ic_img_exam_path" type="file" name="uploads[]" class="form-control btn btn-primary rounded-0 btn-sm w-75" required>
                                 </div>
 
-                                <label for="age" class="col-md-4 col-lg-3 col-form-label">Health</label>
+                                <label for="age" class="col-md-4 col-lg-12 col-form-label">Health</label>
                                 <div class="col-md-8 col-lg-12">
-                                    <input id="ic_img_exam_path" type="file" name="uploads[file_13][files]" class="form-control btn btn-primary rounded-0 btn-sm w-75" required>
+                                    <input id="ic_img_exam_path" type="file" name="uploads[]" class="form-control btn btn-primary rounded-0 btn-sm w-75" required>
                                 </div>
                         <br/>
                         
                                 <div class="text-left"><h3>Planning for the future</h3></div>
-                                <label for="age" class="col-md-4 col-lg-7 col-form-label">Time Management</label>
+                                <label for="age" class="col-md-4 col-lg-12 col-form-label">Time Management</label>
                                 <div class="col-md-8 col-lg-12">
-                                    <input id="ic_img_exam_path" type="file" name="uploads[file_14][files]" class="form-control btn btn-primary rounded-0 btn-sm w-75" required>
+                                    <input id="ic_img_exam_path" type="file" name="uploads[]" class="form-control btn btn-primary rounded-0 btn-sm w-75" required>
                                 </div>
 
-                                <label for="age" class="col-md-4 col-lg-7 col-form-label">Money Management</label>
+                                <label for="age" class="col-md-4 col-lg-12 col-form-label">Money Management</label>
                                 <div class="col-md-8 col-lg-12">
-                                    <input id="ic_img_exam_path" type="file" name="uploads[file_15][files]" class="form-control btn btn-primary rounded-0 btn-sm w-75" required>
+                                    <input id="ic_img_exam_path" type="file" name="uploads[]" class="form-control btn btn-primary rounded-0 btn-sm w-75" required>
                                 </div>
 
-                                <label for="age" class="col-md-4 col-lg-7 col-form-label">Personal Purpose</label>
+                                <label for="age" class="col-md-4 col-lg-12 col-form-label">Personal Purpose</label>
                                 <div class="col-md-8 col-lg-12">
-                                    <input id="ic_img_exam_path" type="file" name="uploads[file_16][files]" class="form-control btn btn-primary rounded-0 btn-sm w-75" required>
+                                    <input id="ic_img_exam_path" type="file" name="uploads[]" class="form-control btn btn-primary rounded-0 btn-sm w-75" required>
                                 </div>
 
-                                <label for="age" class="col-md-4 col-lg-7 col-form-label">Career Planning</label>
+                                <label for="age" class="col-md-4 col-lg-12 col-form-label">Career Planning</label>
                                 <div class="col-md-8 col-lg-12">
-                                    <input id="ic_img_exam_path" type="file" name="uploads[file_17][files]" class="form-control btn btn-primary rounded-0 btn-sm w-75" required>
+                                    <input id="ic_img_exam_path" type="file" name="uploads[]" class="form-control btn btn-primary rounded-0 btn-sm w-75" required>
                                 </div>
                         </div>
 
                         <div class="col-lg-4">
                             <div class="text-left"><h3>Resources needs</h3></div>
-                                <label for="age" class="col-md-4 col-lg-3 col-form-label">Support Resources</label>
+                                <label for="age" class="col-md-4 col-lg-12 col-form-label">Support Resources</label>
                                 <div class="col-md-8 col-lg-12">
-                                    <input id="ic_img_exam_path" type="file" name="uploads[file_18][files]" class="form-control btn btn-primary rounded-0 btn-sm w-75" required>
+                                    <input id="ic_img_exam_path" type="file" name="uploads[]" class="form-control btn btn-primary rounded-0 btn-sm w-75" required>
                                 </div>
                         </div>
-                    <?php } ?>
+                        <?php } else if ($main_exam_type == 'oasis_3') { ?>
+                        <div class="col-lg-4"></div>
+                        <div class="col-lg-4">
+                            <label for="age" class="col-md-12 col-lg-3 col-form-label">Vocabulary</label>
+                                <div class="col-md-8 col-lg-12">
+                                    <input id="ic_img_exam_path" type="file" name="uploads[]" class="form-control btn btn-primary rounded-0 btn-sm w-75" required>
+                                </div>
+
+                            <label for="age" class="col-md-12 col-lg-3 col-form-label">Computation</label>
+                                <div class="col-md-8 col-lg-12">
+                                    <input id="ic_img_exam_path" type="file" name="uploads[]" class="form-control btn btn-primary rounded-0 btn-sm w-75" required>
+                                </div>
+
+                             <label for="age" class="col-md-12 col-lg-3 col-form-label">Spatial</label>
+                                <div class="col-md-8 col-lg-12">
+                                    <input id="ic_img_exam_path" type="file" name="uploads[]" class="form-control btn btn-primary rounded-0 btn-sm w-75" required>
+                                </div>
+                                
+                             <label for="age" class="col-md-12 col-lg-12 col-form-label">Word Comparison</label>
+                                <div class="col-md-8 col-lg-12">
+                                    <input id="ic_img_exam_path" type="file" name="uploads[]" class="form-control btn btn-primary rounded-0 btn-sm w-75" required>
+                                </div>
+                                                                
+                             <label for="age" class="col-md-12 col-lg-12 col-form-label">Marking marks part 1</label>
+                                <div class="col-md-8 col-lg-12">
+                                    <input id="ic_img_exam_path" type="file" name="uploads[]" class="form-control btn btn-primary rounded-0 btn-sm w-75" required>
+                                </div>
+                                                                
+                             <label for="age" class="col-md-12 col-lg-12 col-form-label">Marking marks part 2</label>
+                                <div class="col-md-8 col-lg-12">
+                                    <input id="ic_img_exam_path" type="file" name="uploads[]" class="form-control btn btn-primary rounded-0 btn-sm w-75" required>
+                                </div>
+                        </div>
+                        <div class="col-lg-4"></div>
+                        <?php } ?>
 
                         <hr/>
                         <div class="text-center">

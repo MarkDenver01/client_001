@@ -27,7 +27,7 @@
  function find_by_student() {
    global $db;
    $sql = "SELECT s.id, s.name, s.course, s.student_year, s.semester, s.school_year, s.gender, s.age, s.birth_date, s.present_address, s.email_address, a.password AS studentInfo,";
-   $sql .= " a.user_level, a.status, a.is_logged_in AS studentAccount FROM ";
+   $sql .= " a.user_level, a.image, a.status, a.is_logged_in AS studentAccount FROM ";
    $sql .= " student_info s LEFT JOIN user_account a ";
    $sql .= " ON s.email_address = a.email_address ORDER BY s.id DESC";
    return find_by_sql($sql);
@@ -36,7 +36,7 @@
  function find_by_guidance() {
    global $db;
    $sql = "SELECT g.id, g.name, g.gender, g.age, g.birth_date, g.present_address, g.email_address, a.password AS guidanceInfo,";
-   $sql .= " a.user_level, a.status, a.is_logged_in AS guidanceAccount FROM ";
+   $sql .= " a.user_level, a.image, a.status, a.is_logged_in AS guidanceAccount FROM ";
    $sql .= " guidance_info g LEFT JOIN user_account a ";
    $sql .= " ON g.email_address = a.email_address ORDER BY g.id DESC";
    return find_by_sql($sql);
@@ -118,7 +118,7 @@
    $sql = "SELECT `g`.`name` AS name, `g`.`gender` AS gender, `g`.`age` AS age,";
    $sql .=" `g`.`birth_date` AS birth_date, `g`.`present_address` AS present_address,";
    $sql .=" `u`.`email_address` AS email_address, `u`.`password` as password,";
-   $sql .=" `u`.`user_level` AS user_level, `u`.`status` AS status,";
+   $sql .=" `u`.`user_level` AS user_level,`u`.`image` AS image,`u`.`status` AS status,";
    $sql .=" `u`.`is_logged_in` AS is_logged_in";
    $sql .= " FROM `guidance_info` `g` LEFT JOIN `user_account` `u`";
    $sql .= " ON `g`.`email_address` = `u`.`email_address`";
@@ -170,7 +170,7 @@
    $sql ="SELECT `s`.`id` AS id, `s`.`name` AS name, `s`.`course` AS course, `s`.`semester` AS semester, `s`.`school_year` AS school_year, `s`.`student_year` AS student_year,";
    $sql .=" `s`.`gender` AS gender, `s`.`age` AS age, `s`.`birth_date` AS birth_date,";
    $sql .=" `s`.`present_address` AS present_address, `u`.`email_address` AS email_address,";
-   $sql .=" `u`.`password` AS password, `u`.`user_level` AS user_level,";
+   $sql .=" `u`.`password` AS password, `u`.`user_level` AS user_level, `u`.`image` AS image,";
    $sql .=" `u`.`status` AS status, `u`.`is_logged_in` AS is_logged_in";
    $sql .=" FROM `student_info` `s` LEFT JOIN `user_account` `u`";
    $sql .=" ON `s`.`email_address` = `u`.`email_address`";
@@ -239,16 +239,17 @@
    return ($result && $db->affected_rows() === 1 ? true : false);
  }
 
- function insertUserAccount($full_name, $email_address, $password, $level) {
+ function insertUserAccount($full_name, $email_address, $password, $level, $file_path_name) {
    global $db;
    $sql = "INSERT INTO `user_account`(
-     `name`,`email_address`,`password`,`user_level`,`status`)";
+     `name`,`email_address`,`password`,`user_level`,`image`,`status`,`image`)";
    $sql .= " VALUES ";
    $sql .= "(
      '{$full_name}',
      '{$email_address}',
      '{$password}',
      '{$level}',
+     '{$file_path_name}',
      '0')";
    $db->query($sql);
  }

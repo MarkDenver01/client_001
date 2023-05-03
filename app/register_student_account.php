@@ -10,7 +10,8 @@
     onClickButton("button_back", "./view_student_account");
     // upload image & save account info
     if (isset($_POST["button_save"])) {
-      addStudentAccount("full_name",
+      addStudentAccount("image_path",
+        "full_name",
         "email_address",
         "course",
         "student-year",
@@ -40,6 +41,19 @@
 
     <section class="section profile">
       <div class="row">
+        <div class="col-xl-4">
+          <form method="POST" action="" enctype="multipart/form-data">
+            <div class="card">
+              <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+
+                <img id="ic_image_file" src="./assets/img/profile.png" alt="Profile" class="rounded-circle" style="height: 120px; width: 200px;">
+                </br>
+                <input id="ic_image_file_path" type="file" name="image_path" class="form-control btn btn-primary rounded-pill btn-sm" ></input>
+              </div>
+           </div>
+
+        </div>
+        <div class="col-xl-8">
       <?php $academic_settings = get_academic_settings(); ?>
       <form method="POST" action="" enctype="multipart/form-data">
         <div class="col-xl-12">
@@ -156,10 +170,29 @@
               </div><!-- End Bordered Tabs -->
             </div>
           </div>
+   
 
         </div>
       </div>
     </section>
 
   </main><!-- End #main -->
+
+  <script>
+      function readURL(input) {
+          if (input.files && input.files[0]) {
+              var reader = new FileReader();
+
+              reader.onload = function (e) {
+                  $('#ic_image_file').attr('src', e.target.result);
+              }
+
+              reader.readAsDataURL(input.files[0]);
+          }
+      }
+
+      $("#ic_image_file_path").change(function(){
+          readURL(this);
+      });
+  </script>
 <?php include('../footer.php'); ?>
