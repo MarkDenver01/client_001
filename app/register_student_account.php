@@ -72,21 +72,21 @@
                   <!-- Profile Edit Form -->
                     <div class="row mb-3">
                       <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Full Name</label>
-                      <div class="col-md-8 col-lg-5">
+                      <div class="col-md-8 col-lg-6">
                         <input name="full_name" type="text" class="form-control rounded-0" id="fullName">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="email_address" class="col-md-4 col-lg-3 col-form-label">Email address</label>
-                      <div class="col-md-8 col-lg-5">
+                      <div class="col-md-8 col-lg-6">
                         <input name="email_address" type="email" class="form-control rounded-0" id="email_address">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="course" class="col-md-4 col-lg-3 col-form-label">Course</label>
-                      <div class="col-md-4 col-lg-6">
+                      <div class="col-md-4 col-lg-8">
                         <select name="course" id="course" class="form-select rounded-0">
                           <option selected>Select course</option>
                           <option value="BSIE">Bachelor of Science in Industrial Engineering</option>
@@ -116,14 +116,14 @@
 
                     <div class="row mb-3">
                       <label for="age" class="col-md-4 col-lg-3 col-form-label">Semester</label>
-                      <div class="col-md-8 col-lg-2">
+                      <div class="col-md-8 col-lg-4">
                         <input name="semester" type="text" class="form-control rounded-0" id="age" value="<?php echo $academic_settings['semester']; ?>" readonly>
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="school_year" class="col-md-4 col-lg-3 col-form-label">Academic School Year</label>
-                      <div class="col-md-8 col-lg-2">
+                      <div class="col-md-8 col-lg-4">
                         <input name="school_year" type="text" class="form-control rounded-0" id="school_year" value="<?php echo $academic_settings['school_year']; ?>" readonly>
                       </div>
                     </div>
@@ -148,7 +148,7 @@
 
                     <div class="row mb-3">
                       <label for="birth_date" class="col-md-4 col-lg-3 col-form-label">Birth date</label>
-                      <div class="col-md-8 col-lg-3">
+                      <div class="col-md-8 col-lg-4">
                         <input name="birth_date" type="date" class="form-control rounded-0" id="birth_date">
                       </div>
                     </div>
