@@ -45,7 +45,7 @@ if($developer) {
         <?php } ?>
       </div>
     </div>
-    
+
     <div class="row"> 
     <!-- Counseling Card -->
     <div class="col-xxl-6 col-md-6">

@@ -68,21 +68,21 @@
                   <!-- Profile Edit Form -->
                     <div class="row mb-3">
                       <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Full Name</label>
-                      <div class="col-md-8 col-lg-5">
+                      <div class="col-md-8 col-lg-6">
                         <input name="full_name" type="text" class="form-control rounded-0" id="fullName">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="email_address" class="col-md-4 col-lg-3 col-form-label">Email address</label>
-                      <div class="col-md-8 col-lg-5">
+                      <div class="col-md-8 col-lg-6">
                         <input name="email_address" type="email" class="form-control rounded-0" id="email_address">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="gender" class="col-md-4 col-lg-3 col-form-label">Gender</label>
-                      <div class="col-md-4 col-lg-2">
+                      <div class="col-md-4 col-lg-4">
                         <select name="gender" id="inputState" class="form-select rounded-0">
                           <option selected>Select Gender</option>
                           <option value="Male">Male</option>
@@ -93,14 +93,14 @@
 
                     <div class="row mb-3">
                       <label for="age" class="col-md-4 col-lg-3 col-form-label">Age</label>
-                      <div class="col-md-8 col-lg-1">
+                      <div class="col-md-8 col-lg-2">
                         <input name="age" type="number" class="form-control rounded-0" id="age">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="birth_date" class="col-md-4 col-lg-3 col-form-label">Birth date</label>
-                      <div class="col-md-8 col-lg-3">
+                      <div class="col-md-8 col-lg-4">
                         <input name="birth_date" type="date" class="form-control rounded-0" id="birth_date">
                       </div>
                     </div>
