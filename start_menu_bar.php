@@ -5,7 +5,7 @@
 <header id="header" class="header fixed-top d-flex align-items-center">
 
   <div class="d-flex align-items-center justify-content-between">
-    <a href="#" class="logo d-flex align-items-center">
+    <a href="./dashboard" class="logo d-flex align-items-center">
       <lottie-player src="./assets/json/book.json" background="transparent"  speed="1"  style="width: 60px; height: 60px;" loop autoplay></lottie-player>
       <span class="d-none d-lg-block"><?= $_ENV['SITE_PORTAL']; ?></span>
     </a>
