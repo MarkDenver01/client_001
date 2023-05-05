@@ -9,29 +9,29 @@
     $created_at = date('Y-m-d h:i:s A');
     if ($main_exam_type == 'student_success_kit') {
         $sqlCheck = $db->query("SELECT * FROM exam_created WHERE exam_title='Student Success Kit'");
-        if ($sqlCheck->num_rows > 0) {
-            // nothing
-        } else {
-            $sqlInsert = $db->query("INSERT INTO `exam_created` (`id`, `student_year`, `semester`, `school_year`, `exam_title`, `exam_description`, `exam_category`, `created_at`, `exam_status`, `updated_answer`) VALUES
-            (1, 'First Year', '" .$academic_settings['semester']. "', '" .$academic_settings['school_year']. "', 'Student Success Kit', 'Academic Skills Development', 'Reading', '" .$created_at. "', 1, 0),
-            (2, 'First Year', '" .$academic_settings['semester']. "', '" .$academic_settings['school_year']. "', 'Student Success Kit', 'Academic Skills Development', 'Writing', '" .$created_at. "', 1, 0),
-            (3, 'First Year', '" .$academic_settings['semester']. "', '" .$academic_settings['school_year']. "', 'Student Success Kit', 'Academic Skills Development', 'Speaking Skills', '" .$created_at. "', 1, 0),
-            (4, 'First Year', '" .$academic_settings['semester']. "', '" .$academic_settings['school_year']. "', 'Student Success Kit', 'Academic Skills Development', 'Listening Skills', '" .$created_at. "', 1, 0),
-            (5, 'First Year', '" .$academic_settings['semester']. "', '" .$academic_settings['school_year']. "', 'Student Success Kit', 'Study and Thinking Skills', 'Learning Styles', '" .$created_at. "', 1, 0),
-            (6, 'First Year', '" .$academic_settings['semester']. "', '" .$academic_settings['school_year']. "', 'Student Success Kit', 'Study and Thinking Skills', 'Memory', '" .$created_at. "', 1, 0),
-            (7, 'First Year', '" .$academic_settings['semester']. "', '" .$academic_settings['school_year']. "', 'Student Success Kit', 'Study and Thinking Skills', 'Study Skills','" .$created_at. "', 1, 0),
-            (8, 'First Year', '".$academic_settings['semester']. "', '" .$academic_settings['school_year']. "', 'Student Success Kit', 'Study and Thinking Skills', 'Creative and Thinking Skills','" .$created_at. "', 1, 0),
-            (9, 'First Year', '" .$academic_settings['semester']. "', '" .$academic_settings['school_year']. "', 'Student Success Kit', 'Personal Issues', 'Motivation','" .$created_at. "', 1, 0),
-            (10, 'First Year', '" .$academic_settings['semester']. "', '" .$academic_settings['school_year']. "', 'Student Success Kit', 'Personal Issues', 'Self-Esteem','" .$created_at. "', 1, 0),
-            (11, 'First Year', '" .$academic_settings['semester']. "', '" .$academic_settings['school_year']. "', 'Student Success Kit', 'Personal Issues', 'Personal Relationships','" .$created_at. "', 1, 0),
-            (12, 'First Year', '" .$academic_settings['semester']. "', '" .$academic_settings['school_year']. "', 'Student Success Kit', 'Personal Issues', 'Conflict Resolution', '" .$created_at. "', 1, 0),
-            (13, 'First Year', '" .$academic_settings['semester']. "', '" .$academic_settings['school_year']. "', 'Student Success Kit', 'Personal Issues', 'Health','" .$created_at. "', 1, 0),
-            (14, 'First Year', '" .$academic_settings['semester']. "', '" .$academic_settings['school_year']. "', 'Student Success Kit', 'Planning for the future', 'Time Management','" .$created_at. "', 1, 0),
-            (15, 'First Year', '" .$academic_settings['semester']. "', '" .$academic_settings['school_year']. "', 'Student Success Kit', 'Planning for the future', 'Money Management','" .$created_at. "', 1, 0),
-            (16, 'First Year', '" .$academic_settings['semester']. "', '" .$academic_settings['school_year']. "', 'Student Success Kit', 'Planning for the future', 'Personal Purpose','" .$created_at. "', 1, 0),
-            (17, 'First Year', '" .$academic_settings['semester']. "', '" .$academic_settings['school_year']. "', 'Student Success Kit', 'Planning for the future', 'Career Planning','" .$created_at. "', 1, 0),
-            (18, 'First Year', '" .$academic_settings['semester']. "', '" .$academic_settings['school_year']. "', 'Student Success Kit', 'Resources needs', 'Support Resources','" .$created_at. "', 1, 0);");       
-        }
+        // if ($sqlCheck->num_rows > 0) {
+        //     // nothing
+        // } else {
+        //     $sqlInsert = $db->query("INSERT INTO `exam_created` (`id`, `student_year`, `semester`, `school_year`, `exam_title`, `exam_description`, `exam_category`, `created_at`, `exam_status`, `updated_answer`) VALUES
+        //     (1, 'First Year', '" .$academic_settings['semester']. "', '" .$academic_settings['school_year']. "', 'Student Success Kit', 'Academic Skills Development', 'Reading', '" .$created_at. "', 1, 0),
+        //     (2, 'First Year', '" .$academic_settings['semester']. "', '" .$academic_settings['school_year']. "', 'Student Success Kit', 'Academic Skills Development', 'Writing', '" .$created_at. "', 1, 0),
+        //     (3, 'First Year', '" .$academic_settings['semester']. "', '" .$academic_settings['school_year']. "', 'Student Success Kit', 'Academic Skills Development', 'Speaking Skills', '" .$created_at. "', 1, 0),
+        //     (4, 'First Year', '" .$academic_settings['semester']. "', '" .$academic_settings['school_year']. "', 'Student Success Kit', 'Academic Skills Development', 'Listening Skills', '" .$created_at. "', 1, 0),
+        //     (5, 'First Year', '" .$academic_settings['semester']. "', '" .$academic_settings['school_year']. "', 'Student Success Kit', 'Study and Thinking Skills', 'Learning Styles', '" .$created_at. "', 1, 0),
+        //     (6, 'First Year', '" .$academic_settings['semester']. "', '" .$academic_settings['school_year']. "', 'Student Success Kit', 'Study and Thinking Skills', 'Memory', '" .$created_at. "', 1, 0),
+        //     (7, 'First Year', '" .$academic_settings['semester']. "', '" .$academic_settings['school_year']. "', 'Student Success Kit', 'Study and Thinking Skills', 'Study Skills','" .$created_at. "', 1, 0),
+        //     (8, 'First Year', '".$academic_settings['semester']. "', '" .$academic_settings['school_year']. "', 'Student Success Kit', 'Study and Thinking Skills', 'Creative and Thinking Skills','" .$created_at. "', 1, 0),
+        //     (9, 'First Year', '" .$academic_settings['semester']. "', '" .$academic_settings['school_year']. "', 'Student Success Kit', 'Personal Issues', 'Motivation','" .$created_at. "', 1, 0),
+        //     (10, 'First Year', '" .$academic_settings['semester']. "', '" .$academic_settings['school_year']. "', 'Student Success Kit', 'Personal Issues', 'Self-Esteem','" .$created_at. "', 1, 0),
+        //     (11, 'First Year', '" .$academic_settings['semester']. "', '" .$academic_settings['school_year']. "', 'Student Success Kit', 'Personal Issues', 'Personal Relationships','" .$created_at. "', 1, 0),
+        //     (12, 'First Year', '" .$academic_settings['semester']. "', '" .$academic_settings['school_year']. "', 'Student Success Kit', 'Personal Issues', 'Conflict Resolution', '" .$created_at. "', 1, 0),
+        //     (13, 'First Year', '" .$academic_settings['semester']. "', '" .$academic_settings['school_year']. "', 'Student Success Kit', 'Personal Issues', 'Health','" .$created_at. "', 1, 0),
+        //     (14, 'First Year', '" .$academic_settings['semester']. "', '" .$academic_settings['school_year']. "', 'Student Success Kit', 'Planning for the future', 'Time Management','" .$created_at. "', 1, 0),
+        //     (15, 'First Year', '" .$academic_settings['semester']. "', '" .$academic_settings['school_year']. "', 'Student Success Kit', 'Planning for the future', 'Money Management','" .$created_at. "', 1, 0),
+        //     (16, 'First Year', '" .$academic_settings['semester']. "', '" .$academic_settings['school_year']. "', 'Student Success Kit', 'Planning for the future', 'Personal Purpose','" .$created_at. "', 1, 0),
+        //     (17, 'First Year', '" .$academic_settings['semester']. "', '" .$academic_settings['school_year']. "', 'Student Success Kit', 'Planning for the future', 'Career Planning','" .$created_at. "', 1, 0),
+        //     (18, 'First Year', '" .$academic_settings['semester']. "', '" .$academic_settings['school_year']. "', 'Student Success Kit', 'Resources needs', 'Support Resources','" .$created_at. "', 1, 0);");       
+        // }
     }   
     
     if (isset($_POST['button_submit'])) {

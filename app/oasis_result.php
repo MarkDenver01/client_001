@@ -165,7 +165,11 @@ if(isset($_POST['button_counseling'])) {
                                             <?php if ($counselour_stats == 'Completed') { ?>
                                             <?php echo $counselour_stats; ?>
                                             <?php } else { ?>
-                                            <?php echo $msg; ?>
+                                            <?php if (!empty($msg)) { ?>
+                                              <?php echo $msg; ?>
+                                           <?php } else { ?>
+                                            <?php echo $counselour_stats; ?>
+                                            <?php } ?>
                                             <?php } ?>
                                         </h3>
                                       </div>

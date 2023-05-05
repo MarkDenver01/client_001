@@ -86,14 +86,6 @@
       
       <li class="nav-item dropdown">
 
-        <a class="nav-link nav-icon" href="../chat/chat_app">
-          <i class="bi bi-chat-left-text"></i>
-          <span class="badge bg-success badge-number">Chat</span>
-        </a><!-- End Messages Icon -->
-      </li><!-- End Messages Nav -->
-
-      <li class="nav-item dropdown pe-3">
-
         <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
           <img src="assets/img/profile.png" alt="Profile" class="rounded-circle">
           <span class="d-none d-md-block dropdown-toggle ps-2"><?php echo $_SESSION['key_session']['name']; ?></span>
