@@ -36,6 +36,8 @@
               $sqlUpdate = $db->query("UPDATE examinee SET counselor_notify_status='Counseling' WHERE student_id ='$id'");
               if($sqlUpdate) {
 
+                $sqlCounseling = "INSERT INTO"
+
                 $session->message('s', 'Appointment Success!');
                 redirect('./counseling', false);
               } else {
