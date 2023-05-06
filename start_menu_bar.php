@@ -1,5 +1,6 @@
 <?php require_once('../lib/class.environment.php'); ?>
 <?php include_once('../includes/load.php'); ?>
+<?php global $db; ?>
 <?php delete_announcement_after_a_days(); ?>
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
@@ -17,7 +18,6 @@
   <?php
       $user_level = $_SESSION['key_session']['user_level'];
       if ($user_level == '3') {  ?>
-      <?php global $db; ?>
       <?php $student_id = $_SESSION['key_session']['student_id']; ?>
       <?php 
         if (isset($_POST["button_update"])) {
@@ -29,7 +29,7 @@
           }
         }
       ?>
-      <?php $notify_count = count_notification($_SESSION['key_session']['student_id']); ?>
+    <?php $notify_count = count_notification($_SESSION['key_session']['student_id']); ?>
     <li class="nav-item dropdown">
         <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
           <i class="bi bi-bell"></i>
@@ -81,8 +81,59 @@
         </ul><!-- End Notification Dropdown Items -->
 
       </li><!-- End Notification Nav -->
-  <?php
-      } ?>
+  <?php } else { ?>
+    <?php $notif_admin = count_notification_by_admin(); ?>
+    <li class="nav-item dropdown">
+        <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+          <i class="bi bi-bell"></i>
+          <span class="badge badge-number"  style="background-image: linear-gradient(#d9534f, #AB274F);"><?php echo $notif_admin; ?> Notification</span>
+        </a><!-- End Notification Icon -->
+
+        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+          <li class="dropdown-header">
+            <form action="" method="post">
+            You have <?php echo $notif_admin; ?> new notifications
+            <?php if($notif_admin > 0) { ?>
+              <button name="button_update" type="submit" class="badge rounded-pill bg-primary p-2 ms-2">View all</button>
+            <?php } ?>
+            </form>
+          </li>
+          <?php global $db; ?>
+          <?php 
+            $sql = "SELECT * FROM notify_student WHERE notify_status='unread'";
+            $result_notif = $db->query($sql);
+            if ($result_notif->num_rows > 0) {
+              while ($row = $result_notif->fetch_assoc()) { ?>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+
+          <li class="notification-item">
+            <i class="bi bi-exclamation-circle text-warning"></i>
+            <div>
+              <h4>From Guidance Counselor | </h4><span><?php echo $row['notify_date']; ?></span>
+              <p><?php echo $row['message']; ?></p>
+            </div>
+          </li>
+          <?php
+              }
+            } else {
+          ?>
+             <li>
+            <hr class="dropdown-divider">
+          </li>
+
+          <li class="notification-item">
+            <i class="bi bi-exclamation-circle text-success"></i>
+            <div>
+              <h4>No notification is <b>unread</b></span>
+            </div>
+          </li>
+          <?php } ?>
+          
+        </ul><!-- End Notification Dropdown Items -->
+
+      </li><!-- End Notification Nav -->
       
       <li class="nav-item dropdown">
 
@@ -150,7 +201,7 @@
 
         </ul><!-- End Profile Dropdown Items -->
       </li><!-- End Profile Nav -->
-
+    <?php } ?>
     </ul>
   </nav><!-- End Icons Navigation -->
 

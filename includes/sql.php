@@ -850,4 +850,16 @@ function count_notification($student_id) {
   return false;
 }
 
+function count_notification_by_admin() {
+  global $db;
+  $sql = "SELECT COUNT(*) AS total_count FROM notify_student WHERE notify_status='unread' ORDER BY id DESC";
+  $result = $db->query($sql);
+  if ($db->num_rows($result)) {
+    $check = $db->fetch_assoc($result);
+    $total_count = $check['total_count'];
+    return $total_count;
+  }
+  return false;
+}
+
 ?>
