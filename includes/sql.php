@@ -861,7 +861,7 @@ function find_examinee_complete($student_id, $semester, $school_year) {
 
 function count_notification($student_id) {
   global $db;
-  $sql = "SELECT COUNT(*) AS total_count FROM notify_student WHERE student_id='$student_id' AND notify_status='unread'";
+  $sql = "SELECT COUNT(*) AS total_count FROM notify_student WHERE student_id='$student_id' AND (user_level='1' OR user_level='2') AND notify_status='unread'";
 
   $result = $db->query($sql);
   if ($db->num_rows($result)) {
@@ -872,9 +872,9 @@ function count_notification($student_id) {
   return false;
 }
 
-function count_notification_by_admin() {
+function count_notification_by_admin($email_address) {
   global $db;
-  $sql = "SELECT COUNT(*) AS total_count FROM notify_student WHERE notify_status='unread' ORDER BY id DESC";
+  $sql = "SELECT COUNT(*) AS total_count FROM notify_student WHERE receiver='$email_address' AND user_level='3' AND notify_status='unread' ORDER BY id DESC";
   $result = $db->query($sql);
   if ($db->num_rows($result)) {
     $check = $db->fetch_assoc($result);

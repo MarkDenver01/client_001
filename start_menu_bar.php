@@ -23,7 +23,7 @@
       <?php $student_id = $_SESSION['key_session']['student_id']; ?>
       <?php 
         if (isset($_POST["button_update"])) {
-          $sql = $db->query("UPDATE notify_student SET notify_status='read' WHERE student_id='$student_id'");
+          $sql = $db->query("UPDATE notify_student SET notify_status='read' WHERE student_id='$student_id' AND user_level='1' OR user_level='2'");
           if($sql) {
             redirect('https://gmail.com/', false);
           } else {
@@ -84,7 +84,17 @@
 
       </li><!-- End Notification Nav -->
   <?php } else { ?>
-    <?php $notif_admin = count_notification_by_admin(); ?>
+    <?php 
+            if (isset($_POST['button_update_admin'])) {
+              $sql = $db->query("UPDATE notify_student SET notify_status='read' WHERE receiver='$email_address' AND user_level='3'");
+              if ($sql) {
+                redirect('https://gmail.com/', false);
+              } else {
+                redirect('../app/dashboard', false);
+              }
+            }
+      ?>
+    <?php $notif_admin = count_notification_by_admin($email_address); ?>
 
     <li class="nav-item dropdown">
         <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
@@ -97,7 +107,7 @@
             <form action="" method="post">
             You have <?php echo $notif_admin; ?> new notifications
             <?php if($notif_admin > 0) { ?>
-              <button name="button_update" type="submit" class="badge rounded-pill bg-primary p-2 ms-2">View all</button>
+              <button name="button_update_admin" type="submit" class="badge rounded-pill bg-primary p-2 ms-2">View all</button>
             <?php } ?>
             </form>
           </li>
@@ -114,7 +124,8 @@
           <li class="notification-item">
             <i class="bi bi-exclamation-circle text-warning"></i>
             <div>
-              <h4>From Guidance Counselor | </h4><span><?php echo $row['notify_date']; ?></span>
+              <p>From:<br/> <?php echo $row['sender']; ?><br/>(<?php echo $row['notify_date']; ?>)</p>
+              <hr/>
               <p><?php echo $row['message']; ?></p>
             </div>
           </li>

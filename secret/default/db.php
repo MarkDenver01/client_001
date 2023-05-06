@@ -866,8 +866,11 @@ $db_sql_52[] = "DROP TABLE IF EXISTS `notify_student`";
 
 $db_sql_52[] = "CREATE TABLE `notify_student` (
   `id` int(255) NOT NULL,
-  `student_id` int(255) NOT NULL,
+  `student_id` int(255) NOT NULL, 
+  `sender` VARCHAR(255) NOT NULL,
+  `receiver VARCHAR(255) NOT NULL,
   `message` VARCHAR(255) NOT NULL,
+  `user_level` int(11) NOT NULL,
   `notify_date` VARCHAR(255) NOT NULL,
   `notify_status` VARCHAR(255) NOT NULL
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
