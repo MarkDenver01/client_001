@@ -496,6 +496,13 @@
   return ($result && $db->affected_rows() === 1 ? true : false);
  }
 
+ function update_exam_schedule($id, $status) {
+  global $db;
+  $sql = "UPDATE exam_schedule set exam_status ='" .$status. "' WHERE id ='" .$id. "'";
+  $result = $db->query($sql);
+  return ($result && $db->affected_rows() === 1 ? true : false);
+ }
+
  function insert_exam_schedule(array $data) {
   global $db;
   $sql = "INSERT INTO exam_schedule(student_year, semester, school_year, exam_title, exam_description, exam_category, created_on, expired_on, exam_duration, result_date_and_time, `exam_status`) ";

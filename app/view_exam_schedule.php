@@ -102,11 +102,11 @@
                           <?php } ?>
                           <?php if ($schedule['exam_status'] == 'Ready') { ?>
                         <td data-target="name" scope="row" class="text-center" style="width: 10%;">
-                          <a href="#" type="button" class="btn btn-danger rounded-pill btn-sm w-55 text-light">Deactivate Exam</a>
+                          <a href="../includes/update_exam_schedule_func?id=<?php echo $schedule['id']; ?>&exam_status=<?php echo $schedule['exam_status']; ?>" type="button" class="btn btn-danger rounded-pill btn-sm w-55 text-light">Deactivate Exam</a>
                         </td>
                           <?php } else { ?>
                         <td data-target="name" scope="row" class="text-center" style="width: 10%;">
-                          <a href="#" type="button" class="btn btn-success rounded-pill btn-sm w-75 text-light">Active Exam</a>
+                        <a href="../includes/update_exam_schedule_func?id=<?php echo $schedule['id']; ?>&exam_status=<?php echo $schedule['exam_status']; ?>" type="button" class="btn btn-success rounded-pill btn-sm w-55 text-light">Activate Exam</a>
                         </td>
                           <?php } ?>
                       </tr>
@@ -128,11 +128,11 @@
                           <?php } ?>
                           <?php if ($schedule['exam_status'] == 'Ready') { ?>
                         <td data-target="name" scope="row" class="text-center" style="width: 10%;">
-                          <a href="#" type="button" class="btn btn-danger rounded-pill btn-sm w-55 text-light">Deactivate Exam</a>
+                          <a href="../includes/update_exam_schedule_func?id=<?php echo $schedule['id']; ?>&exam_status=<?php echo $schedule['exam_status']; ?>" type="button" class="btn btn-danger rounded-pill btn-sm w-55 text-light">Deactivate Exam</a>
                         </td>
                           <?php } else { ?>
                         <td data-target="name" scope="row" class="text-center" style="width: 10%;">
-                          <a href="#" type="button" class="btn btn-success rounded-pill btn-sm w-75 text-light">Active Exam</a>
+                        <a href="../includes/update_exam_schedule_func?id=<?php echo $schedule['id']; ?>&exam_status=<?php echo $schedule['exam_status']; ?>" type="button" class="btn btn-success rounded-pill btn-sm w-55 text-light">Activate Exam</a>
                         </td>
                           <?php } ?>
                       </tr>
