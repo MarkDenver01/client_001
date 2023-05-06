@@ -550,15 +550,28 @@ function find_by_exam_created_by_id($id) {
   return $data = [];
 }
 
-function find_by_exam_created_by_student_year($student_year) {
+function find_by_exam_created_by_student_year($student_year, $exam_title, $exam_description) {
   global $db;
-  $sql = "SELECT * FROM exam_created WHERE student_year ='" .$student_year. "'";
+  if (!empty($student_year) && empty($exam_title) && empty($exam_description)) {
+    $sql = "SELECT * FROM exam_created WHERE student_year ='" .$student_year. "'";
+  } elseif (!empty($student_year) && !empty($exam_title) && empty($exam_description)) {
+    $sql = "SELECT * FROM exam_created WHERE student_year ='" .$student_year. "' AND exam_title ='" .$exam_title. "'";
+  } elseif (!empty($student_year) && !empty($exam_title) && !empty($exam_description)) {
+    $sql = "SELECT * FROM exam_created WHERE student_year ='" .$student_year. "' AND exam_title ='" .$exam_title. "' AND exam_description ='" .$exam_description. "'";
+  }
+  
   return find_by_sql($sql);
 }
 
-function find_by_exam_schedule_by_student_year($student_year) {
+function find_by_exam_schedule_by_student_year($student_year, $exam_title, $exam_descriptio) {
   global $db;
-  $sql = "SELECT * FROM exam_schedule WHERE student_year ='" .$student_year. "'";
+  if (!empty($student_year) && empty($exam_title) && empty($exam_description)) {
+    $sql = "SELECT * FROM exam_schedule WHERE student_year ='" .$student_year. "'";
+  } elseif (!empty($student_year) && !empty($exam_title) && empty($exam_description)) {
+    $sql = "SELECT * FROM exam_schedule WHERE student_year ='" .$student_year. "' AND exam_title ='" .$exam_title. "'";
+  } elseif (!empty($student_year) && !empty($exam_title) && !empty($exam_description)) {
+    $sql = "SELECT * FROM exam_schedule WHERE student_year ='" .$student_year. "' AND exam_title ='" .$exam_title. "' AND exam_description ='" .$exam_description. "'";
+  }
   return find_by_sql($sql);
 }
 
