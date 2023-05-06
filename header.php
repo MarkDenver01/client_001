@@ -57,6 +57,21 @@
       padding: 8px;
       max-width: 100px;
     }    
+    
+  </style>
+  <style>
+    .booking-picker {
+      height:500px;
+      width:900px;
+      right:500px;
+      display: block;
+      background:#fff;
+    }
+    
+    #flow-picker {
+
+    }
+
   </style>
 </head>
 <body>
