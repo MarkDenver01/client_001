@@ -2,6 +2,8 @@
 <?php include_once('../includes/load.php'); ?>
 <?php global $db; ?>
 <?php delete_announcement_after_a_days(); ?>
+<?php $email_address = $_SESSION['key_session']['email_address']; ?>
+<?php $user_profile = current_user_account("user_account", $email_address); ?>
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
 
@@ -138,8 +140,17 @@
     <?php } ?>
     <li class="nav-item dropdown">
 
+
 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-  <img src="assets/img/profile.png" alt="Profile" class="rounded-circle">
+  <?php $user_level = $_SESSION['key_session']['user_level']; ?>
+  <?php if ($user_level == '2') { ?>
+    <img src="<?php echo $user_profile['image']; ?>" alt="Profile" class="rounded-circle">
+  <?php } elseif ($user_level == '3') { ?>
+    <img src="<?php echo $user_profile['image']; ?>" alt="Profile" class="rounded-circle">
+  <?php } else { ?>
+    <img src="assets/img/profile.png" alt="Profile" class="rounded-circle">
+  <?php } ?>
+  
   <span class="d-none d-md-block dropdown-toggle ps-2"><?php echo $_SESSION['key_session']['name']; ?></span>
 </a><!-- End Profile Iamge Icon -->
 
