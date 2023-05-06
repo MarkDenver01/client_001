@@ -120,7 +120,7 @@
                         <td data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $schedule['exam_title']; ?></td>
                         <td data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $schedule['exam_description']; ?></td>
                         <td data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $schedule['exam_category']; ?></td>
-                        <td data-target="name" scope="row" class="text-center" style="width: 10%;"><?php echo $schedule['expired_on']; ?></td>
+                        <td data-target="name" scope="row" class="text-center" style="width: 10%;"><?php echo $schedule['exam_duration']; ?></td>
                           <?php if ($schedule['exam_status'] == 'Ready') { ?>
                         <th data-target="name" scope="row" class="text-center text-success" style="width: 10%"?><?php echo $schedule['exam_status']; ?></th>
                           <?php } else { ?>
