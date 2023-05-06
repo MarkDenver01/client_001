@@ -119,7 +119,7 @@
                               <?php if ($created['student_year'] == 'First Year' && $created['exam_title'] == 'Student Success Kit') { ?>
                                 <a href="./update_answer_exam?id=<?php echo $created['id']; ?>&category=<?php echo $created['exam_category']; ?>" name="button_update" type="button" class="btn btn-success rounded-pill btn-sm w-50 disabled">Not Available</button>
                               <?php } elseif ($created['updated_answer'] == 1) { ?>
-                                <a href="./update_answer_exam?id=<?php echo $created['id']; ?>&category=<?php echo $created['exam_category']; ?>" name="button_update" type="button" class="btn btn-success rounded-pill btn-sm w-50 disabled">Updated</button>
+                                <a href="./exam_update_form?id=<?php echo $created['id']; ?>&category=<?php echo $created['exam_category']; ?>" name="button_update" type="button" class="btn btn-success rounded-pill btn-sm w-50">Edit</button>
                               <?php } else { ?>
                                 <a href="./update_answer_exam?id=<?php echo $created['id']; ?>&category=<?php echo $created['exam_category']; ?>" name="button_update" type="button" class="btn btn-success rounded-pill btn-sm w-50">Add Answer</button>
                               <?php } ?>
@@ -148,7 +148,7 @@
                               <?php if ($created['student_year'] == 'First Year' && $created['exam_title'] == 'Student Success Kit') { ?>
                                 <a href="./update_answer_exam?id=<?php echo $created['id']; ?>&category=<?php echo $created['exam_category']; ?>" name="button_update" type="button" class="btn btn-success rounded-pill btn-sm w-50 disabled">Not Available</button>
                               <?php } elseif ($created['updated_answer'] == 1) { ?>
-                                <a href="./update_answer_exam?id=<?php echo $created['id']; ?>&category=<?php echo $created['exam_category']; ?>" name="button_update" type="button" class="btn btn-success rounded-pill btn-sm w-50 disabled">Updated</button>
+                                <a href="./exam_update_form?id=<?php echo $created['id']; ?>&category=<?php echo $created['exam_category']; ?>" name="button_update" type="button" class="btn btn-success rounded-pill btn-sm w-50">Edit</button>
                               <?php } else { ?>
                                 <a href="./update_answer_exam?id=<?php echo $created['id']; ?>&category=<?php echo $created['exam_category']; ?>" name="button_update" type="button" class="btn btn-success rounded-pill btn-sm w-50">Add Answer</button>
                               <?php } ?>
