@@ -4,8 +4,6 @@
 ?>
 <?php include('../header.php'); ?>
 <?php include('../includes/load.php'); ?>
-<?php SET_NOT_LOGGED_IN(); ?>
-<?php include('../start_menu_bar.php'); ?>
 <?php
   if (isset($_SESSION['key_session']['email_address'])) {
     if (isset($_POST['button_submit'])) {
@@ -17,6 +15,8 @@
     }
   }
 ?>
+<?php SET_NOT_LOGGED_IN(); ?>
+<?php include('../start_menu_bar.php'); ?>
 <main id="main" class="main">
 
     <div class="pagetitle">
