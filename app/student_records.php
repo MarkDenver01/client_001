@@ -22,6 +22,57 @@
 <section class="section" style="width: 1560px;">
     <div class="row">
       <!-- start create account -->
+            <!-- start create account -->
+            <div class="card rounded-0">
+      </br>
+        <div class="row">
+          <div class="box">
+            <div class="box-body">
+            <form action="" method="POST">
+		          <div class="row">
+			          <div class="form-group col-sm-12 text-center">
+
+                  <div class="row">
+                    <div class="col-sm-3">
+                    <select id="student_year" name="student_year" class="form-select rounded-0" aria-label="Default select example">
+                        <option selected>Select Year Level</option>
+                        <option value="First Year">First Year</option>
+                        <option value="Second Year">Second Year</option>
+                        <option value="Third Year">Third Year</option>
+                        <option value="Fourth Year">Fourth Year</option>
+                      </select>
+                      <br/>
+                    </div>
+                    <div class="col-sm-3">
+                      <select id="exam_title" name="exam_title" class="form-select rounded-0" aria-label="Default select example">
+                        <option value="" selected>Academic Year</option>
+                      </select>
+                      <br/>
+                      <button name="button_filter" type="submit" class="btn btn-secondary text-white rounded-0 btn-sm w-100"><i class="bi bi-search"></i> </button>
+                    </div>
+                    <div class="col-sm-3">
+                      <select id="exam_description" name="exam_description" class="form-select rounded-0" aria-label="Default select example">
+                         <option value="" selected>Semester</option>
+                      </select>
+                      <br/>
+                    </div>
+                    
+                    <div class="col-sm-3">
+                      <select id="exam_description" name="exam_description" class="form-select rounded-0" aria-label="Default select example">
+                         <option value="" selected>Course</option>
+                      </select>
+                      <br/>
+                    </div>
+
+
+                  </div>
+
+                </div>
+		          </div>
+            </form>
+            </div>
+          </div>
+        <br/>
       <div class="card rounded-0">
         <div class="card-body">
           <br/>
@@ -34,44 +85,48 @@
                   <table class="table table-sm table-hover datatable text-nowrap">
                     <thead>
                       <tr>
-                        <th scope="col" class="text-center" style="width: 30%;">Name</th>
-                        <th scope="col" class="text-center" style="width: 20%;">Student Year</th>
-                        <th scope="col" class="text-center" style="width: 20%;">Course</th>
-                        <th scope="col" class="text-center" style="width: 20%;">Gender</th>
-                        <th scope="col" class="text-center" style="width: 10%;">Counseling Status</th>
+                        <th scope="col" class="text-center" >Name</th>
+                        <th scope="col" class="text-center" >Gender</th>
+                        <th scope="col" class="text-center" >Student Year</th>
+                        <th scope="col" class="text-center" >Course</th>
+                        <th scope="col" class="text-cemter" >Semester</th>
+                        <th scope="col" class="text-center" >School Year</th>
+                        <th scope="col" class="text-center" >Exam Title</th>
+                        <th scope="col" class="text-center" >Grades</th>
+                        <th scope="col" class="text-center" >Exam Result</th>
+                        <th scope="col" class="text-center" >Action</th>
                       </tr>
                     </thead>
                     <tbody>
                     <?php       
-                      $sql = "SELECT * FROM examinee GROUP BY exam_title ORDER BY exam_title LIMIT 1";
-                      $result = $db->query($sql);
+                      // $sql = "SELECT * FROM examinee GROUP BY exam_title ORDER BY exam_title LIMIT 1";
+                      // $result = $db->query($sql);
+                      // if ($result->num_rows > 0) {
+                      //   while ($row = $result->fetch_assoc()) {
+                      //     $id = $row['id'];
+                      //     $name = $row['name'];
+                      //     $student_year = $row['student_year'];
+                      //     $course = $row['course'];
+                      //     $gender = $row['gender'];
+                      //     $counseling_status = $row['counselor_notify_status'];
+                      //     $student_id = $row['student_id'];
+                      $sql = "SELECT * FROM student_exam_result ORDER BY id DESC";
+                      $result =$db->query($sql);
                       if ($result->num_rows > 0) {
-                        while ($row = $result->fetch_assoc()) {
-                          $id = $row['id'];
-                          $name = $row['name'];
-                          $student_year = $row['student_year'];
-                          $course = $row['course'];
-                          $gender = $row['gender'];
-                          $counseling_status = $row['counselor_notify_status'];
-                          $student_id = $row['student_id'];
+                        while($row = $result->fetch_assoc()) {
                     ?>
                       <tr class="text-success">
-                        <th scope="row" class="text-center" style="width: 30%;"><?php echo $name; ?></th>
-                        <td scope="row" class="text-center" style="width: 20%;"><?php echo $student_year; ?></td>
-                        <td scope="row" class="text-center" style="width: 20%;"><?php echo $course; ?></td>
-                        <td scope="row" class="text-center" style="width: 20%;"><?php echo $gender; ?></td>
-                        <td scope="row" class="text-center" style="width: 10%;">
-                        <?php if ($counseling_status == "Counseling") { ?>
-                          <a href="#" id="schedule" data-id="<?php echo $student_id; ?>" class="btn btn-success rounded-0  btn-sm w-100 ">Notify & Re-take Exam</a>
-                        <?php } elseif($counseling_status == "Monitoring") {  ?>
-                          <a href="#" class="btn btn-warning rounded-0  btn-sm w-100 disabled">Monitoring</a>
-                        <?php } elseif($counseling_status == "Pending") { ?>
-                          <a href="#" class="btn btn-danger rounded-0  btn-sm w-100 disabled">On-Going</a>
-                        <?php } elseif ($counseling_status =='Notified') { ?>
-                          <a href="#" class="btn btn-info rounded-0  btn-sm w-100 disabled">Notified</a>
-                        <?php } elseif ($counseling_status == 'Completed') { ?>
-                          <a href="#" class="btn btn-success rounded-0  btn-sm w-100 disabled">Completed</a>
-                        <?php } ?>
+                        <th scope="row" class="text-center" ><?php echo $row['name']; ?></th>
+                        <td scope="row" class="text-center" ><?php echo $row['gender']; ?></td>
+                        <td scope="row" class="text-center" ><?php echo $row['course']; ?></td>
+                        <td scope="row" class="text-center" ><?php echo $row['semester']; ?></td>
+                        <td scope="row" class="text-center" ><?php echo $row['semester']; ?></td>
+                        <td scope="row" class="text-center" ><?php echo $row['school_year']; ?></td>
+                        <td scope="row" class="text-center" ><?php echo $row['exam_title']; ?></td>
+                        <td scope="row" class="text-center" ><?php echo $row['grades']; ?></td>
+                        <td scope="row" class="text-center" ><?php echo $row['exam_result']; ?></td>
+                        <td>
+                        <button name="button_print" type="submit" class="btn btn-success text-white rounded-0 btn-sm w-100"><i class="bi bi-print"></i> View more result</button>
                         </td>
                       </tr>
                     <?php
@@ -81,7 +136,10 @@
                     </tbody>
                   </table>
                   <!-- End Table with hoverable rows -->
+
+                  <button name="button_print" type="submit" class="btn btn-success text-white rounded-0 btn-sm w-25"><i class="bi bi-print"></i> Print</button>
                 </div>
+                
               </div>
             </div>
           </form><!-- End floating Labels Form -->

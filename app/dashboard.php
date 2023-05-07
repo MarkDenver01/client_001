@@ -338,48 +338,13 @@ if($developer) {
         <?php global $db; ?>
         <?php global $session; ?>
         <?php 
-                                $check_monitor = false;
-                            $sql = "SELECT exam_answer,counselor_notify_status, SUM(total_score) AS total FROM examinee WHERE student_id ='$student_id' 
-                                AND semester ='$semester' AND school_year ='$school_year' AND exam_title = '$exam_title'";
-                                if ($exam_title == 'Student Success Kit') {
-                                  $result = $db->query($sql);
-                                  if ($result->num_rows > 0) {
-                                      while ($row = $result->fetch_assoc()) {
-                                          $highest_prob = $row['exam_answer'];
-                                          $data = $row['total'] / 18;
-                                          $counselour_stats = $row['counselor_notify_status'];
-                                      }
-                                  }
-                                  switch($data) {
-                                    case $data >= 25 and $data <= 40:
-                                        $check_monitor = true;
-                                        $msg = "Monitoring";
-                                        if ($counselour_stats == "Pending") {
-                                          for($i = 0; $i < $data; $i++) {
-                                            $sql = "UPDATE examinee SET counselor_notify_status='$msg' WHERE student_id ='$student_id'";
-                                            $db->query($sql);
-                                          }
-                                        }
-                                      break;
-                                    case $data >= 0 and $data <= 20:
-                                        $check_monitor = false;
-                                        $msg = "Counseling";
-                                        if ($counselour_stats == 'Pending') {
-                                          for($i = 0; $i < $data; $i++) {
-                                            $sql = "UPDATE examinee SET counselor_notify_status='$msg' WHERE student_id ='$student_id'";
-                                            $db->query($sql);
-                                          }
-                                        }
-                                      break;
-                                      default:
-                                        $msg = "Not in range";
-                                  }
-                                } else {
-                                  $dev_msg = "Dev is still fixing this issue. Pls. wait.";
-                                }
-                                
-                               
-                            ?>
+          $sql = "SELECT * FROM student_exam_result WHERE student_id ='" .$_SESSION['key_session']['student_id']. "' 
+          AND email_address ='" .$_SESSION['key_session']['email_address']. "'";
+          $result = $db->query($sql);
+          $row = mysqli_fetch_assoc($result);
+          $grades = $row['grades'];
+          $exam_results = $row['exam_result'];
+        ?>
         <div class="card-body ">
           <h5 class="card-title">Exam Result <span>| status</span></h5>
 
@@ -388,16 +353,8 @@ if($developer) {
               <i class="ri-file-user-line"></i>
             </div>
             <div class="ps-3">
-              <?php if ($exam_title == 'Student Success Kit') { ?>
-                <h6><?php echo $data."%"; ?></h6>
-                <span class="text-success small pt-1 fw-bold"><?php echo $msg; ?></span> 
-               
-              <?php } else { ?>
-                <h6><?php echo $dev_msg; ?></h6>
-                <span class="text-success small pt-1 fw-bold"><?php echo $dev_msg; ?></span>
-              <?php } ?>
-             
-
+              <h6><?php echo $exam_results; ?></h6>
+              <span class="text-success small pt-1 fw-bold"><?php echo "Score: ".$grades; ?></span>
             </div>
           </div>
         </div>

@@ -23,7 +23,7 @@
       <?php $student_id = $_SESSION['key_session']['student_id']; ?>
       <?php 
         if (isset($_POST["button_update"])) {
-          $sql = $db->query("UPDATE notify_student SET notify_status='read' WHERE student_id='$student_id' AND user_level='1' OR user_level='2'");
+          $sql = $db->query("UPDATE notify_student SET notify_status='read' WHERE student_id='$student_id' AND user_level='1' OR user_level='2' AND notify_status='unread'");
           if($sql) {
             redirect('https://gmail.com/', false);
           } else {
@@ -86,7 +86,7 @@
   <?php } else { ?>
     <?php 
             if (isset($_POST['button_update_admin'])) {
-              $sql = $db->query("UPDATE notify_student SET notify_status='read' WHERE receiver='$email_address' AND user_level='3'");
+              $sql = $db->query("UPDATE notify_student SET notify_status='read' WHERE receiver='$email_address' AND user_level='3' AND notify_status='unread'");
               if ($sql) {
                 redirect('https://gmail.com/', false);
               } else {

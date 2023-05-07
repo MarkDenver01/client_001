@@ -166,7 +166,7 @@ if ($db->num_rows($result)) {
 </li>  
 <?php } elseif ($examinee['exam_title'] == 'The Keirsey Temperament Sorter') { ?>
 <li class="nav-item">
-  <a class="nav-link " href="../app/keirsey_result">
+  <a class="nav-link " href="../app/keirsey_temp_intrepretation">
     <i class="ri-sticky-note-fill"></i>
     <span><?php echo $examinee['exam_title']; ?>'s Result</span>
   </a>

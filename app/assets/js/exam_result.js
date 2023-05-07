@@ -70,7 +70,15 @@ $(document).on('click', '#submitExamResultFrm', function() {
                 cache: false,
                 success: function(data) {
                     if (data.res == "success") {
-                        window.location.href="../app/baron_eq_interpretation.php?student_id="+student_id;
+                        if (exam_title == 'Student Success Kit') {
+                            
+                        } else if (exam_title == 'OASIS 3') {
+                            
+                        } else if (exam_title == 'BarOn EQ-i:S') {
+                            window.location.href="../app/baron_eq_interpretation.php?student_id="+student_id;
+                        } else if (exam_title == 'The Keirsey Temperament Sorter') {
+                            window.location.href="../app/keirsey_temp_intrepretation.php?student_id="+student_id;
+                        }
                     } else  if(data.res == "failed") {
                         Swal.fire(
                             'Error',
