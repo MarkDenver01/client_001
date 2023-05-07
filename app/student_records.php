@@ -44,14 +44,14 @@
                       <br/>
                     </div>
                     <div class="col-sm-3">
-                      <select id="exam_title" name="exam_title" class="form-select rounded-0" aria-label="Default select example">
+                      <select id="school_year" name="exam_title" class="form-select rounded-0" aria-label="Default select example">
                         <option value="" selected>Academic Year</option>
                       </select>
                       <br/>
                       <button name="button_filter" type="submit" class="btn btn-secondary text-white rounded-0 btn-sm w-100"><i class="bi bi-search"></i> </button>
                     </div>
                     <div class="col-sm-3">
-                      <select id="exam_description" name="exam_description" class="form-select rounded-0" aria-label="Default select example">
+                      <select id="semester" name="exam_description" class="form-select rounded-0" aria-label="Default select example">
                          <option value="" selected>Semester</option>
                       </select>
                       <br/>
@@ -150,4 +150,34 @@
       <!-- end create account -->
     </div>
 </section>
+<script>
+  $(document).ready(fuction() {
+    $('#semester').on('change', function() {
+        var studentYear = $(this).val();
+        if (studentYear) {
+          $.ajax({
+            type: 'POST',
+            url: './ajax/academic_semester.php',
+            data: 'student_year='+studentYear,
+            success:function(html) {
+              $('#school_year').html(html);
+            }
+          }); 
+        } else {
+              $('#school_year').html('<option value="">Select school year first</option>');
+        }
+      });
+
+      $('#school_year').on('change', function() {
+        $.ajax({
+          type: 'POST',
+          url: './ajax/academic_school_year.php',
+          data: {student_year: $('#school_year').val()}, 
+          success:function(html) {
+            $('#school_year').html(html);
+          }
+        });
+      });
+  });
+</script>
 <?php include('../footer.php'); ?>
