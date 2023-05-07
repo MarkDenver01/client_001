@@ -113,9 +113,9 @@
                     $_GET['id']
                   );
                 ?>
-                <div class="col-lg-12">
+                <div class="col-lg-12 booking-picker" id="flow-picker">
                   <br/>
-                  <table class="table table-bordered mb-5">
+                  <table class="table table-bordered mb-5 " >
                     <tbody>
                         <?php foreach($result as $display): ?>
                         <th scope="row" value="<?php echo $result['id']; ?>" hidden>
@@ -455,15 +455,13 @@
                                       <input type="radio" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_2" value="d"> D</input>
                                     </label>
                                     <label class="btn btn-light" for="exampleRadios<?php echo ($i-1); ?>_1">
-                                      <input type="radio" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_1" value="d"> D</input>
-                                    </label>
-                                    <label class="btn btn-light" for="exampleRadios<?php echo ($i-1); ?>_0">
-                                      <input type="text" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_0" value="e"> E</input>
+                                      <input type="radio" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_1" value="e"> E</input>
                                     </label>
                                   </div>
                                 </div>
                                 </td>
                               </tr>
+                              
                               <?php } ?>
                               <?php } else { ?>
                               <?php  echo "Answer sheet not available."; ?>
@@ -600,7 +598,7 @@
                             </tbody>
                           </table>
                         
-                     <?php } elseif ($main_exam_id == 'Test No 1') { ?>
+                     <?php } elseif ($main_exam_id == 'Test No 2') { ?>
 
                         <table class="table table-hover text-nowrap " id="tableList">
                             <tbody>
@@ -628,7 +626,7 @@
                             </tbody>
                           </table>
                         
-                     <?php } elseif ($main_exam_id == 'Test No 2') { ?>
+                     <?php } elseif ($main_exam_id == 'Test No 3') { ?>
 
                       <table class="table table-hover text-nowrap " id="tableList">
                             <tbody>
@@ -656,36 +654,8 @@
                             </tbody>
                           </table>
 
-                     <?php } elseif ($main_exam_id == 'Test No 3') { ?>
-                      
-
-                          <table class="table table-hover text-nowrap " id="tableList">
-                            <tbody>
-                              <?php $sql = $db->query("SELECT * FROM $main_exam"); ?>
-                              <?php if($sql->num_rows > 0) { ?>
-                              <?php $i = 1; ?>
-                              <?php while($row = $sql->fetch_assoc()) { ?>
-                              <tr>
-                                <td>
-                                <p><b>Answer No. <?php echo $i++; ?></b></p>
-                                <div class="row">
-                                  <input type="hidden" name="answer[<?php echo ($i - 1); ?>][item_correct]" value="<?php echo $row['correct_items']; ?>">
-                                  <div class="btn-group">                                   
-                                    <label class="btn btn-light" for="exampleRadios<?php echo ($i-1); ?>_5">
-                                      <input type="text" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_5" > </input>
-                                    </label>    
-                                  </div>
-                                </div>
-                                </td>
-                              </tr>
-                              <?php } ?>
-                              <?php } else { ?>
-                              <?php  echo "Answer sheet not available."; ?>
-                              <?php } ?> 
-                            </tbody>
-                          </table>
-
                      <?php } elseif ($main_exam_id == 'Test No 4') { ?>
+                      
 
                           <table class="table table-hover text-nowrap " id="tableList">
                             <tbody>
@@ -712,8 +682,8 @@
                               <?php } ?> 
                             </tbody>
                           </table>
-                      
-                    <?php } ?>
+
+                     <?php }  ?>
                       
                     </div>
                   </div>
@@ -742,4 +712,25 @@
     </section>
 
   </main><!-- End #main -->
+  <script>
+  
+$(document).ready(function() {
+    var $sidebar   = $("#flow-picker"), 
+    $window    = $(window),
+    offset     = $sidebar.offset(),
+    topPadding = 15
+    
+    $window.scroll(function() {
+      if ($window.scrollTop() > offset.top) {
+        $sidebar.stop().animate({
+          marginTop: $window.scrollTop() - offset.top + topPadding
+        });
+      } else {
+        $sidebar.stop().animate({
+            marginTop: 0
+        });
+    }
+  });
+});
+  </script>
 <?php include('../footer.php'); ?>

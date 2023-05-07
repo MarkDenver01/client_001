@@ -34,21 +34,21 @@
     <li class="nav-item">
       <a class="nav-link " href="./student_records">
         <i class="ri-account-pin-circle-fill"></i>
-        <span>Manage Counseling Records</span>
+        <span>Studen Exam Result</span>
       </a>
     </li><!-- End Student Records Nav -->
 
     <li class="nav-item">
       <a class="nav-link " href="./counseling_records">
-        <i class="ri-account-pin-circle-fill"></i>
-        <span>Student Counseling Records</span>
+        <i class="ri-account-pin-box-fill"></i>
+        <span>Student Appointment</span>
       </a>
     </li><!-- End Student Records Nav -->
 
     <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
         <i class="ri-file-list-fill"></i>
-        <span>Manage Exam</span><i class="bi bi-chevron-down ms-auto"></i>
+        <span>Exam Management</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
       <ul id="icons-nav" class="nav-content collapsed" data-bs-parent="#sidebar-nav">
         <!-- <li>
@@ -61,7 +61,8 @@
             <i class="bi bi-circle"></i><span>Create an exam</span>
           </a>
         </li>
-        <li>
+   
+        
         <li>
           <a href="./view_exam">
             <i class="bi bi-circle"></i><span>View exam record</span>
@@ -102,7 +103,7 @@
     <li class="nav-item">
       <a class="nav-link " href="./view_exam_schedule">
         <i class="ri-todo-fill"></i>
-        <span>Manage Schedule Exam</span>
+        <span>Exam Schedule Management</span>
       </a>
     </li><!-- End Generate Reports Nav -->
 

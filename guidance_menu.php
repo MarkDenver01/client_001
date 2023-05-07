@@ -30,7 +30,7 @@
     <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
         <i class="ri-file-list-fill"></i>
-        <span>Manage Exam</span><i class="bi bi-chevron-down ms-auto"></i>
+        <span>Exam Management</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
       <ul id="icons-nav" class="nav-content collapsed" data-bs-parent="#sidebar-nav">
         <li>
@@ -78,7 +78,7 @@
     <li class="nav-item">
       <a class="nav-link " href="./view_exam_schedule">
         <i class="ri-todo-fill"></i>
-        <span>Manage Schedule Exam</span>
+        <span>Exam Schedule Managemen</span>
       </a>
     </li><!-- End Generate Reports Nav -->
 

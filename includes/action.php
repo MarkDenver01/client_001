@@ -19,39 +19,68 @@ function post_announcements($title, $body_message, $file_path_name) {
   $tmp_dir = $_FILES[$file_path_name]['tmp_name'];
   $upload_size = $_FILES[$file_path_name]['size'];
 
-  $upload_dir = "../uploads/posts/";
-  $upload_ext = strtolower(pathinfo($upload_file, PATHINFO_EXTENSION));
-  $valid_extensions = array(
-    'jpeg',
-    'jpg',
-    'png',
-    'gif',
-    'pdf'
-  );
+  if (empty($upload_file)) {
+    if (empty($errors)) {
+  
+      $user_level = $_SESSION['key_session']['user_level'];
+      if ($user_level == '1') {
+        $user_level = 'Administrator';
+      } elseif ($user_level == '2') {
+        $user_level = 'Guidance';
+      }
+  
+      insert_post_announcements(
+        remove_junk($_POST[$title]),
+        remove_junk($_POST[$body_message]),
+        $dir,
+        $user_level
+      );
 
-  $upload_destination = rand(1000,1000000).".".$upload_ext;
+      $session->message("s", "New announcement has been posted.");
+      redirect('./post_announcement', false);
+    } else {
+      $session->message("d", $errors);
+      redirect('./post_announcement', false);
+    }
+  } else {
+    $upload_dir = "../uploads/posts/";
+    $upload_ext = strtolower(pathinfo($upload_file, PATHINFO_EXTENSION));
+    $valid_extensions = array(
+      'jpeg',
+      'jpg',
+      'png',
+      'gif',
+      'pdf'
+    );
+  
+    $upload_destination = rand(1000,1000000).".".$upload_ext;
+  
+    if (in_array($upload_ext, $valid_extensions)) {
+      if ($upload_size < 10000000) {
+        if (move_uploaded_file($tmp_dir, $upload_dir.$upload_destination)) {
+          $dir = $upload_dir.$upload_destination;
+          if (empty($errors)) {
+  
+            $user_level = $_SESSION['key_session']['user_level'];
+            if ($user_level == '1') {
+              $user_level = 'Administrator';
+            } elseif ($user_level == '2') {
+              $user_level = 'Guidance';
+            }
+        
+            insert_post_announcements(
+              remove_junk($_POST[$title]),
+              remove_junk($_POST[$body_message]),
+              $dir,
+              $user_level
+            );
 
-  if (in_array($upload_ext, $valid_extensions)) {
-    if ($upload_size < 10000000) {
-      if (move_uploaded_file($tmp_dir, $upload_dir.$upload_destination)) {
-        $dir = $upload_dir.$upload_destination;
-        if (empty($errors)) {
-
-          $user_level = $_SESSION['key_session']['user_level'];
-          if ($user_level == '1') {
-            $user_level = 'Administrator';
-          } elseif ($user_level == '2') {
-            $user_level = 'Guidance';
+            $session->message("s", "New announcement has been posted.");
+            redirect('./post_announcement', false);
+          } else {
+            $session->message("d", $errors);
+            redirect('./post_announcement', false);
           }
-      
-          insert_post_announcements(
-            remove_junk($_POST[$title]),
-            remove_junk($_POST[$body_message]),
-            $dir,
-            $user_level
-          );
-        } else {
-          $session->message("d", $errors);
         }
       }
     }
@@ -94,81 +123,145 @@ function addStudentAccount($file_path_name,
     $tmp_dir = $_FILES[$file_path_name]['tmp_name'];
     $img_size = $_FILES[$file_path_name]['size'];
 
-    $upload_dir = '../uploads/students/';
-    $img_ext = strtolower(pathinfo($img_file, PATHINFO_EXTENSION)); // get image extensions
-    $valid_extensions = array('jpeg', 'jpg', 'png', 'gif'); // valid extensions
-
-    $profile_pic = rand(1000,1000000).".".$img_ext;
-
-    if (in_array($img_ext, $valid_extensions)) {
-      if ($img_size < 5000000) {
-        if (move_uploaded_file($tmp_dir, $upload_dir.$profile_pic)) {
-
-          $default_password = sha1("default");
-          $dir = $upload_dir.$profile_pic;
-          
-          if (empty($errors)) {
-            insertUserAccount(
-              remove_junk($_POST[$full_name]),
-              remove_junk($_POST[$email_address]),
-              $default_password,
-              3,
-              $dir
-            );
-      
-            insertStudentAccount(
-              remove_junk($_POST[$full_name]),
-              remove_junk($_POST[$email_address]),
-              remove_junk($_POST[$course]),
-              remove_junk($_POST[$year]),
-              remove_junk($_POST[$semester]),
-              remove_junk($_POST[$school_year]),
-              remove_junk($_POST[$gender]),
-              remove_junk($_POST[$age]),
-              remove_junk($_POST[$birth_date]),
-              remove_junk($_POST[$present_address])
-            );
-      
-            $get_name = remove_junk($_POST[$full_name]);
-            $get_mail_address = remove_junk($_POST[$email_address]);
-      
-            $subject = "Your account has been created";
-            $content = 'Hi '.$get_name;
-            $content .= '<br/>';
-            $content .= 'Welcome to CESLICAM Portal!';
-            $content .= '<br/>';
-            $content .= '<br/>';
-            $content .= 'Your account has been created. Please change your default password for your security.';
-            $content .= '<br/>';
-            $content .= '---------------------------------------';
-            $content .= '<br/>';
-            $content .= 'Email address: '.$get_mail_address;
-            $content .= '<br/>';
-            $content .= 'Password: <b>default</b>';
-            $content .= '<br/>';
-            $content .= '---------------------------------------';
-            $content .= '<br/>';
-            $content .= '<br/>';
-            $content .= 'Thank you.';
-      
-            // send mail account created
-            $send = send_email(
-              $get_mail_address,
-              $get_name,
-              $subject,
-              $content
-            );
-      
-            if ($send) {
-              redirect('./view_student_account', false);
+    if (empty($img_file)) {
+      $default_password = sha1("default");
+      if (empty($errors)) {
+        insertUserAccount(
+          remove_junk($_POST[$full_name]),
+          remove_junk($_POST[$email_address]),
+          $default_password,
+          3,
+          "../app/assets/img/profile.png"
+        );
+  
+        insertStudentAccount(
+          remove_junk($_POST[$full_name]),
+          remove_junk($_POST[$email_address]),
+          remove_junk($_POST[$course]),
+          remove_junk($_POST[$year]),
+          remove_junk($_POST[$semester]),
+          remove_junk($_POST[$school_year]),
+          remove_junk($_POST[$gender]),
+          remove_junk($_POST[$age]),
+          remove_junk($_POST[$birth_date]),
+          remove_junk($_POST[$present_address])
+        );
+  
+        $get_name = remove_junk($_POST[$full_name]);
+        $get_mail_address = remove_junk($_POST[$email_address]);
+  
+        $subject = "Your account has been created";
+        $content = 'Hi '.$get_name;
+        $content .= '<br/>';
+        $content .= 'Welcome to CESLICAM Portal!';
+        $content .= '<br/>';
+        $content .= '<br/>';
+        $content .= 'Your account has been created. Please change your default password for your security.';
+        $content .= '<br/>';
+        $content .= '---------------------------------------';
+        $content .= '<br/>';
+        $content .= 'Email address: '.$get_mail_address;
+        $content .= '<br/>';
+        $content .= 'Password: <b>default</b>';
+        $content .= '<br/>';
+        $content .= '---------------------------------------';
+        $content .= '<br/>';
+        $content .= '<br/>';
+        $content .= 'Thank you.';
+  
+        // send mail account created
+        $send = send_email(
+          $get_mail_address,
+          $get_name,
+          $subject,
+          $content
+        );
+  
+        if ($send) {
+          redirect('./view_student_account', false);
+        } else {
+          $session->message("d", "Error occured during sending an email.");
+        }
+      } else {
+        $session->message("d", $errors);
+        redirect('./register_student_account', false);
+      }
+    } else {
+      $upload_dir = '../uploads/students/';
+      $img_ext = strtolower(pathinfo($img_file, PATHINFO_EXTENSION)); // get image extensions
+      $valid_extensions = array('jpeg', 'jpg', 'png', 'gif'); // valid extensions
+  
+      $profile_pic = rand(1000,1000000).".".$img_ext;
+  
+      if (in_array($img_ext, $valid_extensions)) {
+        if ($img_size < 5000000) {
+          if (move_uploaded_file($tmp_dir, $upload_dir.$profile_pic)) {
+  
+            $default_password = sha1("default");
+            $dir = $upload_dir.$profile_pic;
+            
+            if (empty($errors)) {
+              insertUserAccount(
+                remove_junk($_POST[$full_name]),
+                remove_junk($_POST[$email_address]),
+                $default_password,
+                3,
+                $dir
+              );
+        
+              insertStudentAccount(
+                remove_junk($_POST[$full_name]),
+                remove_junk($_POST[$email_address]),
+                remove_junk($_POST[$course]),
+                remove_junk($_POST[$year]),
+                remove_junk($_POST[$semester]),
+                remove_junk($_POST[$school_year]),
+                remove_junk($_POST[$gender]),
+                remove_junk($_POST[$age]),
+                remove_junk($_POST[$birth_date]),
+                remove_junk($_POST[$present_address])
+              );
+        
+              $get_name = remove_junk($_POST[$full_name]);
+              $get_mail_address = remove_junk($_POST[$email_address]);
+        
+              $subject = "Your account has been created";
+              $content = 'Hi '.$get_name;
+              $content .= '<br/>';
+              $content .= 'Welcome to CESLICAM Portal!';
+              $content .= '<br/>';
+              $content .= '<br/>';
+              $content .= 'Your account has been created. Please change your default password for your security.';
+              $content .= '<br/>';
+              $content .= '---------------------------------------';
+              $content .= '<br/>';
+              $content .= 'Email address: '.$get_mail_address;
+              $content .= '<br/>';
+              $content .= 'Password: <b>default</b>';
+              $content .= '<br/>';
+              $content .= '---------------------------------------';
+              $content .= '<br/>';
+              $content .= '<br/>';
+              $content .= 'Thank you.';
+        
+              // send mail account created
+              $send = send_email(
+                $get_mail_address,
+                $get_name,
+                $subject,
+                $content
+              );
+        
+              if ($send) {
+                redirect('./view_student_account', false);
+              } else {
+                $session->message("d", "Error occured during sending an email.");
+              }
             } else {
-              $session->message("d", "Error occured during sending an email.");
+              $session->message("d", $errors);
+              redirect('./register_student_account', false);
             }
-          } else {
-            $session->message("d", $errors);
-            redirect('./register_student_account', false);
           }
-
         }
       }
     }
@@ -197,76 +290,137 @@ function addGuidanceAccount($file_path_name,
     $tmp_dir = $_FILES[$file_path_name]['tmp_name'];
     $img_size = $_FILES[$file_path_name]['size'];
 
-    $upload_dir = '../uploads/users/';
-    $img_ext = strtolower(pathinfo($img_file, PATHINFO_EXTENSION)); // get image extensions
-    $valid_extensions = array('jpeg', 'jpg', 'png', 'gif'); // valid extensions
+    if (empty($img_file)) {
+      $default_password = sha1("default");
+      if (empty($errors)) {
+        insertUserAccount(
+          remove_junk($_POST[$full_name]),
+          remove_junk($_POST[$email_address]),
+          $default_password,
+          2,
+          "../app/assets/img/profile.png");
+  
+        insertGuidanceAccount(
+          remove_junk($_POST[$full_name]),
+          remove_junk($_POST[$email_address]),
+          remove_junk($_POST[$gender]),
+          remove_junk($_POST[$age]),
+          remove_junk($_POST[$birth_date]),
+          remove_junk($_POST[$present_address])
+      );
+  
+      $get_name = remove_junk($_POST[$full_name]);
+      $get_mail_address = remove_junk($_POST[$email_address]);
+  
+      $subject = "Your account has been created";
+      $content = 'Hi '.$get_name;
+      $content .= '<br/>';
+      $content .= 'Welcome to CESLICAM Portal!';
+      $content .= '<br/>';
+      $content .= '<br/>';
+      $content .= 'Your account has been created. Please change your default password for your security.';
+      $content .= '<br/>';
+      $content .= '---------------------------------------';
+      $content .= '<br/>';
+      $content .= 'Email address: '.$get_mail_address;
+      $content .= '<br/>';
+      $content .= 'Password: <b>default</b>';
+      $content .= '<br/>';
+      $content .= '---------------------------------------';
+      $content .= '<br/>';
+      $content .= '<br/>';
+      $content .= 'Thank you.';
+  
+      // send mail account created
+      $send = send_email(
+        $get_mail_address,
+        $get_name,
+        $subject,
+        $content
+      );
+  
+      if ($send) {
+        redirect('./view_guidance_account', false);
+      } else {
+        $session->message("d", "Error occured during sending an email.");
+      }
+    } else {
+       $session->message("d", $errors);
+       redirect('./register_guidance_account', false);
+    }
 
-    // rename uploading image
-    $profile_pic = rand(1000,1000000).".".$img_ext;
-
-    if (in_array($img_ext, $valid_extensions)) {
-      if ($img_size < 5000000) {
-        if (move_uploaded_file($tmp_dir, $upload_dir.$profile_pic)) {
-          $default_password = sha1("default");
-          $dir = $upload_dir.$profile_pic;
-
-          if (empty($errors)) {
-            insertUserAccount(
-              remove_junk($_POST[$full_name]),
-              remove_junk($_POST[$email_address]),
-              $default_password,
-              2,
-              $dir);
-      
-            insertGuidanceAccount(
-              remove_junk($_POST[$full_name]),
-              remove_junk($_POST[$email_address]),
-              remove_junk($_POST[$gender]),
-              remove_junk($_POST[$age]),
-              remove_junk($_POST[$birth_date]),
-              remove_junk($_POST[$present_address])
-          );
-      
-          $get_name = remove_junk($_POST[$full_name]);
-          $get_mail_address = remove_junk($_POST[$email_address]);
-      
-          $subject = "Your account has been created";
-          $content = 'Hi '.$get_name;
-          $content .= '<br/>';
-          $content .= 'Welcome to CESLICAM Portal!';
-          $content .= '<br/>';
-          $content .= '<br/>';
-          $content .= 'Your account has been created. Please change your default password for your security.';
-          $content .= '<br/>';
-          $content .= '---------------------------------------';
-          $content .= '<br/>';
-          $content .= 'Email address: '.$get_mail_address;
-          $content .= '<br/>';
-          $content .= 'Password: <b>default</b>';
-          $content .= '<br/>';
-          $content .= '---------------------------------------';
-          $content .= '<br/>';
-          $content .= '<br/>';
-          $content .= 'Thank you.';
-      
-          // send mail account created
-          $send = send_email(
-            $get_mail_address,
-            $get_name,
-            $subject,
-            $content
-          );
-      
-          if ($send) {
-            redirect('./view_guidance_account', false);
+    } else {
+      $upload_dir = '../uploads/users/';
+      $img_ext = strtolower(pathinfo($img_file, PATHINFO_EXTENSION)); // get image extensions
+      $valid_extensions = array('jpeg', 'jpg', 'png', 'gif'); // valid extensions
+  
+      // rename uploading image
+      $profile_pic = rand(1000,1000000).".".$img_ext;
+  
+      if (in_array($img_ext, $valid_extensions)) {
+        if ($img_size < 5000000) {
+          if (move_uploaded_file($tmp_dir, $upload_dir.$profile_pic)) {
+            $default_password = sha1("default");
+            $dir = $upload_dir.$profile_pic;
+  
+            if (empty($errors)) {
+              insertUserAccount(
+                remove_junk($_POST[$full_name]),
+                remove_junk($_POST[$email_address]),
+                $default_password,
+                2,
+                $dir);
+        
+              insertGuidanceAccount(
+                remove_junk($_POST[$full_name]),
+                remove_junk($_POST[$email_address]),
+                remove_junk($_POST[$gender]),
+                remove_junk($_POST[$age]),
+                remove_junk($_POST[$birth_date]),
+                remove_junk($_POST[$present_address])
+            );
+        
+            $get_name = remove_junk($_POST[$full_name]);
+            $get_mail_address = remove_junk($_POST[$email_address]);
+        
+            $subject = "Your account has been created";
+            $content = 'Hi '.$get_name;
+            $content .= '<br/>';
+            $content .= 'Welcome to CESLICAM Portal!';
+            $content .= '<br/>';
+            $content .= '<br/>';
+            $content .= 'Your account has been created. Please change your default password for your security.';
+            $content .= '<br/>';
+            $content .= '---------------------------------------';
+            $content .= '<br/>';
+            $content .= 'Email address: '.$get_mail_address;
+            $content .= '<br/>';
+            $content .= 'Password: <b>default</b>';
+            $content .= '<br/>';
+            $content .= '---------------------------------------';
+            $content .= '<br/>';
+            $content .= '<br/>';
+            $content .= 'Thank you.';
+        
+            // send mail account created
+            $send = send_email(
+              $get_mail_address,
+              $get_name,
+              $subject,
+              $content
+            );
+        
+            if ($send) {
+              redirect('./view_guidance_account', false);
+            } else {
+              $session->message("d", "Error occured during sending an email.");
+            }
           } else {
-            $session->message("d", "Error occured during sending an email.");
+             $session->message("d", $errors);
+             redirect('./register_guidance_account', false);
           }
-        } else {
-           $session->message("d", $errors);
-           redirect('./register_guidance_account', false);
-        }
-
+  
+          }
         }
       }
     }

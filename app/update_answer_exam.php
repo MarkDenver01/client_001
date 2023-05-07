@@ -2161,7 +2161,7 @@ if (isset($_POST["button_update"])) {
 
                     <label for="fullName" class="col-md-4 col-lg-12 col-form-label">Item no. 4</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="answer[ajc_3_item_no_4][items_3" type="text" class="form-control rounded-0" id="fullName" value="" >
+                        <input name="answer[ajc_3_item_no_4][items_3]" type="text" class="form-control rounded-0" id="fullName" value="" >
                       </div>
 
                     <label for="fullName" class="col-md-4 col-lg-12 col-form-label">Item no. 5</label>

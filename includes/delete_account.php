@@ -1,6 +1,6 @@
 <?php require_once('./load.php'); ?>
 <?php
-  $email_address = secure::decrypt($_GET['email_address']);
+  $email_address = $_GET['email_address'];
 
   $check_user_level = current_user_account("user_account", $email_address);
 

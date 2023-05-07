@@ -5,11 +5,19 @@
 <?php include('../header.php'); ?>
 <?php include('../includes/load.php'); ?>
 <?php SET_NOT_LOGGED_IN(); ?>
-<?php IS_STUDENT_LEVEL(); ?>
+
 <?php CHECK_EXAM_AVAILABILITY(); ?>
 <?php global $db; ?>
 <?php  
-    $student_id = $_SESSION['key_session']['student_id'];
+
+  if (isset($_SESSION['key_session']['user_level'])) {
+      $user_level = $_SESSION['key_session']['user_level'];
+      if ($user_level != '3') {
+        $student_id = $_GET['student_id'];
+      } else {
+        $student_id = $_SESSION['key_session']['student_id'];
+      }
+  }
     $semester = $_SESSION['key_session']['academic_semester'];
     $school_year = $_SESSION['key_session']['academic_school_year']; 
     $student_name = $_SESSION['key_session']['name'];
@@ -57,24 +65,28 @@ if(isset($_POST['button_counseling'])) {
                     <thead>
                         <tr>
                             <td><h5>Category</h5></td>
-                            <td><h5>Highest Probility Answered</h5></td>
-                            <td><h5>Total Count of answer</h5></td>
-                            <td><h5>Total Score</h5></td>
+                            <td><h5>Score</h5></td>
+                            <td><h5>Status</h5></td>
                         </tr>
                     </thead>
                     <tbody>                   
                     <?php       
-                      $sql = "SELECT * FROM examinee WHERE student_id ='$student_id' AND exam_title = 'Student Success Kit'";
+                      $sql = "SELECT e.student_id AS student_id, e.exam_id AS exam_id, e.name AS name, e.email_address AS email_address, 
+                      e.gender AS gender, e.course AS course, e.semester AS semester, e.school_year, e.student_year AS student_year, 
+                      e.exam_title AS exam_title, e.exam_description AS exam_description, e.exam_category AS exam_category, 
+                      s.exam_result AS exam_result, e.total_score as total_grades, s.grades as grades, e.exam_result_status AS examinee_status FROM `examinee` `e` 
+                      LEFT JOIN `student_exam_result` `s` 
+                      ON e.email_address = s.email_address WHERE e.student_id ='" .$student_id. "' AND e.exam_title='Student Success Kit' GROUP by e.exam_category";
                       $result = $db->query($sql);
                       if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
                             $exam_title = $row['exam_title']; 
+                            $sampling = $row['total'] / 18;
                     ?>
                         <tr>
                           <td><h5><?php echo $row['exam_category']; ?></h5></td>
-                          <td><h5><?php echo $row['exam_answer']; ?></h5></td>
-                          <td><h5><?php echo $row['total_answer']; ?></h5></td>
-                          <td><h5><?php echo $row['total_score']; ?></h5></td>
+                          <td><h5><?php echo $row['grades']; ?></h5></td>
+                          <td><h5><?php echo $row['exam_result']; ?></h5></td>
                         </tr>          
                     <?php 
                         }
@@ -89,6 +101,27 @@ if(isset($_POST['button_counseling'])) {
         </div>
 
         <div class="col-sm-7">
+        <?php if($counselour_stats == 'Monitoring') { ?>
+          <div class="card rounder-0">
+            <div class="card-body">
+              <br/>
+              <div class="row">
+                    <div class="col-lg-12">
+                     <div class="text-center">
+        
+                      <div class="text-center"><h5></h5></div>
+                        <form action ="" method="POST">
+                           
+                                <button name="button_upload" type="submit" class="btn btn-success btn-lg rounded-pill w-100">Upload Student Grade</button>
+                           
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+          </div>
+          <?php } ?>
+
           <div class="card rounded-0">
             <div class="card-body">
               <br/>
@@ -113,23 +146,11 @@ if(isset($_POST['button_counseling'])) {
                                 switch($data) {
                                   case $data >= 25 and $data <= 40:
                                       $check_monitor = true;
-                                      $msg = "Monitoring";
-                                      if ($counselour_stats == "Pending") {
-                                        for($i = 0; $i < $data; $i++) {
-                                          $sql = "UPDATE examinee SET counselor_notify_status='$msg' WHERE student_id ='$student_id'";
-                                          $db->query($sql);
-                                        }
-                                      }
+                                      $msg = "HIGH";
                                     break;
                                   case $data >= 0 and $data <= 20:
                                       $check_monitor = false;
-                                      $msg = "Counseling";
-                                      if ($counselour_stats == 'Pending') {
-                                        for($i = 0; $i < $data; $i++) {
-                                          $sql = "UPDATE examinee SET counselor_notify_status='$msg' WHERE student_id ='$student_id'";
-                                          $db->query($sql);
-                                        }
-                                      }
+                                      $msg = "LOW";
                                     break;
                                     default:
                                       $msg = "Not in range";
@@ -162,11 +183,7 @@ if(isset($_POST['button_counseling'])) {
                                     <div class="d-flex align-items-center">
                                       <div class="text-center">
                                         <h3>
-                                            <?php if ($counselour_stats == 'Completed') { ?>
-                                            <?php echo $counselour_stats; ?>
-                                            <?php } else { ?>
-                                            <?php echo $msg; ?>
-                                            <?php } ?>
+                                          <?php echo $msg; ?>
                                         </h3>
                                       </div>
                                     </div>
@@ -254,24 +271,7 @@ if(isset($_POST['button_counseling'])) {
                           </script>
                           <!-- End Line CHart -->
                         </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-12">
-                     <div class="text-center">
-
-                        <form action ="" method="POST">
-                        <?php if ($check_monitor) { ?>
-                            <?php if($counselour_stats != 'Completed') { ?>
-                                <button name="button_upload" type="submit" class="btn btn-success btn-lg rounded-0 w-100">Upload</button>
-                            <?php } ?>
-                        <?php } else { ?>
-                            <a href="./counseling?student_id=<?php echo $student_id; ?>&name=<?php echo $student_name; ?>" name="button_counseling" type="submit" class="btn btn-success btn-lg rounded-0 w-100">Apply Counseling Schedule</a>
-                        <?php } ?>
-                        </form>
-                      </div>
-                    </div>
-                  </div>
-                
+                  </div>                
             </div>  
           </div>
         </div>

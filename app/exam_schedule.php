@@ -91,14 +91,14 @@ if (isset($_POST['button_schedule'])) {
                    </select>
                  </div>
 
-                 <label for="inputNumber" class="col-sm-5 col-form-label">Created At</label>
+                 <label for="inputNumber" class="col-sm-5 col-form-label" hidden>Created At</label>
                  <div class="col-sm-10">
-                   <input id="created_at" type="text" class="form-control rounded-0 text-danger" value="<?php echo date('d/m/Y'); ?>">
+                   <input id="created_at" type="text" class="form-control rounded-0 text-danger" value="<?php echo date('d/m/Y'); ?>" hidden>
                  </div>
 
-                 <label for="inputNumber" class="col-sm-5 col-form-label">Expired At</label>
+                 <label for="inputNumber" class="col-sm-5 col-form-label" hidden>Expired At</label>
                  <div class="col-sm-10">
-                   <input name="expired_at" type="date" class="form-control text-danger rounded-0">
+                   <input name="expired_at" type="date" class="form-control text-danger rounded-0" hidden>
                  </div>
 
                </div>

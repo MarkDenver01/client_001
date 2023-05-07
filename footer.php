@@ -14,6 +14,7 @@
 <script src="./assets/js/scheduling.js"></script>
 <script src="./assets/js/exam_oasis.js"></script>
 <script src="./assets/js/create_exam.js"></script>
+<script src="./assets/js/exam_result.js"></script>
 <!-- Template Main JS File -->
 <script src="./assets/js/main.js"></script>
 

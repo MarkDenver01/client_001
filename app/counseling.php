@@ -13,98 +13,225 @@
     $student_id = $_GET['student_id'];
     $id = $_SESSION['key_session']['student_id'];
     $name =$_SESSION['key_session']['name'];
+    $email_address = $_SESSION['key_session']['email_address'];
     $curr_date = date('Y-m-d H:i:s');
     $name = $_SESSION['key_session']['name'];
     $student_name = $_POST['name'];
     $date_appointment_default = $_POST['date_counseling'];
-    $date_appointment_formatted = date("Y-m-d h:i:s a",strtotime($date_appointment_default));
+    $time_picker = $_POST['time_counseling'];
+
+    $date_appointment_formatted = date("Y/m/d",strtotime($date_appointment_default));
+    $time_appointment_formatted = date("h:i:s a", strtotime($time_picker));
+    $date_time_picker = $date_appointment_formatted. " " .$time_appointment_formatted;
     $test_msg = "";
 
     $sqlExist = $db->query("SELECT * FROM counseling_appointment WHERE student_name ='$student_name'");
 
-    $sqlCheck = $db->query("SELECT SUM(slots_available) AS slots FROM counseling_appointment WHERE appointment_date='$date_appointment_formatted'");
+    $sqlCheck = $db->query("SELECT * FROM counseling_appointment WHERE appointment_date = '$date_time_picker'");
+    $readSlots = array();
 
     if ($sqlCheck->num_rows > 0) {
-      $row = $sqlCheck->fetch_assoc();
-      $slots_available = $row['slots'];
+      while($row = $sqlCheck->fetch_assoc()) {
+        $readSlots[] = $row['slots_available'];
+      }
 
-      if($slots_available == 0 || $slots_available == "") {
-          if(!$sqlExist->num_rows > 0) {
-            $sqlInsert = $db->query("INSERT INTO counseling_appointment(student_name, appointment_date, slots_available) VALUES('$name','$date_appointment_formatted','1')");
-            if($sqlInsert) {
+    $totalSlots = 5;
+    $availableSlots = array();
 
-              $sqlUpdate = $db->query("UPDATE examinee SET counselor_notify_status='Counseling' WHERE student_id ='$id'");
-              if($sqlUpdate) {
+    for ($i=1; $i < $totalSlots; $i++) { 
+      if (!in_array($i, $readSlots)) {
+        $availableSlots[] = $i;
+      }
+    }
 
-                $session->message('s', 'Appointment Success!');
-                redirect('./counseling', false);
-              } else {
-                $session->message('d', 'Unexpected issued occour');
-                redirect('./counseling', false);
-              }   
+    foreach ($availableSlots as $slot) {
+      $newSlots = $slots;
+    }
 
-            } else {
-              $session->message('d', 'Unexpected issued occour');
+    if ($newSlots <= $totalSlots) {
+      $sqlInsert = $db->query("INSERT INTO counseling_appointment(student_name, appointment_date, slots_available) VALUES('$name', '$date_time_picker','1')");
+      if ($sqlInsert) {
+        $sqlUpdate = $db->query("UPDATE examinee SET counselor_notify_status ='Counseling' WHERE student_id='$id'");
+    
+        if ($sqlUpdate) {
+          $sqlCheckAdmin = $db->query("SELECT `name`, email_address FROM user_account WHERE user_level ='1' OR user_level='2'");
+          $email[] = array();
+          while($row = $sqlCheckAdmin->fetch_assoc()) {
+            $name[] = $row['name'];
+            $email[] = $row['email_address'];
+
+            $subject = "Student's Appointment";
+            $content = 'Hi Sir/Maam';
+            $content .= '<br/>';
+            $content .= '<br/>';
+            $content .= 'Good day!';
+            $content .= '<br/>';
+            $content .= $_POST['message'];
+            $content .= '<br/>';
+            $content .= '---------------------------------------';
+            $content .= '<br/>';
+            $content .= 'Thank you.';
+      
+             // send mail account created
+            $send = send_email(
+              $row['email_address'],
+              $row['name'],
+              $subject,
+              $content
+            );
+          }
+          
+          foreach ($email as $key) {
+            $sqlNotify = $db->query("INSERT INTO notify_student(student_id, sender, receiver, `message`, user_level, notify_date, notify_status) 
+            VALUES('$id','$email_address', '$key', '" .$_POST['message']. "','3','$curr_date','unread')");
+
+            if ($sqlNotify) {
+              $session->message('s', 'Appointment success!');
               redirect('./counseling', false);
             }
-          } else {
-            $sqlUpdateExist = $db->query("UPDATE counseling_appointment SET student_name ='$name', appointment_date ='$date_appointment_formatted', slots_available ='1' WHERE student_id='$id'");
-            if ($sqlUpdateExist) {
-              $sqlUpdateAgain = $db->query("UPDATE examinee SET counselor_notify_status='Counseling' WHERE student_id ='$id'");
-              if ($sqlUpdateAgain) {
-                $session->message('s', 'Appointment Success!');
-                redirect('./counseling', false);
-              } else {
-                $session->message('d', 'Unexpected issued occour');
-                redirect('./counseling', false);
-              }
-             
-            } else {
-              $session->message('d', 'Unexpected issued occour');
-              redirect('./counseling', false);
-            }    
-          }
-      } elseif($slots_available <= 5) {
-        if(!$sqlExist->num_rows > 0) {
-          $sqlInsert = $db->query("INSERT INTO counseling_appointment(student_name, appointment_date, slots_available) VALUES('$name','$date_appointment_formatted','1')");
-          if($sqlInsert) {
-           $sqlUpdate = $db->query("UPDATE examinee SET counselor_notify_status='Counseling' WHERE student_id ='$id'");
-              if($sqlUpdate) {
-                $session->message('s', 'Appointment Success!');
-                redirect('./counseling', false);
-              } else {
-                $session->message('d', 'Unexpected issued occour');
-                redirect('./counseling', false);
-              }   
-          } else {
-            $session->message('d', 'Unexpected issued occour');
-            redirect('./counseling', false);
           }
         } else {
-            $sqlUpdateExist = $db->query("UPDATE counseling_appointment SET student_name ='$name', appointment_date ='$date_appointment_formatted', slots_available ='1' WHERE student_id='$id'");
-            if ($sqlUpdateExist) {
-              $sqlUpdateAgain = $db->query("UPDATE examinee SET counselor_notify_status='Counseling' WHERE student_id ='$id'");
-              if ($sqlUpdateAgain) {
-                $session->message('s', 'Appointment Success!');
-                redirect('./counseling', false);
-              } else {
-                $session->message('d', 'Unexpected issued occour');
-                redirect('./counseling', false);
-              }
-            } else {
-              $session->message('d', 'Unexpected issued occour');
-              redirect('./counseling', false);
-            }   
+          $session->message('d', 'Unexpected issued occour');
+          redirect('./counseling', false);
         }
-      } else {
-        $session->message('w', 'Not available');
-        redirect('./counseling', false);
       }
-        
     } else {
-      $session->message('w', 'Unexpected error occour');
+      $session->message('d', 'No slot available on this date: ' .$date_time_picker);
       redirect('./counseling', false);
     }
+} else {
+  $sqlInsert = $db->query("INSERT INTO counseling_appointment(student_name, appointment_date, slots_available) VALUES('$name', '$date_time_picker','1')");
+  if ($sqlInsert) {
+    $sqlUpdate = $db->query("UPDATE examinee SET counselor_notify_status ='Counseling' WHERE student_id='$id'");
+
+    if ($sqlUpdate) {
+      $sqlCheckAdmin = $db->query("SELECT `name`,email_address FROM user_account WHERE user_level ='1' OR user_level='2'");
+      $email[] = array();
+      while($row = $sqlCheckAdmin->fetch_assoc()) {
+        $email[] = $row['email_address'];
+
+        $subject = "Student's Appointment";
+        $content = 'Hi Sir/Maam';
+        $content .= '<br/>';
+        $content .= '<br/>';
+        $content .= 'Good day!';
+        $content .= '<br/>';
+        $content .= $_POST['message'];
+        $content .= '<br/>';
+        $content .= '---------------------------------------';
+        $content .= '<br/>';
+        $content .= 'Thank you.';
+  
+         // send mail account created
+        $send = send_email(
+          $row['email_address'],
+          $row['name'],
+          $subject,
+          $content
+        );
+      }
+      
+      foreach ($email as $key) {
+        $sqlNotify = $db->query("INSERT INTO notify_student(student_id, sender, receiver, `message`, user_level, notify_date, notify_status) 
+        VALUES('$id','$email_address', '$key', '" .$_POST['message']. "','3','$curr_date','unread')");
+      }
+
+      if ($sqlNotify) {
+        $session->message('s', 'Appointment success!');
+        redirect('./counseling', false);
+      }
+    } else {
+      $session->message('d', 'Unexpected issued occour');
+      redirect('./counseling', false);
+    }
+  }
+}
+
+    
+
+
+   // $sqlCheck = $db->query("SELECT SUM(slots_available) AS slots FROM counseling_appointment WHERE appointment_date='$date_appointment_formatted'");
+
+    // if ($sqlCheck->num_rows > 0) {
+    //   $row = $sqlCheck->fetch_assoc();
+    //   $slots_available = $row['slots'];
+
+    //   if($slots_available == 0 || $slots_available == "") {
+    //       if(!$sqlExist->num_rows > 0) {
+    //         $sqlInsert = $db->query("INSERT INTO counseling_appointment(student_name, appointment_date, slots_available) VALUES('$name','$date_appointment_formatted','1')");
+    //         if($sqlInsert) {
+
+    //           $sqlUpdate = $db->query("UPDATE examinee SET counselor_notify_status='Counseling' WHERE student_id ='$id'");
+    //           if($sqlUpdate) {
+    //             $session->message('s', 'Appointment Success!');
+    //             redirect('./counseling', false);
+    //           } else {
+    //             $session->message('d', 'Unexpected issued occour');
+    //             redirect('./counseling', false);
+    //           }   
+
+    //         } else {
+    //           $session->message('d', 'Unexpected issued occour');
+    //           redirect('./counseling', false);
+    //         }
+    //       } else {
+    //         $sqlUpdateExist = $db->query("UPDATE counseling_appointment SET student_name ='$name', appointment_date ='$date_appointment_formatted', slots_available ='1' WHERE student_id='$id'");
+    //         if ($sqlUpdateExist) {
+    //           $sqlUpdateAgain = $db->query("UPDATE examinee SET counselor_notify_status='Counseling' WHERE student_id ='$id'");
+    //           if ($sqlUpdateAgain) {
+    //             $session->message('s', 'Appointment Success!');
+    //             redirect('./counseling', false);
+    //           } else {
+    //             $session->message('d', 'Unexpected issued occour');
+    //             redirect('./counseling', false);
+    //           }
+             
+    //         } else {
+    //           $session->message('d', 'Unexpected issued occour');
+    //           redirect('./counseling', false);
+    //         }    
+    //       }
+    //   } elseif($slots_available <= 5) {
+    //     if(!$sqlExist->num_rows > 0) {
+    //       $sqlInsert = $db->query("INSERT INTO counseling_appointment(student_name, appointment_date, slots_available) VALUES('$name','$date_appointment_formatted','1')");
+    //       if($sqlInsert) {
+    //        $sqlUpdate = $db->query("UPDATE examinee SET counselor_notify_status='Counseling' WHERE student_id ='$id'");
+    //           if($sqlUpdate) {
+    //             $session->message('s', 'Appointment Success!');
+    //             redirect('./counseling', false);
+    //           } else {
+    //             $session->message('d', 'Unexpected issued occour');
+    //             redirect('./counseling', false);
+    //           }   
+    //       } else {
+    //         $session->message('d', 'Unexpected issued occour');
+    //         redirect('./counseling', false);
+    //       }
+    //     } else {
+    //         $sqlUpdateExist = $db->query("UPDATE counseling_appointment SET student_name ='$name', appointment_date ='$date_appointment_formatted', slots_available ='1' WHERE student_id='$id'");
+    //         if ($sqlUpdateExist) {
+    //           $sqlUpdateAgain = $db->query("UPDATE examinee SET counselor_notify_status='Counseling' WHERE student_id ='$id'");
+    //           if ($sqlUpdateAgain) {
+    //             $session->message('s', 'Appointment Success!');
+    //             redirect('./counseling', false);
+    //           } else {
+    //             $session->message('d', 'Unexpected issued occour');
+    //             redirect('./counseling', false);
+    //           }
+    //         } else {
+    //           $session->message('d', 'Unexpected issued occour');
+    //           redirect('./counseling', false);
+    //         }   
+    //     }
+    //   } else {
+    //     $session->message('w', 'Not available');
+    //     redirect('./counseling', false);
+    //   }
+        
+    // } else {
+    //   $session->message('w', 'Unexpected error occour');
+    //   redirect('./counseling', false);
+    // }
 
 
 
@@ -146,6 +273,16 @@
                     <div class="input-group has-validation">
                       <input class="form-control new_password rounded-0" type="date" name="date_counseling" id="yourNewPassword" required>
                     </div>
+                    <br/>
+                    <label for="yourNewPassword" class="form-label">Time</label>
+                    <div class="input-group has-validation">
+                      <input class="form-control new_password rounded-0" type="time" name="time_counseling" id="yourNewPassword" required>
+                    </div>
+
+                    <label for="present_address" class="col-md-4 col-lg-6 col-form-label">Message</label>
+                      <div class="col-md-8 col-lg-12">
+                        <textarea name="message" class="form-control rounded-0" id="present_address" style="height: 100px"></textarea>
+                      </div>
                   </div>
                   <div class="col-3"></div>
 
@@ -155,7 +292,7 @@
                     
                   </div>
                   <div class="col-6">
-                    <button name="button_apply" class="btn btn-primary w-100 rounded-0" type="submit">Apply</button>
+                    <button name="button_apply" class="btn btn-primary w-100 rounded-0" type="submit">Submit</button>
                   </div>
                   <div class="col-3">
                   </div>

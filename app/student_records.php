@@ -19,9 +19,88 @@
   </div><!-- End Page Title -->
 
 
-<section class="section" style="width: 1560px;">
+<section class="section" style="width: 2360px;">
     <div class="row">
       <!-- start create account -->
+            <!-- start create account -->
+            <div class="card rounded-0">
+      </br>
+        <div class="row">
+          <div class="box">
+            <div class="box-body">
+            <form action="" method="POST">
+		          <div class="row">
+			          <div class="form-group col-sm-12 text-center">
+
+                  <div class="row">
+                    <div class="col-sm-3">
+                    <select id="student_year" name="student_year" class="form-select rounded-0" aria-label="Default select example">
+                        <option value="" selected>Select Year Level</option>
+                        <option value="First Year">First Year</option>
+                        <option value="Second Year">Second Year</option>
+                        <option value="Third Year">Third Year</option>
+                        <option value="Fourth Year">Fourth Year</option>
+                      </select>
+                      <br/>
+                    </div>
+                    <div class="col-sm-3">
+                      <select id="school_year" name="school_year" class="form-select rounded-0" aria-label="Default select example">
+                        <option value="" selected>Academic Year</option>
+                        <?php global $db; ?>
+                        <?php 
+                          $sql = "SELECT * FROM academic_settings";
+                          $result = $db->query($sql);
+                          if ($result->num_rows > 0) {
+                            while($row = $result->fetch_assoc()) {
+                              echo '<option value="' .$row['school_year']. '">' .$row['school_year']. '</option>';
+                            }
+                          }
+                        ?>
+                      </select>
+                      <br/>
+                      <button name="button_filter" type="submit" class="btn btn-secondary text-white rounded-0 btn-sm w-100"><i class="bi bi-search"></i> </button>
+                    </div>
+                    <div class="col-sm-3">
+                      <select id="semester" name="semester" class="form-select rounded-0" aria-label="Default select example">
+                         <option value="" selected>Semester</option>
+                        <?php 
+                          $sql = "SELECT * FROM academic_settings";
+                          $result = $db->query($sql);
+                          if ($result->num_rows > 0) {
+                            while($row = $result->fetch_assoc()) {
+                              echo '<option value="' .$row['semester']. '">' .$row['semester']. '</option>';
+                            }
+                          }
+                        ?>
+                      </select>
+                      <br/>
+                    </div>
+                    
+                    <div class="col-sm-3">
+                      <select id="exam_description" name="course" class="form-select rounded-0" aria-label="Default select example">
+                        <option value="" selected>Select course</option>
+                          <option value="BSIE">Bachelor of Science in Industrial Engineering</option>
+                          <option value="BSIT">Bachelor of Science in Information Technology</option>
+                          <option value="BS-Psy">Bachelor of Science in Psychology</option>
+                          <option value="BSHRM">Bachelor of Science in Hospitality Management</option>
+                          <option value="BSTM">Bachelor of Science in Tourism Management</option>
+                          <option value="BSA">Bachelor of Science in Accountancy</option>
+                          <option value="BSIA">Bachelor of Science in Internal Auditing</option>
+                          <option value="BSMA">Bachelor of Science in Management Accounting</option>
+                        </select>
+                      </select>
+                      <br/>
+                    </div>
+
+
+                  </div>
+
+                </div>
+		          </div>
+            </form>
+            </div>
+          </div>
+        <br/>
       <div class="card rounded-0">
         <div class="card-body">
           <br/>
@@ -31,57 +110,141 @@
               <div class="card">
                 <div class="card-body">
                   <!-- Table with hoverable rows -->
-                  <table class="table table-sm table-hover datatable text-nowrap">
+                  <table id="scroll_view" class="table table-sm table-hover table-striped datatable text-nowrap display" style="width:100%">
                     <thead>
                       <tr>
-                        <th scope="col" class="text-center" style="width: 30%;">Name</th>
-                        <th scope="col" class="text-center" style="width: 20%;">Student Year</th>
-                        <th scope="col" class="text-center" style="width: 20%;">Course</th>
-                        <th scope="col" class="text-center" style="width: 20%;">Gender</th>
-                        <th scope="col" class="text-center" style="width: 10%;">Counseling Status</th>
+                        <th scope="col" class="text-center" >Name</th>
+                        <th scope="col" class="text-center" >Email address</th>
+                        <th scope="col" class="text-center" >Gender</th>
+                        <th scope="col" class="text-center" >Course</th>
+                        <th scope="col" class="text-center" >Semester</th>
+                        <th scope="col" class="text-center" >School Year</th>
+                        <th scope="col" class="text-cemter" >Student Year</th>
+                        <th scope="col" class="text-center" >Exam Type</th>
+                        <th scope="col" class="text-center" >Exam Description</th>
+                        <th scope="col" class="text-center" >Exam Category</th>
+                        <th scope="col" class="text-center" >Grades</th>
+                        <th scope="col" class="text-center" >Exam Result Status</th>
+                        <th scope="col" class="text-center" >Examinee Status</th>
+                        <th scope="col" class="text-center" >Action</th>
                       </tr>
                     </thead>
                     <tbody>
+                    <?php 
+                      if (isset($_POST['button_filter'])) {
+                        $filterData = student_exam_result_combine($_POST['student_year'], $_POST['school_year'], $_POST['semester'], $_POST['course']);
+                        foreach ($filterData as $filtered) { ?>
+
+                      <tr class="text-success">
+                        <th scope="row" class="text-center" hidden ><?php echo $filtered['student_id']; ?></th>
+                        <th scope="row" class="text-center" hidden ><?php echo $filtered['exam_id']; ?></th>
+                        <th scope="row" class="text-center" ><?php echo $filtered['name']; ?></th>
+                        <td scope="row" class="text-center" ><?php echo $filtered['email_address']; ?></td>
+                        <td scope="row" class="text-center" ><?php echo $filtered['gender']; ?></td>
+                        <td scope="row" class="text-center" ><?php echo $filtered['course']; ?></td>
+                        <td scope="row" class="text-center" ><?php echo $filtered['semester']; ?></td>
+                        <td scope="row" class="text-center" ><?php echo $filtered['school_year']; ?></td>
+                        <td scope="row" class="text-center" ><?php echo $filtered['student_year']; ?></td>
+                        <td scope="row" class="text-center" ><?php echo $filtered['exam_title']; ?></td>
+                        <td scope="row" class="text-center" ><?php echo $filtered['exam_description']; ?></td>
+                        <td scope="row" class="text-center" ><?php echo $filtered['exam_category']; ?></td>
+                        <td scope="row" class="text-center" ><?php echo $filtered['total_grades']; ?></td>
+                        <td scope="row" class="text-center" ><?php echo $filtered['exam_result']; ?></td>
+                        <td scope="row" class="text-center" ><?php echo $filtered['examinee_status']; ?></td>
+                        <td>
+                          <?php if ($filtered['exam_title'] == 'Student Success Kit') { ?>
+                         
+                          <a href="../app/student_success_kit_result.php?student_id="<?php echo $filtered['student_id'];?> type="submit" class="btn btn-success text-white rounded-0 btn-sm w-100"><i class="bi bi-print"></i> View result</a>
+                      
+                       
+                         <?php } else if ($filtered['exam_title'] == 'OASIS 3') { ?>
+
+                            <a href="../app/oasis_result.php?student_id="<?php echo $filtered['student_id'];?> type="submit" class="btn btn-success text-white rounded-0 btn-sm w-100"><i class="bi bi-print"></i> View result</a>
+                        
+                          <?php } else if($filtered['exam_title'] == 'BarOn EQ-i:S') { ?>
+
+                            <a href="../app/baron_eq_interpretation.php?student_id="<?php echo $filtered['student_id'];?> type="submit" class="btn btn-success text-white rounded-0 btn-sm w-100"><i class="bi bi-print"></i> View result</a>
+                        
+
+                          <?php } else if ($filtered['exam_title'] == 'The Keirsey Temperament Sorter') { ?>   
+                            
+                            <a href="../app/keirsey_temp_intrepretation.php?student_id="<?php echo $filtered['student_id'];?> type="submit" class="btn btn-success text-white rounded-0 btn-sm w-100"><i class="bi bi-print"></i> View result</a>
+
+
+                          <?php } else if ($filtered['exam_title'] == 'Aptitude J and C') { ?>
+
+                            <a href="../app/aptitude_j_n_c_result.php?student_id="<?php echo $filtered['student_id'];?> type="submit" class="btn btn-success text-white rounded-0 btn-sm w-100"><i class="bi bi-print"></i> View result</a>
+
+                            
+                          <?php } else if ($filtered['exam_title'] == 'ESA') { ?>
+
+                            <a href="../app/esa_result.php?student_id="<?php echo $filtered['student_id'];?> type="submit" class="btn btn-success text-white rounded-0 btn-sm w-100"><i class="bi bi-print"></i> View result</a>
+
+                            
+                          <?php } else if ($filtered['exam_title'] == 'Aptitude Verbal and Numerical') { ?>
+
+                            <a href="../app/aptitude_verbal_n_numerical.php?student_id="<?php echo $filtered['student_id'];?> type="submit" class="btn btn-success text-white rounded-0 btn-sm w-100"><i class="bi bi-print"></i> View result</a>
+
+                            
+                          <?php } ?>
+                        
+                        </td>
+                      </tr>
+
+                    <?php    }  ?>
+                    <?php  } else { ?>
+
                     <?php       
-                      $sql = "SELECT * FROM examinee GROUP BY exam_title ORDER BY exam_title LIMIT 1";
-                      $result = $db->query($sql);
+
+                      $sql = "SELECT e.student_id AS student_id, e.exam_id AS exam_id, e.name AS name, e.email_address AS email_address, 
+                        e.gender AS gender, e.course AS course, e.semester AS semester, e.school_year, e.student_year AS student_year, 
+                        e.exam_title AS exam_title, e.exam_description AS exam_description, e.exam_category AS exam_category, 
+                        s.exam_result AS exam_result, s.grades as total_grades, e.exam_result_status AS examinee_status FROM `examinee` `e` LEFT JOIN `student_exam_result` `s` 
+                        ON e.email_address = s.email_address GROUP by e.exam_category";
+                        $result = $db->query($sql);
+                      $result =$db->query($sql);
                       if ($result->num_rows > 0) {
-                        while ($row = $result->fetch_assoc()) {
-                          $id = $row['id'];
-                          $name = $row['name'];
-                          $student_year = $row['student_year'];
-                          $course = $row['course'];
-                          $gender = $row['gender'];
-                          $counseling_status = $row['counselor_notify_status'];
-                          $student_id = $row['student_id'];
+                        while($row = $result->fetch_assoc()) {
                     ?>
                       <tr class="text-success">
-                        <th scope="row" class="text-center" style="width: 30%;"><?php echo $name; ?></th>
-                        <td scope="row" class="text-center" style="width: 20%;"><?php echo $student_year; ?></td>
-                        <td scope="row" class="text-center" style="width: 20%;"><?php echo $course; ?></td>
-                        <td scope="row" class="text-center" style="width: 20%;"><?php echo $gender; ?></td>
-                        <td scope="row" class="text-center" style="width: 10%;">
-                        <?php if ($counseling_status == "Counseling") { ?>
-                          <a href="#" id="schedule" data-id="<?php echo $student_id; ?>" class="btn btn-success rounded-0  btn-sm w-100 ">Notify & Re-take Exam</a>
-                        <?php } elseif($counseling_status == "Monitoring") {  ?>
-                          <a href="#" class="btn btn-warning rounded-0  btn-sm w-100 disabled">Monitoring</a>
-                        <?php } elseif($counseling_status == "Pending") { ?>
-                          <a href="#" class="btn btn-danger rounded-0  btn-sm w-100 disabled">On-Going</a>
-                        <?php } elseif ($counseling_status =='Notified') { ?>
-                          <a href="#" class="btn btn-info rounded-0  btn-sm w-100 disabled">Notified</a>
-                        <?php } elseif ($counseling_status == 'Completed') { ?>
-                          <a href="#" class="btn btn-success rounded-0  btn-sm w-100 disabled">Completed</a>
-                        <?php } ?>
-                        </td>
+                        <th scope="row" class="text-center" hidden ><?php echo $row['student_id']; ?></th>
+                        <th scope="row" class="text-center" hidden ><?php echo $row['exam_id']; ?></th>
+                        <th scope="row" class="text-center" ><?php echo $row['name']; ?></th>
+                        <td scope="row" class="text-center" ><?php echo $row['email_address']; ?></td>
+                        <td scope="row" class="text-center" ><?php echo $row['gender']; ?></td>
+                        <td scope="row" class="text-center" ><?php echo $row['course']; ?></td>
+                        <td scope="row" class="text-center" ><?php echo $row['semester']; ?></td>
+                        <td scope="row" class="text-center" ><?php echo $row['school_year']; ?></td>
+                        <td scope="row" class="text-center" ><?php echo $row['student_year']; ?></td>
+                        <td scope="row" class="text-center" ><?php echo $row['exam_title']; ?></td>
+                        <td scope="row" class="text-center" ><?php echo $row['exam_description']; ?></td>
+                        <td scope="row" class="text-center" ><?php echo $row['exam_category']; ?></td>
+                        <td scope="row" class="text-center" ><?php echo $row['total_grades']; ?></td>
+                        <td scope="row" class="text-center" ><?php echo $row['exam_result']; ?></td>
+                        <td scope="row" class="text-center" ><?php echo $row['examinee_status']; ?></td>
+                        <td>
+
+     
+                        <a href="../app/student_success_kit_result.php?student_id=<?php echo $row['student_id'];?>" type="submit" class="btn btn-success text-white rounded-0 btn-sm w-100"><i class="bi bi-print"></i> View result</a>
+                        
+                      
+                      
+                      </td>
                       </tr>
                     <?php
                         }
                       } 
+                    }
                     ?>
                     </tbody>
                   </table>
                   <!-- End Table with hoverable rows -->
+           
+                 <button name="button_print" onClick="window.print()" class="btn btn-danger text-white rounded-0 btn-sm" style="width: 150px;"><i class="bi bi-print"></i> Print</button>
+
+
                 </div>
+                
               </div>
             </div>
           </form><!-- End floating Labels Form -->
@@ -92,4 +255,11 @@
       <!-- end create account -->
     </div>
 </section>
+<script>
+  $(document).ready(function () {
+    $('#scroll_view').DataTable({
+        scrollX: true,
+    });
+});
+</script>
 <?php include('../footer.php'); ?>

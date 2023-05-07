@@ -43,11 +43,11 @@
                     <label class="col-sm-5 col-form-label">Academic School Year</label>
                       <div class="row mb-3">
                         <div  class="col-sm-5">
-                            <input name="school_year_start" type="text" class="form-control rounded-0 text-danger" id="school_year_start" value="<?php echo date("Y"); ?>" readonly>
+                            <input name="school_year_start" type="number" class="form-control rounded-0 text-danger" id="school_year_start" required>
                         </div>
                          -
                         <div  class="col-sm-5">
-                            <input name="school_year_end" type="text" class="form-control rounded-0 text-danger" id="school_year_start" value="<?php echo date("Y") + 1; ?>" readonly>
+                            <input name="school_year_end" type="number" class="form-control rounded-0 text-danger" id="school_year_start" required>
                         </div>
                       </div>
                   </div>
