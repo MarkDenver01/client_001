@@ -187,7 +187,7 @@ if ($db->num_rows($result)) {
 </li>  
 <?php } elseif ($examinee['exam_title'] == 'Aptitude Verbal and Numerical') { ?>
 <li class="nav-item">
-  <a class="nav-link " href="../app/aptitude_verbal_n_numeric_result">
+  <a class="nav-link " href="../app/aptitude_verbal_n_numerical">
     <i class="ri-sticky-note-fill"></i>
     <span><?php echo $examinee['exam_title']; ?>'s Result</span>
   </a>
