@@ -40,7 +40,7 @@
 
     <li class="nav-item">
       <a class="nav-link " href="./counseling_records">
-        <i class="ri-account-pin-circle-fill"></i>
+        <i class="ri-account-pin-box-fill"></i>
         <span>Student Appointment</span>
       </a>
     </li><!-- End Student Records Nav -->

@@ -152,7 +152,42 @@
                         <td scope="row" class="text-center" ><?php echo $filtered['exam_result']; ?></td>
                         <td scope="row" class="text-center" ><?php echo $filtered['examinee_status']; ?></td>
                         <td>
-                        <button name="dsfds" type="submit" class="btn btn-success text-white rounded-0 btn-sm w-100"><i class="bi bi-print"></i> View result</button>
+                          <?php if ($filtered['exam_title'] == 'Student Success Kit') { ?>
+                         
+                          <a href="../app/student_success_kit_result.php?student_id="<?php echo $filtered['student_id'];?> type="submit" class="btn btn-success text-white rounded-0 btn-sm w-100"><i class="bi bi-print"></i> View result</a>
+                      
+                       
+                         <?php } else if ($filtered['exam_title'] == 'OASIS 3') { ?>
+
+                            <a href="../app/oasis_result.php?student_id="<?php echo $filtered['student_id'];?> type="submit" class="btn btn-success text-white rounded-0 btn-sm w-100"><i class="bi bi-print"></i> View result</a>
+                        
+                          <?php } else if($filtered['exam_title'] == 'BarOn EQ-i:S') { ?>
+
+                            <a href="../app/baron_eq_interpretation.php?student_id="<?php echo $filtered['student_id'];?> type="submit" class="btn btn-success text-white rounded-0 btn-sm w-100"><i class="bi bi-print"></i> View result</a>
+                        
+
+                          <?php } else if ($filtered['exam_title'] == 'The Keirsey Temperament Sorter') { ?>   
+                            
+                            <a href="../app/keirsey_temp_intrepretation.php?student_id="<?php echo $filtered['student_id'];?> type="submit" class="btn btn-success text-white rounded-0 btn-sm w-100"><i class="bi bi-print"></i> View result</a>
+
+
+                          <?php } else if ($filtered['exam_title'] == 'Aptitude J and C') { ?>
+
+                            <a href="../app/aptitude_j_n_c_result.php?student_id="<?php echo $filtered['student_id'];?> type="submit" class="btn btn-success text-white rounded-0 btn-sm w-100"><i class="bi bi-print"></i> View result</a>
+
+                            
+                          <?php } else if ($filtered['exam_title'] == 'ESA') { ?>
+
+                            <a href="../app/esa_result.php?student_id="<?php echo $filtered['student_id'];?> type="submit" class="btn btn-success text-white rounded-0 btn-sm w-100"><i class="bi bi-print"></i> View result</a>
+
+                            
+                          <?php } else if ($filtered['exam_title'] == 'Aptitude Verbal and Numerical') { ?>
+
+                            <a href="../app/aptitude_verbal_n_numerical.php?student_id="<?php echo $filtered['student_id'];?> type="submit" class="btn btn-success text-white rounded-0 btn-sm w-100"><i class="bi bi-print"></i> View result</a>
+
+                            
+                          <?php } ?>
+                        
                         </td>
                       </tr>
 
@@ -188,8 +223,13 @@
                         <td scope="row" class="text-center" ><?php echo $row['exam_result']; ?></td>
                         <td scope="row" class="text-center" ><?php echo $row['examinee_status']; ?></td>
                         <td>
-                        <button name="dsfds" type="submit" class="btn btn-success text-white rounded-0 btn-sm w-100"><i class="bi bi-print"></i> View result</button>
-                        </td>
+
+     
+                        <a href="../app/student_success_kit_result.php?student_id=<?php echo $row['student_id'];?>" type="submit" class="btn btn-success text-white rounded-0 btn-sm w-100"><i class="bi bi-print"></i> View result</a>
+                        
+                      
+                      
+                      </td>
                       </tr>
                     <?php
                         }

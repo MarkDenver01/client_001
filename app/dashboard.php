@@ -28,7 +28,6 @@ if($developer) {
       </ol>
     </nav>
     <br/>
-    <button name="button_print" onClick="window.print()" class="btn btn-secondary text-white rounded-0 btn-sm w-25"><i class="bi bi-print"></i> Print</button>
   </div><!-- End Page Title -->
 
   <section class="section dashboard">
@@ -61,7 +60,7 @@ if($developer) {
         ?>
 
     <!-- Counseling Card -->
-    <div class="col-xxl-6 col-md-6">
+    <div class="col-xxl-6 col-md-6" id="print_content">
       <div class="card info-card customers-card rounded-0">
         <div class="card-body">
           <h5 class="card-title">Counseling <span>| cases</span></h5>
@@ -518,7 +517,7 @@ if($developer) {
 
     <!-- Number of visits Card -->
     <div class="col-xxl-12 col-md-12">
-    <?php $notify_count = count_notification($_SESSION['key_session']['student_id']); ?>
+    <?php $notify_count = count_notification($_SESSION['key_session']['email_address']); ?>
       <div class="card info-card revenue-card rounded-0">
 
         <div class="card-body">
@@ -553,4 +552,11 @@ if($developer) {
           
 
 <?php include('../end_menu_bar.php'); ?>
+
+<script>
+		function printContent() {
+			var content = document.getElementById("print_content");
+			window.print(content);
+		}
+	</script>
 <?php include('../footer.php'); ?>

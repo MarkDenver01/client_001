@@ -31,7 +31,7 @@
           }
         }
       ?>
-    <?php $notify_count = count_notification($_SESSION['key_session']['student_id']); ?>
+    <?php $notify_count = count_notification($_SESSION['key_session']['email_address']); ?>
     <li class="nav-item dropdown">
         <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
           <i class="bi bi-bell"></i>
@@ -49,7 +49,7 @@
           </li>
           <?php global $db; ?>
           <?php 
-            $sql = "SELECT * FROM notify_student WHERE student_id='$student_id' AND notify_status='unread' AND user_level='1' OR user_level='2'";
+            $sql = "SELECT * FROM notify_student WHERE student_id='99999999' AND receiver='" .$_SESSION['key_session']['email_address']. "' AND notify_status='unread' AND (user_level='1' OR user_level='2')";
             $result = $db->query($sql);
             if ($result->num_rows > 0) {
               while ($row = $result->fetch_assoc()) { ?>

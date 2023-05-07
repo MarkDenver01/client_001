@@ -252,7 +252,7 @@
                         while ($row = $result->fetch_assoc()) {
                           $exam_answer = $row['exam_answer'];
                           $total_answer =$row['total'];
-                          $data = $row['total'] / 8 * 40;
+                          $counter = $row['total'] / 8 * 40;
                         }
                       }
 
@@ -379,7 +379,14 @@
                       <tr>
                         <?php if($exam_title == "Student Success Kit") { ?>
                           <td class="text-success"><h3>Total Score</h3></td>
-                          <td class="text-success"><h3><b><?php echo $data; ?></b></h3></td>
+                          <td class="text-success"><h3><b><?php echo $counter; ?></b></h3></td>
+                          <?php 
+                            if ($counter >= 21 && $counter <= 40) {
+                                $exam_result_status = "HIGH";
+                            } elseif ($counter >=0 && $counter <= 20) {
+                                $exam_result_status = "LOW";
+                            }
+                          ?>
                         <?php } elseif ($exam_title == "OASIS 3") { ?>
                           <td class="text-success"><h3>Total Score</h3></td>
                           <td class="text-success"><h3><b><?php echo $counter; ?></b></h3></td>
@@ -534,10 +541,30 @@
                   </table>
                   <form id="submitExamResultFrm" method="POST">
                    <?php if ($exam_title == "Student Success Kit") { ?>
-                      <input type="hidden" name="exam_answer" value="<?php echo $exam_answer; ?>">
-                      <input type="hidden"  name="total_answer" value="<?php echo $total_answer; ?>">
-                      <input type="hidden" name="total_score" value="<?php echo $data; ?>">
+                      <input type="hidden" id="student_id" name="student_id" value="<?php echo $student_id; ?>">
+                      <input type="hidden" id="exam_type" name="exam_type" value="<?php echo $exam_type; ?>">
+                      <input type="hidden" id="exam_id" name="exam_id" value="<?php echo $exam_id; ?>">
+                      <input type="hidden" id="exam_title" name="exam_title" value="<?php echo $exam_title; ?>">
+                      <input type="hidden" id="exam_desc" name="exam_desc" value="<?php echo $exam_desc; ?>">
+                      <input type="hidden" id="exam_answer" name="exam_answer" value="<?php echo $exam_answer; ?>">
+                      <input type="hidden" id="total_answer" name="total_answer" value="<?php echo $total_answer; ?>">
+                      <input type="hidden" id="total_score" name="total_score" value="<?php echo $counter; ?>">
+
+                      <input type="hidden" id="semester" value="<?php echo $semester; ?>">
+                      <input type="hidden" id="school_year" value="<?php echo $school_year; ?>">
+                      <input type="hidden" id="full_name" value="<?php echo $name; ?>">
+                      <input type="hidden" id="gender" value="<?php echo $gender; ?>">
+                      <input type="hidden" id="course" value="<?php echo $course; ?>">
+                      <input type="hidden" id="start_date" value="<?php echo date('Y-md h:i:s A'); ?>">
+                      <input type="hidden" id="email_address" value="<?php echo $email_address; ?>">
+                      <input type="hidden" id="student_year" value="<?php echo $student_year; ?>">
+                      <input type="hidden" id="exam_result_status" name="exam_result_status" value="<?php echo $exam_result_status; ?>">
                    <?php } elseif ($exam_title == "OASIS 3") { ?>
+                      <input type="hidden" id="student_id" name="student_id" value="<?php echo $student_id; ?>">
+                      <input type="hidden" id="exam_type" name="exam_type" value="<?php echo $exam_type; ?>">
+                      <input type="hidden" id="exam_id" name="exam_id" value="<?php echo $exam_id; ?>">
+                      <input type="hidden" id="exam_title" name="exam_title" value="<?php echo $exam_title; ?>">
+                      <input type="hidden" id="exam_desc" name="exam_desc" value="<?php echo $exam_desc; ?>">
                       <input type="hidden" name="exam_answer" value="<?php echo $exam_answer; ?>">
                       <input type="hidden"  name="total_answer" value="<?php echo $total_answer; ?>">
                       <input type="hidden" name="total_score" value="<?php echo $counter; ?>">
@@ -664,7 +691,7 @@
                       <input type="hidden" id="exam_desc" name="exam_desc" value="<?php echo $exam_desc; ?>">
                       <input type="hidden" id="exam_result_status" name="exam_result_status" value="<?php echo $exam_result_status; ?>">
                       <input type="hidden" id="exam_answer" name="exam_answer" value="0">
-                      <input type="hidden" id="total_answer" name="total_answer" value="6">
+                      <input type="hidden" id="total_answer" name="total_answer" value="32">
                       <input type="hidden" id="total_score" name="total_score" value="<?php echo $counter; ?>">
 
                       <input type="hidden" id="semester" value="<?php echo $semester; ?>">
@@ -683,7 +710,7 @@
                       <input type="hidden" id="exam_desc" name="exam_desc" value="<?php echo $exam_desc; ?>">
                       <input type="hidden" id="exam_result_status" name="exam_result_status" value="<?php echo $exam_result_status; ?>">
                       <input type="hidden" id="exam_answer" name="exam_answer" value="0">
-                      <input type="hidden" id="total_answer" name="total_answer" value="6">
+                      <input type="hidden" id="total_answer" name="total_answer" value="84">
                       <input type="hidden" id="total_score" name="total_score" value="<?php echo $counter; ?>">
 
                       <input type="hidden" id="semester" value="<?php echo $semester; ?>">

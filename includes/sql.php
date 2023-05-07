@@ -859,9 +859,9 @@ function find_examinee_complete($student_id, $semester, $school_year) {
   return $examinee=[];
 }
 
-function count_notification($student_id) {
+function count_notification($email_address) {
   global $db;
-  $sql = "SELECT COUNT(*) AS total_count FROM notify_student WHERE student_id='$student_id' AND (user_level='1' OR user_level='2') AND notify_status='unread'";
+  $sql = "SELECT COUNT(*) AS total_count FROM notify_student WHERE student_id='99999999' AND receiver='$email_address' AND (user_level='1' OR user_level='2') AND notify_status='unread'";
 
   $result = $db->query($sql);
   if ($db->num_rows($result)) {

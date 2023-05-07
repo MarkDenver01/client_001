@@ -71,9 +71,9 @@ $(document).on('click', '#submitExamResultFrm', function() {
                 success: function(data) {
                     if (data.res == "success") {
                         if (exam_title == 'Student Success Kit') {
-                            
+                            window.location.href="../app/student_success_kit_result.php?student_id="+student_id;
                         } else if (exam_title == 'OASIS 3') {
-                            
+                            window.location.href="../app/oasis_result.php?student_id="+student_id;
                         } else if (exam_title == 'BarOn EQ-i:S') {
                             window.location.href="../app/baron_eq_interpretation.php?student_id="+student_id;
                         } else if (exam_title == 'The Keirsey Temperament Sorter') {

@@ -5,7 +5,6 @@
 <?php include('../header.php'); ?>
 <?php include('../includes/load.php'); ?>
 <?php SET_NOT_LOGGED_IN(); ?>
-<?php IS_STUDENT_LEVEL(); ?>
 <?php CHECK_EXAM_AVAILABILITY(); ?>
 <?php global $db; ?>
 <?php  
