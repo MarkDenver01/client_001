@@ -159,7 +159,7 @@ if ($db->num_rows($result)) {
 </li>  
 <?php } elseif ($examinee['exam_title'] == 'BarOn EQ-i:S') { ?>
 <li class="nav-item">
-  <a class="nav-link " href="../app/baron_result">
+  <a class="nav-link " href="../app/baron_eq_interpretation">
     <i class="ri-sticky-note-fill"></i>
     <span><?php echo $examinee['exam_title']; ?>'s Result</span>
   </a>

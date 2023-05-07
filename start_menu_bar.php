@@ -49,7 +49,7 @@
           </li>
           <?php global $db; ?>
           <?php 
-            $sql = "SELECT * FROM notify_student WHERE student_id='$student_id' AND notify_status='unread'";
+            $sql = "SELECT * FROM notify_student WHERE student_id='$student_id' AND notify_status='unread' AND user_level='1' OR user_level='2'";
             $result = $db->query($sql);
             if ($result->num_rows > 0) {
               while ($row = $result->fetch_assoc()) { ?>
@@ -113,7 +113,7 @@
           </li>
           <?php global $db; ?>
           <?php 
-            $sql = "SELECT * FROM notify_student WHERE notify_status='unread'";
+            $sql = "SELECT * FROM notify_student WHERE notify_status='unread' AND receiver='$email_address' AND user_level='3'";
             $result_notif = $db->query($sql);
             if ($result_notif->num_rows > 0) {
               while ($row = $result_notif->fetch_assoc()) { ?>

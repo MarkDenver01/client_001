@@ -913,3 +913,28 @@ ADD PRIMARY KEY(`student_id`)";
 
 $db_sql_54[] = "ALTER TABLE `counseling_appointment` 
 MODIFY  `student_id` int(255) NOT NULL AUTO_INCREMENT";
+
+// =================== exam result ========================== //
+$db_sql_55[] = "DROP TABLE IF EXISTS `student_exam_result`";
+
+$db_sql_55[] = "CREATE TABLE `student_exam_result` (
+  `id` int(255) NOT NULL,
+  `student_id` int(255) NOT NULL,
+  `exam_id` int(255) NOT NULL,
+  `name` VARCHAR(255) NOT NULL,
+  `email_address` VARCHAR(255) NOT NULL,
+  `student_year` VARCHAR(255) NOT NULL,
+  `semester` VARCHAR(255) NOT NULL,
+  `school_year` VARCHAR(255) NOT NULL,
+  `exam_title` VARCHAR(255) NOT NULL,
+  `course` VARCHAR(255) NOT NULL,
+  `gender` VARCHAR(255) NOT NULL,
+  `grades` VARCHAR(255) NOT NULL,
+  `exam_result` VARCHAR(255) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+$db_sql_55[] = "ALTER TABLE `student_exam_result` 
+ADD PRIMARY KEY(`student_id`)";
+
+$db_sql_55[] = "ALTER TABLE `student_exam_result` 
+MODIFY  `student_id` int(255) NOT NULL AUTO_INCREMENT";
