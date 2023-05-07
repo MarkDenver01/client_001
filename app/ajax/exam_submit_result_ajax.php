@@ -42,6 +42,7 @@
       }
 
     } else {
+
         $sqlInsert = $db->query("INSERT INTO student_exam_result(
             student_id, 
             exam_id,

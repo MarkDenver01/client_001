@@ -64,7 +64,7 @@ if(isset($_POST['button_counseling'])) {
                     </thead>
                     <tbody>                   
                     <?php       
-                      $sql = "SELECT * FROM examinee WHERE student_id ='$student_id' AND exam_title = 'BarOn EQ-i:S'";
+                      $sql = "SELECT * FROM examinee WHERE student_id ='$student_id' AND exam_title = 'ESA'";
                       $result = $db->query($sql);
                       if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
@@ -101,7 +101,7 @@ if(isset($_POST['button_counseling'])) {
                             <?php 
                                 $check_monitor = false;
                                 $sql = "SELECT exam_answer,counselor_notify_status, total_score FROM examinee WHERE student_id ='$student_id' 
-                                AND semester ='$semester' AND school_year ='$school_year' AND exam_title = 'BarOn EQ-i:S'";
+                                AND semester ='$semester' AND school_year ='$school_year' AND exam_title = 'ESA'";
                                 $result = $db->query($sql);
                                 if ($result->num_rows > 0) {
                                     while ($row = $result->fetch_assoc()) {
@@ -111,16 +111,20 @@ if(isset($_POST['button_counseling'])) {
                                         $counselour_stats = $row['counselor_notify_status'];
                                     }
                                 }
-                                if ($data >= 30 && $data <=51) { 
-                                    $exam_result_status = "PASSED";
-                                    $msg = $exam_result_status;
-                                } elseif ($data >= 20 && $data <= 29) { 
-                                    $exam_result_status = "AVERAGED";
-                                    $msg = $exam_result_status;
-                                } else if ($data >= 0 && $data <= 19) {
-                                    $exam_result_status = "FAILED";
-                                    $msg = $exam_result_status;
-                                } 
+     
+                                if ($data >= 25 && $data <=32) { 
+                                    $exam_result_status = "EXCELLENT";
+                                    $msg = $exam_result_status; 
+                                  } elseif ($data >= 15 && $data <= 24) { 
+                                    $exam_result_status = "GOOD";
+                                    $msg =$exam_result_status;
+                                  } elseif ($data >= 5 && $data <= 14) {
+                                    $exam_result_status = "POOR";
+                                    $msg =$exam_result_status;
+                                  }  elseif ($data >= 0 && $data <= 4) {
+                                    $exam_result_status = "POOR";
+                                    $msg =$exam_result_status;
+                                  }
                             ?>    
                             <tr>
                               <td>
@@ -132,7 +136,7 @@ if(isset($_POST['button_counseling'])) {
 
                                     <div class="d-flex align-items-center">
                                       <div class="text-center">
-                                        <h3><?php echo $total_score ." out of 51"; ?></h3>
+                                        <h3><?php echo $total_score ." out of 32"; ?></h3>
                                       </div>
                                     </div>
                                   </div>
@@ -169,12 +173,12 @@ if(isset($_POST['button_counseling'])) {
                         <!-- Line Chart -->
                         <canvas class="border border-danger" id="lineChart" style="max-height: 400px; background-image: linear-gradient(#FFFADA, #FDF6E4);"></canvas>
                             <?php 
-                            $sql = "SELECT * FROM examinee WHERE student_id='$student_id' AND exam_title = 'BarOn EQ-i:S'";
+                            $sql = "SELECT * FROM examinee WHERE student_id='$student_id' AND exam_title = 'ESA'";
                             $run_query = $db->query($sql);
                             $data_chart = array();
                             $fail_rate = array();
                             foreach ($run_query as $row) {
-                                $fail_rate[] = 51 - $row['total_score'];
+                                $fail_rate[] = 32 - $row['total_score'];
                                 $score_data[] = $row['total_score'];
                                 $data_chart[] = $row['exam_category'];
                             }
@@ -189,7 +193,7 @@ if(isset($_POST['button_counseling'])) {
                                     'Number of incorrect answer',
                                 ],
                                 datasets: [{
-                                  label: 'BarOn EQ-i:S',
+                                  label: 'ESA',
                                   data: [
                                     '<?php echo $score_data[0]; ?>',
                                     '<?php echo $fail_rate[0]; ?>',

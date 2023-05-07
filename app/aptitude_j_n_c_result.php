@@ -58,13 +58,13 @@ if(isset($_POST['button_counseling'])) {
                         <tr>
                             <td><h5>Category</h5></td>
                             <!-- <td><h5>Highest Probility Answered</h5></td> -->
-                            <td><h5>Total of Items</h5></td>
+                            <td><h5>Total Count of answer</h5></td>
                             <td><h5>Total Score</h5></td>
                         </tr>
                     </thead>
                     <tbody>                   
                     <?php       
-                      $sql = "SELECT * FROM examinee WHERE student_id ='$student_id' AND exam_title = 'BarOn EQ-i:S'";
+                      $sql = "SELECT * FROM examinee WHERE student_id ='$student_id' AND exam_title = 'Aptitude J and C'";
                       $result = $db->query($sql);
                       if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
@@ -100,27 +100,33 @@ if(isset($_POST['button_counseling'])) {
                         <tbody>
                             <?php 
                                 $check_monitor = false;
-                                $sql = "SELECT exam_answer,counselor_notify_status, total_score FROM examinee WHERE student_id ='$student_id' 
-                                AND semester ='$semester' AND school_year ='$school_year' AND exam_title = 'BarOn EQ-i:S'";
-                                $result = $db->query($sql);
-                                if ($result->num_rows > 0) {
-                                    while ($row = $result->fetch_assoc()) {
-                                        $highest_prob = $row['exam_answer'];
-                                        $data = $row['total_score'];
-                                        $total_score = $row['total_score'];
-                                        $counselour_stats = $row['counselor_notify_status'];
-                                    }
-                                }
-                                if ($data >= 30 && $data <=51) { 
-                                    $exam_result_status = "PASSED";
+                                $sql = "SELECT exam_answer,counselor_notify_status, SUM(total_score) AS total FROM examinee WHERE student_id ='$student_id' 
+                                AND semester ='$semester' AND school_year ='$school_year' AND exam_title = 'Aptitude J and C'";
+                               $result = $db->query($sql);
+                               if ($result->num_rows > 0) {
+                                   while ($row = $result->fetch_assoc()) {
+                                       $highest_prob = $row['exam_answer'];
+                                       $data = $row['total'];
+                                       $total_score = $row['total_score'];
+                                       $counselour_stats = $row['counselor_notify_status'];
+                                   }
+                               }
+                               if ($data >= 20 && $data <=26) { 
+                                   $exam_result_status = "EXCELLENT";
+                                   $msg = $exam_result_status;
+                               } elseif ($data >= 15 && $data <= 19) { 
+                                   $exam_result_status = "GOOD";
+                                   $msg = $exam_result_status;
+                               } else if ($data >= 10 && $data <= 14) {
+                                   $exam_result_status = "FAIR";
+                                   $msg = $exam_result_status;
+                               } else if ($data >= 5 && $data <= 9) {
+                                   $exam_result_status = "POOR";
+                                   $msg = $exam_result_status;
+                               } elseif ($data >0 && $data <= 4) {
+                                    $exam_result_status = "BAD";
                                     $msg = $exam_result_status;
-                                } elseif ($data >= 20 && $data <= 29) { 
-                                    $exam_result_status = "AVERAGED";
-                                    $msg = $exam_result_status;
-                                } else if ($data >= 0 && $data <= 19) {
-                                    $exam_result_status = "FAILED";
-                                    $msg = $exam_result_status;
-                                } 
+                               }
                             ?>    
                             <tr>
                               <td>
@@ -132,7 +138,7 @@ if(isset($_POST['button_counseling'])) {
 
                                     <div class="d-flex align-items-center">
                                       <div class="text-center">
-                                        <h3><?php echo $total_score ." out of 51"; ?></h3>
+                                        <h3><?php echo $data; ?></h3>
                                       </div>
                                     </div>
                                   </div>
@@ -169,12 +175,10 @@ if(isset($_POST['button_counseling'])) {
                         <!-- Line Chart -->
                         <canvas class="border border-danger" id="lineChart" style="max-height: 400px; background-image: linear-gradient(#FFFADA, #FDF6E4);"></canvas>
                             <?php 
-                            $sql = "SELECT * FROM examinee WHERE student_id='$student_id' AND exam_title = 'BarOn EQ-i:S'";
+                            $sql = "SELECT * FROM examinee WHERE student_id='$student_id' AND exam_title = 'Aptitude J and C'";
                             $run_query = $db->query($sql);
                             $data_chart = array();
-                            $fail_rate = array();
                             foreach ($run_query as $row) {
-                                $fail_rate[] = 51 - $row['total_score'];
                                 $score_data[] = $row['total_score'];
                                 $data_chart[] = $row['exam_category'];
                             }
@@ -182,20 +186,24 @@ if(isset($_POST['button_counseling'])) {
                          <script>
                           document.addEventListener("DOMContentLoaded", () => {
                             new Chart(document.querySelector('#lineChart'), {
-                              type: 'bar',
+                              type: 'line',
                               data: {
                                 labels: [
-                                    'Number of correct answer',
-                                    'Number of incorrect answer',
+                                    '<?php echo $data_chart[0]; ?>',
+                                    '<?php echo $data_chart[1]; ?>',
+                                    '<?php echo $data_chart[2]; ?>',
+                                    '<?php echo $data_chart[3]; ?>',
                                 ],
                                 datasets: [{
-                                  label: 'BarOn EQ-i:S',
+                                  label: 'Student Success Kit',
                                   data: [
                                     '<?php echo $score_data[0]; ?>',
-                                    '<?php echo $fail_rate[0]; ?>',
+                                    '<?php echo $score_data[1]; ?>',
+                                    '<?php echo $score_data[2]; ?>',
+                                    '<?php echo $score_data[3]; ?>',
                                   ],
                                   fill: true,
-                                  borderColor: 'rgb(255, 12, 10)',
+                                  borderColor: 'rgb(153, 123, 123)',
                                   tension: 0.1
                                 }]
                               },
@@ -211,7 +219,7 @@ if(isset($_POST['button_counseling'])) {
                           </script>
                           <!-- End Line CHart -->
                         </div>
-                  </div> 
+                  </div>
             </div>  
           </div>
         </div>

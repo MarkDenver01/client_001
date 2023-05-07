@@ -92,6 +92,7 @@
                         <th scope="col" class="text-center" style="width: 20%;">Student Year</th>
                         <th scope="col" class="text-center" style="width: 20%;">Exam Type</th>
                         <th scope="col" class="text-center" style="width: 20%;">Exam Description</th>
+                        <th scope="col" class="text-center" style="width: 20%;">Exam Category</th>
                         <th scope="col" class="text-center" style="width: 20%;">Action</th>
                       </tr>
                     </thead>

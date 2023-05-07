@@ -338,12 +338,34 @@ if($developer) {
         <?php global $db; ?>
         <?php global $session; ?>
         <?php 
-          $sql = "SELECT * FROM student_exam_result WHERE student_id ='" .$_SESSION['key_session']['student_id']. "' 
+          $sql = "SELECT SUM(grades) AS total, grades, exam_title, exam_result FROM student_exam_result WHERE student_id ='" .$_SESSION['key_session']['student_id']. "' 
           AND email_address ='" .$_SESSION['key_session']['email_address']. "'";
           $result = $db->query($sql);
           $row = mysqli_fetch_assoc($result);
-          $grades = $row['grades'];
-          $exam_results = $row['exam_result'];
+          if ($row['exam_title'] == "Aptitude J and C") {
+            $grades = $row['total'];
+
+            if ($grades >= 20 && $grades <=26) { 
+              $exam_results = "EXCELLENT";
+           
+          } elseif ($grades >= 15 && $grades <= 19) { 
+              $exam_results = "GOOD";
+             
+          } else if ($grades >= 10 && $grades <= 14) {
+              $exam_results = "FAIR";
+           
+          } else if ($grades >= 5 && $grades <= 9) {
+              $exam_results = "POOR";
+          
+          } elseif ($grades >0 && $grades <= 4) {
+               $exam_results = "BAD";
+               
+          }
+
+          } else {
+            $grades = $row['grades'];
+            $exam_results = $row['exam_result'];
+          }
         ?>
         <div class="card-body ">
           <h5 class="card-title">Exam Result <span>| status</span></h5>

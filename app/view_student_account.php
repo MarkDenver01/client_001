@@ -67,7 +67,7 @@
                         <td class="text-center" style="width: 5%;"><?php echo remove_junk($student['school_year']); ?></td>
                         <td class="text-center" style="width: 10%;">
                           <button type="button" name="button_edit" class="btn btn-primary rounded-pill btn-sm w-50"  data-bs-toggle="modal" data-bs-target="#ExtralargeModal<?php echo $student['id']; ?>"><span></span>Edit</button>
-                          <a href="../includes/delete_account?email_address=<?php echo secure::encrypt(remove_junk($student['email_address'])); ?>" type="button" class="btn btn-danger rounded-pill btn-sm">Delete</button>
+                          <a href="../includes/delete_account?email_address=<?php echo remove_junk($student['email_address']); ?>" type="button" class="btn btn-danger rounded-pill btn-sm">Delete</button>
                         </td>
                       </tr>
                       <?php include('./update_student_account.php'); ?>

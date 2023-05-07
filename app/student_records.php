@@ -19,7 +19,7 @@
   </div><!-- End Page Title -->
 
 
-<section class="section" style="width: 1560px;">
+<section class="section" style="width: 1660px;">
     <div class="row">
       <!-- start create account -->
             <!-- start create account -->
@@ -110,7 +110,7 @@
                       //     $gender = $row['gender'];
                       //     $counseling_status = $row['counselor_notify_status'];
                       //     $student_id = $row['student_id'];
-                      $sql = "SELECT * FROM student_exam_result ORDER BY id DESC";
+                      $sql = "SELECT DISTINCT exam_title, `name`, gender, course, student_year, semester, school_year, grades, exam_result FROM student_exam_result ORDER BY id DESC";
                       $result =$db->query($sql);
                       if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
@@ -119,14 +119,15 @@
                         <th scope="row" class="text-center" ><?php echo $row['name']; ?></th>
                         <td scope="row" class="text-center" ><?php echo $row['gender']; ?></td>
                         <td scope="row" class="text-center" ><?php echo $row['course']; ?></td>
-                        <td scope="row" class="text-center" ><?php echo $row['semester']; ?></td>
+                        <td scope="row" class="text-center" ><?php echo $row['student_year']; ?></td>
                         <td scope="row" class="text-center" ><?php echo $row['semester']; ?></td>
                         <td scope="row" class="text-center" ><?php echo $row['school_year']; ?></td>
                         <td scope="row" class="text-center" ><?php echo $row['exam_title']; ?></td>
                         <td scope="row" class="text-center" ><?php echo $row['grades']; ?></td>
                         <td scope="row" class="text-center" ><?php echo $row['exam_result']; ?></td>
                         <td>
-                        <button name="button_print" type="submit" class="btn btn-success text-white rounded-0 btn-sm w-100"><i class="bi bi-print"></i> View more result</button>
+                        <button name="button_print" type="submit" class="btn btn-success text-white rounded-0 btn-sm w-50"><i class="bi bi-print"></i> View result</button>
+                        <button name="button_print" type="submit" class="btn btn-danger text-white rounded-0 btn-sm w-50"><i class="bi bi-print"></i> Print</button>
                         </td>
                       </tr>
                     <?php
@@ -137,7 +138,6 @@
                   </table>
                   <!-- End Table with hoverable rows -->
 
-                  <button name="button_print" type="submit" class="btn btn-success text-white rounded-0 btn-sm w-25"><i class="bi bi-print"></i> Print</button>
                 </div>
                 
               </div>

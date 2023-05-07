@@ -142,7 +142,7 @@
                       <tr>
                         <td class="bg-success text-white"><h3>Exam Item No</h3></td>
                         <td class="bg-success text-white"><h3>Exam Answer</h3></td>
-                        <?php if($exam_title == 'OASIS 3' || $exam_title == 'BarOn EQ-i:S ' || $exam_title == 'The Keirsey Temperament Sorter') { ?>
+                        <?php if($exam_title == 'OASIS 3' || $exam_title == 'BarOn EQ-i:S ' || $exam_title == 'The Keirsey Temperament Sorter' || $exam_title == 'Aptitude J and C' || $exam_title == 'ESA') { ?>
                           <td class="bg-danger text-white"><h3>Correct Answer</h3></td>
                         <?php } ?>
                       </tr>
@@ -181,6 +181,46 @@
                               <td class="bg-light text-dark"><h3><?php echo $row['exam_correct_answer']; ?></h3></td>
                             <?php } ?>
                         <?php } elseif ($exam_title == 'The Keirsey Temperament Sorter') { ?>
+                          <?php if($row['exam_answer'] === $row['exam_correct_answer']) { ?>
+                              <td style="background-image: linear-gradient(#d9534f, #AB274F);" class="text-white"><h3><?php echo $row['exam_answer']; ?></h3></td>
+                              <td style="background-image: linear-gradient(#d9534f, #AB274F);" class="text-white"><h3><?php echo $row['exam_correct_answer']; ?></h3></td>
+                            <?php } else { ?>
+                              <td ><h3><?php echo $row['exam_answer']; ?></h3></td>
+                              <td class="bg-light text-dark"><h3><?php echo $row['exam_correct_answer']; ?></h3></td>
+                            <?php } ?>
+                        <?php } elseif ($exam_type == 'Test No 1') { ?>
+                          <?php if($row['exam_answer'] === $row['exam_correct_answer']) { ?>
+                              <td style="background-image: linear-gradient(#d9534f, #AB274F);" class="text-white"><h3><?php echo $row['exam_answer']; ?></h3></td>
+                              <td style="background-image: linear-gradient(#d9534f, #AB274F);" class="text-white"><h3><?php echo $row['exam_correct_answer']; ?></h3></td>
+                            <?php } else { ?>
+                              <td ><h3><?php echo $row['exam_answer']; ?></h3></td>
+                              <td class="bg-light text-dark"><h3><?php echo $row['exam_correct_answer']; ?></h3></td>
+                            <?php } ?>
+                        <?php } elseif ($exam_type == 'Test No 2') { ?>
+                          <?php if($row['exam_answer'] === $row['exam_correct_answer']) { ?>
+                              <td style="background-image: linear-gradient(#d9534f, #AB274F);" class="text-white"><h3><?php echo $row['exam_answer']; ?></h3></td>
+                              <td style="background-image: linear-gradient(#d9534f, #AB274F);" class="text-white"><h3><?php echo $row['exam_correct_answer']; ?></h3></td>
+                            <?php } else { ?>
+                              <td ><h3><?php echo $row['exam_answer']; ?></h3></td>
+                              <td class="bg-light text-dark"><h3><?php echo $row['exam_correct_answer']; ?></h3></td>
+                            <?php } ?>
+                        <?php } elseif ($exam_type == 'Test No 3') { ?>
+                          <?php if($row['exam_answer'] === $row['exam_correct_answer']) { ?>
+                              <td style="background-image: linear-gradient(#d9534f, #AB274F);" class="text-white"><h3><?php echo $row['exam_answer']; ?></h3></td>
+                              <td style="background-image: linear-gradient(#d9534f, #AB274F);" class="text-white"><h3><?php echo $row['exam_correct_answer']; ?></h3></td>
+                            <?php } else { ?>
+                              <td ><h3><?php echo $row['exam_answer']; ?></h3></td>
+                              <td class="bg-light text-dark"><h3><?php echo $row['exam_correct_answer']; ?></h3></td>
+                            <?php } ?>
+                        <?php } elseif ($exam_type == 'Test No 4')  { ?>
+                          <?php if($row['exam_answer'] === $row['exam_correct_answer']) { ?>
+                              <td style="background-image: linear-gradient(#d9534f, #AB274F);" class="text-white"><h3><?php echo $row['exam_answer']; ?></h3></td>
+                              <td style="background-image: linear-gradient(#d9534f, #AB274F);" class="text-white"><h3><?php echo $row['exam_correct_answer']; ?></h3></td>
+                            <?php } else { ?>
+                              <td ><h3><?php echo $row['exam_answer']; ?></h3></td>
+                              <td class="bg-light text-dark"><h3><?php echo $row['exam_correct_answer']; ?></h3></td>
+                            <?php } ?>
+                        <?php } elseif ($exam_title == 'ESA') { ?>
                           <?php if($row['exam_answer'] === $row['exam_correct_answer']) { ?>
                               <td style="background-image: linear-gradient(#d9534f, #AB274F);" class="text-white"><h3><?php echo $row['exam_answer']; ?></h3></td>
                               <td style="background-image: linear-gradient(#d9534f, #AB274F);" class="text-white"><h3><?php echo $row['exam_correct_answer']; ?></h3></td>
@@ -254,6 +294,66 @@
                           }
                         }
                       }
+                     } elseif ($exam_type == 'Test No 1') {
+                      $counter = 0;
+                      $sql = "SELECT * FROM examinee_answer_v2 WHERE student_id ='$student_id' AND exam_id ='$exam_id' 
+                      AND semester ='$semester' AND school_year ='$school_year'";
+                      $result = $db->query($sql);
+                      if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                          if ($row['exam_correct_answer'] == $row['exam_answer']) {
+                            $counter = $counter + 1;
+                          }
+                        }
+                      }
+                     } elseif ($exam_type == 'Test No 2') {
+                      $counter = 0;
+                      $sql = "SELECT * FROM examinee_answer_v2 WHERE student_id ='$student_id' AND exam_id ='$exam_id' 
+                      AND semester ='$semester' AND school_year ='$school_year'";
+                      $result = $db->query($sql);
+                      if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                          if ($row['exam_correct_answer'] == $row['exam_answer']) {
+                            $counter = $counter + 1;
+                          }
+                        }
+                      }
+                     } elseif ($exam_type == 'Test No 3') {
+                      $counter = 0;
+                      $sql = "SELECT * FROM examinee_answer_v2 WHERE student_id ='$student_id' AND exam_id ='$exam_id' 
+                      AND semester ='$semester' AND school_year ='$school_year'";
+                      $result = $db->query($sql);
+                      if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                          if ($row['exam_correct_answer'] == $row['exam_answer']) {
+                            $counter = $counter + 1;
+                          }
+                        }
+                      }
+                     } elseif ($exam_type == 'Test No 4') {
+                      $counter = 0;
+                      $sql = "SELECT * FROM examinee_answer_v2 WHERE student_id ='$student_id' AND exam_id ='$exam_id' 
+                      AND semester ='$semester' AND school_year ='$school_year'";
+                      $result = $db->query($sql);
+                      if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                          if ($row['exam_correct_answer'] == $row['exam_answer']) {
+                            $counter = $counter + 1;
+                          }
+                        }
+                      }
+                     } elseif ($exam_title == 'ESA') {
+                      $counter = 0;
+                      $sql = "SELECT * FROM examinee_answer_v2 WHERE student_id ='$student_id' AND exam_id ='$exam_id' 
+                      AND semester ='$semester' AND school_year ='$school_year'";
+                      $result = $db->query($sql);
+                      if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                          if ($row['exam_correct_answer'] == $row['exam_answer']) {
+                            $counter = $counter + 1;
+                          }
+                        }
+                      }
                      }
                     ?>         
                       <tr>
@@ -307,7 +407,88 @@
                               }
                             ?>
                           </b></h3></td>
-                       <?php } ?>
+                       <?php } elseif ($exam_type == 'Test No 1') { ?>
+                        <td class="text-success"><h3>Total Score</h3></td>
+                          <td class="text-success"><h3><b><?php echo $counter; ?></b></h3></td>
+                          <td class="text-success"><h3><b>
+                          <?php 
+                              $exam_result_status = "";
+                              if ($counter >= 4 && $counter <=6) { 
+                                $exam_result_status = "EXCELLENT";
+                                echo "Remarks: " .$exam_result_status; 
+                              } elseif ($counter >= 0 && $counter <= 3) { 
+                                $exam_result_status = "LOW";
+                                echo "Remarks: " .$exam_result_status;
+                              } 
+                            ?>
+                          </b></h3></td>
+                      <?php  } elseif ($exam_type == 'Test No 2') { ?>
+                        <td class="text-success"><h3>Total Score</h3></td>
+                          <td class="text-success"><h3><b><?php echo $counter; ?></b></h3></td>
+                          <td class="text-success"><h3><b>
+                          <?php 
+                              $exam_result_status = "";
+                              if ($counter >= 4 && $counter <=6) { 
+                                $exam_result_status = "EXCELLENT";
+                                echo "Remarks: " .$exam_result_status; 
+                              } elseif ($counter >= 0 && $counter <= 3) { 
+                                $exam_result_status = "LOW";
+                                echo "Remarks: " .$exam_result_status;
+                              } 
+                            ?>
+                          </b></h3></td>
+                      <?php } elseif ($exam_type == 'Test No 3') { ?>
+                        <td class="text-success"><h3>Total Score</h3></td>
+                          <td class="text-success"><h3><b><?php echo $counter; ?></b></h3></td>
+                          <td class="text-success"><h3><b>
+                          <?php 
+                              $exam_result_status = "";
+                              if ($counter >= 4 && $counter <=6) { 
+                                $exam_result_status = "EXCELLENT";
+                                echo "Remarks: " .$exam_result_status; 
+                              } elseif ($counter >= 0 && $counter <= 3) { 
+                                $exam_result_status = "LOW";
+                                echo "Remarks: " .$exam_result_status;
+                              } 
+                            ?>
+                          </b></h3></td>
+                      <?php } elseif ($exam_type == 'Test No 4') { ?>
+                        <td class="text-success"><h3>Total Score</h3></td>
+                          <td class="text-success"><h3><b><?php echo $counter; ?></b></h3></td>
+                          <td class="text-success"><h3><b>
+                          <?php 
+                              $exam_result_status = "";
+                              if ($counter >= 4 && $counter <=6) { 
+                                $exam_result_status = "EXCELLENT";
+                                echo "Remarks: " .$exam_result_status; 
+                              } elseif ($counter >= 0 && $counter <= 3) { 
+                                $exam_result_status = "LOW";
+                                echo "Remarks: " .$exam_result_status;
+                              } 
+                            ?>
+                          </b></h3></td>
+                      <?php } elseif ($exam_title == 'ESA') { ?>
+                        <td class="text-success"><h3>Total Score</h3></td>
+                          <td class="text-success"><h3><b><?php echo $counter; ?></b></h3></td>
+                          <td class="text-success"><h3><b>
+                          <?php 
+                              $exam_result_status = "";
+                              if ($counter >= 25 && $counter <=32) { 
+                                $exam_result_status = "EXCELLENT";
+                                echo "Remarks: " .$exam_result_status; 
+                              } elseif ($counter >= 15 && $counter <= 24) { 
+                                $exam_result_status = "GOOD";
+                                echo "Remarks: " .$exam_result_status;
+                              } elseif ($counter >= 5 && $counter <= 14) {
+                                $exam_result_status = "POOR";
+                                echo "Remarks: " .$exam_result_status;
+                              }  elseif ($counter >= 0 && $countr <= 4) {
+                                $exam_result_status = "POOR";
+                                echo "Remarks: " .$exam_result_status;
+                              }
+                            ?>
+                          </b></h3></td>
+                      <?php } ?>
                       </tr>
                     </tbody>
                   </table>
@@ -349,6 +530,101 @@
                       <input type="hidden" id="exam_result_status" name="exam_result_status" value="<?php echo $exam_result_status; ?>">
                       <input type="hidden" id="exam_answer" name="exam_answer" value="0">
                       <input type="hidden" id="total_answer" name="total_answer" value="70">
+                      <input type="hidden" id="total_score" name="total_score" value="<?php echo $counter; ?>">
+
+                      <input type="hidden" id="semester" value="<?php echo $semester; ?>">
+                      <input type="hidden" id="school_year" value="<?php echo $school_year; ?>">
+                      <input type="hidden" id="full_name" value="<?php echo $name; ?>">
+                      <input type="hidden" id="gender" value="<?php echo $gender; ?>">
+                      <input type="hidden" id="course" value="<?php echo $course; ?>">
+                      <input type="hidden" id="start_date" value="<?php echo date('Y-md h:i:s A'); ?>">
+                      <input type="hidden" id="email_address" value="<?php echo $email_address; ?>">
+                      <input type="hidden" id="student_year" value="<?php echo $student_year; ?>">
+                  <?php } elseif ($exam_type == 'Test No 1') { ?>
+                    <input type="hidden" id="student_id" name="student_id" value="<?php echo $student_id; ?>">
+                      <input type="hidden" id="exam_type" name="exam_type" value="<?php echo $exam_type; ?>">
+                      <input type="hidden" id="exam_id" name="exam_id" value="<?php echo $exam_id; ?>">
+                      <input type="hidden" id="exam_title" name="exam_title" value="<?php echo $exam_title; ?>">
+                      <input type="hidden" id="exam_desc" name="exam_desc" value="<?php echo $exam_desc; ?>">
+                      <input type="hidden" id="exam_result_status" name="exam_result_status" value="<?php echo $exam_result_status; ?>">
+                      <input type="hidden" id="exam_answer" name="exam_answer" value="0">
+                      <input type="hidden" id="total_answer" name="total_answer" value="6">
+                      <input type="hidden" id="total_score" name="total_score" value="<?php echo $counter; ?>">
+
+                      <input type="hidden" id="semester" value="<?php echo $semester; ?>">
+                      <input type="hidden" id="school_year" value="<?php echo $school_year; ?>">
+                      <input type="hidden" id="full_name" value="<?php echo $name; ?>">
+                      <input type="hidden" id="gender" value="<?php echo $gender; ?>">
+                      <input type="hidden" id="course" value="<?php echo $course; ?>">
+                      <input type="hidden" id="start_date" value="<?php echo date('Y-md h:i:s A'); ?>">
+                      <input type="hidden" id="email_address" value="<?php echo $email_address; ?>">
+                      <input type="hidden" id="student_year" value="<?php echo $student_year; ?>">
+                  <?php } elseif ($exam_type == 'Test No 2') { ?>
+                    <input type="hidden" id="student_id" name="student_id" value="<?php echo $student_id; ?>">
+                      <input type="hidden" id="exam_type" name="exam_type" value="<?php echo $exam_type; ?>">
+                      <input type="hidden" id="exam_id" name="exam_id" value="<?php echo $exam_id; ?>">
+                      <input type="hidden" id="exam_title" name="exam_title" value="<?php echo $exam_title; ?>">
+                      <input type="hidden" id="exam_desc" name="exam_desc" value="<?php echo $exam_desc; ?>">
+                      <input type="hidden" id="exam_result_status" name="exam_result_status" value="<?php echo $exam_result_status; ?>">
+                      <input type="hidden" id="exam_answer" name="exam_answer" value="0">
+                      <input type="hidden" id="total_answer" name="total_answer" value="7">
+                      <input type="hidden" id="total_score" name="total_score" value="<?php echo $counter; ?>">
+
+                      <input type="hidden" id="semester" value="<?php echo $semester; ?>">
+                      <input type="hidden" id="school_year" value="<?php echo $school_year; ?>">
+                      <input type="hidden" id="full_name" value="<?php echo $name; ?>">
+                      <input type="hidden" id="gender" value="<?php echo $gender; ?>">
+                      <input type="hidden" id="course" value="<?php echo $course; ?>">
+                      <input type="hidden" id="start_date" value="<?php echo date('Y-md h:i:s A'); ?>">
+                      <input type="hidden" id="email_address" value="<?php echo $email_address; ?>">
+                      <input type="hidden" id="student_year" value="<?php echo $student_year; ?>">
+                  <?php } elseif ($exam_type == 'Test No 3') { ?>
+                    <input type="hidden" id="student_id" name="student_id" value="<?php echo $student_id; ?>">
+                      <input type="hidden" id="exam_type" name="exam_type" value="<?php echo $exam_type; ?>">
+                      <input type="hidden" id="exam_id" name="exam_id" value="<?php echo $exam_id; ?>">
+                      <input type="hidden" id="exam_title" name="exam_title" value="<?php echo $exam_title; ?>">
+                      <input type="hidden" id="exam_desc" name="exam_desc" value="<?php echo $exam_desc; ?>">
+                      <input type="hidden" id="exam_result_status" name="exam_result_status" value="<?php echo $exam_result_status; ?>">
+                      <input type="hidden" id="exam_answer" name="exam_answer" value="0">
+                      <input type="hidden" id="total_answer" name="total_answer" value="7">
+                      <input type="hidden" id="total_score" name="total_score" value="<?php echo $counter; ?>">
+
+                      <input type="hidden" id="semester" value="<?php echo $semester; ?>">
+                      <input type="hidden" id="school_year" value="<?php echo $school_year; ?>">
+                      <input type="hidden" id="full_name" value="<?php echo $name; ?>">
+                      <input type="hidden" id="gender" value="<?php echo $gender; ?>">
+                      <input type="hidden" id="course" value="<?php echo $course; ?>">
+                      <input type="hidden" id="start_date" value="<?php echo date('Y-md h:i:s A'); ?>">
+                      <input type="hidden" id="email_address" value="<?php echo $email_address; ?>">
+                      <input type="hidden" id="student_year" value="<?php echo $student_year; ?>">
+                  <?php } elseif ($exam_type == 'Test No 4') { ?>
+                    <input type="hidden" id="student_id" name="student_id" value="<?php echo $student_id; ?>">
+                      <input type="hidden" id="exam_type" name="exam_type" value="<?php echo $exam_type; ?>">
+                      <input type="hidden" id="exam_id" name="exam_id" value="<?php echo $exam_id; ?>">
+                      <input type="hidden" id="exam_title" name="exam_title" value="<?php echo $exam_title; ?>">
+                      <input type="hidden" id="exam_desc" name="exam_desc" value="<?php echo $exam_desc; ?>">
+                      <input type="hidden" id="exam_result_status" name="exam_result_status" value="<?php echo $exam_result_status; ?>">
+                      <input type="hidden" id="exam_answer" name="exam_answer" value="0">
+                      <input type="hidden" id="total_answer" name="total_answer" value="6">
+                      <input type="hidden" id="total_score" name="total_score" value="<?php echo $counter; ?>">
+
+                      <input type="hidden" id="semester" value="<?php echo $semester; ?>">
+                      <input type="hidden" id="school_year" value="<?php echo $school_year; ?>">
+                      <input type="hidden" id="full_name" value="<?php echo $name; ?>">
+                      <input type="hidden" id="gender" value="<?php echo $gender; ?>">
+                      <input type="hidden" id="course" value="<?php echo $course; ?>">
+                      <input type="hidden" id="start_date" value="<?php echo date('Y-md h:i:s A'); ?>">
+                      <input type="hidden" id="email_address" value="<?php echo $email_address; ?>">
+                      <input type="hidden" id="student_year" value="<?php echo $student_year; ?>">
+                  <?php } elseif ($exam_type == 'ESA') { ?>
+                    <input type="hidden" id="student_id" name="student_id" value="<?php echo $student_id; ?>">
+                      <input type="hidden" id="exam_type" name="exam_type" value="<?php echo $exam_type; ?>">
+                      <input type="hidden" id="exam_id" name="exam_id" value="<?php echo $exam_id; ?>">
+                      <input type="hidden" id="exam_title" name="exam_title" value="<?php echo $exam_title; ?>">
+                      <input type="hidden" id="exam_desc" name="exam_desc" value="<?php echo $exam_desc; ?>">
+                      <input type="hidden" id="exam_result_status" name="exam_result_status" value="<?php echo $exam_result_status; ?>">
+                      <input type="hidden" id="exam_answer" name="exam_answer" value="0">
+                      <input type="hidden" id="total_answer" name="total_answer" value="6">
                       <input type="hidden" id="total_score" name="total_score" value="<?php echo $counter; ?>">
 
                       <input type="hidden" id="semester" value="<?php echo $semester; ?>">

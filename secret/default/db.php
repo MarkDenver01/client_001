@@ -868,7 +868,7 @@ $db_sql_52[] = "CREATE TABLE `notify_student` (
   `id` int(255) NOT NULL,
   `student_id` int(255) NOT NULL, 
   `sender` VARCHAR(255) NOT NULL,
-  `receiver VARCHAR(255) NOT NULL,
+  `receiver` VARCHAR(255) NOT NULL,
   `message` VARCHAR(255) NOT NULL,
   `user_level` int(11) NOT NULL,
   `notify_date` VARCHAR(255) NOT NULL,
@@ -934,7 +934,7 @@ $db_sql_55[] = "CREATE TABLE `student_exam_result` (
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
 
 $db_sql_55[] = "ALTER TABLE `student_exam_result` 
-ADD PRIMARY KEY(`student_id`)";
+ADD PRIMARY KEY(`id`)";
 
 $db_sql_55[] = "ALTER TABLE `student_exam_result` 
-MODIFY  `student_id` int(255) NOT NULL AUTO_INCREMENT";
+MODIFY  `id` int(255) NOT NULL AUTO_INCREMENT";
