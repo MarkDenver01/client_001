@@ -41,6 +41,12 @@ $(document).on('submit', '#submitAnswerFrm', function(){
                 "Something;s went wrong",
                 'error'
             ) 
+        }else if (data.res == "emptyField") {
+            Swal.fire(
+                'Warning',
+                'Some field is/are missing',
+                'warning'
+            )
         }
      },'json');
   }
@@ -86,7 +92,13 @@ $(document).on('submit', '#submitAnswerFrm', function(){
                     "Something;s went wrong",
                     'error'
                 ) 
-            } 
+            } else if (data.res == "emptyField") {
+                Swal.fire(
+                    'Warning',
+                    'Some field is/are missing',
+                    'warning'
+                )
+            }
         },'json');
     }
   });

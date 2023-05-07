@@ -43,6 +43,12 @@ $(document).on('submit','#submitAnswerFrm', function(){
                             'Unexpected error occur',
                             'error'
                         )
+                    } else if (data.res == "emptyField") {
+                        Swal.fire(
+                            'Warning',
+                            'Some field is/are missing',
+                            'warning'
+                        )
                     }
                 }, 'json');
             }
@@ -87,6 +93,12 @@ $(document).on('submit','#submitAnswerFrm', function(){
                             'Error',
                             'Unexpected error occur ',
                             'error'
+                        )
+                    } else if (data.res == "emptyField") {
+                        Swal.fire(
+                            'Warning',
+                            'Some field is/are missing',
+                            'warning'
                         )
                     }
                 }, 'json');
