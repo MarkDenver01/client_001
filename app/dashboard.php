@@ -27,6 +27,8 @@ if($developer) {
         <li class="breadcrumb-item active">Dashboard</li>
       </ol>
     </nav>
+    <br/>
+    <button name="button_print" onClick="window.print()" class="btn btn-secondary text-white rounded-0 btn-sm w-25"><i class="bi bi-print"></i> Print</button>
   </div><!-- End Page Title -->
 
   <section class="section dashboard">

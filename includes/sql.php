@@ -260,7 +260,7 @@
   //  $sql = sprintf("SELECT * FROM `announcement_logs` WHERE `date_posted` <
   //  '%s' GROUP BY `from` ORDER BY `id` DESC", $current_date);
    $sql = sprintf("SELECT * FROM `announcement_logs` WHERE `date_posted` <
-   '%s' ORDER BY `id` DESC", $current_date);
+   '%s' ORDER BY `id` DESC LIMIT 10", $current_date);
    return find_by_sql($sql);
  }
 
@@ -882,6 +882,52 @@ function count_notification_by_admin($email_address) {
     return $total_count;
   }
   return false;
+}
+
+function student_exam_result_combine($student_year, $school_year, $semester, $course) {
+  global $db;
+  if (!empty($student_year) && empty($school_year) && empty($semester) && empty($course)) {
+
+    $sql = "SELECT e.student_id AS student_id, e.exam_id AS exam_id, e.name AS name, e.email_address AS email_address, 
+    e.gender AS gender, e.course AS course, e.semester AS semester, e.school_year, e.student_year AS student_year, 
+    e.exam_title AS exam_title, e.exam_description AS exam_description, e.exam_category AS exam_category, 
+    s.exam_result AS exam_result, s.grades as total_grades, e.exam_result_status AS examinee_status FROM `examinee` `e` 
+    LEFT JOIN `student_exam_result` `s` 
+    ON e.email_address = s.email_address WHERE e.student_year ='" .$student_year. "' GROUP by e.exam_category";
+
+  } elseif (!empty($student_year) && !empty($school_year) && empty($semester) && empty($course)) {
+
+    $sql = "SELECT e.student_id AS student_id, e.exam_id AS exam_id, e.name AS name, e.email_address AS email_address, 
+    e.gender AS gender, e.course AS course, e.semester AS semester, e.school_year, e.student_year AS student_year, 
+    e.exam_title AS exam_title, e.exam_description AS exam_description, e.exam_category AS exam_category, 
+    s.exam_result AS exam_result, s.grades as total_grades, e.exam_result_status AS examinee_status FROM `examinee` `e` 
+    LEFT JOIN `student_exam_result` `s` 
+    ON e.email_address = s.email_address WHERE e.student_year ='" .$student_year. "' 
+    AND e.school_year ='" .$school_year. "' GROUP by e.exam_category";
+
+  } elseif (!empty($student_year) && !empty($school_year) && !empty($semester) && empty($course)) {
+
+    $sql = "SELECT e.student_id AS student_id, e.exam_id AS exam_id, e.name AS name, e.email_address AS email_address, 
+    e.gender AS gender, e.course AS course, e.semester AS semester, e.school_year, e.student_year AS student_year, 
+    e.exam_title AS exam_title, e.exam_description AS exam_description, e.exam_category AS exam_category, 
+    s.exam_result AS exam_result, s.grades as total_grades, e.exam_result_status AS examinee_status FROM `examinee` `e` 
+    LEFT JOIN `student_exam_result` `s` 
+    ON e.email_address = s.email_address WHERE e.student_year ='" .$student_year. "' 
+    AND e.school_year ='" .$school_year. "' AND e.semester ='" .$semester. "' GROUP by e.exam_category";
+
+  } elseif (!empty($student_year) && !empty($school_year) && !empty($semester) && !empty($course)) {
+
+    $sql = "SELECT e.student_id AS student_id, e.exam_id AS exam_id, e.name AS name, e.email_address AS email_address, 
+    e.gender AS gender, e.course AS course, e.semester AS semester, e.school_year, e.student_year AS student_year, 
+    e.exam_title AS exam_title, e.exam_description AS exam_description, e.exam_category AS exam_category, 
+    s.exam_result AS exam_result, s.grades as total_grades, e.exam_result_status AS examinee_status FROM `examinee` `e` 
+    LEFT JOIN `student_exam_result` `s` 
+    ON e.email_address = s.email_address WHERE e.student_year ='" .$student_year. "' 
+    AND e.school_year ='" .$school_year. "' AND e.semester ='" .$semester. "' AND e.course ='" .$course. "' GROUP by e.exam_category";
+
+  }
+  
+  return find_by_sql($sql);
 }
 
 ?>
