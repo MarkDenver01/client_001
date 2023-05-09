@@ -525,6 +525,36 @@
   }
  }
 
+ function update_exam_schedule_sql(array $data, $id) {
+     global $db;
+     $sql = "UPDATE exam_schedule SET student_year = '" .$data['student_year']. "',
+     semester= '" .$data['semester']. "',
+     school_year= '" .$data['school_year']. "',
+     exam_title = '" .$data['exam_title']. "', 
+     exam_description = '" .$data['exam_description']. "',
+     exam_category ='" .$data['exam_category']. "',
+     exam_duration ='" .$data['exam_duration']. "',
+     exam_status ='" .$data['exam_status']. "' WHERE id='" .$id. "'";
+    $result = $db->query($sql);
+     if ($result) {
+    return true;
+  } else {
+    return false;
+  }
+ }
+
+
+ function view_student_grade($id) {
+     global $db;
+    $sql = "SELECT * FROM monitoring_student WHERE student_id ='" .$id. "'";
+    $result = $db->query($sql);
+    if ($db->num_rows($result)) {
+        $data = $db->fetch_assoc($result);
+        return $data;
+    }
+    return $data = [];
+ }
+
  function find_all_user($id) {
    global $db;
 
@@ -928,6 +958,17 @@ function student_exam_result_combine($student_year, $school_year, $semester, $co
   }
   
   return find_by_sql($sql);
+}
+
+function find_update_exam_schedule($id) {
+  global $db;
+  $sql = "SELECT * FROM exam_schedule WHERE id ='" .$id. "'";
+  $result = $db->query($sql);
+  if ($db->num_rows($result)) {
+    $data = $db->fetch_assoc($result);
+    return $data;
+  }
+  return $data = [];
 }
 
 ?>

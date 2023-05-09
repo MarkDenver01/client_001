@@ -88,13 +88,13 @@
                   <table class="table table-sm table-hover datatable text-nowrap">
                     <thead>
                       <tr>
-                        <th scope="col" class="text-center" style="width: 10%;">Student Year</th>
-                        <th scope="col" class="text-center" style="width: 20%;">Type</th>
-                        <th scope="col" class="text-center" style="width: 20%;">Description</th>
-                        <th scope="col" class="text-center" style="width: 20%;">Category</th>
-                        <th scope="col" class="text-center" style="width: 5%;">Time Limit</th>
-                        <th scope="col" class="text-center" style="width: 10%;">Exam Status</th>
-                        <th scope="col" class="text-center" style="width: 10%;">Action</th>
+                        <th scope="col" class="text-center" >Student Year</th>
+                        <th scope="col" class="text-center" >Type</th>
+                        <th scope="col" class="text-center" >Description</th>
+                        <th scope="col" class="text-center" >Category</th>
+                        <th scope="col" class="text-center" >Time Limit</th>
+                        <th scope="col" class="text-center" >Exam Status</th>
+                        <th scope="col" class="text-center" >Action</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -108,23 +108,25 @@
                       <?php foreach($schedules as $schedule): ?>
                         <tr>
                         <td id="<?php echo $schedule['id']; ?>" scope="row" class="text-center" hidden>
-                        <th data-target="name" scope="row" class="text-center" style="width: 10%;"><?php echo $schedule['student_year']; ?></th>
-                        <td data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $schedule['exam_title']; ?></td>
-                        <td data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $schedule['exam_description']; ?></td>
-                        <td data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $schedule['exam_category']; ?></td>
-                        <td data-target="name" scope="row" class="text-center" style="width: 5%;"><?php echo $schedule['exam_duration']; ?></td>
+                        <th data-target="name" scope="row" class="text-center" ><?php echo $schedule['student_year']; ?></th>
+                        <td data-target="name" scope="row" class="text-center" ><?php echo $schedule['exam_title']; ?></td>
+                        <td data-target="name" scope="row" class="text-center" ><?php echo $schedule['exam_description']; ?></td>
+                        <td data-target="name" scope="row" class="text-center" ><?php echo $schedule['exam_category']; ?></td>
+                        <td data-target="name" scope="row" class="text-center" ><?php echo $schedule['exam_duration']; ?></td>
                           <?php if ($schedule['exam_status'] == 'Ready') { ?>
-                        <th data-target="name" scope="row" class="text-center text-success" style="width: 10%"?><?php echo $schedule['exam_status']; ?></th>
+                        <th data-target="name" scope="row" class="text-center text-success" ><?php echo $schedule['exam_status']; ?></th>
                           <?php } else { ?>
-                        <th data-target="name" scope="row" class="text-center text-danger" style="width: 10%"?><?php echo $schedule['exam_status']; ?></th>
+                        <th data-target="name" scope="row" class="text-center text-danger" ><?php echo $schedule['exam_status']; ?></th>
                           <?php } ?>
                           <?php if ($schedule['exam_status'] == 'Ready') { ?>
-                        <td data-target="name" scope="row" class="text-center" style="width: 10%;">
-                          <a href="../includes/update_exam_schedule_func?id=<?php echo $schedule['id']; ?>&exam_status=<?php echo $schedule['exam_status']; ?>" type="button" class="btn btn-danger rounded-pill btn-sm w-55 text-light">Deactivate Exam</a>
+                        <td data-target="name" scope="row" class="text-center" style=>
+                          <a href="../includes/update_exam_schedule_func?id=<?php echo $schedule['id']; ?>&exam_status=<?php echo $schedule['exam_status']; ?>" type="button" class="btn btn-danger rounded-pill btn-sm w-50 text-light">Deactivate Exam</a>
+                           <a href="./update_exam_schedule?id=<?php echo $schedule['id']; ?>" type="button" class="btn btn-warning text-white rounded-pill btn-sm w-50 text-light">Edit</a>
                         </td>
                           <?php } else { ?>
-                        <td data-target="name" scope="row" class="text-center" style="width: 10%;">
-                        <a href="../includes/update_exam_schedule_func?id=<?php echo $schedule['id']; ?>&exam_status=<?php echo $schedule['exam_status']; ?>" type="button" class="btn btn-success rounded-pill btn-sm w-55 text-light">Activate Exam</a>
+                        <td data-target="name" scope="row" class="text-center" >
+                        <a href="../includes/update_exam_schedule_func?id=<?php echo $schedule['id']; ?>&exam_status=<?php echo $schedule['exam_status']; ?>" type="button" class="btn btn-success rounded-pill btn-sm w-50 text-light">Activate Exam</a>
+                       <a href="./update_exam_schedule?id=<?php echo $schedule['id']; ?>" type="button" class="btn btn-warning text-white rounded-pill btn-sm w-50 text-light">Edit</a>
                         </td>
                           <?php } ?>
                       </tr>
@@ -134,25 +136,28 @@
                       <?php foreach($schedules as $schedule): ?>
                       <tr>
                         <td id="<?php echo $schedule['id']; ?>" scope="row" class="text-center" hidden>
-                        <th data-target="name" scope="row" class="text-center" style="width: 10%;"><?php echo $schedule['student_year']; ?></th>
-                        <td data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $schedule['exam_title']; ?></td>
-                        <td data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $schedule['exam_description']; ?></td>
-                        <td data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo $schedule['exam_category']; ?></td>
-                        <td data-target="name" scope="row" class="text-center" style="width: 10%;"><?php echo $schedule['exam_duration']; ?></td>
+                        <th data-target="name" scope="row" class="text-center" ><?php echo $schedule['student_year']; ?></th>
+                        <td data-target="name" scope="row" class="text-center" ><?php echo $schedule['exam_title']; ?></td>
+                        <td data-target="name" scope="row" class="text-center" ><?php echo $schedule['exam_description']; ?></td>
+                        <td data-target="name" scope="row" class="text-center" ><?php echo $schedule['exam_category']; ?></td>
+                        <td data-target="name" scope="row" class="text-center" ><?php echo $schedule['exam_duration']; ?></td>
                           <?php if ($schedule['exam_status'] == 'Ready') { ?>
-                        <th data-target="name" scope="row" class="text-center text-success" style="width: 10%"?><?php echo $schedule['exam_status']; ?></th>
+                        <th data-target="name" scope="row" class="text-center text-success" ><?php echo $schedule['exam_status']; ?></th>
                           <?php } else { ?>
-                        <th data-target="name" scope="row" class="text-center text-danger" style="width: 10%"?><?php echo $schedule['exam_status']; ?></th>
+                        <th data-target="name" scope="row" class="text-center text-danger" ?><?php echo $schedule['exam_status']; ?></th>
                           <?php } ?>
                           <?php if ($schedule['exam_status'] == 'Ready') { ?>
-                        <td data-target="name" scope="row" class="text-center" style="width: 10%;">
-                          <a href="../includes/update_exam_schedule_func?id=<?php echo $schedule['id']; ?>&exam_status=<?php echo $schedule['exam_status']; ?>" type="button" class="btn btn-danger rounded-pill btn-sm w-55 text-light">Deactivate Exam</a>
-                        </td>
+                        <td data-target="name" scope="row" class="text-center">
+                          <a href="../includes/update_exam_schedule_func?id=<?php echo $schedule['id']; ?>&exam_status=<?php echo $schedule['exam_status']; ?>" type="button" class="btn btn-danger rounded-pill btn-sm w-50 text-light">Deactivate Exam</a>
+                        <a href="./update_exam_schedule?id=<?php echo $schedule['id']; ?>" type="button" class="btn btn-warning text-white rounded-pill btn-sm w-50 text-light">Edit</a>
                           <?php } else { ?>
-                        <td data-target="name" scope="row" class="text-center" style="width: 10%;">
-                        <a href="../includes/update_exam_schedule_func?id=<?php echo $schedule['id']; ?>&exam_status=<?php echo $schedule['exam_status']; ?>" type="button" class="btn btn-success rounded-pill btn-sm w-55 text-light">Activate Exam</a>
+                        <td data-target="name" scope="row" class="text-center" >
+                        <a href="../includes/update_exam_schedule_func?id=<?php echo $schedule['id']; ?>&exam_status=<?php echo $schedule['exam_status']; ?>" type="button" class="btn btn-success rounded-pill btn-sm w-50 text-light">Activate Exam</a>
+                        <a href="./update_exam_schedule?id=<?php echo $schedule['id']; ?>" type="button" class="btn btn-warning text-white rounded-pill btn-sm w-50 text-light">Edit</a>
                         </td>
+                   
                           <?php } ?>
+                        
                       </tr>
                       <?php endforeach; ?>
                       <?php } ?>

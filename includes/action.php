@@ -1066,6 +1066,63 @@ function create_exam_schedule($student_year, $semester, $school_year, $exam_titl
   }
 }
 
+
+# TODO : add validation for schedule of exam
+function update_exam_schedule_new($student_year, $semester, $school_year, $exam_title, $exam_description, $exam_category,$exam_duration, $exam_status, $id) {
+  global $db;
+  global $session;
+  $student_year = $_POST[$student_year];
+  $semester = $_POST[$semester];
+  $school_year = $_POST[$school_year];
+  $exam_title = $_POST[$exam_title];
+  $exam_description = $_POST[$exam_description];
+  $exam_category = $_POST[$exam_category];
+  $exam_duration = $_POST[$exam_duration];
+  $exam_status  = $_POST[$exam_status];
+
+  if ($exam_title == 'OASIS 3' || 
+  $exam_title == 'BarOn EQ-i:S' || 
+  $exam_title == 'The Keirsey Temperament Sorter' || 
+  $exam_title == 'ESA' || 
+  $exam_title == 'Aptitude Verbal and Numerical') {
+    $exam_category = "N/A";
+  }
+
+  $data = array(
+    'student_year' => $student_year,
+    'semester' => $semester,
+    'school_year' => $school_year,
+    'exam_title' => $exam_title,
+    'exam_description' => $exam_description,
+    'exam_category' => $exam_category,
+    'exam_duration' => $exam_duration,
+    'exam_status' => $exam_status
+  );
+
+  $user_level = $_SESSION['key_session']['user_level'];
+  if ($user_level == '1') {
+    $user_level = 'Administrator';
+  } elseif ($user_level == '2') {
+    $user_level = 'Guidance';
+  }
+
+  $is_check = check_academic();
+  if (!$is_check) {
+    $session->message('w', 'Please set the semester and school year first.');
+    redirect('./exam_schedule', false);
+    return;
+  }
+
+  $update = update_exam_schedule_sql($data, $id);
+  if ($update) {
+      redirect('./view_exam_schedule', false);
+  } else {
+      redirect('./update_exam_schedule', false);
+  }
+
+  
+}
+
 function set_academic($semester, $start_school_year, $end_school_year) {
     global $session;
     $semester = $_POST[$semester];
