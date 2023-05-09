@@ -13,7 +13,568 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
   }else{
     $check_db = $conn->query("SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '{$_POST['DB_NAME']}'")->num_rows;
     if($check_db > 0){
-      $error = 'Database already exist. Please use a different name to prevent data loss on your database.';
+      // $error = 'Database already exist. Please use a different name to prevent data loss on your database.';
+          
+
+      $conn->select_db($_POST['DB_NAME']);
+      include_once('./default/db.php');
+
+      // user account
+      if(isset($db_sql_1)){
+        foreach($db_sql_1 as $sql){
+          $conn->query($sql);
+          if($conn->error){
+            die($conn->error);
+          }
+        }
+      }
+
+      // user groups
+      if (isset($db_sql_2)) {
+        foreach ($db_sql_2 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+             die($conn->error);
+          }
+        }
+      }
+
+      // student info
+      if (isset($db_sql_3)) {
+        foreach ($db_sql_3 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      // student info
+      if (isset($db_sql_4)) {
+        foreach ($db_sql_4 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      // authentication
+      if (isset($db_sql_5)) {
+        foreach ($db_sql_5 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      // login logs
+      if (isset($db_sql_6)) {
+        foreach ($db_sql_6 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      // conversation logs
+      if (isset($db_sql_7)) {
+        foreach ($db_sql_7 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      // chat logs
+      if (isset($db_sql_8)) {
+        foreach ($db_sql_8 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      // announcement logs
+      if (isset($db_sql_9)) {
+        foreach ($db_sql_9 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      // exam created
+      if (isset($db_sql_10)) {
+        foreach ($db_sql_10 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      // exam schedule
+      if (isset($db_sql_11)) {
+        foreach ($db_sql_11 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      // student records
+      if (isset($db_sql_12)) {
+        foreach ($db_sql_12 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      // assign exam record
+      if (isset($db_sql_13)) {
+        foreach ($db_sql_13 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      // exam category
+      if (isset($db_sql_14)) {
+        foreach ($db_sql_14 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      // reading
+      if (isset($db_sql_15)) {
+        foreach ($db_sql_15 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      // writing
+      if (isset($db_sql_16)) {
+        foreach ($db_sql_16 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      // speaking
+      if (isset($db_sql_17)) {
+        foreach ($db_sql_17 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      // listening
+      if (isset($db_sql_18)) {
+        foreach ($db_sql_18 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      // learning
+      if (isset($db_sql_19)) {
+        foreach ($db_sql_19 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      // memory
+      if (isset($db_sql_20)) {
+        foreach ($db_sql_20 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      // study
+      if (isset($db_sql_21)) {
+        foreach ($db_sql_21 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      // creating and thinking
+      if (isset($db_sql_22)) {
+        foreach ($db_sql_22 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      // motivation
+      if (isset($db_sql_23)) {
+        foreach ($db_sql_23 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      // self esteem
+      if (isset($db_sql_24)) {
+        foreach ($db_sql_24 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      // personal relationship
+      if (isset($db_sql_25)) {
+        foreach ($db_sql_25 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      // conflict
+      if (isset($db_sql_26)) {
+        foreach ($db_sql_26 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+    
+      // health
+      if (isset($db_sql_27)) {
+        foreach ($db_sql_27 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      // time management
+      if (isset($db_sql_28)) {
+        foreach ($db_sql_28 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      // money management
+      if (isset($db_sql_29)) {
+        foreach ($db_sql_29 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      // personal purpose
+      if (isset($db_sql_30)) {
+        foreach ($db_sql_30 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      // career planning
+      if (isset($db_sql_31)) {
+        foreach ($db_sql_31 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      // support resources
+      if (isset($db_sql_32)) {
+        foreach ($db_sql_32 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      // vocabulary
+      if (isset($db_sql_33)) {
+        foreach ($db_sql_33 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      // computation
+      if (isset($db_sql_34)) {
+        foreach ($db_sql_34 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      // spatial
+      if (isset($db_sql_35)) {
+        foreach ($db_sql_35 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      // word comparison
+      if (isset($db_sql_36)) {
+        foreach ($db_sql_36 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      // making marks part 1
+      if (isset($db_sql_37)) {
+        foreach ($db_sql_37 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      // making marks part 2
+      if (isset($db_sql_38)) {
+        foreach ($db_sql_38 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      // baron eq
+      if (isset($db_sql_39)) {
+        foreach ($db_sql_39 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      // keirsey
+      if (isset($db_sql_40)) {
+        foreach ($db_sql_40 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      // aptitude  j and c 1
+      if (isset($db_sql_41)) {
+        foreach ($db_sql_41 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      // esa
+      if (isset($db_sql_42)) {
+        foreach ($db_sql_42 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      // aptitude verbal and numerical
+      if (isset($db_sql_43)) {
+        foreach ($db_sql_43 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      // aptitude j and c 2
+      if (isset($db_sql_44)) {
+        foreach ($db_sql_44 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      // aptitude j and c 3
+      if (isset($db_sql_45)) {
+        foreach ($db_sql_45 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      // aptitude j and c 4
+      if (isset($db_sql_46)) {
+        foreach ($db_sql_46 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      // examinee
+      if (isset($db_sql_47)) {
+        foreach ($db_sql_47 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      // examinee answer
+      if (isset($db_sql_48)) {
+        foreach ($db_sql_48 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      // academic settings
+      if (isset($db_sql_49)) {
+        foreach ($db_sql_49 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      // examinee answer v2
+      if (isset($db_sql_50)) {
+        foreach ($db_sql_50 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      // exam attempts
+      if (isset($db_sql_51)) {
+        foreach ($db_sql_51 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      // noify student
+      if (isset($db_sql_52)) {
+        foreach ($db_sql_52 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      // monitoring student
+      if (isset($db_sql_53)) {
+        foreach ($db_sql_53 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      // counseling appointment
+      if (isset($db_sql_54)) {
+        foreach ($db_sql_54 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      // student result
+      if (isset($db_sql_55)) {
+        foreach ($db_sql_55 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
+      $update_env_vars = $__DotEnvironment->update_env_variables($_POST);
+      if($update_env_vars){
+        echo "<script>location.href = './?step=4'</script>";
+        exit;
+      }
+    $conn->close();
     }else{
       // echo "CREATE DATABASE `{$_POST['DB_NAME']}`";
       // $conn->close();
