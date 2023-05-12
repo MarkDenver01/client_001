@@ -10,7 +10,7 @@
   <div class="d-flex align-items-center justify-content-between">
     <a href="./dashboard" class="logo d-flex align-items-center">
       <lottie-player src="./assets/json/book.json" background="transparent"  speed="1"  style="width: 60px; height: 60px;" loop autoplay></lottie-player>
-      <span class="d-none d-lg-block"><?= $_ENV['SITE_PORTAL']; ?></span>
+      <span class="d-none d-lg-block" data-toggle="tooltip" data-placement="top" title="Center for Student Life and Career Management"><?= $_ENV['SITE_PORTAL']; ?></span>
     </a>
     <i class="bi bi-list toggle-sidebar-btn"></i>
   </div><!-- End Logo -->
