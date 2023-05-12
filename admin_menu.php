@@ -6,11 +6,23 @@
     </li><!-- End Dashboard Nav -->
 
     <li class="nav-item">
-      <a class="nav-link " href="./post_announcement">
+      <a class="nav-link collapsed" data-bs-target="#announcement-nav" data-bs-toggle="collapse" href="#">
         <i class="ri-artboard-line"></i>
-        <span>Announcement</span>
+        <span>Manage Announcement</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
-    </li><!-- End Student Counseling Progress Nav -->
+      <ul id="announcement-nav" class="nav-content collapsed" data-bs-parent="#sidebar-nav">
+        <li>
+          <a href="./post_announcement">
+            <i class="bi bi-circle"></i><span>Post Announcement</span>
+          </a>
+        </li>
+        <li>
+          <a href="./announcement_history">
+            <i class="bi bi-circle"></i><span>Announcement History</span>
+          </a>
+        </li>
+      </ul>
+    </li><!-- End Dashboard Nav -->
 
 
     <!-- <li class="nav-item">
@@ -42,7 +54,7 @@
     <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
         <i class="ri-file-list-fill"></i>
-        <span>Exam Management</span><i class="bi bi-chevron-down ms-auto"></i>
+        <span>Manage Exam</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
       <ul id="icons-nav" class="nav-content collapsed" data-bs-parent="#sidebar-nav">
         <!-- <li>
@@ -68,7 +80,7 @@
     <li class="nav-item">
       <a class="nav-link " href="./view_exam_schedule">
         <i class="bx bxs-book-open"></i>
-        <span>Schedule Management</span>
+        <span>Manage Exam Schedule</span>
       </a>
     </li><!-- End Generate Reports Nav -->
 

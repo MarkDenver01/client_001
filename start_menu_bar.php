@@ -10,7 +10,7 @@
   <div class="d-flex align-items-center justify-content-between">
     <a href="./dashboard" class="logo d-flex align-items-center">
       <lottie-player src="./assets/json/book.json" background="transparent"  speed="1"  style="width: 60px; height: 60px;" loop autoplay></lottie-player>
-      <span class="d-none d-lg-block" data-toggle="tooltip" data-placement="top" title="Center for Student Life and Career Management"><?= $_ENV['SITE_PORTAL']; ?></span>
+      <span class="d-none d-lg-block"><?= $_ENV['SITE_PORTAL']; ?></span>
     </a>
     <i class="bi bi-list toggle-sidebar-btn"></i>
   </div><!-- End Logo -->
@@ -84,10 +84,10 @@
 
       </li><!-- End Notification Nav -->
   <?php } else { ?>
-    <li class="nav-item" style="padding-right: 35px;">
+    <li class="nav-item">
       <a class="nav-link nav-icon" href="./set_academic_settings">
-          <i class="bx bx-message-alt-detail"></i>
           <span class="badge badge-number"  style="background-image: linear-gradient(#7BB661, #006B3C);">Semester and school year</span>
+          <i class="ri-align-center"></i>  
       </a><!-- End Notification Icon -->
     </li><!-- End Semester Nav -->
 
@@ -105,8 +105,8 @@
 
     <li class="nav-item dropdown">
         <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+          <span class="badge badge-number"  style="background-image: linear-gradient(#d9534f, #AB274F);"><?php echo $notif_admin; ?> </span>
           <i class="bi bi-bell"></i>
-          <span class="badge badge-number"  style="background-image: linear-gradient(#d9534f, #AB274F);">Notification</span>
         </a><!-- End Notification Icon -->
 
         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
