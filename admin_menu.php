@@ -5,12 +5,12 @@
       </a>
     </li><!-- End Dashboard Nav -->
 
-    <li class="nav-item">
+    <!-- <li class="nav-item">
       <a class="nav-link " href="./set_academic_settings">
         <i class="bi bi-calendar-check"></i>
         <span>Semester and School Year</span>
       </a>
-    </li><!-- End Semester Nav -->
+    </li>End Semester Nav -->
 
     <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">

@@ -22,16 +22,22 @@
 
     <section class="section profile">
       <div class="row">
-        <div class="col-xl-12">
+        <div class="col-xl-3"></div>
+        <div class="col-xl-6">
+          <br/>
+          <br/>
+          <br/>
+          <br/>
+          <br/>
           <div class="card rounded-0">
             <div class="card-body">
               <h5 class="card-title">Set Semester and Academic School Year</h5>
               <?php echo display_message($msg); ?>
               <!-- Floating Labels Form -->
                 <form action="" method="POST" enctype="multipart/form-data">
-                  <div class="col-lg-6">
+                  <div class="col-lg-12">
                     <label class="col-sm-3 col-form-label">Semester</label>
-                      <div  class="col-sm-10">
+                      <div  class="col-sm-6">
                         <select name="semester" class="form-select rounded-0" aria-label="Default select example">
                           <option selected disabled>Select semester</option>
                           <option value="First semester">First semester</option>
@@ -59,6 +65,7 @@
             </div>
           </div>
         </div>
+        <div class="col-xl-3"></div>
       </div>
     </section>
 

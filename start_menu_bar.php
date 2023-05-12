@@ -84,6 +84,13 @@
 
       </li><!-- End Notification Nav -->
   <?php } else { ?>
+    <li class="nav-item" style="padding-right: 35px;">
+      <a class="nav-link nav-icon" href="./set_academic_settings">
+          <i class="bx bx-message-alt-detail"></i>
+          <span class="badge badge-number"  style="background-image: linear-gradient(#7BB661, #006B3C);">Semester and school year</span>
+      </a><!-- End Notification Icon -->
+    </li><!-- End Semester Nav -->
+
     <?php 
             if (isset($_POST['button_update_admin'])) {
               $sql = $db->query("UPDATE notify_student SET notify_status='read' WHERE receiver='$email_address' AND user_level='3' AND notify_status='unread'");
@@ -99,7 +106,7 @@
     <li class="nav-item dropdown">
         <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
           <i class="bi bi-bell"></i>
-          <span class="badge badge-number"  style="background-image: linear-gradient(#d9534f, #AB274F);"><?php echo $notif_admin; ?> Notification</span>
+          <span class="badge badge-number"  style="background-image: linear-gradient(#d9534f, #AB274F);">Notification</span>
         </a><!-- End Notification Icon -->
 
         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
