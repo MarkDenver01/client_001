@@ -49,11 +49,14 @@
                     <label class="col-sm-5 col-form-label">Academic School Year</label>
                       <div class="row mb-3">
                         <div  class="col-sm-5">
-                            <input name="school_year_start" type="number" class="form-control rounded-0 text-danger" id="school_year_start" required>
+                            <select name="school_year_start" id="school_year_start" required  class="form-select rounded-0 text-danger" aria-label="Default select example">
+                              <option selected disabled>Select school year</option>
+                              <option value="<?php echo date("Y"); ?>"><?php echo date("Y"); ?></option>
+                            </select>
                         </div>
                          -
                         <div  class="col-sm-5">
-                            <input name="school_year_end" type="number" class="form-control rounded-0 text-danger" id="school_year_start" required>
+                            <input name="school_year_end" type="number" class="form-control rounded-0 text-danger" id="school_year_end">
                         </div>
                       </div>
                   </div>
@@ -70,4 +73,15 @@
     </section>
 
   </main><!-- End #main -->
+
+
+  <script>
+      $(document).ready(function() {
+        $('#school_year_start').on('change', function() {
+          var school_year_end_value = <?php echo date("Y") + 1; ?>;
+          $('#school_year_end').val(school_year_end_value);
+        });
+      });
+  </script>
+
 <?php include('../footer.php'); ?>
