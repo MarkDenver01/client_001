@@ -98,6 +98,13 @@
       </a>
     </li><!-- End Student Records Nav -->
 
+    <li class="nav-item">
+      <a class="nav-link " href="#">
+        <i class="ri-account-pin-box-fill"></i>
+        <span>Student probation</span>
+      </a>
+    </li><!-- End Generate Reports Nav -->
+
     <!--<li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
         <i class="ri-hand-heart-fill"></i>
