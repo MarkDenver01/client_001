@@ -443,19 +443,19 @@
                                   <input type="hidden" name="answer[<?php echo ($i - 1); ?>][item_correct]" value="<?php echo $row['correct_items']; ?>">
                                   <div class="btn-group">                                   
                                     <label class="btn btn-light" for="exampleRadios<?php echo ($i-1); ?>_5">
-                                      <input type="radio" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_5" value="a"> A</input>
+                                      <input type="radio" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_5" value="1"> 1</input>
                                     </label>    
                                     <label class="btn btn-light" for="exampleRadios<?php echo ($i-1); ?>_4">
-                                      <input type="radio" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_4" value="b"> B</input>
+                                      <input type="radio" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_4" value="2"> 2</input>
                                     </label>
                                     <label class="btn btn-light" for="exampleRadios<?php echo ($i-1); ?>_3">
-                                      <input type="radio" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_3" value="c"> C</input>
+                                      <input type="radio" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_3" value="3"> 3</input>
                                     </label>
                                     <label class="btn btn-light" for="exampleRadios<?php echo ($i-1); ?>_2">
-                                      <input type="radio" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_2" value="d"> D</input>
+                                      <input type="radio" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_2" value="4"> 4</input>
                                     </label>
                                     <label class="btn btn-light" for="exampleRadios<?php echo ($i-1); ?>_1">
-                                      <input type="radio" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_1" value="e"> E</input>
+                                      <input type="radio" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_1" value="5"> 5</input>
                                     </label>
                                   </div>
                                 </div>

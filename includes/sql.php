@@ -259,8 +259,9 @@
    $current_date = date("Y-m-d H:i:s", strtotime('12 day'));
   //  $sql = sprintf("SELECT * FROM `announcement_logs` WHERE `date_posted` <
   //  '%s' GROUP BY `from` ORDER BY `id` DESC", $current_date);
-   $sql = sprintf("SELECT * FROM `announcement_logs` WHERE `date_posted` <
-   '%s' ORDER BY `id` DESC LIMIT 10", $current_date);
+  //  $sql = sprintf("SELECT * FROM `announcement_logs` WHERE `date_posted` <
+  //  '%s' ORDER BY `id` DESC LIMIT 10", $current_date);
+  $sql = "SELECT * FROM announcement_logs WHERE date_posted BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 WEEK) AND CURDATE()";
    return find_by_sql($sql);
  }
 
@@ -468,6 +469,14 @@
    return ($result && $db->affected_rows() === 1 ? true : false);
  }
 
+ function change_password_with_img_by_query($email_address, $change_password, $img_file_path) {
+  global $db;
+  $encrypt = sha1($change_password);
+  $sql = "UPDATE user_account SET password ='" .$encrypt. "', image ='" .$img_file_path. "', status ='1' WHERE email_address ='" .$email_address. "' LIMIT 1";
+  $result = $db->query($sql);
+  return ($result && $db->affected_rows() === 1 ? true : false);
+}
+
  function insert_new_exam(array $data) {
   global $db;
   $sql ="INSERT INTO exam_created(student_year, semester, school_year, exam_title, exam_description, exam_category, image_exam_path, created_at, exam_status, updated_answer) ";
@@ -523,6 +532,36 @@
   } else {
     return false;
   }
+ }
+
+ function update_exam_schedule_sql(array $data, $id) {
+     global $db;
+     $sql = "UPDATE exam_schedule SET student_year = '" .$data['student_year']. "',
+     semester= '" .$data['semester']. "',
+     school_year= '" .$data['school_year']. "',
+     exam_title = '" .$data['exam_title']. "', 
+     exam_description = '" .$data['exam_description']. "',
+     exam_category ='" .$data['exam_category']. "',
+     exam_duration ='" .$data['exam_duration']. "',
+     exam_status ='" .$data['exam_status']. "' WHERE id='" .$id. "'";
+    $result = $db->query($sql);
+     if ($result) {
+    return true;
+  } else {
+    return false;
+  }
+ }
+
+
+ function view_student_grade($id) {
+     global $db;
+    $sql = "SELECT * FROM monitoring_student WHERE student_id ='" .$id. "'";
+    $result = $db->query($sql);
+    if ($db->num_rows($result)) {
+        $data = $db->fetch_assoc($result);
+        return $data;
+    }
+    return $data = [];
  }
 
  function find_all_user($id) {
@@ -928,6 +967,40 @@ function student_exam_result_combine($student_year, $school_year, $semester, $co
   }
   
   return find_by_sql($sql);
+}
+
+function find_update_exam_schedule($id) {
+  global $db;
+  $sql = "SELECT * FROM exam_schedule WHERE id ='" .$id. "'";
+  $result = $db->query($sql);
+  if ($db->num_rows($result)) {
+    $data = $db->fetch_assoc($result);
+    return $data;
+  }
+  return $data = [];
+}
+
+function find_announcement($id) {
+  global $db;
+  $sql = "SELECT * FROM announcement_logs WHERE id ='" .$id. "'";
+  $result = $db->query($sql);
+  if ($db->num_rows($result)) {
+    $data = $db->fetch_assoc($result);
+    return $data;
+  }
+  return $data = [];
+}
+
+
+function find_course($id) {
+  global $db;
+  $sql = "SELECT * FROM course_tbl WHERE id ='" .$id. "'";
+  $result = $db->query($sql);
+  if ($db->num_rows($result)) {
+    $data = $db->fetch_assoc($result);
+    return $data;
+  }
+  return $data = [];
 }
 
 ?>

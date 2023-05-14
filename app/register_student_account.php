@@ -5,6 +5,7 @@
 <?php include('../header.php'); ?>
 <?php include('../includes/load.php'); ?>
 <?php SET_NOT_LOGGED_IN(); ?>
+<?php global $db; ?>
 <?php
     // button back
     onClickButton("button_back", "./view_student_account");
@@ -48,7 +49,7 @@
 
                 <img id="ic_image_file" src="./assets/img/profile.png" alt="Profile" class="rounded-circle" style="height: 120px; width: 200px;">
                 </br>
-                <input id="ic_image_file_path" type="file" name="image_path" class="form-control btn btn-primary rounded-pill btn-sm" ></input>
+                <input id="ic_image_file_path" type="file" name="image_path" class="form-control btn btn-primary rounded-0 btn-sm" ></input>
               </div>
            </div>
 
@@ -88,15 +89,16 @@
                       <label for="course" class="col-md-4 col-lg-3 col-form-label">Course</label>
                       <div class="col-md-4 col-lg-8">
                         <select name="course" id="course" class="form-select rounded-0">
-                          <option selected>Select course</option>
-                          <option value="BSIE">Bachelor of Science in Industrial Engineering</option>
-                          <option value="BSIT">Bachelor of Science in Information Technology</option>
-                          <option value="BS-Psy">Bachelor of Science in Psychology</option>
-                          <option value="BSHRM">Bachelor of Science in Hospitality Management</option>
-                          <option value="BSTM">Bachelor of Science in Tourism Management</option>
-                          <option value="BSA">Bachelor of Science in Accountancy</option>
-                          <option value="BSIA">Bachelor of Science in Internal Auditing</option>
-                          <option value="BSMA">Bachelor of Science in Management Accounting</option>
+                        <?php 
+                          $sql = "SELECT * FROM course_tbl";
+                          $result = $db->query($sql);
+                          if ($result->num_rows > 0) {
+                            echo '<option value="" disabled>Select course</option>';
+                            while ($row = $result->fetch_assoc()) {
+                              echo '<option value="' .$row['course']. '">' .$row['course']. '</option>';
+                            }
+                          }
+                        ?>
                         </select>
                       </div>
                     </div>

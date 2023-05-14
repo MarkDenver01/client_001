@@ -23,9 +23,6 @@
     $student_name = $_SESSION['key_session']['name'];
 ?>
 <?php 
-if (isset($_POST['button_upload'])) {
-    redirect('./monitoring',false);
-}
 
 if(isset($_POST['button_counseling'])) {
   redirect('./counseling', false);
@@ -101,7 +98,7 @@ if(isset($_POST['button_counseling'])) {
         </div>
 
         <div class="col-sm-7">
-        <?php if($counselour_stats == 'Monitoring') { ?>
+        <?php if($user_level == '1' || $user_level == '2') { ?>
           <div class="card rounder-0">
             <div class="card-body">
               <br/>
@@ -110,11 +107,22 @@ if(isset($_POST['button_counseling'])) {
                      <div class="text-center">
         
                       <div class="text-center"><h5></h5></div>
-                        <form action ="" method="POST">
-                           
-                                <button name="button_upload" type="submit" class="btn btn-success btn-lg rounded-pill w-100">Upload Student Grade</button>
-                           
-                        </form>
+                        <a href="./view_grade?student_id=<?php echo $student_id; ?>" name="button_upload" type="submit" class="btn btn-danger btn-lg rounded-pill w-100">View Student Grade</a>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+          </div>
+          <?php } else if($user_level == '3') { ?>
+        <div class="card rounder-0">
+            <div class="card-body">
+              <br/>
+              <div class="row">
+                    <div class="col-lg-12">
+                     <div class="text-center">
+        
+                      <div class="text-center"><h5></h5></div>
+                        <a href="./monitoring" type="submit" class="btn btn-danger btn-lg rounded-pill w-100">Upload Student Grade</a>
                       </div>
                     </div>
                   </div>

@@ -78,16 +78,16 @@
                     
                     <div class="col-sm-3">
                       <select id="exam_description" name="course" class="form-select rounded-0" aria-label="Default select example">
-                        <option value="" selected>Select course</option>
-                          <option value="BSIE">Bachelor of Science in Industrial Engineering</option>
-                          <option value="BSIT">Bachelor of Science in Information Technology</option>
-                          <option value="BS-Psy">Bachelor of Science in Psychology</option>
-                          <option value="BSHRM">Bachelor of Science in Hospitality Management</option>
-                          <option value="BSTM">Bachelor of Science in Tourism Management</option>
-                          <option value="BSA">Bachelor of Science in Accountancy</option>
-                          <option value="BSIA">Bachelor of Science in Internal Auditing</option>
-                          <option value="BSMA">Bachelor of Science in Management Accounting</option>
-                        </select>
+                      <?php 
+                          $sql = "SELECT * FROM course_tbl";
+                          $result = $db->query($sql);
+                          if ($result->num_rows > 0) {
+                            echo '<option value="" disabled>Select course</option>';
+                            while ($row = $result->fetch_assoc()) {
+                              echo '<option value="' .$row['course']. '">' .$row['course']. '</option>';
+                            }
+                          }
+                        ?>
                       </select>
                       <br/>
                     </div>
@@ -133,7 +133,25 @@
                     <?php 
                       if (isset($_POST['button_filter'])) {
                         $filterData = student_exam_result_combine($_POST['student_year'], $_POST['school_year'], $_POST['semester'], $_POST['course']);
-                        foreach ($filterData as $filtered) { ?>
+                      foreach ($filterData as $filtered) { ?>
+                      <?php 
+                      
+                        if ($filtered['exam_title'] == 'Student Success Kit') {
+                            $redirect = "../app/student_success_kit_result.php?student_id=" .$filtered['student_id'];
+                        } else if ($filtered['exam_title'] == 'OASIS 3') {
+                            $redirect = "../app/oasis_result.php?student_id=" .$filtered['student_id'];
+                        } else if($filtered['exam_title'] == 'BarOn EQ-i:S') {
+                            $redirect = "../app/baron_eq_interpretation.php?student_id=" .$filtered['student_id'];
+                        } else if ($filtered['exam_title'] == 'The Keirsey Temperament Sorter') {
+                            $redirect = "../app/keirsey_temp_intrepretation.php?student_id=" .$filtered['student_id'];
+                        } else if ($filtered['exam_title'] == 'Aptitude J and C') {
+                            $redirect = "../app/aptitude_j_n_c_result.php?student_id=" .$filtered['student_id'];
+                        } else if ($filtered['exam_title'] == 'ESA') {
+                            $redirect = "../app/esa_result.php?student_id=" .$filtered['student_id'];
+                        } else if ($filtered['exam_title'] == 'Aptitude Verbal and Numerical') {
+                            $redirect = "../app/aptitude_verbal_n_numerical.php?student_id=" .$filtered['student_id'];
+                        }
+                      ?>
 
                       <tr class="text-success">
                         <th scope="row" class="text-center" hidden ><?php echo $filtered['student_id']; ?></th>
@@ -152,42 +170,7 @@
                         <td scope="row" class="text-center" ><?php echo $filtered['exam_result']; ?></td>
                         <td scope="row" class="text-center" ><?php echo $filtered['examinee_status']; ?></td>
                         <td>
-                          <?php if ($filtered['exam_title'] == 'Student Success Kit') { ?>
-                         
-                          <a href="../app/student_success_kit_result.php?student_id="<?php echo $filtered['student_id'];?> type="submit" class="btn btn-success text-white rounded-0 btn-sm w-100"><i class="bi bi-print"></i> View result</a>
-                      
-                       
-                         <?php } else if ($filtered['exam_title'] == 'OASIS 3') { ?>
-
-                            <a href="../app/oasis_result.php?student_id="<?php echo $filtered['student_id'];?> type="submit" class="btn btn-success text-white rounded-0 btn-sm w-100"><i class="bi bi-print"></i> View result</a>
-                        
-                          <?php } else if($filtered['exam_title'] == 'BarOn EQ-i:S') { ?>
-
-                            <a href="../app/baron_eq_interpretation.php?student_id="<?php echo $filtered['student_id'];?> type="submit" class="btn btn-success text-white rounded-0 btn-sm w-100"><i class="bi bi-print"></i> View result</a>
-                        
-
-                          <?php } else if ($filtered['exam_title'] == 'The Keirsey Temperament Sorter') { ?>   
-                            
-                            <a href="../app/keirsey_temp_intrepretation.php?student_id="<?php echo $filtered['student_id'];?> type="submit" class="btn btn-success text-white rounded-0 btn-sm w-100"><i class="bi bi-print"></i> View result</a>
-
-
-                          <?php } else if ($filtered['exam_title'] == 'Aptitude J and C') { ?>
-
-                            <a href="../app/aptitude_j_n_c_result.php?student_id="<?php echo $filtered['student_id'];?> type="submit" class="btn btn-success text-white rounded-0 btn-sm w-100"><i class="bi bi-print"></i> View result</a>
-
-                            
-                          <?php } else if ($filtered['exam_title'] == 'ESA') { ?>
-
-                            <a href="../app/esa_result.php?student_id="<?php echo $filtered['student_id'];?> type="submit" class="btn btn-success text-white rounded-0 btn-sm w-100"><i class="bi bi-print"></i> View result</a>
-
-                            
-                          <?php } else if ($filtered['exam_title'] == 'Aptitude Verbal and Numerical') { ?>
-
-                            <a href="../app/aptitude_verbal_n_numerical.php?student_id="<?php echo $filtered['student_id'];?> type="submit" class="btn btn-success text-white rounded-0 btn-sm w-100"><i class="bi bi-print"></i> View result</a>
-
-                            
-                          <?php } ?>
-                        
+                            <a href="<?php echo $redirect; ?>" type="submit" class="btn btn-success text-white rounded-0 btn-sm w-100"><i class="bi bi-print"></i> View result</a>
                         </td>
                       </tr>
 
@@ -195,7 +178,6 @@
                     <?php  } else { ?>
 
                     <?php       
-
                       $sql = "SELECT e.student_id AS student_id, e.exam_id AS exam_id, e.name AS name, e.email_address AS email_address, 
                         e.gender AS gender, e.course AS course, e.semester AS semester, e.school_year, e.student_year AS student_year, 
                         e.exam_title AS exam_title, e.exam_description AS exam_description, e.exam_category AS exam_category, 
@@ -205,6 +187,22 @@
                       $result =$db->query($sql);
                       if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) {
+          
+                        if ($row['exam_title'] == 'Student Success Kit') {
+                            $redirect = "../app/student_success_kit_result.php?student_id=" .$row['student_id'];
+                        } else if ($row['exam_title'] == 'OASIS 3') {
+                            $redirect = "../app/oasis_result.php?student_id=" .$row['student_id'];
+                        } else if($row['exam_title'] == 'BarOn EQ-i:S') {
+                            $redirect = "../app/baron_eq_interpretation.php?student_id=" .$row['student_id'];
+                        } else if ($row['exam_title'] == 'The Keirsey Temperament Sorter') {
+                            $redirect = "../app/keirsey_temp_intrepretation.php?student_id=" .$row['student_id'];
+                        } else if ($row['exam_title'] == 'Aptitude J and C') {
+                            $redirect = "../app/aptitude_j_n_c_result.php?student_id=" .$row['student_id'];
+                        } else if ($row['exam_title'] == 'ESA') {
+                            $redirect = "../app/esa_result.php?student_id=" .$row['student_id'];
+                        } else if ($row['exam_title'] == 'Aptitude Verbal and Numerical') {
+                            $redirect = "../app/aptitude_verbal_n_numerical.php?student_id=" .$row['student_id'];
+                        }
                     ?>
                       <tr class="text-success">
                         <th scope="row" class="text-center" hidden ><?php echo $row['student_id']; ?></th>
@@ -223,12 +221,7 @@
                         <td scope="row" class="text-center" ><?php echo $row['exam_result']; ?></td>
                         <td scope="row" class="text-center" ><?php echo $row['examinee_status']; ?></td>
                         <td>
-
-     
-                        <a href="../app/student_success_kit_result.php?student_id=<?php echo $row['student_id'];?>" type="submit" class="btn btn-success text-white rounded-0 btn-sm w-100"><i class="bi bi-print"></i> View result</a>
-                        
-                      
-                      
+                            <a href="<?php echo $redirect; ?>" type="submit" class="btn btn-success text-white rounded-0 btn-sm w-100"><i class="bi bi-print"></i> View result</a>
                       </td>
                       </tr>
                     <?php

@@ -698,24 +698,72 @@ function change_password($new_password, $confirm_password) {
     }
 }
 
-function change_password_v2($new_password, $confirm_password) {
+function change_password_v2($new_password, $confirm_password, $file_path_name) {
   global $session;
-  $new_password = remove_junk($_POST[$new_password]);
-  $confirm_password = remove_junk($_POST[$confirm_password]);
-  if (empty($errors)) {
-    if ($new_password == $confirm_password) {
-      if ($new_password == "default" || $confirm_password == "default") {
-        $session->message('w', 'Please change your default password.');
-        redirect('account_settings', false);
-      } else {
-        change_password_by_query($_SESSION['key_session']['email_address'], $new_password);
-        redirect('account_settings', false);
+
+    $new_password = $_POST[$new_password];
+    $confirm_password = $_POST[$confirm_password];
+    $img_file = $_FILES[$file_path_name]['name'];
+    $tmp_dir = $_FILES[$file_path_name]['tmp_name'];
+    $img_size = $_FILES[$file_path_name]['size'];
+
+    if (empty($img_file)) {
+      if (empty($errors)) {
+        if ($new_password == $confirm_password) {
+          if ($new_password == "default" || $confirm_password == "default") {
+            $session->message('w', 'Please change your default password.');
+            redirect('account_settings', false);
+          } else {
+            change_password_by_query($_SESSION['key_session']['email_address'], $new_password);
+            redirect('account_settings', false);
+          }
+        } else {
+          $session->message('w', 'Password does not match. Please try again');
+          redirect('account_settings', false);
+        }
       }
     } else {
-      $session->message('w', 'Password does not match. Please try again');
-      redirect('account_settings', false);
-    }
-  }
+      $upload_dir = '../uploads/students/';
+      
+      $img_ext = strtolower(pathinfo($img_file, PATHINFO_EXTENSION)); // get image extensions
+      $valid_extensions = array('jpeg', 'jpg', 'png', 'gif'); // valid extensio
+
+      $profile_pic = rand(1000,1000000).".".$img_ext;
+
+      if (in_array($img_ext, $valid_extensions)) {
+        if ($img_size < 5000000) {
+          if (move_uploaded_file($tmp_dir, $upload_dir.$profile_pic)) {
+            $dir = $upload_dir.$profile_pic;
+            if (empty($errors)) {
+              if ($new_password == $confirm_password) {
+                if ($new_password == "default" || $confirm_password == "default") {
+                  $session->message('w', 'Please change your default password.');
+                  redirect('account_settings', false);
+                } else {
+                  change_password_with_img_by_query($_SESSION['key_session']['email_address'], $new_password, $dir);
+                  redirect('account_settings', false);
+                }
+              } else {
+                $session->message('w', 'Password does not match. Please try again');
+                redirect('account_settings', false);
+              }
+            } else {
+              $session->message('d', 'error 4');
+              redirect('account_settings', false);
+            }
+          } else {
+            $session->message('d', 'error 3');
+            redirect('account_settings', false);
+          }
+         } else {
+          $session->message('d', 'error 2');
+          redirect('account_settings', false);
+         }
+      } else {
+        $session->message('d', 'error 1');
+                redirect('account_settings', false);
+      }
+   }
 }
 
 function SET_LOGGED_IN() {
@@ -1064,6 +1112,63 @@ function create_exam_schedule($student_year, $semester, $school_year, $exam_titl
       redirect('./exam_schedule', false);
     }
   }
+}
+
+
+# TODO : add validation for schedule of exam
+function update_exam_schedule_new($student_year, $semester, $school_year, $exam_title, $exam_description, $exam_category,$exam_duration, $exam_status, $id) {
+  global $db;
+  global $session;
+  $student_year = $_POST[$student_year];
+  $semester = $_POST[$semester];
+  $school_year = $_POST[$school_year];
+  $exam_title = $_POST[$exam_title];
+  $exam_description = $_POST[$exam_description];
+  $exam_category = $_POST[$exam_category];
+  $exam_duration = $_POST[$exam_duration];
+  $exam_status  = $_POST[$exam_status];
+
+  if ($exam_title == 'OASIS 3' || 
+  $exam_title == 'BarOn EQ-i:S' || 
+  $exam_title == 'The Keirsey Temperament Sorter' || 
+  $exam_title == 'ESA' || 
+  $exam_title == 'Aptitude Verbal and Numerical') {
+    $exam_category = "N/A";
+  }
+
+  $data = array(
+    'student_year' => $student_year,
+    'semester' => $semester,
+    'school_year' => $school_year,
+    'exam_title' => $exam_title,
+    'exam_description' => $exam_description,
+    'exam_category' => $exam_category,
+    'exam_duration' => $exam_duration,
+    'exam_status' => $exam_status
+  );
+
+  $user_level = $_SESSION['key_session']['user_level'];
+  if ($user_level == '1') {
+    $user_level = 'Administrator';
+  } elseif ($user_level == '2') {
+    $user_level = 'Guidance';
+  }
+
+  $is_check = check_academic();
+  if (!$is_check) {
+    $session->message('w', 'Please set the semester and school year first.');
+    redirect('./exam_schedule', false);
+    return;
+  }
+
+  $update = update_exam_schedule_sql($data, $id);
+  if ($update) {
+      redirect('./view_exam_schedule', false);
+  } else {
+      redirect('./update_exam_schedule', false);
+  }
+
+  
 }
 
 function set_academic($semester, $start_school_year, $end_school_year) {
