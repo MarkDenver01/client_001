@@ -49,10 +49,7 @@
                   </div>
                 </div>
                 <div class="col-12">
-                  <div class="form-floating">
-                    <textarea name="body_message" class="form-control rounded-0" placeholder="Your announcement" id="floatingTextarea" style="height: 100px;" ><?php echo $announcement['body_message']; ?></textarea>
-                    <label for="floatingTextarea">Body Message</label>
-                  </div>
+                   <textarea id="summernote" name="body_message" class="form-control rounded-0" placeholder="Your announcement" id="floatingTextarea" style="height: 100px;" ><?php echo $announcement['body_message']; ?></textarea>
                 </div>
                 <div class="col-md-6">
                   <label for="ic_image_file_path">Attached Files</label>
@@ -87,5 +84,10 @@
       $("#ic_image_file_path").change(function(){
           readURL(this);
       });
+  </script>
+  <script>
+    $(document).ready(function() {
+      $('#summernote').summernote();
+    });
   </script>
 <?php include('../footer.php'); ?>
