@@ -971,4 +971,15 @@ function find_update_exam_schedule($id) {
   return $data = [];
 }
 
+function find_announcement($id) {
+  global $db;
+  $sql = "SELECT * FROM announcement_logs WHERE id ='" .$id. "'";
+  $result = $db->query($sql);
+  if ($db->num_rows($result)) {
+    $data = $db->fetch_assoc($result);
+    return $data;
+  }
+  return $data = [];
+}
+
 ?>

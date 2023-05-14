@@ -43,12 +43,13 @@
                       <?php while($row = $sql->fetch_assoc()) { ?>
 
                       <tr>
+                      <th data-target="name" scope="row" class="text-center" hidden><?php echo remove_junk($row['id']); ?></th>
                         <th data-target="name" scope="row" class="text-center"><?php echo remove_junk($row['title']); ?></th>
                         <td data-target="name" scope="row" class="text-center" ><?php echo remove_junk($row['body_message']); ?></td>
-                        <td data-target="name"  class="text-center" scope="row"><?php echo remove_junk($row['date_posted']); ?></td>
-                        <td data-target="name"  class="text-center" scope="row"><?php echo remove_junk($row['from']); ?></td>
-                        <td>
-                            <a href="#" type="submit" class="btn text-white rounded-pill btn-sm w-100" style="background-image: linear-gradient(#AB274F, #9F2B68);"><i class="bi bi-print"></i> Repost</a>
+                        <td data-target="name" class="text-center" scope="row"><?php echo remove_junk($row['date_posted']); ?></td>
+                        <td data-target="name" class="text-center" scope="row"><?php echo remove_junk($row['from']); ?></td>
+                        <td data-target="name" class="text-center" scope="row">
+                            <a href="./post_announcement?id=<?php echo $row['id']; ?>" type="submit" class="btn text-white rounded-pill btn-sm w-100" style="background-image: linear-gradient(#4B6F44, #006B3C);"><i class="bi bi-print"></i> Edit</a>
                         </td>
                       </tr>
                       <?php } ?>

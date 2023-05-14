@@ -4,6 +4,7 @@
 ?>
 <?php include('../header.php'); ?>
 <?php include('../includes/load.php'); ?>
+<?php $id = $_GET['id']; ?>
 <?php
   if (isset($_SESSION['key_session']['email_address'])) {
     if (isset($_POST['button_submit'])) {
@@ -34,25 +35,28 @@
         <div class="col-xl-12">
           <div class="card rounded-0">
           <div class="card-body">
+            <?php
+              $announcement = find_announcement($id);
+            ?>
             <h5 class="card-title">Post an announcement</h5>
             <?php echo display_message($msg); ?>
             <!-- Floating Labels Form -->
               <form class="row g-3" action="", method="POST" enctype="multipart/form-data">
                 <div class="col-md-12">
                   <div class="form-floating">
-                    <input name="title" type="text" class="form-control rounded-0" id="floatingName" placeholder="Your title">
+                    <input name="title" type="text" class="form-control rounded-0" id="floatingName" placeholder="Your title" value="<?php echo $announcement['title']; ?>">
                     <label for="floatingName">Title</label>
                   </div>
                 </div>
                 <div class="col-12">
                   <div class="form-floating">
-                    <textarea name="body_message" class="form-control rounded-0" placeholder="Your announcement" id="floatingTextarea" style="height: 100px;"></textarea>
+                    <textarea name="body_message" class="form-control rounded-0" placeholder="Your announcement" id="floatingTextarea" style="height: 100px;" ><?php echo $announcement['body_message']; ?></textarea>
                     <label for="floatingTextarea">Body Message</label>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <label for="ic_image_file_path">Attached Files</label>
-                  <input id="ic_image_file_path" type="file" name="image_path" class="form-control btn btn-primary rounded-0 btn-sm" ></input>
+                  <input id="ic_image_file_path" type="file" name="image_path" class="form-control btn btn-primary rounded-0 btn-sm" value="<?php echo $announcement['attached_file_path']; ?>"></input>
                 </div>
 
                 <div class="text-left">
