@@ -165,51 +165,30 @@ if(isset($_POST['button_counseling'])) {
                       </table>
                     </div>
                     <div class="col-lg-12">
-                        <!-- Line Chart -->
-                        <canvas class="border border-danger" id="lineChart" style="max-height: 400px; background-image: linear-gradient(#FFFADA, #FDF6E4);"></canvas>
-                            <?php 
-                            $sql = "SELECT * FROM examinee WHERE student_id='$student_id' AND exam_title = 'BarOn EQ-i:S'";
-                            $run_query = $db->query($sql);
-                            $data_chart = array();
-                            $fail_rate = array();
-                            foreach ($run_query as $row) {
-                                $fail_rate[] = 51 - $row['total_score'];
-                                $score_data[] = $row['total_score'];
-                                $data_chart[] = $row['exam_category'];
-                            }
-                            ?>
-                         <script>
-                          document.addEventListener("DOMContentLoaded", () => {
-                            new Chart(document.querySelector('#lineChart'), {
-                              type: 'bar',
-                              data: {
-                                labels: [
-                                    'Number of correct answer',
-                                    'Number of incorrect answer',
-                                ],
-                                datasets: [{
-                                  label: 'BarOn EQ-i:S',
-                                  data: [
-                                    '<?php echo $score_data[0]; ?>',
-                                    '<?php echo $fail_rate[0]; ?>',
-                                  ],
-                                  fill: true,
-                                  borderColor: 'rgb(255, 12, 10)',
-                                  tension: 0.1
-                                }]
-                              },
-                              options: {
-                                scales: {
-                                  y: {
-                                    beginAtZero: true
-                                  }
-                                }
-                              }
-                            });
-                          });
-                          </script>
-                          <!-- End Line CHart -->
-                        </div>
+                    <table class="table table-hover table-bordered mb-5 text-center text-nowrap">
+                    <tbody>                   
+                        <tr>
+                          <td><h5>51 - 40</h5></td>
+                          <td><h5>SUPERIOR</h5></td>
+                        </tr>     
+                        <tr>
+                          <td><h5>39 - 30</h5></td>
+                          <td><h5>ABOVE AVERAGE</h5></td>
+                        </tr>   
+                        <tr>
+                          <td><h5>29 - 20</h5></td>
+                          <td><h5>AVERAGE</h5></td>
+                        </tr>  
+                        <tr>
+                          <td><h5>19 - 10</h5></td>
+                          <td><h5>AVERAGE</h5></td>
+                        </tr>  
+                        <tr>
+                          <td><h5>9 - 0</h5></td>
+                          <td><h5>POOR</h5></td>
+                        </tr>  
+                    </tbody>
+                  </table>
                   </div> 
             </div>  
           </div>
