@@ -698,24 +698,72 @@ function change_password($new_password, $confirm_password) {
     }
 }
 
-function change_password_v2($new_password, $confirm_password) {
+function change_password_v2($new_password, $confirm_password, $file_path_name) {
   global $session;
-  $new_password = remove_junk($_POST[$new_password]);
-  $confirm_password = remove_junk($_POST[$confirm_password]);
-  if (empty($errors)) {
-    if ($new_password == $confirm_password) {
-      if ($new_password == "default" || $confirm_password == "default") {
-        $session->message('w', 'Please change your default password.');
-        redirect('account_settings', false);
-      } else {
-        change_password_by_query($_SESSION['key_session']['email_address'], $new_password);
-        redirect('account_settings', false);
+
+    $new_password = $_POST[$new_password];
+    $confirm_password = $_POST[$confirm_password];
+    $img_file = $_FILES[$file_path_name]['name'];
+    $tmp_dir = $_FILES[$file_path_name]['tmp_name'];
+    $img_size = $_FILES[$file_path_name]['size'];
+
+    if (empty($img_file)) {
+      if (empty($errors)) {
+        if ($new_password == $confirm_password) {
+          if ($new_password == "default" || $confirm_password == "default") {
+            $session->message('w', 'Please change your default password.');
+            redirect('account_settings', false);
+          } else {
+            change_password_by_query($_SESSION['key_session']['email_address'], $new_password);
+            redirect('account_settings', false);
+          }
+        } else {
+          $session->message('w', 'Password does not match. Please try again');
+          redirect('account_settings', false);
+        }
       }
     } else {
-      $session->message('w', 'Password does not match. Please try again');
-      redirect('account_settings', false);
-    }
-  }
+      $upload_dir = '../uploads/students/';
+      
+      $img_ext = strtolower(pathinfo($img_file, PATHINFO_EXTENSION)); // get image extensions
+      $valid_extensions = array('jpeg', 'jpg', 'png', 'gif'); // valid extensio
+
+      $profile_pic = rand(1000,1000000).".".$img_ext;
+
+      if (in_array($img_ext, $valid_extensions)) {
+        if ($img_size < 5000000) {
+          if (move_uploaded_file($tmp_dir, $upload_dir.$profile_pic)) {
+            $dir = $upload_dir.$profile_pic;
+            if (empty($errors)) {
+              if ($new_password == $confirm_password) {
+                if ($new_password == "default" || $confirm_password == "default") {
+                  $session->message('w', 'Please change your default password.');
+                  redirect('account_settings', false);
+                } else {
+                  change_password_with_img_by_query($_SESSION['key_session']['email_address'], $new_password, $dir);
+                  redirect('account_settings', false);
+                }
+              } else {
+                $session->message('w', 'Password does not match. Please try again');
+                redirect('account_settings', false);
+              }
+            } else {
+              $session->message('d', 'error 4');
+              redirect('account_settings', false);
+            }
+          } else {
+            $session->message('d', 'error 3');
+            redirect('account_settings', false);
+          }
+         } else {
+          $session->message('d', 'error 2');
+          redirect('account_settings', false);
+         }
+      } else {
+        $session->message('d', 'error 1');
+                redirect('account_settings', false);
+      }
+   }
 }
 
 function SET_LOGGED_IN() {

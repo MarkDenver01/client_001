@@ -6,9 +6,11 @@
 <?php include('../includes/load.php'); ?>
 <?php SET_NOT_LOGGED_IN(); ?>
 <?php global $db; ?>
-<?php if(isset($_POST['button_change'])) change_password_v2(
-  "new_password",
-  "confirm_password"); ?>
+<?php if(isset($_POST['button_change'])) { 
+  change_password_v2("new_password",
+  "confirm_password",
+  "image_path"); 
+} ?>
 <?php include('../start_menu_bar.php'); ?>
 
 <main id="main" class="main">
@@ -32,7 +34,7 @@
                   <?php echo display_message($msg); ?>
                 </div>
 
-                <form action="" method="POST" class="row g-3 needs-validation" novalidate>
+                <form action="" method="POST" class="row g-3" enctype="multipart/form-data">
                 <?php $sql = "SELECT * FROM user_account WHERE email_address ='" .$_SESSION['key_session']['email_address']. "'";
                   $result = $db->query($sql);
                   if ($db->num_rows($result)) {
@@ -86,4 +88,23 @@
     
     </div>
 </section>
+
+<script>
+      function readURL(input) {
+          if (input.files && input.files[0]) {
+              var reader = new FileReader();
+
+              reader.onload = function (e) {
+                  $('#ic_image_file').attr('src', e.target.result);
+              }
+
+              reader.readAsDataURL(input.files[0]);
+          }
+      }
+
+      $("#ic_image_file_path").change(function(){
+          readURL(this);
+      });
+  </script>
+
 <?php include('../footer.php'); ?>

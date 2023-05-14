@@ -469,6 +469,14 @@
    return ($result && $db->affected_rows() === 1 ? true : false);
  }
 
+ function change_password_with_img_by_query($email_address, $change_password, $img_file_path) {
+  global $db;
+  $encrypt = sha1($change_password);
+  $sql = "UPDATE user_account SET password ='" .$encrypt. "', image ='" .$img_file_path. "', status ='1' WHERE email_address ='" .$email_address. "' LIMIT 1";
+  $result = $db->query($sql);
+  return ($result && $db->affected_rows() === 1 ? true : false);
+}
+
  function insert_new_exam(array $data) {
   global $db;
   $sql ="INSERT INTO exam_created(student_year, semester, school_year, exam_title, exam_description, exam_category, image_exam_path, created_at, exam_status, updated_answer) ";
