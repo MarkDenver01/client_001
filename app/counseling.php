@@ -27,78 +27,15 @@
 
     $sqlExist = $db->query("SELECT * FROM counseling_appointment WHERE student_name ='$student_name'");
 
-    $sqlCheck = $db->query("SELECT * FROM counseling_appointment WHERE appointment_date = '$date_time_picker'");
-    $readSlots = array();
+    $sqlCheckAM = $db->query("SELECT * FROM counseling_appointment WHERE date(appointment_date) = '$date_appointment_formatted' AND time(appointment_date) BETWEEN '08:00:00' AND '12:00:00'");
+    $sqlCheckPM = $db->query("SELECT * FROM counseling_appointment WHERE date(appointment_date) = '$date_appointment_formatted' AND time(appointment_date) BETWEEN '13:00:00' AND '17:00:00'");
 
-    if ($sqlCheck->num_rows > 0) {
-      while($row = $sqlCheck->fetch_assoc()) {
-        $readSlots[] = $row['slots_available'];
-      }
-
-    $totalSlots = 5;
-    $availableSlots = array();
-
-    for ($i=1; $i < $totalSlots; $i++) { 
-      if (!in_array($i, $readSlots)) {
-        $availableSlots[] = $i;
-      }
-    }
-
-    foreach ($availableSlots as $slot) {
-      $newSlots = $slots;
-    }
-
-    if ($newSlots <= $totalSlots) {
-      $sqlInsert = $db->query("INSERT INTO counseling_appointment(student_name, appointment_date, slots_available) VALUES('$name', '$date_time_picker','1')");
-      if ($sqlInsert) {
-        $sqlUpdate = $db->query("UPDATE examinee SET counselor_notify_status ='Counseling' WHERE student_id='$id'");
-    
-        if ($sqlUpdate) {
-          $sqlCheckAdmin = $db->query("SELECT `name`, email_address FROM user_account WHERE user_level ='1' OR user_level='2'");
-          $email[] = array();
-          while($row = $sqlCheckAdmin->fetch_assoc()) {
-            $name[] = $row['name'];
-            $email[] = $row['email_address'];
-
-            $subject = "Student's Appointment";
-            $content = 'Hi Sir/Maam';
-            $content .= '<br/>';
-            $content .= '<br/>';
-            $content .= 'Good day!';
-            $content .= '<br/>';
-            $content .= $_POST['message'];
-            $content .= '<br/>';
-            $content .= '---------------------------------------';
-            $content .= '<br/>';
-            $content .= 'Thank you.';
-      
-             // send mail account created
-            $send = send_email(
-              $row['email_address'],
-              $row['name'],
-              $subject,
-              $content
-            );
-          }
-          
-          foreach ($email as $key) {
-            $sqlNotify = $db->query("INSERT INTO notify_student(student_id, sender, receiver, `message`, user_level, notify_date, notify_status) 
-            VALUES('$id','$email_address', '$key', '" .$_POST['message']. "','3','$curr_date','unread')");
-
-            if ($sqlNotify) {
-              $session->message('s', 'Appointment success!');
-              redirect('./counseling', false);
-            }
-          }
-        } else {
-          $session->message('d', 'Unexpected issued occour');
-          redirect('./counseling', false);
-        }
-      }
-    } else {
-      $session->message('d', 'No slot available on this date: ' .$date_time_picker);
-      redirect('./counseling', false);
-    }
+if ($sqlCheckAM->num_rows > 0) {
+    $session->message('w', 'No slot available on this morning.');
+    redirect('./counseling', false);
+} elseif ($sqlCheckPM->num_rows > 0) {
+    $session->message('w', 'No slot available on this afternoon.');
+    redirect('./counseling', false);
 } else {
   $sqlInsert = $db->query("INSERT INTO counseling_appointment(student_name, appointment_date, slots_available) VALUES('$name', '$date_time_picker','1')");
   if ($sqlInsert) {
