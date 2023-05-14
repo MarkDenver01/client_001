@@ -119,9 +119,9 @@
     </li><!-- End Student Records Nav -->
 
     <li class="nav-item">
-      <a class="nav-link " href="#">
+      <a class="nav-link " href="./view_student_probation">
         <i class="ri-account-pin-box-fill"></i>
-        <span>Student probation</span>
+        <span>Student Probation</span>
       </a>
     </li><!-- End Generate Reports Nav -->
 
