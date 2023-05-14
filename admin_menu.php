@@ -4,6 +4,7 @@
         <span>Dashboard</span>
       </a>
     </li><!-- End Dashboard Nav -->
+    
 
     <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#announcement-nav" data-bs-toggle="collapse" href="#">
@@ -31,6 +32,25 @@
         <span>Semester and School Year</span>
       </a>
     </li>End Semester Nav -->
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" data-bs-target="#course-nav" data-bs-toggle="collapse" href="#">
+        <i class="ri-file-copy-2-fill"></i>
+        <span>Manage Course</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul id="course-nav" class="nav-content collapsed" data-bs-parent="#sidebar-nav">
+        <li>
+          <a href="./add_course">
+            <i class="bi bi-circle"></i><span>Add Course</span>
+          </a>
+        </li>
+        <li>
+          <a href="./view_course">
+            <i class="bi bi-circle"></i><span>View Course</span>
+          </a>
+        </li>
+      </ul>
+    </li><!-- End Dashboard Nav -->
 
     <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">

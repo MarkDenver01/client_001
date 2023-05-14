@@ -78,16 +78,16 @@
                     
                     <div class="col-sm-3">
                       <select id="exam_description" name="course" class="form-select rounded-0" aria-label="Default select example">
-                        <option value="" selected>Select course</option>
-                          <option value="BSIE">Bachelor of Science in Industrial Engineering</option>
-                          <option value="BSIT">Bachelor of Science in Information Technology</option>
-                          <option value="BS-Psy">Bachelor of Science in Psychology</option>
-                          <option value="BSHRM">Bachelor of Science in Hospitality Management</option>
-                          <option value="BSTM">Bachelor of Science in Tourism Management</option>
-                          <option value="BSA">Bachelor of Science in Accountancy</option>
-                          <option value="BSIA">Bachelor of Science in Internal Auditing</option>
-                          <option value="BSMA">Bachelor of Science in Management Accounting</option>
-                        </select>
+                      <?php 
+                          $sql = "SELECT * FROM course_tbl";
+                          $result = $db->query($sql);
+                          if ($result->num_rows > 0) {
+                            echo '<option value="" disabled>Select course</option>';
+                            while ($row = $result->fetch_assoc()) {
+                              echo '<option value="' .$row['course']. '">' .$row['course']. '</option>';
+                            }
+                          }
+                        ?>
                       </select>
                       <br/>
                     </div>

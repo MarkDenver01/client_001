@@ -569,6 +569,16 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         }
       }
 
+      // add course
+      if (isset($db_sql_56)) {
+        foreach ($db_sql_56 as $sql) {
+          $conn->query($sql);
+          if ($conn->error) {
+            die($conn->error);
+          }
+        }
+      }
+
       $update_env_vars = $__DotEnvironment->update_env_variables($_POST);
       if($update_env_vars){
         echo "<script>location.href = './?step=4'</script>";
@@ -1127,6 +1137,16 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         // student result
         if (isset($db_sql_55)) {
           foreach ($db_sql_55 as $sql) {
+            $conn->query($sql);
+            if ($conn->error) {
+              die($conn->error);
+            }
+          }
+        }
+
+        // add course
+        if (isset($db_sql_56)) {
+          foreach ($db_sql_56 as $sql) {
             $conn->query($sql);
             if ($conn->error) {
               die($conn->error);

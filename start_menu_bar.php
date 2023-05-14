@@ -157,8 +157,6 @@
       </li><!-- End Notification Nav -->
     <?php } ?>
     <li class="nav-item dropdown">
-
-
 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
   <?php $user_level = $_SESSION['key_session']['user_level']; ?>
   <?php if ($user_level == '2') { ?>

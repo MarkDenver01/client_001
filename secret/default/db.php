@@ -938,3 +938,17 @@ ADD PRIMARY KEY(`id`)";
 
 $db_sql_55[] = "ALTER TABLE `student_exam_result` 
 MODIFY  `id` int(255) NOT NULL AUTO_INCREMENT";
+
+// =================== course ========================== //
+$db_sql_56[] = "DROP TABLE IF EXISTS `course_tbl`";
+
+$db_sql_56[] = "CREATE TABLE `course_tbl` (
+  `id` int(255) NOT NULL,
+  `course` VARCHAR(255) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+$db_sql_56[] = "ALTER TABLE `course_tbl` 
+ADD PRIMARY KEY(`id`)";
+
+$db_sql_56[] = "ALTER TABLE `course_tbl` 
+MODIFY  `id` int(255) NOT NULL AUTO_INCREMENT";
