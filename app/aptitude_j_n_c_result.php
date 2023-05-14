@@ -171,53 +171,31 @@ if(isset($_POST['button_counseling'])) {
                       </table>
                     </div>
                     <div class="col-lg-12">
-                        <!-- Line Chart -->
-                        <canvas class="border border-danger" id="lineChart" style="max-height: 400px; background-image: linear-gradient(#FFFADA, #FDF6E4);"></canvas>
-                            <?php 
-                            $sql = "SELECT * FROM examinee WHERE student_id='$student_id' AND exam_title = 'Aptitude J and C'";
-                            $run_query = $db->query($sql);
-                            $data_chart = array();
-                            foreach ($run_query as $row) {
-                                $score_data[] = $row['total_score'];
-                                $data_chart[] = $row['exam_category'];
-                            }
-                            ?>
-                         <script>
-                          document.addEventListener("DOMContentLoaded", () => {
-                            new Chart(document.querySelector('#lineChart'), {
-                              type: 'line',
-                              data: {
-                                labels: [
-                                    '<?php echo $data_chart[0]; ?>',
-                                    '<?php echo $data_chart[1]; ?>',
-                                    '<?php echo $data_chart[2]; ?>',
-                                    '<?php echo $data_chart[3]; ?>',
-                                ],
-                                datasets: [{
-                                  label: 'Student Success Kit',
-                                  data: [
-                                    '<?php echo $score_data[0]; ?>',
-                                    '<?php echo $score_data[1]; ?>',
-                                    '<?php echo $score_data[2]; ?>',
-                                    '<?php echo $score_data[3]; ?>',
-                                  ],
-                                  fill: true,
-                                  borderColor: 'rgb(153, 123, 123)',
-                                  tension: 0.1
-                                }]
-                              },
-                              options: {
-                                scales: {
-                                  y: {
-                                    beginAtZero: true
-                                  }
-                                }
-                              }
-                            });
-                          });
-                          </script>
-                          <!-- End Line CHart -->
-                        </div>
+                    <table class="table table-hover table-bordered mb-5 text-center text-nowrap">
+                    <tbody>                   
+                        <tr>
+                          <td><h5>20 - 26</h5></td>
+                          <td><h5>EXCELLENT</h5></td>
+                        </tr>     
+                        <tr>
+                          <td><h5>15 - 19</h5></td>
+                          <td><h5>GOOD</h5></td>
+                        </tr>   
+                        <tr>
+                          <td><h5>10 - 14</h5></td>
+                          <td><h5>FAIR</h5></td>
+                        </tr>  
+                        <tr>
+                          <td><h5>5 - 9</h5></td>
+                          <td><h5>POOR</h5></td>
+                        </tr>  
+                        <tr>
+                          <td><h5>0 - 4</h5></td>
+                          <td><h5>BAD</h5></td>
+                        </tr>  
+                    </tbody>
+                  </table>
+                      </div>
                   </div>
             </div>  
           </div>
