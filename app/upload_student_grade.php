@@ -31,15 +31,20 @@
                 if (move_uploaded_file($tmp_dir, $upload_dir.$generate_file_name)) {
                   $dir = $upload_dir.$generate_file_name;
                   if (empty($errors)) {
-                        $sqlIns = $db->query("INSERT INTO monitoring_student(student_id, attached_grade_file, school_year, semester) VALUES(
-                        '$student_id',
-                        '$dir',
-                        '$school_year',
-                        '$semester')");
+                        $sqlCheck = $db->query("SELECT * FROM monitoring_student WHERE student_id ='" .$student_id. "'");
+                        if ($sqlCheck->num_rows > 0) { 
+                            redirect('./view_student_probation', false);
+                        } else {
+                            $sqlIns = $db->query("INSERT INTO monitoring_student(student_id, attached_grade_file, school_year, semester) VALUES(
+                                '$student_id',
+                                '$dir',
+                                '$school_year',
+                                '$semester')");
 
-                    if ($sqlIns) {
-                        redirect('./view_student_probation', false);
-                    }
+                            if ($sqlIns) {
+                                redirect('./view_student_probation', false);
+                            }
+                        }
                   } else {
                     redirect($redirect_page, false);
                   }
