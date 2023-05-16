@@ -407,7 +407,7 @@ if($developer) {
   <i class="ri-chat-delete-line"></i>
 </div>
 <div class="ps-3">
-  <h6><?php echo $not_take + 6; ?> </h6>
+  <h6><?php echo $not_take; ?> </h6>
   <span class="text-danger small pt-1 fw-bold"></span> <span class="text-muted small pt-2 ps-1">result</span>
 
 </div>

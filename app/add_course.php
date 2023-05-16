@@ -4,6 +4,7 @@
 ?>
 <?php include('../header.php'); ?>
 <?php include('../includes/load.php'); ?>
+<?php IS_HIGHER_LEVEL(); ?>
 <?php global $db; ?>
 <?php global $session; ?>
 <?php $id = $_GET['id']; ?>

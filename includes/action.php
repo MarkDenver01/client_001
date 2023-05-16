@@ -815,6 +815,15 @@ function IS_ADMIN_LEVEL() {
   }
 }
 
+function IS_HIGHER_LEVEL() {
+  if (isset($_SESSION['key_session']['user_level'])) {
+    $user_level = $_SESSION['key_session']['user_level'];
+    if ($user_level == '3') {
+      redirect('./dashboard', false);
+    }
+  }
+}
+
 function CHECK_EXAM_AVAILABILITY() {
   if(isset($_SESSION['key_session']['exam_status']) && $_SESSION['key_session']['exam_status'] == 'Not Ready') {
     redirect('./dashboard', false);

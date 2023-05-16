@@ -4,6 +4,7 @@
 ?>
 <?php include('../header.php'); ?>
 <?php include('../includes/load.php'); ?>
+<?php IS_HIGHER_LEVEL(); ?>
 <?php $id = $_GET['id']; ?>
 <?php
   if (isset($_SESSION['key_session']['email_address'])) {

@@ -5,6 +5,7 @@
 <?php include('../header.php'); ?>
 <?php include('../includes/load.php'); ?>
 <?php SET_NOT_LOGGED_IN(); ?>
+<?php IS_HIGHER_LEVEL(); ?>
 <?php $schedule = find_update_exam_schedule($_GET['id']); ?>
 <?php 
 $id = $_GET['id'];

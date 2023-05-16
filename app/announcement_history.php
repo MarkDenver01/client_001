@@ -5,6 +5,7 @@
 <?php include('../header.php'); ?>
 <?php include('../includes/load.php'); ?>
 <?php SET_NOT_LOGGED_IN(); ?>
+<?php IS_HIGHER_LEVEL(); ?>
 <?php global $db; ?>
 <?php include('../start_menu_bar.php'); ?>
 

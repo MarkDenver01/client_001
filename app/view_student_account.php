@@ -6,6 +6,7 @@
 <?php header("Refresh: 30"); ?>
 <?php include('../includes/load.php'); ?>
 <?php SET_NOT_LOGGED_IN(); ?>
+<?php IS_HIGHER_LEVEL(); ?>
 <?php onClickButton("button_create", "./register_student_account"); ?>
 <?php include('../start_menu_bar.php'); ?>
 

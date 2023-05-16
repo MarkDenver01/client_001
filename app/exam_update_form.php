@@ -1,6 +1,7 @@
 <?php include('../header.php'); ?>
 <?php include('../includes/load.php'); ?>
 <?php SET_NOT_LOGGED_IN(); ?>
+<?php IS_HIGHER_LEVEL(); ?>
 <?php $id = $_GET['id']; ?>
 <?php $category = $_GET['category']; ?>
 <?php $created = find_by_exam_created_by_id($id); ?>

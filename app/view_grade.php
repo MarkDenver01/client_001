@@ -1,6 +1,7 @@
 <?php include('../header.php'); ?>
 <?php include('../includes/load.php'); ?>
 <?php SET_NOT_LOGGED_IN(); ?>
+<?php IS_HIGHER_LEVEL(); ?>
 <?php 
     $student_id = $_GET['student_id']; ?>
     if (isset($_POST['button_close'])) {
