@@ -4,6 +4,7 @@
 <?php delete_announcement_after_a_days(); ?>
 <?php $email_address = $_SESSION['key_session']['email_address']; ?>
 <?php $user_profile = current_user_account("user_account", $email_address); ?>
+<?php $notify_count = count_notification($_SESSION['key_session']['email_address']); ?>
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
 
@@ -20,22 +21,30 @@
   <?php
       $user_level = $_SESSION['key_session']['user_level'];
       if ($user_level == '3') {  ?>
+
+      <li class="nav-item">
+        <a class="nav-link nav-icon" href="./counseling?student_id=<?php echo $_SESSION['key_session']['student_id']; ?>">
+          <span class="badge badge-number"  style="background-image: linear-gradient(#3C69E7, #6699CC);">Set Appointment</span>
+          <i class="bi bi-alarm"></i>  
+        </a><!-- End Notification Icon -->
+      </li><!-- End Semester Nav -->
+
       <?php $student_id = $_SESSION['key_session']['student_id']; ?>
       <?php 
         if (isset($_POST["button_update"])) {
-          $sql = $db->query("UPDATE notify_student SET notify_status='read' WHERE student_id='$student_id' AND user_level='1' OR user_level='2' AND notify_status='unread'");
+          $sql = $db->query("UPDATE notify_student SET notify_status='read' WHERE student_id='99999999' AND user_level='1' OR user_level='2' AND notify_status='unread'");
           if($sql) {
-            redirect('https://gmail.com/', false);
+            redirect('./dashboard', false);
           } else {
             redirect('../app/dashboard', false);
           }
         }
       ?>
-    <?php $notify_count = count_notification($_SESSION['key_session']['email_address']); ?>
+    
     <li class="nav-item dropdown">
         <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
           <i class="bi bi-bell"></i>
-          <span class="badge badge-number"  style="background-image: linear-gradient(#d9534f, #AB274F);"><?php echo $notify_count; ?> Notification</span>
+          <span class="badge badge-number"  style="background-image: linear-gradient(#d9534f, #AB274F);"><?php echo $notify_count; ?></span>
         </a><!-- End Notification Icon -->
 
         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
@@ -43,7 +52,7 @@
             <form action="" method="post">
             You have <?php echo $notify_count; ?> new notifications
             <?php if($notify_count > 0) { ?>
-              <button name="button_update" type="submit" class="badge rounded-pill bg-primary p-2 ms-2">View all</button>
+              <button name="button_update" type="submit" class="badge rounded-pill bg-primary p-2 ms-2">Read all</button>
             <?php } ?>
             </form>
           </li>
@@ -86,7 +95,7 @@
   <?php } else { ?>
     <li class="nav-item">
       <a class="nav-link nav-icon" href="./set_academic_settings">
-          <span class="badge badge-number"  style="background-image: linear-gradient(#7BB661, #006B3C);">Semester and school year</span>
+          <span class="badge badge-number"  style="background-image: linear-gradient(#007FFF, #2E5894);">Semester and school year</span>
           <i class="ri-align-center"></i>  
       </a><!-- End Notification Icon -->
     </li><!-- End Semester Nav -->
@@ -97,7 +106,7 @@
               if ($sql) {
                 redirect('https://gmail.com/', false);
               } else {
-                redirect('../app/dashboard', false);
+                redirect('./dashboard', false);
               }
             }
       ?>

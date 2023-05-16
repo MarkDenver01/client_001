@@ -5,6 +5,7 @@
 <?php include('../header.php'); ?>
 <?php include('../includes/load.php'); ?>
 <?php SET_NOT_LOGGED_IN(); ?>
+<?php IS_STUDENT_LEVEL(); ?>
 <?php global $db; ?>
 <?php global $session; ?>
 <?php 
@@ -27,8 +28,8 @@
 
     $sqlExist = $db->query("SELECT * FROM counseling_appointment WHERE student_name ='$student_name'");
 
-    $sqlCheckAM = $db->query("SELECT * FROM counseling_appointment WHERE date(appointment_date) = '$date_appointment_formatted' AND time(appointment_date) BETWEEN '08:00:00' AND '12:00:00'");
-    $sqlCheckPM = $db->query("SELECT * FROM counseling_appointment WHERE date(appointment_date) = '$date_appointment_formatted' AND time(appointment_date) BETWEEN '13:00:00' AND '17:00:00'");
+    $sqlCheckAM = $db->query("SELECT * FROM counseling_appointment WHERE student_id ='$id' AND date(appointment_date) = '$date_appointment_formatted' AND time(appointment_date) BETWEEN '08:00:00' AND '12:00:00'");
+    $sqlCheckPM = $db->query("SELECT * FROM counseling_appointment WHERE student_id ='$id' AND  date(appointment_date) = '$date_appointment_formatted' AND time(appointment_date) BETWEEN '13:00:00' AND '17:00:00'");
 
 if ($sqlCheckAM->num_rows > 0) {
     $session->message('w', 'No slot available on this morning.');
@@ -37,7 +38,7 @@ if ($sqlCheckAM->num_rows > 0) {
     $session->message('w', 'No slot available on this afternoon.');
     redirect('./counseling', false);
 } else {
-  $sqlInsert = $db->query("INSERT INTO counseling_appointment(student_name, appointment_date, slots_available) VALUES('$name', '$date_time_picker','1')");
+  $sqlInsert = $db->query("INSERT INTO counseling_appointment(student_id, student_name, appointment_date, slots_available) VALUES('$id', '$name', '$date_time_picker','1')");
   if ($sqlInsert) {
     $sqlUpdate = $db->query("UPDATE examinee SET counselor_notify_status ='Counseling' WHERE student_id='$id'");
 

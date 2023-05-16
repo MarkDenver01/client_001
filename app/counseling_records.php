@@ -31,29 +31,29 @@
                   <table class="table table-sm table-hover datatable text-nowrap">
                     <thead>
                       <tr>
-                      <th scope="col" class="text-center" >Student Id</th>
-                        <th scope="col" class="text-center" >Name</th>
-                        <th scope="col" class="text-center" >Appointment Date</th>
-                        <th scope="col" class="text-center" >Action</th>
+                      <th scope="col" class="text-center" style="width: 20%;">Student Id</th>
+                        <th scope="col" class="text-center" style="width: 30%;" >Name</th>
+                        <th scope="col" class="text-center" style="width: 20%;">Appointment Date</th>
+                        <th scope="col" class="text-center" style="width: 30%;">Action</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <?php $sql = $db->query("SELECT * FROM counseling_appointment ORDER BY student_id DESC"); ?>
+                      <?php $sql = $db->query("SELECT * FROM counseling_appointment ORDER BY id DESC"); ?>
                       <?php if($sql->num_rows > 0) {?>
                       <?php while($row = $sql->fetch_assoc()) { ?>
 
                       <tr>
-                        <th data-target="name" scope="row" class="text-center"><?php echo remove_junk($row['student_id']); ?></th>
-                        <th data-target="name" scope="row" class="text-center" ><?php echo remove_junk($row['student_name']); ?></th>
-                        <td class="text-center" ><?php echo remove_junk($row['appointment_date']); ?></td>
-                        <td>
+                        <th data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo remove_junk($row['student_id']); ?></th>
+                        <th data-target="name" scope="row" class="text-center" style="width: 30%;"><?php echo remove_junk($row['student_name']); ?></th>
+                        <td class="text-center" style="width: 20%;"><?php echo remove_junk($row['appointment_date']); ?></td>
+                        <td style="width: 30%;">
                           <?php $sqlCheck = $db->query("SELECT * FROM examinee WHERE counselor_notify_status ='Re-assestment' AND student_id ='" .$row['student_id']. "'"); ?>
                           <?php if ($sqlCheck->num_rows > 0)  { ?>
                             <button type="submit" class="btn text-white rounded-pill btn-sm w-100" style="background-image: linear-gradient(#AB274F, #9F2B68);" disabled>This student can now re-take the exam.  </a>
                           <?php } else { ?>
-                            <a href="../includes/notify_student.php?student_id=<?php echo $row['student_id']; ?>" type="submit" class="btn text-white rounded-pill btn-sm w-100" style="background-image: linear-gradient(#AB274F, #9F2B68);"><i class="bi bi-print"></i> Re-take Assement & Notify</a>
-                          <?php } ?>
-                          
+                            <a href="../includes/notify_student.php?student_id=<?php echo $row['student_id']; ?>" type="submit" class="btn text-white rounded-pill btn-sm w-50" style="background-image: linear-gradient(#AB274F, #9F2B68);"><i class="bi bi-print"></i> Re-take & Notify</a>
+                            <?php } ?>
+                            <a href="../includes/reschedule_appointment.php?student_id=<?php echo $row['student_id']; ?>" type="submit" class="btn text-white rounded-pill btn-sm w-50" style="background-image: linear-gradient(#4B6F44, #7BB661);"><i class="bi bi-print"></i> Re-schedule</a>
                         </td>
                       </tr>
 
