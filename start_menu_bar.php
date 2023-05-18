@@ -94,7 +94,7 @@
       </li><!-- End Notification Nav -->
   <?php } else { ?>
     <li class="nav-item">
-      <a class="nav-link nav-icon" href="./set_academic_settings">
+      <a class="nav-link nav-icon align-items-center pe-0" href="./set_academic_settings">
           <span class="badge badge-number"  style="background-image: linear-gradient(#007FFF, #2E5894);">Semester and school year</span>
           <i class="ri-align-center"></i>  
       </a><!-- End Notification Icon -->
@@ -113,7 +113,7 @@
     <?php $notif_admin = count_notification_by_admin($email_address); ?>
 
     <li class="nav-item dropdown">
-        <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+        <a class="nav-link nav-icon align-items-center pe-0" href="#" data-bs-toggle="dropdown">
           <span class="badge badge-number"  style="background-image: linear-gradient(#d9534f, #AB274F);"><?php echo $notif_admin; ?> </span>
           <i class="bi bi-bell"></i>
         </a><!-- End Notification Icon -->
@@ -173,7 +173,11 @@
   <?php } elseif ($user_level == '3') { ?>
     <img src="<?php echo $user_profile['image']; ?>" alt="Profile" class="rounded-circle">
   <?php } else { ?>
+  <?php if (empty($user_profile['image'])) { ?>
     <img src="assets/img/profile.png" alt="Profile" class="rounded-circle">
+  <?php } else { ?>
+    <img src="<?php echo $user_profile['image']; ?>" alt="Profile" class="rounded-circle">
+  <?php } ?>
   <?php } ?>
   
   <span class="d-none d-md-block dropdown-toggle ps-2"><?php echo $_SESSION['key_session']['name']; ?></span>
