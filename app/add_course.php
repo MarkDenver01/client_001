@@ -11,7 +11,7 @@
 <?php
    if (isset($_POST['button_submit'])) {
     if (empty($id)) {
-        $sql = "INSERT INTO course_tbl(course) VALUES('" .$_POST['course']. "')";
+        $sql = "INSERT INTO course_tbl(course_code, course) VALUES('" .$_POST['course_code']. "','" .$_POST['course']. "')";
         $result = $db->query($sql);
         if ($result) {
             $session->message('s', 'New course has been added');
@@ -21,7 +21,7 @@
             redirect('./add_course', false);
         }
     } else {
-        $sql = "UPDATE course_tbl SET course ='" .$_POST['course']. "' WHERE id='" .$id. "'";
+        $sql = "UPDATE course_tbl SET course_code ='" .$_POST['course_code']. "', course ='" .$_POST['course']. "' WHERE id='" .$id. "'";
         $result = $db->query($sql);
         if ($result) {
             $session->message('s', 'Course has been updated');
@@ -60,6 +60,11 @@
             <!-- Floating Labels Form -->
               <form class="row g-3" action="", method="POST" enctype="multipart/form-data">
                 <div class="col-md-12">
+                  <div class="form-floating">
+                    <input name="course_code" type="text" class="form-control rounded-0 w-50" id="floatingName" placeholder="Course Code" value="<?php echo $course['course_code']; ?>">
+                    <label for="floatingName">Course Code</label>
+                  </div>
+                  <br/>
                   <div class="form-floating">
                     <input name="course" type="text" class="form-control rounded-0 w-50" id="floatingName" placeholder="Course" value="<?php echo $course['course']; ?>">
                     <label for="floatingName">Course</label>

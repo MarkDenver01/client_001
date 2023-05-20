@@ -945,6 +945,7 @@ $db_sql_56[] = "DROP TABLE IF EXISTS `course_tbl`";
 
 $db_sql_56[] = "CREATE TABLE `course_tbl` (
   `id` int(255) NOT NULL,
+  `course_code` VARCHAR(255) NOT NULL,
   `course` VARCHAR(255) NOT NULL
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
 
