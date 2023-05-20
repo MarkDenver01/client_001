@@ -8,12 +8,26 @@
 <?php $id = $_GET['id']; ?>
 <?php
   if (isset($_SESSION['key_session']['email_address'])) {
-    if (isset($_POST['button_submit'])) {
-      post_announcements(
-        "title",
-        "body_message",
-        "image_path"
-      );
+    if (empty($id)) {
+      if (isset($_POST['button_submit'])) {
+        post_announcements(
+          "title",
+          "body_message",
+          "image_path",
+          false,
+          ""
+        );
+      }
+    } else {
+      if (isset($_POST['button_repost'])) {
+        post_announcements(
+          "title",
+          "body_message",
+          "image_path",
+          true,
+          $id
+        );
+      }
     }
   }
 ?>
@@ -58,7 +72,12 @@
                 </div>
 
                 <div class="text-left">
-                  <button name="button_submit" type="submit" class="btn btn-primary rounded-0">Submit</button>
+                  <?php if (empty($id)) { ?>
+                    <button name="button_submit" type="submit" class="btn btn-primary rounded-0">Submit</button>
+                  <?php } else { ?>
+                    <button name="button_repost" type="submit" class="btn btn-success rounded-0">Repost</button>
+                  <?php } ?>
+                  
                 </div>
               </form><!-- End floating Labels Form -->
 

@@ -175,7 +175,8 @@ $db_sql_9[] = "CREATE TABLE `announcement_logs` (
   `body_message` VARCHAR(255) NOT NULL,
   `attached_file_path` VARCHAR(255) NOT NULL,
   `date_posted` datetime NOT NULL,
-  `from` VARCHAR(255) NOT NULL
+  `from` VARCHAR(255) NOT NULL,
+  `status` VARCHAR(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET = utf8mb4";
 
 $db_sql_9[] = "ALTER TABLE `announcement_logs`

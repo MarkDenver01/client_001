@@ -261,7 +261,7 @@
   //  '%s' GROUP BY `from` ORDER BY `id` DESC", $current_date);
   //  $sql = sprintf("SELECT * FROM `announcement_logs` WHERE `date_posted` <
   //  '%s' ORDER BY `id` DESC LIMIT 10", $current_date);
-  $sql = "SELECT * FROM announcement_logs WHERE date_posted BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 WEEK) AND CURDATE()";
+  $sql = "SELECT * FROM announcement_logs WHERE status ='active' AND date_posted BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 WEEK) AND date_posted";
    return find_by_sql($sql);
  }
 
@@ -273,7 +273,8 @@
      `body_message`,
      `attached_file_path`,
      `date_posted`,
-     `from`
+     `from`,
+     `status`
    )";
    $sql .=" VALUES ";
    $sql .="(
@@ -281,9 +282,28 @@
      '{$body_message}',
      '{$attached_file}',
      '{$current_date}',
-     '{$from}'
+     '{$from}',
+     'active'
      )";
     $db->query($sql);
+ }
+
+ function update_post_announements($title, $body_message, $attached_file, $from, $id) {
+  global $db;
+  $current_date = date('Y-m-d H:i:s');
+  $sql = "UPDATE announcement_logs SET 
+  title ='$title', 
+  body_message ='$body_message', 
+  attached_file_path ='$attached_file',  
+  date_posted ='$current_date', 
+  `from` ='$from', 
+  `status` ='active' WHERE id ='$id'";
+  $result = $db->query($sql);
+  if ($result) {
+    return true;
+  } else {
+    return false;
+  }
  }
 
  function delete_announcement_after_a_days() {

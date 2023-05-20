@@ -5,7 +5,7 @@ function onClickButton($button_name, $url) {
   }
 }
 
-function post_announcements($title, $body_message, $file_path_name) {
+function post_announcements($title, $body_message, $file_path_name, $is_repost, $id) {
   global $session;
   $req_fields = array(
     $title,
@@ -28,16 +28,31 @@ function post_announcements($title, $body_message, $file_path_name) {
       } elseif ($user_level == '2') {
         $user_level = 'Guidance';
       }
-  
-      insert_post_announcements(
-        remove_junk($_POST[$title]),
-        remove_junk($_POST[$body_message]),
-        $dir,
-        $user_level
-      );
 
-      $session->message("s", "New announcement has been posted.");
-      redirect('./post_announcement', false);
+      if (!$is_repost) {
+        insert_post_announcements(
+          remove_junk($_POST[$title]),
+          remove_junk($_POST[$body_message]),
+          $dir,
+          $user_level
+        );
+  
+        $session->message("s", "New announcement has been posted.");
+        redirect('./post_announcement', false);
+      } else {
+
+        update_post_announements(
+          $_POST[$title],
+          $_POST[$body_message],
+          $dir,
+          $user_level, 
+          $_POST[$id]
+        );
+
+        $session->message("s", "Announce has been re-posted.");
+        redirect('./post_announcement', false);
+      }
+
     } else {
       $session->message("d", $errors);
       redirect('./post_announcement', false);
@@ -66,17 +81,32 @@ function post_announcements($title, $body_message, $file_path_name) {
               $user_level = 'Administrator';
             } elseif ($user_level == '2') {
               $user_level = 'Guidance';
-            }
-        
-            insert_post_announcements(
-              remove_junk($_POST[$title]),
-              remove_junk($_POST[$body_message]),
-              $dir,
-              $user_level
-            );
+            }   
 
-            $session->message("s", "New announcement has been posted.");
-            redirect('./post_announcement', false);
+            if (!$is_repost) {
+              insert_post_announcements(
+                remove_junk($_POST[$title]),
+                remove_junk($_POST[$body_message]),
+                $dir,
+                $user_level
+              );
+
+              $session->message("s", "New announcement has been posted.");
+              redirect('./post_announcement', false);
+            } else {
+              update_post_announements(
+                $_POST[$title],
+                $_POST[$body_message],
+                $dir,
+                $user_level, 
+                $id
+              );
+      
+              $session->message("s", "Announce has been re-posted.");
+              redirect('./post_announcement', false);
+            }
+
+
           } else {
             $session->message("d", $errors);
             redirect('./post_announcement', false);
