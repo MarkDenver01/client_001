@@ -524,6 +524,8 @@ function switch_user_level($email_address, $user_level) {
     case '2':
         // find info from guidance
         $guidance = find_guidance_login($email_address);
+        // set academic settings
+        $academic_settings = get_academic_settings();
         // create session with email address
         // pass the info that filtered by email to array list
         $arr = array(
@@ -531,7 +533,9 @@ function switch_user_level($email_address, $user_level) {
           'email_address' => $guidance['email_address'],
           'user_level' => $guidance['user_level'],
           'status' => $guidance['status'],
-          'is_logged_in' => $guidance['is_logged_in']
+          'is_logged_in' => $guidance['is_logged_in'],
+          'academic_semester' => $academic_settings['semester'],
+          'academic_school_year' => $academic_settings['school_year']
         );
         // then pass the array to session
         $session->login_session($arr);
@@ -663,16 +667,31 @@ function login($email_address, $password) {
       // redirect user to respective pages by user level
       if ($is_check_user['status'] === '1') {
         if ($_ENV['SUPER_USER'] == true && $is_check_user['user_level'] == '1') {
+          // set academic settings
+          $academic_settings = get_academic_settings();
           // create session with email address
           // pass the info that filtered by email to array list
-          $arr = array(
-            'id' => $is_check_user['id'],
-            'name' => $is_check_user['name'],
-            'email_address' => $is_check_user['email_address'],
-            'user_level' => $is_check_user['user_level'],
-            'status' => $is_check_user['status'],
-            'is_logged_in' => $is_check_user['is_logged_in']
-          );
+          if (empty($academic_settings['semester'])) {
+            $arr = array(
+              'id' => $is_check_user['id'],
+              'name' => $is_check_user['name'],
+              'email_address' => $is_check_user['email_address'],
+              'user_level' => $is_check_user['user_level'],
+              'status' => $is_check_user['status'],
+              'is_logged_in' => $is_check_user['is_logged_in']
+            );  
+          } else {
+            $arr = array(
+              'id' => $is_check_user['id'],
+              'name' => $is_check_user['name'],
+              'email_address' => $is_check_user['email_address'],
+              'user_level' => $is_check_user['user_level'],
+              'status' => $is_check_user['status'],
+              'is_logged_in' => $is_check_user['is_logged_in'],
+              'academic_semester' => $academic_settings['semester'],
+              'academic_school_year' => $academic_settings['school_year']
+            );
+          }
           // then pass the array to session
           $session->login_session($arr);
           // update login time
