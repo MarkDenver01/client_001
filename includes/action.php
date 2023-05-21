@@ -528,15 +528,26 @@ function switch_user_level($email_address, $user_level) {
         $academic_settings = get_academic_settings();
         // create session with email address
         // pass the info that filtered by email to array list
-        $arr = array(
-          'name' => $guidance['name'],
-          'email_address' => $guidance['email_address'],
-          'user_level' => $guidance['user_level'],
-          'status' => $guidance['status'],
-          'is_logged_in' => $guidance['is_logged_in'],
-          'academic_semester' => $academic_settings['semester'],
-          'academic_school_year' => $academic_settings['school_year']
-        );
+        if (empty($academic_settings['semester'])) {
+          $arr = array(
+            'name' => $guidance['name'],
+            'email_address' => $guidance['email_address'],
+            'user_level' => $guidance['user_level'],
+            'status' => $guidance['status'],
+            'is_logged_in' => $guidance['is_logged_in']
+          );
+        } else {
+          $arr = array(
+            'name' => $guidance['name'],
+            'email_address' => $guidance['email_address'],
+            'user_level' => $guidance['user_level'],
+            'status' => $guidance['status'],
+            'is_logged_in' => $guidance['is_logged_in'],
+            'academic_semester' => $academic_settings['semester'],
+            'academic_school_year' => $academic_settings['school_year']
+          );
+        }
+
         // then pass the array to session
         $session->login_session($arr);
         // redirecting to main page
@@ -554,26 +565,49 @@ function switch_user_level($email_address, $user_level) {
           $academic_settings['school_year']);
         // create session with email address
         // pass the info that filtered by email to array list
-        $arr = array(
-          'student_id' => $student['id'],
-          'name' => $student['name'],
-          'course' => $student['course'],
-          'semester' => $student['semester'],
-          'school_year' => $student['school_year'],
-          'student_year' => $student['student_year'],
-          'gender' => $student['gender'],
-          'age' => $student['age'],
-          'birth_date' => $student['birth_date'],
-          'present_address' => $student['present_address'],
-          'email_address' => $student['email_address'],
-          'user_level' => $student['user_level'],
-          'status' => $student['status'],
-          'is_logged_in' => $student['is_logged_in'],
-          'exam_status' => $exam['exam_status'],
-          'exam_title' => $exam['exam_title'],
-          'academic_semester' => $academic_settings['semester'],
-          'academic_school_year' => $academic_settings['school_year']
-        );
+
+        if (empty($academic_settings['semester'])) {
+          $arr = array(
+            'student_id' => $student['id'],
+            'name' => $student['name'],
+            'course' => $student['course'],
+            'semester' => $student['semester'],
+            'school_year' => $student['school_year'],
+            'student_year' => $student['student_year'],
+            'gender' => $student['gender'],
+            'age' => $student['age'],
+            'birth_date' => $student['birth_date'],
+            'present_address' => $student['present_address'],
+            'email_address' => $student['email_address'],
+            'user_level' => $student['user_level'],
+            'status' => $student['status'],
+            'is_logged_in' => $student['is_logged_in'],
+            'exam_status' => $exam['exam_status'],
+            'exam_title' => $exam['exam_title']
+          );
+        } else {
+          $arr = array(
+            'student_id' => $student['id'],
+            'name' => $student['name'],
+            'course' => $student['course'],
+            'semester' => $student['semester'],
+            'school_year' => $student['school_year'],
+            'student_year' => $student['student_year'],
+            'gender' => $student['gender'],
+            'age' => $student['age'],
+            'birth_date' => $student['birth_date'],
+            'present_address' => $student['present_address'],
+            'email_address' => $student['email_address'],
+            'user_level' => $student['user_level'],
+            'status' => $student['status'],
+            'is_logged_in' => $student['is_logged_in'],
+            'exam_status' => $exam['exam_status'],
+            'exam_title' => $exam['exam_title'],
+            'academic_semester' => $academic_settings['semester'],
+            'academic_school_year' => $academic_settings['school_year']
+          );
+        }
+
         // then pass the array to session
         $session->login_session($arr);
         // redirecting to main page

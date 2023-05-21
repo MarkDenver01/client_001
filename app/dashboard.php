@@ -21,8 +21,7 @@ if($developer) {
 <main id="main" class="main">
   <div class="pagetitle">
     <div class="row">
-      
-      <div class="col-lg-4">
+      <div class="col-lg-2">
         <h1>Dashboard</h1>
         <nav>
           <ol class="breadcrumb">
@@ -30,17 +29,15 @@ if($developer) {
             <li class="breadcrumb-item active">Dashboard</li>
           </ol>
         </nav>
-        <br/>
       </div>
-      <div class="col-lg-8">
-        <h1>Semester & School Year</h1>
-        <nav>
-          <ol class="breadcrumb ">
-            <li class="breadcrumb-item active"><div class="text-danger"><?php echo $_SESSION['key_session']['academic_semester']; ?></div></li>
-            <li class="breadcrumb-item active" style="width:250px;"><div class="text-danger"><?php echo $_SESSION['key_session']['academic_school_year']; ?></div></li>
-          </ol>
-        </nav>
-        <br/>
+      <div class="col-lg-10">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="alert alert-primary alert-dismissible fade show text-left rounded-0" role="alert" style="height:50px;">
+              <b>SEMESTER: &nbsp;&nbsp;</b><?php echo $_SESSION['key_session']['academic_semester']; ?><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SCHOOL YEAR: &nbsp;&nbsp;</b><?php echo $_SESSION['key_session']['academic_school_year']; ?>
+            </div>
+          </div>
+        </div>
       </div>
     
     </div>
