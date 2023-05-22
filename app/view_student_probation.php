@@ -187,6 +187,8 @@
                     </tbody>
                   </table>
                   <!-- End Table with hoverable rows -->
+                  <button name="button_print" onClick="window.print()" class="btn btn-danger text-white rounded-0 btn-sm" style="width: 150px;"><i class="bi bi-print"></i> Print</button>
+
 
 
                 </div>

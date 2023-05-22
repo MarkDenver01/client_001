@@ -1054,4 +1054,31 @@ function filter_student_probation($student_year, $school_year, $semester, $cours
   return find_by_sql($sql);
 }
 
+function filter_student_info($student_year, $school_year, $semester, $course) {
+  global $db;
+  if (!empty($student_year) && empty($school_year) && empty($semester) && empty($course)) {
+
+    $sql = "SELECT * FROM student_info WHERE student_year ='" .$student_year. "'";
+
+  } elseif (!empty($student_year) && !empty($school_year) && empty($semester) && empty($course)) {
+
+    $sql = "SELECT * FROM student_info WHERE student_year ='" .$student_year. "' AND school_year ='" .$school_year. "'";
+
+  } elseif (!empty($student_year) && !empty($school_year) && !empty($semester) && empty($course)) {
+
+    $sql = "SELECT * FROM student_info WHERE student_year ='" .$student_year. "' AND school_year ='" .$school_year. "' AND semester ='" .$semester. "'";
+
+  } elseif (!empty($student_year) && !empty($school_year) && !empty($semester) && !empty($course)) {
+
+    $sql = "SELECT * FROM student_info WHERE student_year ='" .$student_year. "' AND school_year ='" .$school_year. "' AND semester ='" .$semester. "' AND course ='" .$course. "'";
+
+  } else {
+
+    $sql = "SELECT * FROM student_info WHERE student_year ='" .$student_year. "' OR school_year ='" .$school_year. "' OR semester ='" .$semester. "' OR course ='" .$course. "'";
+
+  }
+  
+  return find_by_sql($sql);
+}
+
 ?>
