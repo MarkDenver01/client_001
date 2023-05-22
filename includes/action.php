@@ -118,6 +118,7 @@ function post_announcements($title, $body_message, $file_path_name, $is_repost, 
 }
 
 function addStudentAccount($file_path_name,
+                          $student_no,
                           $full_name,
                            $email_address,
                            $course,
@@ -165,6 +166,7 @@ function addStudentAccount($file_path_name,
         );
   
         insertStudentAccount(
+          remove_junk($_POST[$student_no]),
           remove_junk($_POST[$full_name]),
           remove_junk($_POST[$email_address]),
           remove_junk($_POST[$course]),
@@ -240,6 +242,7 @@ function addStudentAccount($file_path_name,
               );
         
               insertStudentAccount(
+                remove_junk($_POST[$student_no]),
                 remove_junk($_POST[$full_name]),
                 remove_junk($_POST[$email_address]),
                 remove_junk($_POST[$course]),
@@ -569,6 +572,7 @@ function switch_user_level($email_address, $user_level) {
         if (empty($academic_settings['semester'])) {
           $arr = array(
             'student_id' => $student['id'],
+            'student_no' => $student['student_no'],
             'name' => $student['name'],
             'course' => $student['course'],
             'semester' => $student['semester'],
@@ -588,6 +592,7 @@ function switch_user_level($email_address, $user_level) {
         } else {
           $arr = array(
             'student_id' => $student['id'],
+            'student_no' => $student['student_no'],
             'name' => $student['name'],
             'course' => $student['course'],
             'semester' => $student['semester'],

@@ -97,6 +97,7 @@
                   <table class="table table-sm table-hover datatable text-nowrap">
                     <thead>
                       <tr>
+                      <th scope="col" class="text-center" style="width: 5%;">Student Id</th>
                         <th scope="col" class="text-center" style="width: 10%;">Name</th>
                         <th scope="col" class="text-center" style="width: 10%;">Email address</th>
                         <th scope="col" class="text-center" style="width: 5%;">Age</th>
@@ -104,7 +105,7 @@
                         <th scope="col" class="text-center" style="width: 5%;">Birthday</th>
                         <th scope="col" class="text-center" style="width: 15%;">Address</th>
                         <th scope="col" class="text-center" style="width: 10%;">Year</th>
-                        <th scope="col" class="text-center" style="width: 20%;">Course</th>
+                        <th scope="col" class="text-center" style="width: 15%;">Course</th>
                         <th scope="col" class="text-center" style="width: 5%;">Semester</th>
                         <th scope="col" class="text-center" style="width: 5%;">A.Y.</th>
                         <th scope="col" class="text-center" style="width: 10%;">Action</th>
@@ -123,6 +124,7 @@
                             foreach ($filterData as $filtered) { ?>
                              <tr>
                         <td id="<?php echo remove_junk($filtered['id']); ?>" scope="row" class="text-center"hidden>
+                        <th data-target="name" scope="row" class="text-center text-danger" style="width: 5;"><?php echo remove_junk($filtered['student_no']); ?></th>
                         <th data-target="name" scope="row" class="text-center" style="width: 10%;"><?php echo remove_junk($filtered['name']); ?></th>
                         <td class="text-center" style="width: 10%;"><?php echo remove_junk($filtered['email_address']); ?></td>
                         <td class="text-center" style="width: 5%;"><?php echo remove_junk($filtered['age']); ?></td>
@@ -130,7 +132,7 @@
                         <td class="text-center" style="width: 5%;"><?php echo remove_junk($filtered['birth_date']); ?></td>
                         <td class="text-center" style="width: 15%;"><?php echo remove_junk($filtered['present_address']); ?></td>
                         <td class="text-center" style="width: 10%;"><?php echo remove_junk($filtered['student_year']); ?></td>
-                        <td class="text-center" style="width: 20%;"><?php echo remove_junk($filtered['course']); ?></td>
+                        <td class="text-center" style="width: 15%;"><?php echo remove_junk($filtered['course']); ?></td>
                         <td class="text-center" style="width: 5%;"><?php echo remove_junk($filtered['semester']); ?></td>
                         <td class="text-center" style="width: 5%;"><?php echo remove_junk($filtered['school_year']); ?></td>
                         <td class="text-center" style="width: 10%;">
@@ -145,6 +147,7 @@
                       <?php foreach($students as $student): ?>
                       <tr>
                         <td id="<?php echo remove_junk($student['id']); ?>" scope="row" class="text-center"hidden>
+                        <th data-target="name" scope="row" class="text-center text-danger" style="width: 5%;"><?php echo remove_junk($student['student_no']); ?></th>
                         <th data-target="name" scope="row" class="text-center" style="width: 10%;"><?php echo remove_junk($student['name']); ?></th>
                         <td class="text-center" style="width: 10%;"><?php echo remove_junk($student['email_address']); ?></td>
                         <td class="text-center" style="width: 5%;"><?php echo remove_junk($student['age']); ?></td>
@@ -152,7 +155,7 @@
                         <td class="text-center" style="width: 5%;"><?php echo remove_junk($student['birth_date']); ?></td>
                         <td class="text-center" style="width: 15%;"><?php echo remove_junk($student['present_address']); ?></td>
                         <td class="text-center" style="width: 10%;"><?php echo remove_junk($student['student_year']); ?></td>
-                        <td class="text-center" style="width: 20%;"><?php echo remove_junk($student['course']); ?></td>
+                        <td class="text-center" style="width: 15%;"><?php echo remove_junk($student['course']); ?></td>
                         <td class="text-center" style="width: 5%;"><?php echo remove_junk($student['semester']); ?></td>
                         <td class="text-center" style="width: 5%;"><?php echo remove_junk($student['school_year']); ?></td>
                         <td class="text-center" style="width: 10%;">

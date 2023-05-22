@@ -10,6 +10,7 @@
     AND exam_category ='$exam_type'");
     if($sqlExist->num_rows > 0) {
         $sqlUpdate = $db->query("INSERT INTO student_exam_result(
+            student_no,
             student_id, 
             exam_id,
             `name`,
@@ -22,6 +23,7 @@
             gender,
             grades,
             exam_result) VALUES(
+                '" .$_SESSION['key_session']['student_no']. "',
                 '" .$_SESSION['key_session']['student_id']. "',
                 '$exam_id',
                 '".$_SESSION['key_session']['name']. "',
@@ -64,6 +66,7 @@
     } else {
 
         $sqlInsert = $db->query("INSERT INTO student_exam_result(
+            student_no,
             student_id, 
             exam_id,
             `name`,
@@ -76,6 +79,7 @@
             gender,
             grades,
             exam_result) VALUES(
+                '" .$_SESSION['key_session']['student_no']. "',
                 '" .$_SESSION['key_session']['student_id']. "',
                 '$exam_id',
                 '".$_SESSION['key_session']['name']. "',
@@ -90,8 +94,9 @@
                 '$exam_result_status')");
         
         if ($sqlInsert) {
-            $sql = $db->query("INSERT INTO examinee(student_id, exam_id, `name`, email_address, gender, course, semester, 
+            $sql = $db->query("INSERT INTO examinee(student_no, student_id, exam_id, `name`, email_address, gender, course, semester, 
         school_year, student_year, exam_title, exam_description, exam_category, start_exam_date, exam_answer,total_answer,total_score, exam_result_status, counselor_notify_status) VALUES(
+        '" .$_SESSION['key_session']['student_no']. "',
         '" .$_SESSION['key_session']['student_id']. "',
         '$exam_id',
         '" .$_SESSION['key_session']['name']. "',

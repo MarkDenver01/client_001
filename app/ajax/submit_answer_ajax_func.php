@@ -4,6 +4,7 @@
     session_start();
     extract($_POST);
     $student_id = $_SESSION['key_session']['student_id'];
+    $student_no = $_SESSION['key_session']['student_no'];
     $semester = $_SESSION['key_session']['academic_semester'];
     $school_year = $_SESSION['key_session']['academic_school_year'];
     $submitted = date('Y-m-d h:i:s A');
@@ -34,8 +35,9 @@
                 foreach($_REQUEST['answer'] as $key => $value) {
                     $correct_items = $value['item_correct'];
                     $value = $value['correct_items'];
-                    $insert_ans = $db->query("INSERT INTO examinee_answer_v2(student_id, exam_id, semester, 
+                    $insert_ans = $db->query("INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, 
                     school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES(
+                    '$student_no',
                     '$student_id',
                     '$exam_id',
                     '$semester',
@@ -47,8 +49,8 @@
                     '$submitted')");
                 }
                 if ($insert_ans) {
-                    $insert_at = $db->query("INSERT INTO examinee_attempt(student_id, exam_id, exam_attempt_status) VALUES(
-                        '$student_id','$exam_id', 'Completed')");
+                    $insert_at = $db->query("INSERT INTO examinee_attempt(student_no, student_id, exam_id, exam_attempt_status) VALUES(
+                        '$student_no','$student_id','$exam_id', 'Completed')");
                     
                     if ($insert_at) {
                         $res = array("res" => "success");
@@ -63,8 +65,9 @@
             foreach($_REQUEST['answer'] as $key => $value) {
                 $correct_items = $value['item_correct'];
                 $value = $value['correct_items'];
-                $insert_ans = $db->query("INSERT INTO examinee_answer_v2(student_id, exam_id, semester, 
+                $insert_ans = $db->query("INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, 
                 school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES(
+                '$student_no',
                 '$student_id',
                 '$exam_id',
                 '$semester',
@@ -76,8 +79,8 @@
                 '$submitted')");
             }
             if ($insert_ans) {
-                $insert_at = $db->query("INSERT INTO examinee_attempt(student_id, exam_id, exam_attempt_status) VALUES(
-                    '$student_id','$exam_id', 'Completed')");
+                $insert_at = $db->query("INSERT INTO examinee_attempt(student_no, student_id, exam_id, exam_attempt_status) VALUES(
+                    '$student_no','$student_id','$exam_id', 'Completed')");
                 
                 if ($insert_at) {
                     $res = array("res" => "success");

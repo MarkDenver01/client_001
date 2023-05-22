@@ -56,6 +56,10 @@
                                 </div>
 
                                 <div class="border border-dark text-center rounded-0 bg-light">
+                                    <label for="age" class="col-md-4 col-lg-3 col-form-label"><strong>Student Id</strong></label>
+                                    <div class="col-md-8 col-lg-12">
+                                        <input name="semester" type="text" style="background-image: linear-gradient(#996666, #81613C);" class="form-control rounded-0 border-0 text-white text-center" value="<?php echo $_SESSION['key_session']['student_no']; ?>" readonly>
+                                    </div>
                                     <label for="age" class="col-md-4 col-lg-3 col-form-label"><strong>Full name</strong></label>
                                     <div class="col-md-8 col-lg-12">
                                         <input name="semester" type="text" style="background-image: linear-gradient(#996666, #81613C);" class="form-control rounded-0 border-0 text-white text-center" value="<?php echo $_SESSION['key_session']['name']; ?>" readonly>

@@ -101,6 +101,7 @@
                   <table class="table table-sm table-hover datatable text-nowrap">
                     <thead>
                       <tr>
+                        <th scope="col" class="text-center" >Student Id</th>
                         <th scope="col" class="text-center" >Name</th>
                         <th scope="col" class="text-center" >Email address</th>
                         <th scope="col" class="text-center" >Age</th>
@@ -130,7 +131,8 @@
                               
                      <tr>
                         <td id="<?php echo $filtered['id']; ?>" scope="row" class="text-center"hidden>
-                        <th data-target="name" scope="row" class="text-center" ><?php echo $filtered['name']; ?></th>
+                        <th data-target="name" scope="row" class="text-center text-danger" ><?php echo $filtered['student_no']; ?></th>
+                        <td class="text-center" ><?php echo $filtered['name']; ?></td>
                         <td class="text-center" ><?php echo $filtered['email_address']; ?></td>
                         <td class="text-center" ><?php echo $filtered['age']; ?></td>
                         <td class="text-center" ><?php echo $filtered['gender']; ?></td>
@@ -159,7 +161,8 @@
                       <?php foreach($students as $student): ?>
                       <tr>
                         <td id="<?php echo remove_junk($student['id']); ?>" scope="row" class="text-center"hidden>
-                        <th data-target="name" scope="row" class="text-center" ><?php echo remove_junk($student['name']); ?></th>
+                        <th data-target="name" scope="row" class="text-center text-danger" ><?php echo remove_junk($student['student_no']); ?></th>
+                        <td class="text-center" ><?php echo remove_junk($student['name']); ?></td>
                         <td class="text-center" ><?php echo remove_junk($student['email_address']); ?></td>
                         <td class="text-center" ><?php echo remove_junk($student['age']); ?></td>
                         <td class="text-center" ><?php echo remove_junk($student['gender']); ?></td>

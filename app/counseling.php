@@ -12,6 +12,7 @@
 
   if(isset($_POST['button_apply'])) {
     $student_id = $_GET['student_id'];
+    $student_no = $_SESSION['key_session']['student_no'];
     $id = $_SESSION['key_session']['student_id'];
     $name =$_SESSION['key_session']['name'];
     $email_address = $_SESSION['key_session']['email_address'];
@@ -38,7 +39,7 @@ if ($sqlCheckAM->num_rows > 0) {
     $session->message('w', 'No slot available on this afternoon.');
     redirect('./counseling', false);
 } else {
-  $sqlInsert = $db->query("INSERT INTO counseling_appointment(student_id, student_name, appointment_date, slots_available) VALUES('$id', '$name', '$date_time_picker','1')");
+  $sqlInsert = $db->query("INSERT INTO counseling_appointment(student_id, student_no, student_name, appointment_date, slots_available) VALUES('$id', '$student_no', '$name', '$date_time_picker','1')");
   if ($sqlInsert) {
     $sqlUpdate = $db->query("UPDATE examinee SET counselor_notify_status ='Counseling' WHERE student_id='$id'");
 

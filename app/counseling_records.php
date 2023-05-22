@@ -43,7 +43,8 @@
                       <?php while($row = $sql->fetch_assoc()) { ?>
 
                       <tr>
-                        <th data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo remove_junk($row['student_id']); ?></th>
+                      <th data-target="name" scope="row" class="text-center"  hidden><?php echo remove_junk($row['student_id']); ?></th>
+                        <th data-target="name" scope="row" class="text-center text-danger" style="width: 20%;"><?php echo remove_junk($row['student_no']); ?></th>
                         <th data-target="name" scope="row" class="text-center" style="width: 30%;"><?php echo remove_junk($row['student_name']); ?></th>
                         <td class="text-center" style="width: 20%;"><?php echo remove_junk($row['appointment_date']); ?></td>
                         <td style="width: 30%;">

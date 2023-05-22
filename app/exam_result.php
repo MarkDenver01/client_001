@@ -9,7 +9,8 @@
 <?php CHECK_EXAM_AVAILABILITY(); ?>
 <?php global $db; ?>
 <?php 
-  $exam_type = $_GET['exam_type']; 
+  $exam_type = $_GET['exam_type'];
+  $student_no = $_SESSION['key_session']['student_no']; 
   $exam_id = $_GET['exam_id'];
   $student_id = $_SESSION['key_session']['student_id'];
   $semester = $_SESSION['key_session']['academic_semester'];
