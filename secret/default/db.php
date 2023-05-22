@@ -61,7 +61,8 @@ $db_sql_3[] = "CREATE TABLE `student_info` (
   `gender` varchar(120) NOT NULL,
   `age` int(32),
   `birth_date` varchar(255),
-  `present_address` varchar(255)
+  `present_address` varchar(255),
+  `probation_status` varchar(255)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
 
 $db_sql_3[] = "ALTER TABLE `student_info`

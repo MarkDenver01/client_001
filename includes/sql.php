@@ -26,7 +26,7 @@
 
  function find_by_student() {
    global $db;
-   $sql = "SELECT s.id, s.name, s.course, s.student_year, s.semester, s.school_year, s.gender, s.age, s.birth_date, s.present_address, s.email_address, a.password AS studentInfo,";
+   $sql = "SELECT s.id, s.name, s.course, s.student_year, s.semester, s.school_year, s.gender, s.age, s.birth_date, s.present_address, s.email_address, s.probation_status, a.password AS studentInfo,";
    $sql .= " a.user_level, a.image, a.status, a.is_logged_in AS studentAccount FROM ";
    $sql .= " student_info s LEFT JOIN user_account a ";
    $sql .= " ON s.email_address = a.email_address ORDER BY s.id DESC";
@@ -1021,6 +1021,37 @@ function find_course($id) {
     return $data;
   }
   return $data = [];
+}
+
+function filter_student_probation($student_year, $school_year, $semester, $course, $status) {
+  global $db;
+  if (!empty($student_year) && empty($school_year) && empty($semester) && empty($course) && empty($status)) {
+
+    $sql = "SELECT * FROM student_info WHERE student_year ='" .$student_year. "'";
+
+  } elseif (!empty($student_year) && !empty($school_year) && empty($semester) && empty($course) && empty($status)) {
+
+    $sql = "SELECT * FROM student_info WHERE student_year ='" .$student_year. "' AND school_year ='" .$school_year. "'";
+
+  } elseif (!empty($student_year) && !empty($school_year) && !empty($semester) && empty($course) && empty($status)) {
+
+    $sql = "SELECT * FROM student_info WHERE student_year ='" .$student_year. "' AND school_year ='" .$school_year. "' AND semester ='" .$semester. "'";
+
+  } elseif (!empty($student_year) && !empty($school_year) && !empty($semester) && !empty($course) && empty($status)) {
+
+    $sql = "SELECT * FROM student_info WHERE student_year ='" .$student_year. "' AND school_year ='" .$school_year. "' AND semester ='" .$semester. "' AND course ='" .$course. "'";
+
+  } elseif (!empty($student_year) && !empty($school_year) && !empty($semester) && !empty($course) && !empty($status)) {
+
+    $sql = "SELECT * FROM student_info WHERE student_year ='" .$student_year. "' AND school_year ='" .$school_year. "' AND semester ='" .$semester. "' AND course ='" .$course. "' AND probation_status ='" .$status. "'";
+
+  } else {
+
+    $sql = "SELECT * FROM student_info WHERE student_year ='" .$student_year. "' OR school_year ='" .$school_year. "' OR semester ='" .$semester. "' OR course ='" .$course. "' OR probation_status ='" .$status. "'";
+
+  }
+  
+  return find_by_sql($sql);
 }
 
 ?>
