@@ -430,43 +430,12 @@
 
                       <?php } elseif ($student['exam_title'] == 'BarOn EQ-i:S') { ?>
                         <div class="row">
-                          <div class="col-sm-4">
-                          <table class="table table-hover text-nowrap " id="tableList">
-                            <tbody>
-
-                              <tr>
-                                <td>
-                                <p><b>Item # 27</b></p>
-                                <div class="row">
-                                  <input type="hidden" name="answer[<?php echo ($i - 1); ?>][item_correct]" value="<?php echo $row['correct_items']; ?>">
-                                  <div class="btn-group">                                   
-                                    <label class="btn btn-light" for="exampleRadios<?php echo ($i-1); ?>_5">
-                                      <input type="radio" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_5" value="1"> 1</input>
-                                    </label>    
-                                    <label class="btn btn-light" for="exampleRadios<?php echo ($i-1); ?>_4">
-                                      <input type="radio" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_4" value="2"> 2</input>
-                                    </label>
-                                    <label class="btn btn-light" for="exampleRadios<?php echo ($i-1); ?>_4">
-                                      <input type="radio" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_4" value="3"> 3</input>
-                                    </label>
-                                    <label class="btn btn-light" for="exampleRadios<?php echo ($i-1); ?>_4">
-                                      <input type="radio" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_4" value="4"> 4</input>
-                                    </label>
-                                    <label class="btn btn-light" for="exampleRadios<?php echo ($i-1); ?>_4">
-                                      <input type="radio" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_4" value="5"> 5</input>
-                                    </label>
-                                  </div>
-                                </div>
-                                </td>
-                              </tr>
-
-                            </tbody>
-                          </table>
-                          </div>
-                          <div class="col-sm-4">
+                          <div class="col-sm-12">
                             <table class="table table-hover text-nowrap text-center" id="tableList">
                               <thead>
                                 <tr>
+                                  <td>Item no</td>
+                                  <td></td>
                                   <td>A</td>
                                   <td>B</td>
                                   <td>C</td>
@@ -474,10 +443,14 @@
                                   <td>E</td>
                                   <td>F</td>
                                   <td>G</td>
+                                  <td></td>
+                                  <td>Item no</td>
                                 </tr>
                               </thead>
                               <tbody>
                                 <tr> <!-- #1 -->
+                                  <th><div class="text-danger">27</div></th>
+                                  <td>1&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;</td>
                                   <td><input name="email_address" type="text" class="form-control rounded-0" style="width: 50px; height:35px"><div class="text-danger">(▢)</div></td>
                                   <td>---</td>
                                   <td>---</td>
@@ -487,6 +460,8 @@
                                   <td>---</td>
                                 </tr>
                                 <tr> <!-- #2 -->
+                                  <th><div class="text-danger">28</div></th>
+                                  <td>1&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;</td>
                                   <td>---</td>
                                   <td><input name="email_address" type="text" class="form-control rounded-0" style="width: 50px; height:35px"><div class="text-danger">(△)</div></td>
                                   <td><input name="email_address" type="text" class="form-control rounded-0" style="width: 50px; height:35px"><div class="text-danger">(▢)</div></td>
@@ -496,6 +471,8 @@
                                   <td>---</td>
                                 </tr>
                                 <tr> <!-- #3 -->
+                                  <th><div class="text-danger">29</div></th>
+                                  <td>5&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;</td>
                                   <td><input name="email_address" type="text" class="form-control rounded-0" style="width: 50px; height:35px"><div class="text-danger">(△)</div></td>
                                   <td>---</td>
                                   <td>---</td>
@@ -505,6 +482,8 @@
                                   <td>---</td>
                                 </tr>
                                 <tr> <!-- #4 -->
+                                  <th><div class="text-danger">30</div></th>
+                                  <td>5&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;</td>
                                   <td>---</td>
                                   <td>---</td>
                                   <td><input name="email_address" type="text" class="form-control rounded-0" style="width: 50px; height:35px"><div class="text-danger">(△)</div></td>
@@ -514,6 +493,8 @@
                                   <td><input name="email_address" type="text" class="form-control rounded-0" style="width: 50px; height:35px"><div class="text-danger">(▢)</div></td>
                                 </tr>
                                 <tr> <!-- #5 -->
+                                  <th><div class="text-danger">31</div></th>
+                                  <td>5&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;</td>
                                   <td>---</td>
                                   <td>---</td>
                                   <td>---</td>
@@ -523,6 +504,8 @@
                                   <td>---</td>
                                 </tr>
                                 <tr> <!-- #6 -->
+                                <th><div class="text-danger">32</div></th>
+                                  <td>5&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;</td>
                                   <td>---</td>
                                   <td><input name="email_address" type="text" class="form-control rounded-0" style="width: 50px; height:35px"><div class="text-danger">(▢)</div></td>
                                   <td>---</td>
@@ -532,6 +515,8 @@
                                   <td><input name="email_address" type="text" class="form-control rounded-0" style="width: 50px; height:35px"><div class="text-danger">(△)</div></td>
                                 </tr>
                                 <tr> <!-- #7 -->
+                                  <th><div class="text-danger">33</div></th>
+                                  <td>1&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;</td>
                                   <td><input name="email_address" type="text" class="form-control rounded-0" style="width: 50px; height:35px"><div class="text-danger">(▢)</div></td>
                                   <td>---</td>
                                   <td>---</td>
@@ -541,6 +526,8 @@
                                   <td>---</td>
                                 </tr>
                                 <tr> <!-- #8 -->
+                                  <th><div class="text-danger">34</div></th>
+                                  <td>1&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;</td>
                                   <td>---</td>
                                   <td><input name="email_address" type="text" class="form-control rounded-0" style="width: 50px; height:35px"><div class="text-danger">(△)</div></td>
                                   <td><input name="email_address" type="text" class="form-control rounded-0" style="width: 50px; height:35px"><div class="text-danger">(▢)</div></td>
@@ -550,6 +537,8 @@
                                   <td>---</td>
                                 </tr>
                                 <tr> <!-- #9 -->
+                                  <td>&nbsp;&nbsp;&nbsp;</td>
+                                  <td>&nbsp;&nbsp;&nbsp;</td>
                                   <td><input name="email_address" type="text" class="form-control rounded-0" style="width: 50px; height:35px"><div class="text-danger">(△)</div></td>
                                   <td>---</td>
                                   <td>---</td>
@@ -559,6 +548,8 @@
                                   <td>---</td>
                                 </tr>
                                 <tr> <!-- #10 -->
+                                <th><div class="text-danger">35</div></th>
+                                  <td>5&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;</td>
                                   <td>---</td>
                                   <td>---</td>
                                   <td><input name="email_address" type="text" class="form-control rounded-0" style="width: 50px; height:35px"><div class="text-danger">(△)</div></td>
@@ -568,6 +559,8 @@
                                   <td>---</td>
                                 </tr>
                                 <tr> <!-- #11 -->
+                                <th><div class="text-danger">36</div></th>
+                                  <td>5&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;</td>
                                   <td>---</td>
                                   <td>---</td>
                                   <td>---</td>
@@ -577,6 +570,8 @@
                                   <td><input name="email_address" type="text" class="form-control rounded-0" style="width: 50px; height:35px"><div class="text-danger">(▢)</div></td>
                                 </tr>
                                 <tr> <!-- #12 -->
+                                <th><div class="text-danger">37</div></th>
+                                  <td>1&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;</td>
                                   <td>---</td>
                                   <td>---</td>
                                   <td>---</td>
@@ -586,6 +581,8 @@
                                   <td>---</td>
                                 </tr>
                                 <tr> <!-- #13 -->
+                                <th><div class="text-danger">38</div></th>
+                                  <td>5&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;</td>
                                   <td>---</td>
                                   <td><input name="email_address" type="text" class="form-control rounded-0" style="width: 50px; height:35px"><div class="text-danger">(▢)</div></td>
                                   <td>---</td>
@@ -595,6 +592,8 @@
                                   <td><input name="email_address" type="text" class="form-control rounded-0" style="width: 50px; height:35px"><div class="text-danger">(△)</div></td>
                                 </tr>
                                 <tr> <!-- #14 -->
+                                <th><div class="text-danger">39</div></th>
+                                  <td>1&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;</td>
                                   <td><input name="email_address" type="text" class="form-control rounded-0" style="width: 50px; height:35px"><div class="text-danger">(▢)</div></td>
                                   <td>---</td>
                                   <td>---</td>
@@ -604,6 +603,8 @@
                                   <td>---</td>
                                 </tr>
                                 <tr> <!-- #15 -->
+                                <th><div class="text-danger">40</div></th>
+                                  <td>1&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;</td>
                                   <td>---</td>
                                   <td><input name="email_address" type="text" class="form-control rounded-0" style="width: 50px; height:35px"><div class="text-danger">(△)</div></td>
                                   <td><input name="email_address" type="text" class="form-control rounded-0" style="width: 50px; height:35px"><div class="text-danger">(▢)</div></td>
@@ -613,6 +614,8 @@
                                   <td>---</td>
                                 </tr>
                                 <tr> <!-- #16 -->
+                                  <td>&nbsp;&nbsp;&nbsp;</td>
+                                  <td>&nbsp;&nbsp;&nbsp;</td>
                                   <td><input name="email_address" type="text" class="form-control rounded-0" style="width: 50px; height:35px"><div class="text-danger">(△)</div></td>
                                   <td>---</td>
                                   <td>---</td>
@@ -622,6 +625,8 @@
                                   <td>---</td>
                                 </tr>
                                 <tr> <!-- #17 -->
+                                <th><div class="text-danger">41</div></th>
+                                  <td>5&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;</td>
                                   <td>---</td>
                                   <td>---</td>
                                   <td><input name="email_address" type="text" class="form-control rounded-0" style="width: 50px; height:35px"><div class="text-danger">(△)</div></td>
@@ -631,6 +636,8 @@
                                   <td>---</td>
                                 </tr>
                                 <tr> <!-- #18 -->
+                                <th><div class="text-danger">42</div></th>
+                                  <td>5&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;</td>
                                   <td>---</td>
                                   <td>---</td>
                                   <td>---</td>
@@ -640,6 +647,8 @@
                                   <td>---</td>
                                 </tr>
                                 <tr> <!-- #19 -->
+                                <th><div class="text-danger">43</div></th>     
+                                  <td>5&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;</td>
                                   <td>---</td>
                                   <td><input name="email_address" type="text" class="form-control rounded-0" style="width: 50px; height:35px"><div class="text-danger">(▢)</div></td>
                                   <td>---</td>
@@ -649,6 +658,8 @@
                                   <td><input name="email_address" type="text" class="form-control rounded-0" style="width: 50px; height:35px"><div class="text-danger">(△)</div></td>
                                 </tr>
                                 <tr> <!-- #20 -->
+                                <th><div class="text-danger">44</div></th>
+                                  <td>1&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;</td>
                                   <td><input name="email_address" type="text" class="form-control rounded-0" style="width: 50px; height:35px"><div class="text-danger">(▢)</div></td>
                                   <td>---</td>
                                   <td>---</td>
@@ -658,6 +669,8 @@
                                   <td>---</td>
                                 </tr>
                                 <tr> <!-- #21 -->
+                                <th><div class="text-danger">45</div></th>
+                                  <td>1&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;</td>
                                   <td>---</td>
                                   <td><input name="email_address" type="text" class="form-control rounded-0" style="width: 50px; height:35px"><div class="text-danger">(△)</div></td>
                                   <td><input name="email_address" type="text" class="form-control rounded-0" style="width: 50px; height:35px"><div class="text-danger">(▢)</div></td>
@@ -667,6 +680,8 @@
                                   <td>---</td>
                                 </tr>
                                 <tr> <!-- #22 -->
+                                <th><div class="text-danger">46</div></th>
+                                  <td>5&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;</td>
                                   <td><input name="email_address" type="text" class="form-control rounded-0" style="width: 50px; height:35px"><div class="text-danger">(△)</div></td>
                                   <td>---</td>
                                   <td>---</td>
@@ -676,6 +691,8 @@
                                   <td>---</td>
                                 </tr>
                                 <tr> <!-- #23 -->
+                                <th><div class="text-danger">47</div></th>
+                                  <td>5&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;</td>
                                   <td>---</td>
                                   <td><input name="email_address" type="text" class="form-control rounded-0" style="width: 50px; height:35px"><div class="text-danger">(▢)</div></td>
                                   <td><input name="email_address" type="text" class="form-control rounded-0" style="width: 50px; height:35px"><div class="text-danger">(△)</div></td>
@@ -685,6 +702,8 @@
                                   <td>---</td>
                                 </tr>
                                 <tr> <!-- #24 -->
+                                <th><div class="text-danger">48</div></th>
+                                  <td>1&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;</td>
                                   <td><input name="email_address" type="text" class="form-control rounded-0" style="width: 50px; height:35px"><div class="text-danger">(▢)</div></td>
                                   <td>---</td>
                                   <td>---</td>
@@ -694,6 +713,8 @@
                                   <td>---</td>
                                 </tr>
                                 <tr> <!-- #25 -->
+                                <th><div class="text-danger">49</div></th>
+                                  <td>1&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;</td>
                                   <td>---</td>
                                   <td>---</td>
                                   <td>---</td>
@@ -703,6 +724,8 @@
                                   <td><input name="email_address" type="text" class="form-control rounded-0" style="width: 50px; height:35px"><div class="text-danger">(△)</div></td>
                                 </tr>
                                 <tr> <!-- #26 -->
+                                <th><div class="text-danger">50</div></th>
+                                  <td>1&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;5&nbsp;&nbsp;</td>
                                   <td><input name="email_address" type="text" class="form-control rounded-0" style="width: 50px; height:35px"><div class="text-danger">(▢)</div></td>
                                   <td><input name="email_address" type="text" class="form-control rounded-0" style="width: 50px; height:35px"><div class="text-danger">(△)</div></td>
                                   <td>---</td>
@@ -710,8 +733,10 @@
                                   <td>---</td>
                                   <td>---</td>
                                   <td>---</td>
-                                </tr>
+                                  </tr>
                                 <tr> <!-- #27 -->
+                                <th><div class="text-danger">51</div></th>
+                                  <td>5&nbsp;&nbsp;&nbsp;4&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;</td>
                                   <td>---</td>
                                   <td><input name="email_address" type="text" class="form-control rounded-0" style="width: 50px; height:35px"><div class="text-danger">(▢)</div></td>
                                   <td>---</td>
@@ -722,9 +747,6 @@
                                 </tr>
                               </tbody>
                             </table>
-                          </div>
-                          <div class="col-sm-4">
-                            
                           </div>
                         </div>
                         
