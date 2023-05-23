@@ -31,6 +31,7 @@
                   <table class="table table-sm table-hover datatable text-nowrap">
                     <thead>
                       <tr>
+                        <th scope="col" class="text-center" >Course Code</th>
                         <th scope="col" class="text-center" >Course</th>
                         <th scope="col" class="text-center" >Action</th>
                       </tr>
@@ -41,7 +42,8 @@
                       <?php while($row = $sql->fetch_assoc()) { ?>
 
                       <tr>
-                      <th data-target="name" scope="row" class="text-center" hidden><?php echo remove_junk($row['id']); ?></th>
+                        <th data-target="name" scope="row" class="text-center" hidden><?php echo remove_junk($row['id']); ?></th>
+                        <th data-target="name" scope="row" class="text-center"><?php echo remove_junk($row['course_code']); ?></th>
                         <th data-target="name" scope="row" class="text-center"><?php echo remove_junk($row['course']); ?></th>
                         <td data-target="name" class="text-center" scope="row">
                             <a href="./add_course?id=<?php echo $row['id']; ?>" type="submit" class="btn text-white rounded-pill btn-sm w-100" style="background-image: linear-gradient(#4B6F44, #006B3C);"><i class="bi bi-print"></i> Edit</a>

@@ -52,6 +52,7 @@ $db_sql_3[] = "DROP TABLE IF EXISTS `student_info`";
 
 $db_sql_3[] = "CREATE TABLE `student_info` (
   `id` int(11) NOT NULL,
+  `student_no` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
   `email_address` varchar(255) NOT NULL,
   `course` varchar(255) NOT NULL,
@@ -61,7 +62,8 @@ $db_sql_3[] = "CREATE TABLE `student_info` (
   `gender` varchar(120) NOT NULL,
   `age` int(32),
   `birth_date` varchar(255),
-  `present_address` varchar(255)
+  `present_address` varchar(255),
+  `probation_status` varchar(255)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
 
 $db_sql_3[] = "ALTER TABLE `student_info`
@@ -72,6 +74,9 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT";
 
 $db_sql_3[] = "ALTER TABLE `student_info`
 ADD INDEX email_address (`email_address`)";
+
+$db_sql_3[] = "ALTER TABLE `student_info`
+ADD INDEX student_no (`student_no`)";
 
 // =================== guidance info table ========================== //
 $db_sql_4[] = "DROP TABLE IF EXISTS `guidance_info`";
@@ -175,7 +180,8 @@ $db_sql_9[] = "CREATE TABLE `announcement_logs` (
   `body_message` VARCHAR(255) NOT NULL,
   `attached_file_path` VARCHAR(255) NOT NULL,
   `date_posted` datetime NOT NULL,
-  `from` VARCHAR(255) NOT NULL
+  `from` VARCHAR(255) NOT NULL,
+  `status` VARCHAR(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET = utf8mb4";
 
 $db_sql_9[] = "ALTER TABLE `announcement_logs`
@@ -749,6 +755,7 @@ $db_sql_47[] = "DROP TABLE IF EXISTS `examinee`";
 
 $db_sql_47[] = "CREATE TABLE `examinee` (
   `examinee_id` int(11) NOT NULL,
+  `student_no` varchar(255) NOT NULL,
   `student_id` int(11) NOT NULL,
   `exam_id` int(11) NOT NULL,
   `name` VARCHAR(255) NOT NULL,
@@ -784,6 +791,7 @@ $db_sql_48[] = "DROP TABLE IF EXISTS `examinee_answer`";
 
 $db_sql_48[] = "CREATE TABLE `examinee_answer` (
   `id` int(11) NOT NULL,
+  `student_no` VARCHAR(255) NOT NULL,
   `email_address` VARCHAR(255) NOT NULL,
   `student_year` VARCHAR(255) NOT NULL,
   `semester` VARCHAR(255) NOT NULL,
@@ -828,6 +836,7 @@ $db_sql_50[] = "DROP TABLE IF EXISTS `examinee_answer_v2`";
 
 $db_sql_50[] = "CREATE TABLE `examinee_answer_v2` (
   `examinee_id` int(255) NOT NULL,
+  `student_no` varchar(255) NOT NULL,
   `student_id` int(255) NOT NULL,
   `exam_id` int(255) NOT NULL,
   `semester` VARCHAR(255) NOT NULL,
@@ -850,6 +859,7 @@ $db_sql_51[] = "DROP TABLE IF EXISTS `examinee_attempt`";
 
 $db_sql_51[] = "CREATE TABLE `examinee_attempt` (
   `attempt_id` int(255) NOT NULL,
+  `student_no` varchar(255) NOT NULL,
   `student_id` int(255) NOT NULL,
   `exam_id` int(255) NOT NULL,
   `exam_attempt_status` VARCHAR(255) NOT NULL 
@@ -904,6 +914,7 @@ $db_sql_54[] = "DROP TABLE IF EXISTS `counseling_appointment`";
 $db_sql_54[] = "CREATE TABLE `counseling_appointment` (
   `id` int(255) NOT NULL,
   `student_id` int(255) NOT NULL,
+  `student_no` VARCHAR(255) NOT NULL,
   `student_name` VARCHAR(255) NOT NULL,
   `appointment_date` VARCHAR(255) NOT NULL,
   `slots_available` int(11) NOT NULL
@@ -920,6 +931,7 @@ $db_sql_55[] = "DROP TABLE IF EXISTS `student_exam_result`";
 
 $db_sql_55[] = "CREATE TABLE `student_exam_result` (
   `id` int(255) NOT NULL,
+  `student_no` VARCHAR(255) NOT NULL,
   `student_id` int(255) NOT NULL,
   `exam_id` int(255) NOT NULL,
   `name` VARCHAR(255) NOT NULL,
@@ -945,6 +957,7 @@ $db_sql_56[] = "DROP TABLE IF EXISTS `course_tbl`";
 
 $db_sql_56[] = "CREATE TABLE `course_tbl` (
   `id` int(255) NOT NULL,
+  `course_code` VARCHAR(255) NOT NULL,
   `course` VARCHAR(255) NOT NULL
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
 

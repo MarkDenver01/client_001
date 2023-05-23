@@ -35,6 +35,7 @@
                         <th scope="col" class="text-center" >Content</th>
                         <th scope="col" class="text-center" >Date Posted</th>
                         <th scope="col" class="text-center" >From</th>
+                        <th scope="col" class="text-center" >Status</th>
                         <th scope="col" class="text-center" >Action</th>
                       </tr>
                     </thead>
@@ -49,8 +50,14 @@
                         <td data-target="name" scope="row" class="text-center" ><?php echo remove_junk($row['body_message']); ?></td>
                         <td data-target="name" class="text-center" scope="row"><?php echo remove_junk($row['date_posted']); ?></td>
                         <td data-target="name" class="text-center" scope="row"><?php echo remove_junk($row['from']); ?></td>
+                        <td data-target="name" class="text-center" scope="row"><?php echo remove_junk($row['status']); ?></td>
                         <td data-target="name" class="text-center" scope="row">
-                            <a href="./post_announcement?id=<?php echo $row['id']; ?>" type="submit" class="btn text-white rounded-pill btn-sm w-100" style="background-image: linear-gradient(#4B6F44, #006B3C);"><i class="bi bi-print"></i> Edit</a>
+                            <a href="./post_announcement?id=<?php echo $row['id']; ?>" type="submit" class="btn btn-primary text-white rounded-pill btn-sm w-50"><i class="bi bi-print"></i> Edit</a>
+                            <?php if ($row['status'] == 'active') { ?>
+                              <a href="../includes/announcement_activation?id=<?php echo $row['id']; ?>&status=<?php echo $row['status']; ?>" type="submit" class="btn text-white rounded-pill btn-sm w-50" style="background-image: linear-gradient(#7C0A02, #841B2D);"><i class="bi bi-print"></i> Disable</a>
+                            <?php } elseif ($row['status'] == 'inactive') { ?>
+                              <a href="../includes/announcement_activation?id=<?php echo $row['id']; ?>&status=<?php echo $row['status']; ?>" type="submit" class="btn text-white rounded-pill btn-sm w-50" style="background-image: linear-gradient(#4B6F44, #006B3C);"><i class="bi bi-print"></i> Enable</a>
+                            <?php } ?>
                         </td>
                       </tr>
                       <?php } ?>

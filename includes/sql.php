@@ -26,7 +26,7 @@
 
  function find_by_student() {
    global $db;
-   $sql = "SELECT s.id, s.name, s.course, s.student_year, s.semester, s.school_year, s.gender, s.age, s.birth_date, s.present_address, s.email_address, a.password AS studentInfo,";
+   $sql = "SELECT s.id, s.student_no, s.name, s.course, s.student_year, s.semester, s.school_year, s.gender, s.age, s.birth_date, s.present_address, s.email_address, s.probation_status, a.password AS studentInfo,";
    $sql .= " a.user_level, a.image, a.status, a.is_logged_in AS studentAccount FROM ";
    $sql .= " student_info s LEFT JOIN user_account a ";
    $sql .= " ON s.email_address = a.email_address ORDER BY s.id DESC";
@@ -167,7 +167,7 @@
  function find_student_login($email_address) {
    global $db;
    $email_address = $db->escape($email_address);
-   $sql ="SELECT `s`.`id` AS id, `s`.`name` AS name, `s`.`course` AS course, `s`.`semester` AS semester, `s`.`school_year` AS school_year, `s`.`student_year` AS student_year,";
+   $sql ="SELECT `s`.`id` AS id, `s`.`student_no`, `s`.`name` AS name, `s`.`course` AS course, `s`.`semester` AS semester, `s`.`school_year` AS school_year, `s`.`student_year` AS student_year,";
    $sql .=" `s`.`gender` AS gender, `s`.`age` AS age, `s`.`birth_date` AS birth_date,";
    $sql .=" `s`.`present_address` AS present_address, `u`.`email_address` AS email_address,";
    $sql .=" `u`.`password` AS password, `u`.`user_level` AS user_level, `u`.`image` AS image,";
@@ -261,7 +261,7 @@
   //  '%s' GROUP BY `from` ORDER BY `id` DESC", $current_date);
   //  $sql = sprintf("SELECT * FROM `announcement_logs` WHERE `date_posted` <
   //  '%s' ORDER BY `id` DESC LIMIT 10", $current_date);
-  $sql = "SELECT * FROM announcement_logs WHERE date_posted BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 WEEK) AND CURDATE()";
+  $sql = "SELECT * FROM announcement_logs WHERE status ='active' AND date_posted BETWEEN DATE_SUB(CURDATE(), INTERVAL 1 WEEK) AND date_posted";
    return find_by_sql($sql);
  }
 
@@ -273,7 +273,8 @@
      `body_message`,
      `attached_file_path`,
      `date_posted`,
-     `from`
+     `from`,
+     `status`
    )";
    $sql .=" VALUES ";
    $sql .="(
@@ -281,9 +282,28 @@
      '{$body_message}',
      '{$attached_file}',
      '{$current_date}',
-     '{$from}'
+     '{$from}',
+     'active'
      )";
     $db->query($sql);
+ }
+
+ function update_post_announements($title, $body_message, $attached_file, $from, $id) {
+  global $db;
+  $current_date = date('Y-m-d H:i:s');
+  $sql = "UPDATE announcement_logs SET 
+  title ='$title', 
+  body_message ='$body_message', 
+  attached_file_path ='$attached_file',  
+  date_posted ='$current_date', 
+  `from` ='$from', 
+  `status` ='active' WHERE id ='$id'";
+  $result = $db->query($sql);
+  if ($result) {
+    return true;
+  } else {
+    return false;
+  }
  }
 
  function delete_announcement_after_a_days() {
@@ -294,15 +314,16 @@
    $db->query($sql);
  }
 
- function insertStudentAccount($full_name, $email_address, $course,
+ function insertStudentAccount($student_no, $full_name, $email_address, $course,
      $year, $semester, $school_year, $gender, $age, $birth_date, $present_address) {
      global $db;
 
-       $sql = "INSERT INTO `student_info`(`name`,`email_address`,`course`
+       $sql = "INSERT INTO `student_info`(`student_no`, `name`,`email_address`,`course`
          ,`student_year`, `semester`,`school_year`,`gender`,`age`
          ,`birth_date`,`present_address`)";
        $sql .= " VALUES ";
        $sql .= "(
+         '{$student_no}',
          '{$full_name}',
          '{$email_address}',
          '{$course}',
@@ -927,16 +948,15 @@ function student_exam_result_combine($student_year, $school_year, $semester, $co
   global $db;
   if (!empty($student_year) && empty($school_year) && empty($semester) && empty($course)) {
 
-    $sql = "SELECT e.student_id AS student_id, e.exam_id AS exam_id, e.name AS name, e.email_address AS email_address, 
+    $sql = "SELECT e.student_no AS student_no, e.student_id AS student_id, e.exam_id AS exam_id, e.name AS name, e.email_address AS email_address, 
     e.gender AS gender, e.course AS course, e.semester AS semester, e.school_year, e.student_year AS student_year, 
     e.exam_title AS exam_title, e.exam_description AS exam_description, e.exam_category AS exam_category, 
     s.exam_result AS exam_result, s.grades as total_grades, e.exam_result_status AS examinee_status FROM `examinee` `e` 
-    LEFT JOIN `student_exam_result` `s` 
-    ON e.email_address = s.email_address WHERE e.student_year ='" .$student_year. "' GROUP by e.exam_category";
+    LEFT JOIN `student_exam_result` `s` ON e.email_address = s.email_address WHERE e.student_year ='" .$student_year. "' GROUP by e.exam_category";
 
   } elseif (!empty($student_year) && !empty($school_year) && empty($semester) && empty($course)) {
 
-    $sql = "SELECT e.student_id AS student_id, e.exam_id AS exam_id, e.name AS name, e.email_address AS email_address, 
+    $sql = "SELECT e.student_no AS student_no, e.student_id AS student_id, e.exam_id AS exam_id, e.name AS name, e.email_address AS email_address, 
     e.gender AS gender, e.course AS course, e.semester AS semester, e.school_year, e.student_year AS student_year, 
     e.exam_title AS exam_title, e.exam_description AS exam_description, e.exam_category AS exam_category, 
     s.exam_result AS exam_result, s.grades as total_grades, e.exam_result_status AS examinee_status FROM `examinee` `e` 
@@ -946,7 +966,7 @@ function student_exam_result_combine($student_year, $school_year, $semester, $co
 
   } elseif (!empty($student_year) && !empty($school_year) && !empty($semester) && empty($course)) {
 
-    $sql = "SELECT e.student_id AS student_id, e.exam_id AS exam_id, e.name AS name, e.email_address AS email_address, 
+    $sql = "SELECT e.student_no AS student_no, e.student_id AS student_id, e.exam_id AS exam_id, e.name AS name, e.email_address AS email_address, 
     e.gender AS gender, e.course AS course, e.semester AS semester, e.school_year, e.student_year AS student_year, 
     e.exam_title AS exam_title, e.exam_description AS exam_description, e.exam_category AS exam_category, 
     s.exam_result AS exam_result, s.grades as total_grades, e.exam_result_status AS examinee_status FROM `examinee` `e` 
@@ -956,7 +976,7 @@ function student_exam_result_combine($student_year, $school_year, $semester, $co
 
   } elseif (!empty($student_year) && !empty($school_year) && !empty($semester) && !empty($course)) {
 
-    $sql = "SELECT e.student_id AS student_id, e.exam_id AS exam_id, e.name AS name, e.email_address AS email_address, 
+    $sql = "SELECT e.student_no AS student_no, e.student_id AS student_id, e.exam_id AS exam_id, e.name AS name, e.email_address AS email_address, 
     e.gender AS gender, e.course AS course, e.semester AS semester, e.school_year, e.student_year AS student_year, 
     e.exam_title AS exam_title, e.exam_description AS exam_description, e.exam_category AS exam_category, 
     s.exam_result AS exam_result, s.grades as total_grades, e.exam_result_status AS examinee_status FROM `examinee` `e` 
@@ -964,6 +984,13 @@ function student_exam_result_combine($student_year, $school_year, $semester, $co
     ON e.email_address = s.email_address WHERE e.student_year ='" .$student_year. "' 
     AND e.school_year ='" .$school_year. "' AND e.semester ='" .$semester. "' AND e.course ='" .$course. "' GROUP by e.exam_category";
 
+  } else {
+    $sql = "SELECT e.student_no AS student_no, e.student_id AS student_id, e.exam_id AS exam_id, e.name AS name, e.email_address AS email_address, 
+    e.gender AS gender, e.course AS course, e.semester AS semester, e.school_year, e.student_year AS student_year, 
+    e.exam_title AS exam_title, e.exam_description AS exam_description, e.exam_category AS exam_category, 
+    s.exam_result AS exam_result, s.grades as total_grades, e.exam_result_status AS examinee_status FROM `examinee` `e` 
+    LEFT JOIN `student_exam_result` `s` 
+    ON e.email_address = s.email_address WHERE e.student_year ='" .$student_year. "' OR e.school_year ='" .$school_year. "' OR e.semester ='" .$semester. "' OR e.course ='" .$course. "' GROUP by e.exam_category";
   }
   
   return find_by_sql($sql);
@@ -1001,6 +1028,64 @@ function find_course($id) {
     return $data;
   }
   return $data = [];
+}
+
+function filter_student_probation($student_year, $school_year, $semester, $course, $status) {
+  global $db;
+  if (!empty($student_year) && empty($school_year) && empty($semester) && empty($course) && empty($status)) {
+
+    $sql = "SELECT * FROM student_info WHERE student_year ='" .$student_year. "'";
+
+  } elseif (!empty($student_year) && !empty($school_year) && empty($semester) && empty($course) && empty($status)) {
+
+    $sql = "SELECT * FROM student_info WHERE student_year ='" .$student_year. "' AND school_year ='" .$school_year. "'";
+
+  } elseif (!empty($student_year) && !empty($school_year) && !empty($semester) && empty($course) && empty($status)) {
+
+    $sql = "SELECT * FROM student_info WHERE student_year ='" .$student_year. "' AND school_year ='" .$school_year. "' AND semester ='" .$semester. "'";
+
+  } elseif (!empty($student_year) && !empty($school_year) && !empty($semester) && !empty($course) && empty($status)) {
+
+    $sql = "SELECT * FROM student_info WHERE student_year ='" .$student_year. "' AND school_year ='" .$school_year. "' AND semester ='" .$semester. "' AND course ='" .$course. "'";
+
+  } elseif (!empty($student_year) && !empty($school_year) && !empty($semester) && !empty($course) && !empty($status)) {
+
+    $sql = "SELECT * FROM student_info WHERE student_year ='" .$student_year. "' AND school_year ='" .$school_year. "' AND semester ='" .$semester. "' AND course ='" .$course. "' AND probation_status ='" .$status. "'";
+
+  } else {
+
+    $sql = "SELECT * FROM student_info WHERE student_year ='" .$student_year. "' OR school_year ='" .$school_year. "' OR semester ='" .$semester. "' OR course ='" .$course. "' OR probation_status ='" .$status. "'";
+
+  }
+  
+  return find_by_sql($sql);
+}
+
+function filter_student_info($student_year, $school_year, $semester, $course) {
+  global $db;
+  if (!empty($student_year) && empty($school_year) && empty($semester) && empty($course)) {
+
+    $sql = "SELECT * FROM student_info WHERE student_year ='" .$student_year. "'";
+
+  } elseif (!empty($student_year) && !empty($school_year) && empty($semester) && empty($course)) {
+
+    $sql = "SELECT * FROM student_info WHERE student_year ='" .$student_year. "' AND school_year ='" .$school_year. "'";
+
+  } elseif (!empty($student_year) && !empty($school_year) && !empty($semester) && empty($course)) {
+
+    $sql = "SELECT * FROM student_info WHERE student_year ='" .$student_year. "' AND school_year ='" .$school_year. "' AND semester ='" .$semester. "'";
+
+  } elseif (!empty($student_year) && !empty($school_year) && !empty($semester) && !empty($course)) {
+
+    $sql = "SELECT * FROM student_info WHERE student_year ='" .$student_year. "' AND school_year ='" .$school_year. "' AND semester ='" .$semester. "' AND course ='" .$course. "'";
+
+  } else {
+
+    $sql = "SELECT * FROM student_info WHERE student_year ='" .$student_year. "' OR school_year ='" .$school_year. "' OR semester ='" .$semester. "' OR course ='" .$course. "'";
+
+  }
+  
+  return find_by_sql($sql);
 }
 
 ?>

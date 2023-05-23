@@ -22,7 +22,7 @@
   </div><!-- End Page Title -->
 
 
-<section class="section" style="width: 1260px;">
+<section class="section" style="width: 1560px;">
     <div class="row">
       <!-- start create account -->
       <div class="card rounded-0 bg-light">
@@ -35,7 +35,7 @@
               <div class="card rounded-0">
                 <div class="card-body">
                   <!-- Table with hoverable rows -->
-                  <table class="table table-sm table-hover datatable">
+                  <table class="table table-sm table-hover datatable text-nowrap">
                     <thead>
                       <tr>
                         <th scope="col" class="text-center" style="width: 15%;">Name</th>

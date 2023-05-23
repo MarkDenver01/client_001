@@ -19,7 +19,7 @@
   </div><!-- End Page Title -->
 
 
-<section class="section" style="width: 2360px;">
+<section class="section" style="width: 2460px;">
     <div class="row">
       <!-- start create account -->
             <!-- start create account -->
@@ -113,6 +113,7 @@
                   <table id="scroll_view" class="table table-sm table-hover table-striped datatable text-nowrap display" style="width:100%">
                     <thead>
                       <tr>
+                        <th scope="col" class="text-center" >Student Id</th>
                         <th scope="col" class="text-center" >Name</th>
                         <th scope="col" class="text-center" >Email address</th>
                         <th scope="col" class="text-center" >Gender</th>
@@ -156,6 +157,7 @@
                       <tr class="text-success">
                         <th scope="row" class="text-center" hidden ><?php echo $filtered['student_id']; ?></th>
                         <th scope="row" class="text-center" hidden ><?php echo $filtered['exam_id']; ?></th>
+                        <th scope="row" class="text-center text-danger" ><?php echo $filtered['student_no']; ?></th>
                         <th scope="row" class="text-center" ><?php echo $filtered['name']; ?></th>
                         <td scope="row" class="text-center" ><?php echo $filtered['email_address']; ?></td>
                         <td scope="row" class="text-center" ><?php echo $filtered['gender']; ?></td>
@@ -178,7 +180,7 @@
                     <?php  } else { ?>
 
                     <?php       
-                      $sql = "SELECT e.student_id AS student_id, e.exam_id AS exam_id, e.name AS name, e.email_address AS email_address, 
+                      $sql = "SELECT e.student_no, e.student_id AS student_id, e.exam_id AS exam_id, e.name AS name, e.email_address AS email_address, 
                         e.gender AS gender, e.course AS course, e.semester AS semester, e.school_year, e.student_year AS student_year, 
                         e.exam_title AS exam_title, e.exam_description AS exam_description, e.exam_category AS exam_category, 
                         s.exam_result AS exam_result, s.grades as total_grades, e.exam_result_status AS examinee_status FROM `examinee` `e` LEFT JOIN `student_exam_result` `s` 
@@ -207,6 +209,7 @@
                       <tr class="text-success">
                         <th scope="row" class="text-center" hidden ><?php echo $row['student_id']; ?></th>
                         <th scope="row" class="text-center" hidden ><?php echo $row['exam_id']; ?></th>
+                        <th scope="row" class="text-center text-danger" ><?php echo $row['student_no']; ?></th>
                         <th scope="row" class="text-center" ><?php echo $row['name']; ?></th>
                         <td scope="row" class="text-center" ><?php echo $row['email_address']; ?></td>
                         <td scope="row" class="text-center" ><?php echo $row['gender']; ?></td>

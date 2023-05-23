@@ -13,6 +13,7 @@
     // upload image & save account info
     if (isset($_POST["button_save"])) {
       addStudentAccount("image_path",
+        "student_no",
         "full_name",
         "email_address",
         "course",
@@ -72,6 +73,12 @@
                 <div class="tab-content pt-2" id="profile-edit">
                   <br/>
                   <!-- Profile Edit Form -->
+                    <div class="row mb-3">
+                      <label for="student_no" class="col-md-4 col-lg-3 col-form-label">Student Id</label>
+                      <div class="col-md-8 col-lg-6">
+                        <input name="student_no" type="text" class="form-control rounded-0" id="student_no" placeholder ="__-______">
+                      </div>
+                    </div>
                     <div class="row mb-3">
                       <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Full Name</label>
                       <div class="col-md-8 col-lg-6">

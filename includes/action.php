@@ -5,7 +5,7 @@ function onClickButton($button_name, $url) {
   }
 }
 
-function post_announcements($title, $body_message, $file_path_name) {
+function post_announcements($title, $body_message, $file_path_name, $is_repost, $id) {
   global $session;
   $req_fields = array(
     $title,
@@ -28,16 +28,31 @@ function post_announcements($title, $body_message, $file_path_name) {
       } elseif ($user_level == '2') {
         $user_level = 'Guidance';
       }
-  
-      insert_post_announcements(
-        remove_junk($_POST[$title]),
-        remove_junk($_POST[$body_message]),
-        $dir,
-        $user_level
-      );
 
-      $session->message("s", "New announcement has been posted.");
-      redirect('./post_announcement', false);
+      if (!$is_repost) {
+        insert_post_announcements(
+          remove_junk($_POST[$title]),
+          remove_junk($_POST[$body_message]),
+          $dir,
+          $user_level
+        );
+  
+        $session->message("s", "New announcement has been posted.");
+        redirect('./post_announcement', false);
+      } else {
+
+        update_post_announements(
+          $_POST[$title],
+          $_POST[$body_message],
+          $dir,
+          $user_level, 
+          $_POST[$id]
+        );
+
+        $session->message("s", "Announce has been re-posted.");
+        redirect('./post_announcement', false);
+      }
+
     } else {
       $session->message("d", $errors);
       redirect('./post_announcement', false);
@@ -66,17 +81,32 @@ function post_announcements($title, $body_message, $file_path_name) {
               $user_level = 'Administrator';
             } elseif ($user_level == '2') {
               $user_level = 'Guidance';
-            }
-        
-            insert_post_announcements(
-              remove_junk($_POST[$title]),
-              remove_junk($_POST[$body_message]),
-              $dir,
-              $user_level
-            );
+            }   
 
-            $session->message("s", "New announcement has been posted.");
-            redirect('./post_announcement', false);
+            if (!$is_repost) {
+              insert_post_announcements(
+                remove_junk($_POST[$title]),
+                remove_junk($_POST[$body_message]),
+                $dir,
+                $user_level
+              );
+
+              $session->message("s", "New announcement has been posted.");
+              redirect('./post_announcement', false);
+            } else {
+              update_post_announements(
+                $_POST[$title],
+                $_POST[$body_message],
+                $dir,
+                $user_level, 
+                $id
+              );
+      
+              $session->message("s", "Announce has been re-posted.");
+              redirect('./post_announcement', false);
+            }
+
+
           } else {
             $session->message("d", $errors);
             redirect('./post_announcement', false);
@@ -88,6 +118,7 @@ function post_announcements($title, $body_message, $file_path_name) {
 }
 
 function addStudentAccount($file_path_name,
+                          $student_no,
                           $full_name,
                            $email_address,
                            $course,
@@ -135,6 +166,7 @@ function addStudentAccount($file_path_name,
         );
   
         insertStudentAccount(
+          remove_junk($_POST[$student_no]),
           remove_junk($_POST[$full_name]),
           remove_junk($_POST[$email_address]),
           remove_junk($_POST[$course]),
@@ -210,6 +242,7 @@ function addStudentAccount($file_path_name,
               );
         
               insertStudentAccount(
+                remove_junk($_POST[$student_no]),
                 remove_junk($_POST[$full_name]),
                 remove_junk($_POST[$email_address]),
                 remove_junk($_POST[$course]),
@@ -494,15 +527,30 @@ function switch_user_level($email_address, $user_level) {
     case '2':
         // find info from guidance
         $guidance = find_guidance_login($email_address);
+        // set academic settings
+        $academic_settings = get_academic_settings();
         // create session with email address
         // pass the info that filtered by email to array list
-        $arr = array(
-          'name' => $guidance['name'],
-          'email_address' => $guidance['email_address'],
-          'user_level' => $guidance['user_level'],
-          'status' => $guidance['status'],
-          'is_logged_in' => $guidance['is_logged_in']
-        );
+        if (empty($academic_settings['semester'])) {
+          $arr = array(
+            'name' => $guidance['name'],
+            'email_address' => $guidance['email_address'],
+            'user_level' => $guidance['user_level'],
+            'status' => $guidance['status'],
+            'is_logged_in' => $guidance['is_logged_in']
+          );
+        } else {
+          $arr = array(
+            'name' => $guidance['name'],
+            'email_address' => $guidance['email_address'],
+            'user_level' => $guidance['user_level'],
+            'status' => $guidance['status'],
+            'is_logged_in' => $guidance['is_logged_in'],
+            'academic_semester' => $academic_settings['semester'],
+            'academic_school_year' => $academic_settings['school_year']
+          );
+        }
+
         // then pass the array to session
         $session->login_session($arr);
         // redirecting to main page
@@ -520,26 +568,51 @@ function switch_user_level($email_address, $user_level) {
           $academic_settings['school_year']);
         // create session with email address
         // pass the info that filtered by email to array list
-        $arr = array(
-          'student_id' => $student['id'],
-          'name' => $student['name'],
-          'course' => $student['course'],
-          'semester' => $student['semester'],
-          'school_year' => $student['school_year'],
-          'student_year' => $student['student_year'],
-          'gender' => $student['gender'],
-          'age' => $student['age'],
-          'birth_date' => $student['birth_date'],
-          'present_address' => $student['present_address'],
-          'email_address' => $student['email_address'],
-          'user_level' => $student['user_level'],
-          'status' => $student['status'],
-          'is_logged_in' => $student['is_logged_in'],
-          'exam_status' => $exam['exam_status'],
-          'exam_title' => $exam['exam_title'],
-          'academic_semester' => $academic_settings['semester'],
-          'academic_school_year' => $academic_settings['school_year']
-        );
+
+        if (empty($academic_settings['semester'])) {
+          $arr = array(
+            'student_id' => $student['id'],
+            'student_no' => $student['student_no'],
+            'name' => $student['name'],
+            'course' => $student['course'],
+            'semester' => $student['semester'],
+            'school_year' => $student['school_year'],
+            'student_year' => $student['student_year'],
+            'gender' => $student['gender'],
+            'age' => $student['age'],
+            'birth_date' => $student['birth_date'],
+            'present_address' => $student['present_address'],
+            'email_address' => $student['email_address'],
+            'user_level' => $student['user_level'],
+            'status' => $student['status'],
+            'is_logged_in' => $student['is_logged_in'],
+            'exam_status' => $exam['exam_status'],
+            'exam_title' => $exam['exam_title']
+          );
+        } else {
+          $arr = array(
+            'student_id' => $student['id'],
+            'student_no' => $student['student_no'],
+            'name' => $student['name'],
+            'course' => $student['course'],
+            'semester' => $student['semester'],
+            'school_year' => $student['school_year'],
+            'student_year' => $student['student_year'],
+            'gender' => $student['gender'],
+            'age' => $student['age'],
+            'birth_date' => $student['birth_date'],
+            'present_address' => $student['present_address'],
+            'email_address' => $student['email_address'],
+            'user_level' => $student['user_level'],
+            'status' => $student['status'],
+            'is_logged_in' => $student['is_logged_in'],
+            'exam_status' => $exam['exam_status'],
+            'exam_title' => $exam['exam_title'],
+            'academic_semester' => $academic_settings['semester'],
+            'academic_school_year' => $academic_settings['school_year']
+          );
+        }
+
         // then pass the array to session
         $session->login_session($arr);
         // redirecting to main page
@@ -633,16 +706,31 @@ function login($email_address, $password) {
       // redirect user to respective pages by user level
       if ($is_check_user['status'] === '1') {
         if ($_ENV['SUPER_USER'] == true && $is_check_user['user_level'] == '1') {
+          // set academic settings
+          $academic_settings = get_academic_settings();
           // create session with email address
           // pass the info that filtered by email to array list
-          $arr = array(
-            'id' => $is_check_user['id'],
-            'name' => $is_check_user['name'],
-            'email_address' => $is_check_user['email_address'],
-            'user_level' => $is_check_user['user_level'],
-            'status' => $is_check_user['status'],
-            'is_logged_in' => $is_check_user['is_logged_in']
-          );
+          if (empty($academic_settings['semester'])) {
+            $arr = array(
+              'id' => $is_check_user['id'],
+              'name' => $is_check_user['name'],
+              'email_address' => $is_check_user['email_address'],
+              'user_level' => $is_check_user['user_level'],
+              'status' => $is_check_user['status'],
+              'is_logged_in' => $is_check_user['is_logged_in']
+            );  
+          } else {
+            $arr = array(
+              'id' => $is_check_user['id'],
+              'name' => $is_check_user['name'],
+              'email_address' => $is_check_user['email_address'],
+              'user_level' => $is_check_user['user_level'],
+              'status' => $is_check_user['status'],
+              'is_logged_in' => $is_check_user['is_logged_in'],
+              'academic_semester' => $academic_settings['semester'],
+              'academic_school_year' => $academic_settings['school_year']
+            );
+          }
           // then pass the array to session
           $session->login_session($arr);
           // update login time
