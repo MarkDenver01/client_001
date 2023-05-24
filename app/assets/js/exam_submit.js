@@ -1,4 +1,5 @@
 $(document).on('submit','#submitAnswerFrm', function(){
+    var main_category = $('#main_category').val();
     var examAction = $('#examAction').val();
     if (examAction != "") {
         Swal.fire({
@@ -12,7 +13,7 @@ $(document).on('submit','#submitAnswerFrm', function(){
             confirmButtonText: 'OK!'    
         }).then((result) => {
             if (result.value) {
-                $.post("../app/ajax/submit_answer_ajax_func.php", $(this).serialize(), function(data) {
+                $.post("../app/ajax/submit_answer_ajax_func.php", $(this).serialize(), function(data) {                  
                     if (data.res == "alreadyTaken") {
                         Swal.fire(
                             'Already Taken',
@@ -49,7 +50,7 @@ $(document).on('submit','#submitAnswerFrm', function(){
                             'Some field is/are missing',
                             'warning'
                         )
-                    }
+                    } 
                 }, 'json');
             }
         });
@@ -100,7 +101,7 @@ $(document).on('submit','#submitAnswerFrm', function(){
                             'Some field is/are missing',
                             'warning'
                         )
-                    }
+                    } 
                 }, 'json');
             }
         });
