@@ -804,36 +804,171 @@
                         </div>
                         
                       <?php } elseif ($student['exam_title'] == 'The Keirsey Temperament Sorter') { ?>
+                        <div class="row">
+                          <div class="col-lg-12">
+                            <table class="table table-bordered table-hover text-nowrap text-center" id="tableList">
+                              <thead>
+                                <tr>
+                                  <td class="bg-success text-white"></td>
+                                  <td>a</td>
+                                  <td>b</td>
+                                  <td class="bg-success text-white"></td>
+                                  <td>a</td>
+                                  <td>b</td>
+                                  <td class="bg-success text-white"></td>
+                                  <td>a</td>
+                                  <td>b</td>
+                                  <td class="bg-success text-white"></td>
+                                  <td>a</td>
+                                  <td>b</td>
+                                  <td class="bg-success text-white"></td>
+                                  <td>a</td>
+                                  <td>b</td>
+                                  <td class="bg-success text-white"></td>
+                                  <td>a</td>
+                                  <td>b</td>
+                                  <td class="bg-success text-white"></td>
+                                  <td>a</td>
+                                  <td>b</td>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
 
-                        <table class="table table-hover text-nowrap " id="tableList">
-                            <tbody>
-                              <?php $sql = $db->query("SELECT * FROM $main_exam"); ?>
-                              <?php if($sql->num_rows > 0) { ?>
-                              <?php $i = 1; ?>
-                              <?php while($row = $sql->fetch_assoc()) { ?>
-                              <tr>
-                                <td>
-                                <p><b>Answer No. <?php echo $i++; ?></b></p>
-                                <div class="row">
-                                  <input type="hidden" name="answer[<?php echo ($i - 1); ?>][item_correct]" value="<?php echo $row['correct_items']; ?>">
-                                  <div class="btn-group">                                   
-                                    <label class="btn btn-light" for="exampleRadios<?php echo ($i-1); ?>_5">
-                                      <input type="radio" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_5" value="a"> a</input>
-                                    </label>    
-                                    <label class="btn btn-light" for="exampleRadios<?php echo ($i-1); ?>_4">
-                                      <input type="radio" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_4" value="b"> b</input>
-                                    </label>
-                                  </div>
-                                </div>
-                                </td>
-                              </tr>
-                              <?php } ?>
-                              <?php } else { ?>
-                              <?php  echo "Answer sheet not available."; ?>
-                              <?php } ?> 
-                            </tbody>
-                          </table>
+                                  <th class="bg-success text-white">1</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_1_a">
+                                        <input type="radio" name="rbo_k_1" id="rbo_k_1_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_1_b">
+                                        <input type="radio" name="rbo_k_1" id="rbo_k_1_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
 
+                                  <th class="bg-success text-white">2</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_2_a">
+                                        <input type="radio" name="rbo_k_2" id="rbo_k_2_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_2_b">
+                                        <input type="radio" name="rbo_k_2" id="rbo_k_2_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th class="bg-success text-white">3</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_2_a">
+                                        <input type="radio" name="rbo_k_2" id="rbo_k_2_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_2_b">
+                                        <input type="radio" name="rbo_k_2" id="rbo_k_2_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th class="bg-success text-white">4</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_2_a">
+                                        <input type="radio" name="rbo_k_2" id="rbo_k_2_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_2_b">
+                                        <input type="radio" name="rbo_k_2" id="rbo_k_2_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th class="bg-success text-white">5</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_2_a">
+                                        <input type="radio" name="rbo_k_2" id="rbo_k_2_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_2_b">
+                                        <input type="radio" name="rbo_k_2" id="rbo_k_2_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th class="bg-success text-white">6</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_2_a">
+                                        <input type="radio" name="rbo_k_2" id="rbo_k_2_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_2_b">
+                                        <input type="radio" name="rbo_k_2" id="rbo_k_2_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th class="bg-success text-white">7</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_2_a">
+                                        <input type="radio" name="rbo_k_2" id="rbo_k_2_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_2_b">
+                                        <input type="radio" name="rbo_k_2" id="rbo_k_2_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                </tr>
+                                <tr>
+                                  <td>8</td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_8_a">
+                                        <input type="radio" name="rbo_k_8" id="rbo_k_8_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_8_b">
+                                        <input type="radio" name="rbo_k_8" id="rbo_k_8_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
                       <?php } elseif ($student['exam_title'] == 'ESA') { ?>
 
 
