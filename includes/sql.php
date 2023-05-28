@@ -1088,4 +1088,9 @@ function filter_student_info($student_year, $school_year, $semester, $course) {
   return find_by_sql($sql);
 }
 
+function baron_answer($student_id, $exam_id, $semester, $school_year) {
+  $sql = "SELECT * FROM examinee_answer_v2 WHERE student_id ='1' AND exam_id ='1' AND semester ='First Semester' AND school_year ='2023-2024'";
+  return find_by_sql($sql);
+}
+
 ?>

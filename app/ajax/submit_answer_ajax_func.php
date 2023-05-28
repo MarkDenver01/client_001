@@ -99,6 +99,8 @@
                     $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
                         '$exam_id','$semester','$school_year',41, 'd','$txt_d_41','Completed',  '$submitted');";
                     $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                        '$exam_id','$semester','$school_year',17, 'd','$txt_d_17','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
                         '$exam_id','$semester','$school_year',23, 'd','$txt_d_23','Completed',  '$submitted');";
                     $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
                         '$exam_id','$semester','$school_year',1, 'e','$txt_e_1','Completed',  '$submitted');";
