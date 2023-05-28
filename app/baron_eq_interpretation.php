@@ -63,7 +63,7 @@ if(isset($_POST['button_counseling'])) {
                         </thead>
                         <tbody>              
                           <?php 
-                            $results = baron_answer($_SESSION['key_session']['student_id'], $exam_id, $_SESSION['key_session']['academic_semester'], $_SESSION['key_session']['academic_school_year']);
+                             $results = baron_answer($_SESSION['key_session']['student_id'], $exam_id, $_SESSION['key_session']['academic_semester'], $_SESSION['key_session']['academic_school_year']);          
                           ?>
                           <?php foreach ($results as $key) { ?>
                           <?php if ($key['exam_correct_answer'] == 'a') { ?>
@@ -183,9 +183,13 @@ if(isset($_POST['button_counseling'])) {
                     <div class="col-lg-2">
                         <table class="table table-bordered mb-5 text-center">
                             <?php 
-                                $sql = "SELECT SUM(exam_answer) as total FROM examinee_answer_v2 WHERE student_id ='" .$_SESSION['key_session']['student_id']. "' 
-                                 AND semester ='" .$_SESSION['key_session']['academic_semester']. "' AND school_year ='" .$_SESSION['key_session']['academic_school_year']. "'
-                                 AND exam_correct_answer='a'";
+                                if (!isset($_SESSION['key_session']['student_id'])) {
+                                  $sql = "SELECT SUM(exam_answer) as total FROM examinee_answer_v2 WHERE student_id ='" .$_GET['student_id']. "'AND exam_correct_answer='a'";
+                                } else {
+                                  $sql = "SELECT SUM(exam_answer) as total FROM examinee_answer_v2 WHERE student_id ='" .$_SESSION['key_session']['student_id']. "' 
+                                  AND semester ='" .$_SESSION['key_session']['academic_semester']. "' AND school_year ='" .$_SESSION['key_session']['academic_school_year']. "'
+                                  AND exam_correct_answer='a'";
+                                }                             
                                 $result = $db->query($sql);
                                 if ($db->num_rows($result)) {
                                     $fetch = $db->fetch_assoc($result);
@@ -207,9 +211,13 @@ if(isset($_POST['button_counseling'])) {
                     <div class="col-lg-2">
                         <table class="table table-bordered mb-5 text-center">
                             <?php 
-                                $sql = "SELECT SUM(exam_answer) as total FROM examinee_answer_v2 WHERE student_id ='" .$_SESSION['key_session']['student_id']. "' 
-                                 AND semester ='" .$_SESSION['key_session']['academic_semester']. "' AND school_year ='" .$_SESSION['key_session']['academic_school_year']. "'
-                                 AND exam_correct_answer='b'";
+                                if (!isset($_SESSION['key_session']['student_id'])) {
+                                  $sql = "SELECT SUM(exam_answer) as total FROM examinee_answer_v2 WHERE student_id ='" .$_GET['student_id']. "'AND exam_correct_answer='b'";
+                                } else {
+                                  $sql = "SELECT SUM(exam_answer) as total FROM examinee_answer_v2 WHERE student_id ='" .$_SESSION['key_session']['student_id']. "' 
+                                  AND semester ='" .$_SESSION['key_session']['academic_semester']. "' AND school_year ='" .$_SESSION['key_session']['academic_school_year']. "'
+                                  AND exam_correct_answer='b'";
+                                }
                                 $result = $db->query($sql);
                                 if ($db->num_rows($result)) {
                                     $fetch = $db->fetch_assoc($result);
@@ -231,9 +239,13 @@ if(isset($_POST['button_counseling'])) {
                     <div class="col-lg-2">
                         <table class="table table-bordered mb-5 text-center">
                             <?php 
-                                $sql = "SELECT SUM(exam_answer) as total FROM examinee_answer_v2 WHERE student_id ='" .$_SESSION['key_session']['student_id']. "' 
-                                 AND semester ='" .$_SESSION['key_session']['academic_semester']. "' AND school_year ='" .$_SESSION['key_session']['academic_school_year']. "'
-                                 AND exam_correct_answer='c'";
+                                if (!isset($_SESSION['key_session']['student_id'])) {
+                                  $sql = "SELECT SUM(exam_answer) as total FROM examinee_answer_v2 WHERE student_id ='" .$_GET['student_id']. "'AND exam_correct_answer='c'";
+                                } else {
+                                  $sql = "SELECT SUM(exam_answer) as total FROM examinee_answer_v2 WHERE student_id ='" .$_SESSION['key_session']['student_id']. "' 
+                                  AND semester ='" .$_SESSION['key_session']['academic_semester']. "' AND school_year ='" .$_SESSION['key_session']['academic_school_year']. "'
+                                  AND exam_correct_answer='c'";
+                                }
                                 $result = $db->query($sql);
                                 if ($db->num_rows($result)) {
                                     $fetch = $db->fetch_assoc($result);
@@ -255,9 +267,13 @@ if(isset($_POST['button_counseling'])) {
                     <div class="col-lg-2">
                         <table class="table table-bordered mb-5 text-center">
                             <?php 
-                                $sql = "SELECT SUM(exam_answer) as total FROM examinee_answer_v2 WHERE student_id ='" .$_SESSION['key_session']['student_id']. "' 
-                                 AND semester ='" .$_SESSION['key_session']['academic_semester']. "' AND school_year ='" .$_SESSION['key_session']['academic_school_year']. "'
-                                 AND exam_correct_answer='d'";
+                                if (!isset($_SESSION['key_session']['student_id'])) {
+                                  $sql = "SELECT SUM(exam_answer) as total FROM examinee_answer_v2 WHERE student_id ='" .$_GET['student_id']. "'AND exam_correct_answer='d'";
+                                } else {
+                                  $sql = "SELECT SUM(exam_answer) as total FROM examinee_answer_v2 WHERE student_id ='" .$_SESSION['key_session']['student_id']. "' 
+                                  AND semester ='" .$_SESSION['key_session']['academic_semester']. "' AND school_year ='" .$_SESSION['key_session']['academic_school_year']. "'
+                                  AND exam_correct_answer='d'";
+                                }
                                 $result = $db->query($sql);
                                 if ($db->num_rows($result)) {
                                     $fetch = $db->fetch_assoc($result);
@@ -279,9 +295,14 @@ if(isset($_POST['button_counseling'])) {
                     <div class="col-lg-2">
                         <table class="table table-bordered mb-5 text-center">
                             <?php 
-                                $sql = "SELECT SUM(exam_answer) as total FROM examinee_answer_v2 WHERE student_id ='" .$_SESSION['key_session']['student_id']. "' 
-                                 AND semester ='" .$_SESSION['key_session']['academic_semester']. "' AND school_year ='" .$_SESSION['key_session']['academic_school_year']. "'
-                                 AND exam_correct_answer='e'";
+                                if (!isset($_SESSION['key_session']['student_id'])) {
+                                  $sql = "SELECT SUM(exam_answer) as total FROM examinee_answer_v2 WHERE student_id ='" .$_GET['student_id']. "'AND exam_correct_answer='e'";
+                                } else {
+                                  $sql = "SELECT SUM(exam_answer) as total FROM examinee_answer_v2 WHERE student_id ='" .$_SESSION['key_session']['student_id']. "' 
+                                  AND semester ='" .$_SESSION['key_session']['academic_semester']. "' AND school_year ='" .$_SESSION['key_session']['academic_school_year']. "'
+                                  AND exam_correct_answer='e'";
+                                }
+                               
                                 $result = $db->query($sql);
                                 if ($db->num_rows($result)) {
                                     $fetch = $db->fetch_assoc($result);
@@ -303,9 +324,14 @@ if(isset($_POST['button_counseling'])) {
                     <div class="col-lg-2">
                         <table class="table table-bordered mb-5 text-center">
                             <?php 
-                                $sql = "SELECT SUM(exam_answer) as total FROM examinee_answer_v2 WHERE student_id ='" .$_SESSION['key_session']['student_id']. "' 
-                                 AND semester ='" .$_SESSION['key_session']['academic_semester']. "' AND school_year ='" .$_SESSION['key_session']['academic_school_year']. "'
-                                 AND exam_correct_answer='g'";
+                                if (!isset($_SESSION['key_session']['student_id'])) {
+                                  $sql = "SELECT SUM(exam_answer) as total FROM examinee_answer_v2 WHERE student_id ='" .$_GET['student_id']. "'AND exam_correct_answer='g'";
+                                } else {
+                                  $sql = "SELECT SUM(exam_answer) as total FROM examinee_answer_v2 WHERE student_id ='" .$_SESSION['key_session']['student_id']. "' 
+                                  AND semester ='" .$_SESSION['key_session']['academic_semester']. "' AND school_year ='" .$_SESSION['key_session']['academic_school_year']. "'
+                                  AND exam_correct_answer='g'";
+                                }
+
                                 $result = $db->query($sql);
                                 if ($db->num_rows($result)) {
                                     $fetch = $db->fetch_assoc($result);
