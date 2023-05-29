@@ -41,6 +41,8 @@ $(document).on('submit','#submitAnswerFrm', function(){
                                     window.location.href='../app/keirsey_temerment_result.php?exam_id='+exam_id+'&exam_type='+exam_type+'&exam_desc='+exam_desc+'&exam_title='+exam_title;
                                 } else if (exam_desc == 'ESA') {
                                     window.location.href='../app/esa_exam_result.php?exam_id='+exam_id+'&exam_type='+exam_type+'&exam_desc='+exam_desc+'&exam_title='+exam_title;
+                                } else if (exam_desc == 'Aptitude Verbal and Numerical') {
+                                    window.location.href='../app/aptitude_v_n_n_result.php?exam_id='+exam_id+'&exam_type='+exam_type+'&exam_desc='+exam_desc+'&exam_title='+exam_title;
                                 } else {
                                     window.location.href='../app/exam_result.php?exam_id='+exam_id+'&exam_type='+exam_type+'&exam_desc='+exam_desc+'&exam_title='+exam_title;
                                 }   
@@ -101,6 +103,8 @@ $(document).on('submit','#submitAnswerFrm', function(){
                                 window.location.href='../app/keirsey_temerment_result.php?exam_id='+exam_id+'&exam_type='+exam_type+'&exam_desc='+exam_desc+'&exam_title='+exam_title;
                             } else if (exam_desc == 'ESA') {
                                 window.location.href='../app/esa_exam_result.php?exam_id='+exam_id+'&exam_type='+exam_type+'&exam_desc='+exam_desc+'&exam_title='+exam_title;
+                            } else if (exam_desc == 'Aptitude Verbal and Numerical') {
+                                window.location.href='../app/aptitude_v_n_n_result.php?exam_id='+exam_id+'&exam_type='+exam_type+'&exam_desc='+exam_desc+'&exam_title='+exam_title;
                             } else {
                                 window.location.href='../app/exam_result.php?exam_id='+exam_id+'&exam_type='+exam_type+'&exam_desc='+exam_desc+'&exam_title='+exam_title;
                             }   
