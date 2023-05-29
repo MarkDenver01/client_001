@@ -2080,7 +2080,7 @@
                                   <input type="hidden" name="answer[<?php echo ($i - 1); ?>][item_correct]" value="<?php echo $row['correct_items']; ?>">
                                   <div class="btn-group">                                   
                                     <label class="btn btn-light" for="exampleRadios<?php echo ($i-1); ?>_5">
-                                      <input type="text" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_5" > </input>
+                                      <input oninput="this.value = this.value.toUpperCase()" type="text" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_5" > </input>
                                     </label>    
                                   </div>
                                 </div>
@@ -2108,7 +2108,7 @@
                                   <input type="hidden" name="answer[<?php echo ($i - 1); ?>][item_correct]" value="<?php echo $row['correct_items']; ?>">
                                   <div class="btn-group">                                   
                                     <label class="btn btn-light" for="exampleRadios<?php echo ($i-1); ?>_5">
-                                      <input type="text" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_5" > </input>
+                                      <input oninput="this.value = this.value.toUpperCase()" type="text" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_5" > </input>
                                     </label>    
                                   </div>
                                 </div>
@@ -2136,7 +2136,7 @@
                                   <input type="hidden" name="answer[<?php echo ($i - 1); ?>][item_correct]" value="<?php echo $row['correct_items']; ?>">
                                   <div class="btn-group">                                   
                                     <label class="btn btn-light" for="exampleRadios<?php echo ($i-1); ?>_5">
-                                      <input type="text" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_5" > </input>
+                                      <input oninput="this.value = this.value.toUpperCase()" type="text" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_5" > </input>
                                     </label>    
                                   </div>
                                 </div>
@@ -2165,7 +2165,7 @@
                                   <input type="hidden" name="answer[<?php echo ($i - 1); ?>][item_correct]" value="<?php echo $row['correct_items']; ?>">
                                   <div class="btn-group">                                   
                                     <label class="btn btn-light" for="exampleRadios<?php echo ($i-1); ?>_5">
-                                      <input type="text" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_5" > </input>
+                                      <input oninput="this.value = this.value.toUpperCase()" type="text" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_5" > </input>
                                     </label>    
                                   </div>
                                 </div>

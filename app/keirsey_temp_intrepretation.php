@@ -8,10 +8,17 @@
 <?php CHECK_EXAM_AVAILABILITY(); ?>
 <?php global $db; ?>
 <?php  
-    $student_id = $_SESSION['key_session']['student_id'];
-    $semester = $_SESSION['key_session']['academic_semester'];
-    $school_year = $_SESSION['key_session']['academic_school_year']; 
-    $student_name = $_SESSION['key_session']['name'];
+    if (!isset($_SESSION['key_session']['student_id'])) {
+      $student_id  = $_GET['student_id'];
+      $semester = $_GET['semester'];
+      $school_year = $_GET['school_year'];
+      $student_name = $_GET['name'];
+    } else {
+      $student_id = $_SESSION['key_session']['student_id'];
+      $semester = $_SESSION['key_session']['academic_semester'];
+      $school_year = $_SESSION['key_session']['academic_school_year']; 
+      $student_name = $_SESSION['key_session']['name'];
+    }
 ?>
 <?php 
 if (isset($_POST['button_upload'])) {
