@@ -207,6 +207,7 @@
                         }
                     ?>
                       <tr class="text-success">
+
                         <th scope="row" class="text-center" hidden ><?php echo $row['student_id']; ?></th>
                         <th scope="row" class="text-center" hidden ><?php echo $row['exam_id']; ?></th>
                         <th scope="row" class="text-center text-danger" ><?php echo $row['student_no']; ?></th>
