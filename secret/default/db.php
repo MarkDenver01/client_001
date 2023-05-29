@@ -917,6 +917,7 @@ $db_sql_54[] = "CREATE TABLE `counseling_appointment` (
   `student_no` VARCHAR(255) NOT NULL,
   `student_name` VARCHAR(255) NOT NULL,
   `appointment_date` VARCHAR(255) NOT NULL,
+  `time_counseling` VARCHAR(255) NOT NULL,
   `slots_available` int(11) NOT NULL
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
 

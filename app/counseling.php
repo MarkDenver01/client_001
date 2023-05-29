@@ -29,17 +29,13 @@
 
     $sqlExist = $db->query("SELECT * FROM counseling_appointment WHERE student_name ='$student_name'");
 
-    $sqlCheckAM = $db->query("SELECT * FROM counseling_appointment WHERE student_id ='$id' AND date(appointment_date) = '$date_appointment_formatted' AND time(appointment_date) BETWEEN '08:00:00' AND '12:00:00'");
-    $sqlCheckPM = $db->query("SELECT * FROM counseling_appointment WHERE student_id ='$id' AND  date(appointment_date) = '$date_appointment_formatted' AND time(appointment_date) BETWEEN '13:00:00' AND '17:00:00'");
-
-if ($sqlCheckAM->num_rows > 0) {
-    $session->message('w', 'No slot available on this morning.');
-    redirect('./counseling', false);
-} elseif ($sqlCheckPM->num_rows > 0) {
-    $session->message('w', 'No slot available on this afternoon.');
+    $sqlCheck = $db->query("SELECT * FROM counseling_appointment WHERE student_id ='$id' AND date(appointment_date) = '$date_appointment_formatted' AND time_counseling = '$time_picker'");
+   
+if ($sqlCheck->num_rows > 0) {
+    $session->message('w', 'Time slot not available. Please check other time.');
     redirect('./counseling', false);
 } else {
-  $sqlInsert = $db->query("INSERT INTO counseling_appointment(student_id, student_no, student_name, appointment_date, slots_available) VALUES('$id', '$student_no', '$name', '$date_time_picker','1')");
+  $sqlInsert = $db->query("INSERT INTO counseling_appointment(student_id, student_no, student_name, appointment_date, time_counseling, slots_available) VALUES('$id', '$student_no', '$name', '$date_time_picker','$time_picker','1')");
   if ($sqlInsert) {
     $sqlUpdate = $db->query("UPDATE examinee SET counselor_notify_status ='Counseling' WHERE student_id='$id'");
 
@@ -213,10 +209,21 @@ if ($sqlCheckAM->num_rows > 0) {
                       <input class="form-control new_password rounded-0" type="date" name="date_counseling" id="yourNewPassword" required>
                     </div>
                     <br/>
-                    <label for="yourNewPassword" class="form-label">Time</label>
+                    <!-- <label for="yourNewPassword" class="form-label">Time</label>
                     <div class="input-group has-validation">
                       <input class="form-control new_password rounded-0" type="time" name="time_counseling" id="yourNewPassword" required>
-                    </div>
+                    </div> -->
+
+                    <label for="student_year" class="form-label">TIme</label>
+                    <select id="student_year" name="time_counseling" class="form-select rounded-0" aria-label="Default select example">
+                                <option selected>Select Time</option>
+                                <option value="8:30 - 9:30">8:30 - 9:30</option>
+                                <option value="9:30 - 10:30">9:30 - 10:30</option>
+                                <option value="10:30 - 11:30">10:30 - 11:30</option>
+                                <option value="01:00 - 02:00">01:00 - 02:00</option>
+                                <option value="02:00 - 03:00">02:00 - 03:00</option>
+                                <option value="03:00 - 04:00">03:00 - 04:00</option>
+                              </select>
 
                     <label for="present_address" class="col-md-4 col-lg-6 col-form-label">Message</label>
                       <div class="col-md-8 col-lg-12">
