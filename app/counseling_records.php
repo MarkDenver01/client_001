@@ -32,21 +32,26 @@
                     <thead>
                       <tr>
                       <th scope="col" class="text-center" style="width: 20%;">Student Id</th>
-                        <th scope="col" class="text-center" style="width: 30%;" >Name</th>
+                        <th scope="col" class="text-center" style="width: 20%;" >Name</th>
                         <th scope="col" class="text-center" style="width: 20%;">Appointment Date</th>
+                        <th scope="col" class="text-center" style="width: 10%;">Time Counseling</th>
                         <th scope="col" class="text-center" style="width: 30%;">Action</th>
                       </tr>
                     </thead>
                     <tbody>
                       <?php $sql = $db->query("SELECT * FROM counseling_appointment ORDER BY id DESC"); ?>
                       <?php if($sql->num_rows > 0) {?>
-                      <?php while($row = $sql->fetch_assoc()) { ?>
+                      <?php while($row = $sql->fetch_assoc()) { 
+                            $get_date = $row['appointment_date'];
+                            $date_appointment_formatted = date("Y/m/d",strtotime($get_date));
+                      ?>
 
                       <tr>
                       <th data-target="name" scope="row" class="text-center"  hidden><?php echo remove_junk($row['student_id']); ?></th>
                         <th data-target="name" scope="row" class="text-center text-danger" style="width: 20%;"><?php echo remove_junk($row['student_no']); ?></th>
-                        <th data-target="name" scope="row" class="text-center" style="width: 30%;"><?php echo remove_junk($row['student_name']); ?></th>
-                        <td class="text-center" style="width: 20%;"><?php echo remove_junk($row['appointment_date']); ?></td>
+                        <th data-target="name" scope="row" class="text-center" style="width: 20%;"><?php echo remove_junk($row['student_name']); ?></th>
+                        <td class="text-center" style="width: 20%;"><?php echo $date_appointment_formatted; ?></td>
+                        <td class="text-center" style="width: 20%;"><?php echo $row['time_counseling']; ?></td>
                         <td style="width: 30%;">
                           <?php $sqlCheck = $db->query("SELECT * FROM examinee WHERE counselor_notify_status ='Re-assestment' AND student_id ='" .$row['student_id']. "'"); ?>
                           <?php if ($sqlCheck->num_rows > 0)  { ?>
