@@ -8,21 +8,24 @@
 <?php IS_STUDENT_LEVEL(); ?>
 <?php CHECK_EXAM_AVAILABILITY(); ?>
 <?php global $db; ?>
-<?php  
-    $student_id = $_SESSION['key_session']['student_id'];
-    $semester = $_SESSION['key_session']['academic_semester'];
-    $school_year = $_SESSION['key_session']['academic_school_year']; 
-    $student_name = $_SESSION['key_session']['name'];
-    $exam_id = $_GET['exam_id'];
-?>
 <?php 
-if (isset($_POST['button_upload'])) {
-    redirect('./monitoring',false);
-}
-
-if(isset($_POST['button_counseling'])) {
-  redirect('./counseling', false);
-}
+  $exam_type = $_GET['exam_type'];
+  $student_no = $_SESSION['key_session']['student_no']; 
+  $exam_id = $_GET['exam_id'];
+  $student_id = $_SESSION['key_session']['student_id'];
+  $semester = $_SESSION['key_session']['academic_semester'];
+  $school_year = $_SESSION['key_session']['academic_school_year'];
+  $name = $_SESSION['key_session']['name'];
+  $gender = $_SESSION['key_session']['gender'];
+  $course = $_SESSION['key_session']['course'];
+  $exam_title = $_GET['exam_title'];
+  $exam_desc = $_GET['exam_desc'];
+  $start_date = date('Y-m-d h:i:s A');
+  $total_score = $_POST['total_score'];
+  $exam_answers = $_POST['exam_answer'];
+  $total_answers = $_POST['total_answer'];
+  $email_address = $_SESSION['key_session']['email_address'];
+  $student_year =$_SESSION['key_session']['student_year'];
 ?>
 <?php include('../start_menu_bar.php'); ?>
 <script type="text/javascript" >
@@ -45,16 +48,18 @@ if(isset($_POST['button_counseling'])) {
     <section class="section profile" style="width: 1360px;">
       <div class="row">
         <!-- center -->
-        <div class="col-sm-5">
+        <div class="col-sm-12">
           <div class="card rounded-0">
             <div class="card-body">
               <br/>
-              <div class="text-center"><h2>RESULT</h2></div>
+              <div class="text-center"><h2><?php echo $exam_type; ?>'s Exam Result </h2></div>
               <hr/>
               <div class="row">
                 <div class="col-lg-12">
                   <br/>
-                  <table class="table table-hover table-bordered text-nowrap text-center" id="tableList">
+                  <div class="row">
+                          <div class="col-lg-12">
+                            <table class="table table-hover table-bordered text-nowrap text-center" id="tableList">
                               <thead>
                                 <tr>
                                   <td><h3>5</h3</td>
@@ -257,117 +262,33 @@ if(isset($_POST['button_counseling'])) {
                                 </tr>
                                
                             </table>
-                </div>
+                          </div>
+                        </div>
+                  <form id="submitExamResultFrm" method="POST">
+                   <?php if ($exam_title == "ESA") { ?>
+                      <input type="hidden" id="exam_type" name="exam_type" value="<?php echo $exam_type; ?>">
+                      <input type="hidden" id="exam_id" name="exam_id" value="<?php echo $exam_id; ?>">
+                      <input type="hidden" id="exam_title" name="exam_title" value="<?php echo $exam_title; ?>">
+                      <input type="hidden" id="exam_desc" name="exam_desc" value="<?php echo $exam_desc; ?>">
+                      <input type="hidden" id="exam_result_status" name="exam_result_status" value="<?php echo $exam_result_status; ?>">
+                      <input type="hidden" id="exam_answer" name="exam_answer" value="0">
+                      <input type="hidden" id="total_answer" name="total_answer" value="32">
+                      <input type="hidden" id="total_score" name="total_score" value="<?php echo $counter; ?>">
+
+                      <input type="hidden" id="semester" value="<?php echo $semester; ?>">
+                      <input type="hidden" id="school_year" value="<?php echo $school_year; ?>">
+                      <input type="hidden" id="full_name" value="<?php echo $name; ?>">
+                      <input type="hidden" id="gender" value="<?php echo $gender; ?>">
+                      <input type="hidden" id="course" value="<?php echo $course; ?>">
+                      <input type="hidden" id="start_date" value="<?php echo date('Y-md h:i:s A'); ?>">
+                      <input type="hidden" id="email_address" value="<?php echo $email_address; ?>">
+                      <input type="hidden" id="student_year" value="<?php echo $student_year; ?>">
+                  <?php } ?>
+                    <a href="" class="btn btn-success rounded-0 w-100 btn-lg" name="button_submit" type="submit">Submit</a>
+                  </form>
+                  </div>
               </div>
             </div>
-          </div>
-        </div>
-
-        <div class="col-sm-7">
-          <div class="card rounded-0">
-            <div class="card-body">
-              <br/>
-              <div class="text-center"><h2>Data Visualization</h2></div>
-              <hr/>
-                  <div class="row mb-3">
-                    <div class="col-lg-12">
-                      <table class="table text-nowrap " id="tableList">
-                        <tbody>
-                            <?php 
-                                $check_monitor = false;
-                                $sql = "SELECT exam_answer,counselor_notify_status, total_score FROM examinee WHERE student_id ='$student_id' 
-                                AND semester ='$semester' AND school_year ='$school_year' AND exam_title = 'ESA'";
-                                $result = $db->query($sql);
-                                if ($result->num_rows > 0) {
-                                    while ($row = $result->fetch_assoc()) {
-                                        $highest_prob = $row['exam_answer'];
-                                        $data = $row['total_score'];
-                                        $total_score = $row['total_score'];
-                                        $counselour_stats = $row['counselor_notify_status'];
-                                    }
-                                }
-     
-                                if ($data >= 25 && $data <=32) { 
-                                    $exam_result_status = "EXCELLENT";
-                                    $msg = $exam_result_status; 
-                                  } elseif ($data >= 15 && $data <= 24) { 
-                                    $exam_result_status = "GOOD";
-                                    $msg =$exam_result_status;
-                                  } elseif ($data >= 5 && $data <= 14) {
-                                    $exam_result_status = "POOR";
-                                    $msg =$exam_result_status;
-                                  }  elseif ($data >= 0 && $data <= 4) {
-                                    $exam_result_status = "BAD";
-                                    $msg =$exam_result_status;
-                                  }
-                            ?>    
-                            <tr>
-                              <td>
-                              <div class="col-xxl-12 col-md-6">
-                                <div class="card info-card revenue-card rounded-0 text-white " style="background-image: linear-gradient(#d9534f, #AB274F);">
-
-                                  <div class="card-body">
-                                    <h3 class="card-title text-white">Score <span class="text-light">| <?php echo $exam_title; ?></span></h3>
-
-                                    <div class="d-flex align-items-center">
-                                      <div class="text-center">
-                                        <h3><?php echo $total_score ." out of 32"; ?></h3>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              </td>
-                              <td>
-                              <div class="col-xxl-12 col-md-6">
-                                <div class="card info-card revenue-card rounded-0 text-white " style="background-image: linear-gradient(#4B6F44, #7BB661);">
-
-                                  <div class="card-body">
-                                    <h3 class="card-title text-white"><?php echo $exam_title; ?>'s Result</h3>
-
-                                    <div class="d-flex align-items-center">
-                                      <div class="text-center">
-                                        <h3>
-                                            <?php if ($counselour_stats == 'Completed') { ?>
-                                            <?php echo $counselour_stats; ?>
-                                            <?php } else { ?>
-                                            <?php echo $msg; ?>
-                                            <?php } ?>
-                                        </h3>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              </td>
-                            </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                    <div class="col-lg-12">
-                    <table class="table table-hover table-bordered mb-5 text-center text-nowrap">
-                    <tbody>                   
-                        <tr>
-                          <td><h5>25 - 32</h5></td>
-                          <td><h5>EXCELLENT</h5></td>
-                        </tr>     
-                        <tr>
-                          <td><h5>15 - 24</h5></td>
-                          <td><h5>GOOD</h5></td>
-                        </tr>   
-                        <tr>
-                          <td><h5>5 - 14</h5></td>
-                          <td><h5>POOR</h5></td>
-                        </tr>  
-                        <tr>
-                          <td><h5>0 - 4</h5></td>
-                          <td><h5>BAD</h5></td>
-                        </tr>  
-                    </tbody>
-                  </table>
-                        </div>
-                  </div> 
-            </div>  
           </div>
         </div>
 

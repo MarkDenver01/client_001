@@ -1996,46 +1996,1400 @@
                           </div>
                         </div>
                       <?php } elseif ($student['exam_title'] == 'ESA') { ?>
+                        <div class="row">
+                          <div class="col-lg-12">
+                            <table class="table table-hover table-bordered text-nowrap text-center" id="tableList">
+                              <thead>
+                                <tr>
+                                  <td><h3>5</h3</td>
+                                  <td><h3>Strongly Angree</h3</td>
+                                </tr>
+                                <tr>
+                                  <td><h3>4</h3</td>
+                                  <td><h3>Agree Moderately</h3</td>
+                                </tr>
+                                <tr>
+                                  <td><h3>3</h3</td>
+                                  <td><h3>Agree a little</h3</td>
+                                </tr>
+                                <tr>
+                                  <td><h3>2</h3</td>
+                                  <td><h3>Nuetral</h3</td>
+                                </tr>
+                                <tr>
+                                  <td><h3>1</h3</td>
+                                  <td><h3>Disagree</h3></td>
+                                </tr>
+                              </thead>
+                            </table>
+                          </div>
+                          <div class="col-lg-12">
+                            <table class="table table-hover table-bordered text-nowrap text-center" id="tableList">
+                                <tr>
+                                  <thead>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">Skills</th>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">Item No.</th>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">5</th>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">4</th>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">3</th>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">2</th>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">1</th>
+                                  </thead>
+                                </tr>
+                                <tr>
+                                  <td rowspan="1" class="text-center"><h3>Writtent Communications</h3></td>
+                                  <td>1</td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_1_5">
+                                        <input type="radio" name="rbo_w_1" id="rbo_w_1_5" value="5"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_1_4">
+                                        <input type="radio" name="rbo_w_1" id="rbo_w_1_4" value="4"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_1_3">
+                                        <input type="radio" name="rbo_w_1" id="rbo_w_1_3" value="3"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_1_2">
+                                        <input type="radio" name="rbo_w_1" id="rbo_w_1_2" value="2"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_1_1">
+                                        <input type="radio" name="rbo_w_1" id="rbo_w_1_1" value="1"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td rowspan="1"></td>
+                                  <td>13</td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_13_5">
+                                        <input type="radio" name="rbo_w_13" id="rbo_w_13_5" value="5"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_13_4">
+                                        <input type="radio" name="rbo_w_13" id="rbo_w_13_4" value="4"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_13_3">
+                                        <input type="radio" name="rbo_w_13" id="rbo_w_13_3" value="3"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_13_2">
+                                        <input type="radio" name="rbo_w_13" id="rbo_w_13_2" value="2"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_13_1">
+                                        <input type="radio" name="rbo_w_13" id="rbo_w_13_1" value="1"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                </tr>
 
+                                <tr>
+                                  <td rowspan="1"></td>
+                                  <td>21</td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_21_5">
+                                        <input type="radio" name="rbo_w_21" id="rbo_w_21_5" value="5"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_21_4">
+                                        <input type="radio" name="rbo_w_21" id="rbo_w_21_4" value="4"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_21_3">
+                                        <input type="radio" name="rbo_w_21" id="rbo_w_21_3" value="3"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_21_2">
+                                        <input type="radio" name="rbo_w_21" id="rbo_w_21_2" value="2"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_21_1">
+                                        <input type="radio" name="rbo_w_21" id="rbo_w_21_1" value="1"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                </tr>
 
-                        <table class="table table-hover text-nowrap " id="tableList">
-                            <tbody>
-                              <?php $sql = $db->query("SELECT * FROM $main_exam"); ?>
-                              <?php if($sql->num_rows > 0) { ?>
-                              <?php $i = 1; ?>
-                              <?php while($row = $sql->fetch_assoc()) { ?>
-                              <tr>
-                                <td>
-                                <p><b>Answer No. <?php echo $i++; ?></b></p>
-                                <div class="row">
-                                  <input type="hidden" name="answer[<?php echo ($i - 1); ?>][item_correct]" value="<?php echo $row['correct_items']; ?>">
-                                  <div class="btn-group">                                   
-                                    <label class="btn btn-light" for="exampleRadios<?php echo ($i-1); ?>_5">
-                                      <input type="radio" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_5" value="1"> 1</input>
-                                    </label>    
-                                    <label class="btn btn-light" for="exampleRadios<?php echo ($i-1); ?>_4">
-                                      <input type="radio" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_4" value="2"> 2</input>
-                                    </label>
-                                    <label class="btn btn-light" for="exampleRadios<?php echo ($i-1); ?>_3">
-                                      <input type="radio" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_3" value="3"> 3</input>
-                                    </label>
-                                    <label class="btn btn-light" for="exampleRadios<?php echo ($i-1); ?>_2">
-                                      <input type="radio" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_2" value="4"> 4</input>
-                                    </label>
-                                    <label class="btn btn-light" for="exampleRadios<?php echo ($i-1); ?>_1">
-                                      <input type="radio" name="answer[<?php echo ($i - 1); ?>][correct_items]" id="exampleRadios<?php echo ($i-1); ?>_1" value="5"> 5</input>
-                                    </label>
-                                  </div>
-                                </div>
-                                </td>
-                              </tr>
-                              <?php } ?>
-                              <?php } else { ?>
-                              <?php  echo "Answer sheet not available."; ?>
-                              <?php } ?> 
-                            </tbody>
-                          </table>
+                                <tr>
+                                  <td rowspan="1"></td>
+                                  <td>31</td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_31_5">
+                                        <input type="radio" name="rbo_w_31" id="rbo_w_31_5" value="5"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_31_4">
+                                        <input type="radio" name="rbo_w_31" id="rbo_w_31_4" value="4"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_31_3">
+                                        <input type="radio" name="rbo_w_31" id="rbo_w_31_3" value="3"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_31_2">
+                                        <input type="radio" name="rbo_w_31" id="rbo_w_31_2" value="2"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_31_1">
+                                        <input type="radio" name="rbo_w_31" id="rbo_w_31_1" value="1"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                </tr>
 
+                                <tr>
+                                  <thead>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">Skills</th>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">Item No.</th>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">5</th>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">4</th>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">3</th>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">2</th>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">1</th>
+                                  </thead>
+                                </tr>
+                                <tr>
+                                  <td rowspan="1" class="text-center"><h3>Negotiating and Persuading</h3></td>
+                                  <td>7</td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_7_5">
+                                        <input type="radio" name="rbo_w_7" id="rbo_w_7_5" value="5"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_7_4">
+                                        <input type="radio" name="rbo_w_7" id="rbo_w_7_4" value="4"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_7_3">
+                                        <input type="radio" name="rbo_w_7" id="rbo_w_7_3" value="3"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_7_2">
+                                        <input type="radio" name="rbo_w_7" id="rbo_w_7_2" value="2"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_7_1">
+                                        <input type="radio" name="rbo_w_7" id="rbo_w_7_1" value="1"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td rowspan="1"></td>
+                                  <td>14</td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_14_5">
+                                        <input type="radio" name="rbo_w_14" id="rbo_w_14_5" value="5"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_14_4">
+                                        <input type="radio" name="rbo_w_14" id="rbo_w_14_4" value="4"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_14_3">
+                                        <input type="radio" name="rbo_w_14" id="rbo_w_14_3" value="3"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_14_2">
+                                        <input type="radio" name="rbo_w_14" id="rbo_w_14_2" value="2"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_14_1">
+                                        <input type="radio" name="rbo_w_14" id="rbo_w_14_1" value="1"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <td rowspan="1"></td>
+                                  <td>18</td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_18_5">
+                                        <input type="radio" name="rbo_w_18" id="rbo_w_18_5" value="5"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_18_4">
+                                        <input type="radio" name="rbo_w_18" id="rbo_w_18_4" value="4"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_18_3">
+                                        <input type="radio" name="rbo_w_18" id="rbo_w_18_3" value="3"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_18_2">
+                                        <input type="radio" name="rbo_w_18" id="rbo_w_18_2" value="2"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_18_1">
+                                        <input type="radio" name="rbo_w_18" id="rbo_w_18_1" value="1"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <td rowspan="1"></td>
+                                  <td>19</td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_19_5">
+                                        <input type="radio" name="rbo_w_19" id="rbo_w_19_5" value="5"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_19_4">
+                                        <input type="radio" name="rbo_w_19" id="rbo_w_19_4" value="4"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_19_3">
+                                        <input type="radio" name="rbo_w_19" id="rbo_w_19_3" value="3"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_19_2">
+                                        <input type="radio" name="rbo_w_19" id="rbo_w_19_2" value="2"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_19_1">
+                                        <input type="radio" name="rbo_w_19" id="rbo_w_19_1" value="1"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <td rowspan="1"></td>
+                                  <td>23</td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_23_5">
+                                        <input type="radio" name="rbo_w_23" id="rbo_w_23_5" value="5"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_23_4">
+                                        <input type="radio" name="rbo_w_23" id="rbo_w_23_4" value="4"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_23_3">
+                                        <input type="radio" name="rbo_w_23" id="rbo_w_23_3" value="3"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_23_2">
+                                        <input type="radio" name="rbo_w_23" id="rbo_w_23_2" value="2"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_23_1">
+                                        <input type="radio" name="rbo_w_23" id="rbo_w_23_1" value="1"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <thead>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">Skills</th>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">Item No.</th>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">5</th>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">4</th>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">3</th>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">2</th>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">1</th>
+                                  </thead>
+                                </tr>
+                                <tr>
+                                  <td rowspan="1" class="text-center"><h3>Verbal Communication</h3></td>
+                                  <td>6</td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_6_5">
+                                        <input type="radio" name="rbo_w_6" id="rbo_w_6_5" value="5"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_6_4">
+                                        <input type="radio" name="rbo_w_6" id="rbo_w_6_4" value="4"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_6_3">
+                                        <input type="radio" name="rbo_w_6" id="rbo_w_6_3" value="3"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_6_2">
+                                        <input type="radio" name="rbo_w_6" id="rbo_w_6_2" value="2"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_6_1">
+                                        <input type="radio" name="rbo_w_6" id="rbo_w_6_1" value="1"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td rowspan="1"></td>
+                                  <td>10</td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_10_5">
+                                        <input type="radio" name="rbo_w_10" id="rbo_w_10_5" value="5"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_10_4">
+                                        <input type="radio" name="rbo_w_10" id="rbo_w_10_4" value="4"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_10_3">
+                                        <input type="radio" name="rbo_w_10" id="rbo_w_10_3" value="3"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_10_2">
+                                        <input type="radio" name="rbo_w_10" id="rbo_w_10_2" value="2"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_10_1">
+                                        <input type="radio" name="rbo_w_10" id="rbo_w_10_1" value="1"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <td rowspan="1"></td>
+                                  <td>17</td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_17_5">
+                                        <input type="radio" name="rbo_w_17" id="rbo_w_17_5" value="5"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_17_4">
+                                        <input type="radio" name="rbo_w_17" id="rbo_w_17_4" value="4"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_17_3">
+                                        <input type="radio" name="rbo_w_17" id="rbo_w_17_3" value="3"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_17_2">
+                                        <input type="radio" name="rbo_w_17" id="rbo_w_17_2" value="2"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_17_1">
+                                        <input type="radio" name="rbo_w_17" id="rbo_w_17_1" value="1"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <td rowspan="1"></td>
+                                  <td>22</td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_22_5">
+                                        <input type="radio" name="rbo_w_22" id="rbo_w_22_5" value="5"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_22_4">
+                                        <input type="radio" name="rbo_w_22" id="rbo_w_22_4" value="4"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_22_3">
+                                        <input type="radio" name="rbo_w_22" id="rbo_w_22_3" value="3"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_22_2">
+                                        <input type="radio" name="rbo_w_22" id="rbo_w_22_2" value="2"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_22_1">
+                                        <input type="radio" name="rbo_w_22" id="rbo_w_22_1" value="1"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <thead>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">Skills</th>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">Item No.</th>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">5</th>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">4</th>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">3</th>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">2</th>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">1</th>
+                                  </thead>
+                                </tr>
+                                <tr>
+                                  <td rowspan="1" class="text-center"><h3>Co-operating</h3></td>
+                                  <td>3</td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_3_5">
+                                        <input type="radio" name="rbo_w_3" id="rbo_w_3_5" value="5"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_3_4">
+                                        <input type="radio" name="rbo_w_3" id="rbo_w_3_4" value="4"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_3_3">
+                                        <input type="radio" name="rbo_w_3" id="rbo_w_3_3" value="3"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_3_2">
+                                        <input type="radio" name="rbo_w_3" id="rbo_w_3_2" value="2"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_3_1">
+                                        <input type="radio" name="rbo_w_3" id="rbo_w_3_1" value="1"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td rowspan="1"></td>
+                                  <td>11</td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_11_5">
+                                        <input type="radio" name="rbo_w_11" id="rbo_w_11_5" value="5"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_11_4">
+                                        <input type="radio" name="rbo_w_11" id="rbo_w_11_4" value="4"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_11_3">
+                                        <input type="radio" name="rbo_w_11" id="rbo_w_11_3" value="3"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_11_2">
+                                        <input type="radio" name="rbo_w_11" id="rbo_w_11_2" value="2"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_11_1">
+                                        <input type="radio" name="rbo_w_11" id="rbo_w_11_1" value="1"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <td rowspan="1"></td>
+                                  <td>15</td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_15_5">
+                                        <input type="radio" name="rbo_w_15" id="rbo_w_15_5" value="5"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_15_4">
+                                        <input type="radio" name="rbo_w_15" id="rbo_w_15_4" value="4"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_15_3">
+                                        <input type="radio" name="rbo_w_15" id="rbo_w_15_3" value="3"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_15_2">
+                                        <input type="radio" name="rbo_w_15" id="rbo_w_15_2" value="2"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_15_1">
+                                        <input type="radio" name="rbo_w_15" id="rbo_w_15_1" value="1"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <td rowspan="1"></td>
+                                  <td>30</td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_30_5">
+                                        <input type="radio" name="rbo_w_30" id="rbo_w_30_5" value="5"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_30_4">
+                                        <input type="radio" name="rbo_w_30" id="rbo_w_30_4" value="4"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_30_3">
+                                        <input type="radio" name="rbo_w_30" id="rbo_w_30_3" value="3"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_30_2">
+                                        <input type="radio" name="rbo_w_30" id="rbo_w_30_2" value="2"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_30_1">
+                                        <input type="radio" name="rbo_w_30" id="rbo_w_30_1" value="1"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <thead>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">Skills</th>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">Item No.</th>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">5</th>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">4</th>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">3</th>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">2</th>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">1</th>
+                                  </thead>
+                                </tr>
+                                <tr>
+                                  <td rowspan="1" class="text-center"><h3>Investigating and Analyzing</h3></td>
+                                  <td>2</td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_2_5">
+                                        <input type="radio" name="rbo_w_2" id="rbo_w_2_5" value="5"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_2_4">
+                                        <input type="radio" name="rbo_w_2" id="rbo_w_2_4" value="4"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_2_3">
+                                        <input type="radio" name="rbo_w_2" id="rbo_w_2_3" value="3"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_2_2">
+                                        <input type="radio" name="rbo_w_2" id="rbo_w_2_2" value="2"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_2_1">
+                                        <input type="radio" name="rbo_w_2" id="rbo_w_2_1" value="1"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td rowspan="1"></td>
+                                  <td>5</td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_5_5">
+                                        <input type="radio" name="rbo_w_5" id="rbo_w_5_5" value="5"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_5_4">
+                                        <input type="radio" name="rbo_w_5" id="rbo_w_5_4" value="4"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_5_3">
+                                        <input type="radio" name="rbo_w_5" id="rbo_w_5_3" value="3"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_5_2">
+                                        <input type="radio" name="rbo_w_5" id="rbo_w_5_2" value="2"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_5_1">
+                                        <input type="radio" name="rbo_w_5" id="rbo_w_5_1" value="1"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <td rowspan="1"></td>
+                                  <td>12</td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_12_5">
+                                        <input type="radio" name="rbo_w_12" id="rbo_w_12_5" value="5"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_12_4">
+                                        <input type="radio" name="rbo_w_12" id="rbo_w_12_4" value="4"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_12_3">
+                                        <input type="radio" name="rbo_w_12" id="rbo_w_12_3" value="3"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_12_2">
+                                        <input type="radio" name="rbo_w_12" id="rbo_w_12_2" value="2"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_12_1">
+                                        <input type="radio" name="rbo_w_12" id="rbo_w_12_1" value="1"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <td rowspan="1"></td>
+                                  <td>29</td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_29_5">
+                                        <input type="radio" name="rbo_w_29" id="rbo_w_29_5" value="5"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_29_4">
+                                        <input type="radio" name="rbo_w_29" id="rbo_w_29_4" value="4"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_29_3">
+                                        <input type="radio" name="rbo_w_29" id="rbo_w_29_3" value="3"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_29_2">
+                                        <input type="radio" name="rbo_w_29" id="rbo_w_29_2" value="2"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_29_1">
+                                        <input type="radio" name="rbo_w_29" id="rbo_w_29_1" value="1"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <thead>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">Skills</th>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">Item No.</th>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">5</th>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">4</th>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">3</th>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">2</th>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">1</th>
+                                  </thead>
+                                </tr>
+                                <tr>
+                                  <td rowspan="1" class="text-center"><h3>Leadership</h3></td>
+                                  <td>4</td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_4_5">
+                                        <input type="radio" name="rbo_w_4" id="rbo_w_4_5" value="5"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_4_4">
+                                        <input type="radio" name="rbo_w_4" id="rbo_w_4_4" value="4"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_4_3">
+                                        <input type="radio" name="rbo_w_4" id="rbo_w_4_3" value="3"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_4_2">
+                                        <input type="radio" name="rbo_w_4" id="rbo_w_4_2" value="2"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_4_1">
+                                        <input type="radio" name="rbo_w_4" id="rbo_w_4_1" value="1"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td rowspan="1"></td>
+                                  <td>8</td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_8_5">
+                                        <input type="radio" name="rbo_w_8" id="rbo_w_8_5" value="5"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_8_4">
+                                        <input type="radio" name="rbo_w_8" id="rbo_w_8_4" value="4"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_8_3">
+                                        <input type="radio" name="rbo_w_8" id="rbo_w_8_3" value="3"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_8_2">
+                                        <input type="radio" name="rbo_w_8" id="rbo_w_8_2" value="2"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_8_1">
+                                        <input type="radio" name="rbo_w_8" id="rbo_w_8_1" value="1"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <td rowspan="1"></td>
+                                  <td>32</td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_32_5">
+                                        <input type="radio" name="rbo_w_32" id="rbo_w_32_5" value="5"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_32_4">
+                                        <input type="radio" name="rbo_w_32" id="rbo_w_32_4" value="4"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_32_3">
+                                        <input type="radio" name="rbo_w_32" id="rbo_w_32_3" value="3"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_32_2">
+                                        <input type="radio" name="rbo_w_32" id="rbo_w_32_2" value="2"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_32_1">
+                                        <input type="radio" name="rbo_w_32" id="rbo_w_32_1" value="1"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <thead>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">Skills</th>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">Item No.</th>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">5</th>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">4</th>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">3</th>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">2</th>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">1</th>
+                                  </thead>
+                                </tr>
+                                <tr>
+                                  <td rowspan="1" class="text-center"><h3>Planning and Organizing</h3></td>
+                                  <td>20</td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_20_5">
+                                        <input type="radio" name="rbo_w_20" id="rbo_w_20_5" value="5"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_20_4">
+                                        <input type="radio" name="rbo_w_20" id="rbo_w_20_4" value="4"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_20_3">
+                                        <input type="radio" name="rbo_w_20" id="rbo_w_20_3" value="3"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_20_2">
+                                        <input type="radio" name="rbo_w_20" id="rbo_w_20_2" value="2"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_20_1">
+                                        <input type="radio" name="rbo_w_20" id="rbo_w_20_1" value="1"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td rowspan="1"></td>
+                                  <td>24</td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_24_5">
+                                        <input type="radio" name="rbo_w_24" id="rbo_w_24_5" value="5"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_24_4">
+                                        <input type="radio" name="rbo_w_24" id="rbo_w_24_4" value="4"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_24_3">
+                                        <input type="radio" name="rbo_w_24" id="rbo_w_24_3" value="3"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_24_2">
+                                        <input type="radio" name="rbo_w_24" id="rbo_w_24_2" value="2"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_24_1">
+                                        <input type="radio" name="rbo_w_24" id="rbo_w_24_1" value="1"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <td rowspan="1"></td>
+                                  <td>26</td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_26_5">
+                                        <input type="radio" name="rbo_w_26" id="rbo_w_26_5" value="5"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_26_4">
+                                        <input type="radio" name="rbo_w_26" id="rbo_w_26_4" value="4"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_26_3">
+                                        <input type="radio" name="rbo_w_26" id="rbo_w_26_3" value="3"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_26_2">
+                                        <input type="radio" name="rbo_w_26" id="rbo_w_26_2" value="2"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_26_1">
+                                        <input type="radio" name="rbo_w_26" id="rbo_w_26_1" value="1"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <td rowspan="1"></td>
+                                  <td>27</td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_27_5">
+                                        <input type="radio" name="rbo_w_27" id="rbo_w_27_5" value="5"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_27_4">
+                                        <input type="radio" name="rbo_w_27" id="rbo_w_27_4" value="4"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_27_3">
+                                        <input type="radio" name="rbo_w_27" id="rbo_w_27_3" value="3"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_27_2">
+                                        <input type="radio" name="rbo_w_27" id="rbo_w_27_2" value="2"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_27_1">
+                                        <input type="radio" name="rbo_w_27" id="rbo_w_27_1" value="1"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <thead>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">Skills</th>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">Item No.</th>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">5</th>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">4</th>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">3</th>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">2</th>
+                                    <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" colspan="1">1</th>
+                                  </thead>
+                                </tr>
+                                <tr>
+                                  <td rowspan="1" class="text-center"><h3>Numeracy</h3></td>
+                                  <td>9</td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_9_5">
+                                        <input type="radio" name="rbo_w_9" id="rbo_w_9_5" value="5"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_9_4">
+                                        <input type="radio" name="rbo_w_9" id="rbo_w_9_4" value="4"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_9_3">
+                                        <input type="radio" name="rbo_w_9" id="rbo_w_9_3" value="3"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_9_2">
+                                        <input type="radio" name="rbo_w_9" id="rbo_w_9_2" value="2"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_9_1">
+                                        <input type="radio" name="rbo_w_9" id="rbo_w_9_1" value="1"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td rowspan="1"></td>
+                                  <td>16</td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_16_5">
+                                        <input type="radio" name="rbo_w_16" id="rbo_w_16_5" value="5"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_16_4">
+                                        <input type="radio" name="rbo_w_16" id="rbo_w_16_4" value="4"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_16_3">
+                                        <input type="radio" name="rbo_w_16" id="rbo_w_16_3" value="3"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_16_2">
+                                        <input type="radio" name="rbo_w_16" id="rbo_w_16_2" value="2"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_16_1">
+                                        <input type="radio" name="rbo_w_16" id="rbo_w_16_1" value="1"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <td rowspan="1"></td>
+                                  <td>25</td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_25_5">
+                                        <input type="radio" name="rbo_w_25" id="rbo_w_25_5" value="5"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_25_4">
+                                        <input type="radio" name="rbo_w_25" id="rbo_w_25_4" value="4"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_25_3">
+                                        <input type="radio" name="rbo_w_25" id="rbo_w_25_3" value="3"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_25_2">
+                                        <input type="radio" name="rbo_w_25" id="rbo_w_25_2" value="2"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_25_1">
+                                        <input type="radio" name="rbo_w_25" id="rbo_w_25_1" value="1"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <td rowspan="1"></td>
+                                  <td>28</td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_28_5">
+                                        <input type="radio" name="rbo_w_28" id="rbo_w_28_5" value="5"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_28_4">
+                                        <input type="radio" name="rbo_w_28" id="rbo_w_28_4" value="4"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_28_3">
+                                        <input type="radio" name="rbo_w_28" id="rbo_w_28_3" value="3"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_28_2">
+                                        <input type="radio" name="rbo_w_28" id="rbo_w_28_2" value="2"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_w_28_1">
+                                        <input type="radio" name="rbo_w_28" id="rbo_w_28_1" value="1"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                </tr>
+                               
+
+                            </table>
+                          </div>
+                        </div>
+                      
                         
                       <?php } elseif ($student['exam_title'] == 'Aptitude Verbal and Numerical') { ?>
 

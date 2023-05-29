@@ -586,6 +586,176 @@
                 }
             }
         }
+    } elseif ($main_category == "ESA") {
+        if (empty($rbo_w_1) || empty($rbo_w_2) || empty($rbo_w_3) || empty($rbo_w_4) || empty($rbo_w_5) || empty($rbo_w_6) || empty($rbo_w_7) || 
+        empty($rbo_w_8) || empty($rbo_w_9) || empty($rbo_w_10) || empty($rbo_w_11) || empty($rbo_w_12) || empty($rbo_w_13) || empty($rbo_w_14) ||
+        empty($rbo_w_15) || empty($rbo_w_16) || empty($rbo_w_17) || empty($rbo_w_18) || empty($rbo_w_19) || empty($rbo_w_20) || empty($rbo_w_21) ||
+        empty($rbo_w_22) || empty($rbo_w_23) || empty($rbo_w_24) || empty($rbo_w_25) || empty($rbo_w_26) || empty($rbo_w_27) || empty($rbo_w_28) ||
+        empty($rbo_w_29) || empty($rbo_w_30) || empty($rbo_w_31) || empty($rbo_w_32)) {
+            $res = array("res" => "emptyField");
+        } else {
+            if ($sql_attempt->num_rows > 0) {
+                $res = array("res" => "alreadyExam");
+            } elseif ($sql_ans->num_rows > 0) {
+                $update_ans = $db->query("UPDATE examinee_answer_v2 SET exam_answer_status='Completed', exam_submitted ='$submitted' 
+                WHERE student_id ='$student_id' AND exam_id ='$exam_id'");
+
+                if ($update_ans) {
+                    $insert_at = $db->query("INSERT INTO examinee_attempt(student_no, student_id, exam_id, exam_attempt_status) VALUES(
+                        '$student_no','$student_id','$exam_id', 'Completed')");
+                }
+
+                if ($insert_at) {
+                    $sql = "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',1, '$rbo_w_1','1','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',13, '$rbo_w_13','1','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',21, '$rbo_w_21','1','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',31, '$rbo_w_31','1','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',7, '$rbo_w_7','2','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',14, '$rbo_w_14','2','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',18, '$rbo_w_18','2','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',19, '$rbo_w_19','2','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',23, '$rbo_w_23','2','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',6, '$rbo_w_6','3','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',10, '$rbo_w_10','3','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',17, '$rbo_w_17','3','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',22, '$rbo_w_22','3','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',3, '$rbo_w_3','4','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',11, '$rbo_w_11','4','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',15, '$rbo_w_15','4','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',30, '$rbo_w_30','4','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',2, '$rbo_w_2','5','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',5, '$rbo_w_5','5','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',12, '$rbo_w_12','5','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',29, '$rbo_w_29','5','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',4, '$rbo_w_4','6','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',8, '$rbo_w_8','6','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',32, '$rbo_w_32','6','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',20, '$rbo_w_20','7','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',24, '$rbo_w_24','7','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',26, '$rbo_w_26','7','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',27, '$rbo_w_27','7','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',9, '$rbo_w_9','8','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',16, '$rbo_w_16','8','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',25, '$rbo_w_25','8','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',28, '$rbo_w_28','8','Completed',  '$submitted');";
+                    $insert_ans = $db->multi_query($sql);
+                }
+                if ($insert_ans) {
+                    $res = array("res" => "success");
+                } else {
+                    $res = array("res" => "failed");
+                }
+            } else {
+                $insert_at = $db->query("INSERT INTO examinee_attempt(student_no, student_id, exam_id, exam_attempt_status) VALUES(
+                    '$student_no','$student_id','$exam_id', 'Completed')");
+
+                if ($insert_at) {
+                    $sql = "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',1, '$rbo_w_1','1','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',13, '$rbo_w_13','1','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',21, '$rbo_w_21','1','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',31, '$rbo_w_31','1','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',7, '$rbo_w_7','2','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',14, '$rbo_w_14','2','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',18, '$rbo_w_18','2','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',19, '$rbo_w_19','2','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',23, '$rbo_w_23','2','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',6, '$rbo_w_6','3','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',10, '$rbo_w_10','3','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',17, '$rbo_w_17','3','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',22, '$rbo_w_22','3','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',3, '$rbo_w_3','4','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',11, '$rbo_w_11','4','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',15, '$rbo_w_15','4','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',30, '$rbo_w_30','4','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',2, '$rbo_w_2','5','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',5, '$rbo_w_5','5','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',12, '$rbo_w_12','5','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',29, '$rbo_w_29','5','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',4, '$rbo_w_4','6','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',8, '$rbo_w_8','6','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',32, '$rbo_w_32','6','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',20, '$rbo_w_20','7','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',24, '$rbo_w_24','7','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',26, '$rbo_w_26','7','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',27, '$rbo_w_27','7','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',9, '$rbo_w_9','8','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',16, '$rbo_w_16','8','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',25, '$rbo_w_25','8','Completed',  '$submitted');";
+                    $sql .= "INSERT INTO examinee_answer_v2(student_no, student_id, exam_id, semester, school_year, exam_item_no, exam_correct_answer, exam_answer, exam_answer_status, exam_submitted) VALUES('$student_no', '$student_id',
+                    '$exam_id','$semester','$school_year',28, '$rbo_w_28','8','Completed',  '$submitted');";
+                    $insert_ans = $db->multi_query($sql);
+                } 
+                if ($insert_ans) {
+                    $res = array("res" => "success");
+                } else {
+                    $res = array("res" => "failed");
+                }
+            }
+        }
+        
     } else {
         $isproceed = false;
         foreach($_REQUEST['answer'] as $key => $value) {

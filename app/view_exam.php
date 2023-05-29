@@ -149,7 +149,8 @@
                           <?php } else { ?>
                               <?php if (($created['student_year'] == 'First Year' && $created['exam_title'] == 'Student Success Kit') 
                               || ($created['student_year'] == 'Second Year' && $created['exam_title'] == 'BarOn EQ-i:S') 
-                              || ($created['student_year'] == 'Third Year' && $created['exam_title'] == 'The Keirsey Temperament Sorter')) { ?>
+                              || ($created['student_year'] == 'Third Year' && $created['exam_title'] == 'The Keirsey Temperament Sorter')
+                              || ($created['student_year'] == 'Fourth Year' && $created['exam_title'] == 'ESA')) { ?>
                                 <a href="./update_answer_exam?id=<?php echo $created['id']; ?>&category=<?php echo $created['exam_category']; ?>" name="button_update" type="button" class="btn btn-success rounded-pill btn-sm w-50 disabled">Not Available</button>
                               <?php } elseif ($created['updated_answer'] == 1) { ?>
                                 <a href="./exam_update_form?id=<?php echo $created['id']; ?>&category=<?php echo $created['exam_category']; ?>" name="button_update" type="button" class="btn btn-success rounded-pill btn-sm w-50">Edit</button>

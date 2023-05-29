@@ -122,7 +122,7 @@ if ($db->num_rows($result)) {
 <?php } ?>
 
 
-<?php $sql = "SELECT exam_title FROM examinee WHERE student_year ='$student_year' 
+<?php $sql = "SELECT * FROM examinee WHERE student_year ='$student_year' 
 AND semester ='$semester' AND school_year ='$school_year' AND exam_result_status='Done' GROUP BY exam_title"?>
 <?php 
 $result = $db->query($sql);
@@ -167,7 +167,7 @@ if ($db->num_rows($result)) {
 </li>  
 <?php } elseif ($examinee['exam_title'] == 'ESA') { ?>
 <li class="nav-item">
-  <a class="nav-link " href="../app/esa_result">
+  <a class="nav-link " href="../app/esa_result.php?exam_id=<?php echo $examinee['exam_id']; ?>">
     <i class="ri-sticky-note-fill"></i>
     <span><?php echo $examinee['exam_title']; ?>'s Result</span>
   </a>
