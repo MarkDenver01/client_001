@@ -1,4 +1,5 @@
 $(document).on('submit','#submitAnswerFrm', function(){
+    var main_category = $('#main_category').val();
     var examAction = $('#examAction').val();
     if (examAction != "") {
         Swal.fire({
@@ -12,7 +13,7 @@ $(document).on('submit','#submitAnswerFrm', function(){
             confirmButtonText: 'OK!'    
         }).then((result) => {
             if (result.value) {
-                $.post("../app/ajax/submit_answer_ajax_func.php", $(this).serialize(), function(data) {
+                $.post("../app/ajax/submit_answer_ajax_func.php", $(this).serialize(), function(data) {                  
                     if (data.res == "alreadyTaken") {
                         Swal.fire(
                             'Already Taken',
@@ -34,7 +35,17 @@ $(document).on('submit','#submitAnswerFrm', function(){
                                 var exam_type =$('#main_exam_id').val();
                                 var exam_desc =$('#main_exam_desc').val();
                                 var exam_title =$('#main_exam_title').val();
-                                window.location.href='../app/exam_result.php?exam_id='+exam_id+'&exam_type='+exam_type+'&exam_desc='+exam_desc+'&exam_title='+exam_title;
+                                if (exam_desc == 'BarOn EQ-i:S') {
+                                    window.location.href='../app/baron_exam_result.php?exam_id='+exam_id+'&exam_type='+exam_type+'&exam_desc='+exam_desc+'&exam_title='+exam_title;
+                                } else if (exam_desc == 'The Keirsey Temerament Sorter') {
+                                    window.location.href='../app/keirsey_temerment_result.php?exam_id='+exam_id+'&exam_type='+exam_type+'&exam_desc='+exam_desc+'&exam_title='+exam_title;
+                                } else if (exam_desc == 'ESA') {
+                                    window.location.href='../app/esa_exam_result.php?exam_id='+exam_id+'&exam_type='+exam_type+'&exam_desc='+exam_desc+'&exam_title='+exam_title;
+                                } else if (exam_desc == 'Aptitude Verbal and Numerical') {
+                                    window.location.href='../app/aptitude_v_n_n_result.php?exam_id='+exam_id+'&exam_type='+exam_type+'&exam_desc='+exam_desc+'&exam_title='+exam_title;
+                                } else {
+                                    window.location.href='../app/exam_result.php?exam_id='+exam_id+'&exam_type='+exam_type+'&exam_desc='+exam_desc+'&exam_title='+exam_title;
+                                }   
                             }
                         });
                     } else if (data.res == "failed") {
@@ -49,7 +60,7 @@ $(document).on('submit','#submitAnswerFrm', function(){
                             'Some field is/are missing',
                             'warning'
                         )
-                    }
+                    } 
                 }, 'json');
             }
         });
@@ -86,7 +97,17 @@ $(document).on('submit','#submitAnswerFrm', function(){
                             var exam_type =$('#main_exam_id').val();
                             var exam_desc =$('#main_exam_desc').val();
                             var exam_title =$('#main_exam_title').val();
-                            window.location.href='../app/exam_result.php?exam_id='+exam_id+'&exam_type='+exam_type+'&exam_desc='+exam_desc+'&exam_title='+exam_title;
+                            if (exam_desc == 'BarOn EQ-i:S') {
+                                window.location.href='../app/baron_exam_result.php?exam_id='+exam_id+'&exam_type='+exam_type+'&exam_desc='+exam_desc+'&exam_title='+exam_title;
+                            } else if (exam_desc == 'The Keirsey Temerament Sorter') {
+                                window.location.href='../app/keirsey_temerment_result.php?exam_id='+exam_id+'&exam_type='+exam_type+'&exam_desc='+exam_desc+'&exam_title='+exam_title;
+                            } else if (exam_desc == 'ESA') {
+                                window.location.href='../app/esa_exam_result.php?exam_id='+exam_id+'&exam_type='+exam_type+'&exam_desc='+exam_desc+'&exam_title='+exam_title;
+                            } else if (exam_desc == 'Aptitude Verbal and Numerical') {
+                                window.location.href='../app/aptitude_v_n_n_result.php?exam_id='+exam_id+'&exam_type='+exam_type+'&exam_desc='+exam_desc+'&exam_title='+exam_title;
+                            } else {
+                                window.location.href='../app/exam_result.php?exam_id='+exam_id+'&exam_type='+exam_type+'&exam_desc='+exam_desc+'&exam_title='+exam_title;
+                            }   
                         });
                     } else if(data.res == "failed") {
                         Swal.fire(
@@ -100,7 +121,7 @@ $(document).on('submit','#submitAnswerFrm', function(){
                             'Some field is/are missing',
                             'warning'
                         )
-                    }
+                    } 
                 }, 'json');
             }
         });

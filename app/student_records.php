@@ -19,7 +19,7 @@
   </div><!-- End Page Title -->
 
 
-<section class="section" style="width: 2460px;">
+<section class="section" style="width: 2660px;">
     <div class="row">
       <!-- start create account -->
             <!-- start create account -->
@@ -195,18 +195,19 @@
                         } else if ($row['exam_title'] == 'OASIS 3') {
                             $redirect = "../app/oasis_result.php?student_id=" .$row['student_id'];
                         } else if($row['exam_title'] == 'BarOn EQ-i:S') {
-                            $redirect = "../app/baron_eq_interpretation.php?student_id=" .$row['student_id'];
+                            $redirect = "../app/baron_eq_interpretation.php?student_id=" .$row['student_id']. "&semester=" .$row['semester']. "&school_year=" .$row['school_year']. "&name=" .$row['name'];
                         } else if ($row['exam_title'] == 'The Keirsey Temperament Sorter') {
-                            $redirect = "../app/keirsey_temp_intrepretation.php?student_id=" .$row['student_id'];
+                            $redirect = "../app/keirsey_temp_intrepretation.php?student_id=" .$row['student_id']. "&semester=" .$row['semester']. "&school_year=" .$row['school_year']. "&name=" .$row['name'];
                         } else if ($row['exam_title'] == 'Aptitude J and C') {
-                            $redirect = "../app/aptitude_j_n_c_result.php?student_id=" .$row['student_id'];
+                            $redirect = "../app/aptitude_j_n_c_result.php?student_id=" .$row['student_id']. "&semester=" .$row['semester']. "&school_year=" .$row['school_year']. "&name=" .$row['name'];
                         } else if ($row['exam_title'] == 'ESA') {
-                            $redirect = "../app/esa_result.php?student_id=" .$row['student_id'];
+                            $redirect = "../app/esa_result.php?student_id=" .$row['student_id']. "&semester=" .$row['semester']. "&school_year=" .$row['school_year']. "&name=" .$row['name']. "&exam_id=" .$row['exam_id'];
                         } else if ($row['exam_title'] == 'Aptitude Verbal and Numerical') {
-                            $redirect = "../app/aptitude_verbal_n_numerical.php?student_id=" .$row['student_id'];
+                            $redirect = "../app/aptitude_verbal_n_numerical.php?student_id=" .$row['student_id']. "&semester=" .$row['semester']. "&school_year=" .$row['school_year']. "&name=" .$row['name']. "&exam_id=" .$row['exam_id'];;
                         }
                     ?>
                       <tr class="text-success">
+
                         <th scope="row" class="text-center" hidden ><?php echo $row['student_id']; ?></th>
                         <th scope="row" class="text-center" hidden ><?php echo $row['exam_id']; ?></th>
                         <th scope="row" class="text-center text-danger" ><?php echo $row['student_no']; ?></th>

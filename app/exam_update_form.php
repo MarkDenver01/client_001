@@ -97,7 +97,7 @@ if (isset($_POST["button_update"])) {
                 if ($sql1) {
                     redirect('./view_exam', false);
                 } else {
-                    redirect('./view_exam', false);
+                    redirect('./dashboard', false);
                 }
             } elseif ($created['exam_category'] == 'Test No 2') {
                 foreach ($_REQUEST['answer'] as $key => $value) {
@@ -414,7 +414,7 @@ if (isset($_POST["button_update"])) {
                                 <div class="col-xl-9">
                                     <label for="fullName" class="col-md-4 col-lg-12 col-form-label">Item no. <?php echo ($i -1) ?></label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input name="answer[<?php echo ($i - 1); ?>][items]" type="text" class="form-control rounded-0" id="fullName" value="<?php echo $row['correct_items']; ?>" >
+                                            <input oninput="this.value = this.value.toUpperCase()" name="answer[<?php echo ($i - 1); ?>][items_1]" type="text" class="form-control rounded-0" id="fullName" value="<?php echo $row['correct_items']; ?>" >
                                         </div>
                                 </div>
                                 <?php } ?>
@@ -433,7 +433,7 @@ if (isset($_POST["button_update"])) {
                                 <div class="col-xl-9">
                                     <label for="fullName" class="col-md-4 col-lg-12 col-form-label">Item no. <?php echo ($i -1) ?></label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input name="answer[<?php echo ($i - 1); ?>][items]" type="text" class="form-control rounded-0" id="fullName" value="<?php echo $row['correct_items']; ?>" >
+                                            <input oninput="this.value = this.value.toUpperCase()" name="answer[<?php echo ($i - 1); ?>][items_2]" type="text" class="form-control rounded-0" id="fullName" value="<?php echo $row['correct_items']; ?>" >
                                         </div>
                                 </div>
                                 <?php } ?>
@@ -452,7 +452,7 @@ if (isset($_POST["button_update"])) {
                                 <div class="col-xl-9">
                                     <label for="fullName" class="col-md-4 col-lg-12 col-form-label">Item no. <?php echo ($i -1) ?></label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input name="answer[<?php echo ($i - 1); ?>][items]" type="text" class="form-control rounded-0" id="fullName" value="<?php echo $row['correct_items']; ?>" >
+                                            <input oninput="this.value = this.value.toUpperCase()" name="answer[<?php echo ($i - 1); ?>][items_3]" type="text" class="form-control rounded-0" id="fullName" value="<?php echo $row['correct_items']; ?>" >
                                         </div>
                                 </div>
                                 <?php } ?>
@@ -471,7 +471,7 @@ if (isset($_POST["button_update"])) {
                                 <div class="col-xl-9">
                                     <label for="fullName" class="col-md-4 col-lg-12 col-form-label">Item no. <?php echo ($i -1) ?></label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input name="answer[<?php echo ($i - 1); ?>][items]" type="text" class="form-control rounded-0" id="fullName" value="<?php echo $row['correct_items']; ?>" >
+                                            <input oninput="this.value = this.value.toUpperCase()" name="answer[<?php echo ($i - 1); ?>][items_4]" type="text" class="form-control rounded-0" id="fullName" value="<?php echo $row['correct_items']; ?>" >
                                         </div>
                                 </div>
                                 <?php } ?>
