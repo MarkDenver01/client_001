@@ -794,14 +794,17 @@
                                   <td class="text-white" style="background-image: linear-gradient(#6F2DA8, #9A2CA0);"><?php echo $total_b_4; ?></td>
                                 </tr>
                                 <tr>
+                                 <?php $char = []; ?>
                                   <td style="background-image: linear-gradient(#4B3621, #4B3621);"></td>
                                   <?php 
                                     if ($highest_k_a_b_1 == $total_a_1) { ?>
                                         <td id="blink_1" class="text-white" style="background-image: linear-gradient(#005A92, #0066B2);"><h3>E</h3></td>
                                         <td class="text-white" style="background-image: linear-gradient(#80461B, #8B4513);">I</td>
+                                        <?php $char[] = "E"; ?>
                                   <?php } elseif ($highest_k_a_b_1 == $total_b_1) { ?>
                                         <td class="text-white" style="background-image: linear-gradient(#80461B, #8B4513);">E</td>
                                         <td id="blink_1" class="text-white" style="background-image: linear-gradient(#005A92, #0066B2);"><h3>I</h3></td>
+                                        <?php $char[] = "I"; ?>
                                   <?php } ?>
                                   <td style="background-image: linear-gradient(#4B3621, #4B3621);"></td>
                                   <td style="background-image: linear-gradient(#4B3621, #4B3621);"></td>
@@ -810,9 +813,11 @@
                                   <?php if ($highest_k_a_b_2 == $total_a_2) { ?>
                                         <td id="blink_2" class="text-white" style="background-image: linear-gradient(#005A92, #0066B2);"><h3>S</h3></td>
                                         <td class="text-white" style="background-image: linear-gradient(#80461B, #8B4513);">N</td>
+                                        <?php $char[] = "S"; ?>
                                   <?php } elseif ($highest_k_a_b_2 == $total_b_2) { ?>
                                         <td class="text-white" style="background-image: linear-gradient(#80461B, #8B4513);">S</td>
                                         <td id="blink_2" class="text-white" style="background-image: linear-gradient(#005A92, #0066B2);"><h3>N</h3></td>
+                                        <?php $char[] = "N"; ?>
                                   <?php } ?>
                                   <td style="background-image: linear-gradient(#4B3621, #4B3621);"></td>
                                   <td style="background-image: linear-gradient(#4B3621, #4B3621);"></td>
@@ -821,9 +826,11 @@
                                   <?php if ($highest_k_a_b_3 == $total_a_3) { ?>
                                         <td id="blink_3" class="text-white" style="background-image: linear-gradient(#005A92, #0066B2);"><h3>T</h3></td>
                                         <td class="text-white" style="background-image: linear-gradient(#80461B, #8B4513);">F</td>
+                                        <?php $char[] = "T"; ?>
                                   <?php } elseif ($highest_k_a_b_3 == $total_b_3) { ?>
                                         <td class="text-white" style="background-image: linear-gradient(#80461B, #8B4513);">T</td>
                                         <td id="blink_3" class="text-white" style="background-image: linear-gradient(#005A92, #0066B2);"><h3>F</h3></td>
+                                        <?php $char[] = "F"; ?>
                                   <?php } ?>
                                   <td style="background-image: linear-gradient(#4B3621, #4B3621);"></td>
                                   <td style="background-image: linear-gradient(#4B3621, #4B3621);"></td>
@@ -832,9 +839,11 @@
                                   <?php if ($highest_k_a_b_4 == $total_a_4) { ?>
                                         <td id="blink_4" class="text-white" style="background-image: linear-gradient(#005A92, #0066B2);"><h3>J</h3></td>
                                         <td class="text-white" style="background-image: linear-gradient(#80461B, #8B4513);">P</td>
+                                        <?php $char[] = "J"; ?>
                                   <?php } elseif ($highest_k_a_b_4 == $total_b_4) { ?>
                                         <td class="text-white" style="background-image: linear-gradient(#80461B, #8B4513);">J</td>
                                         <td id="blink_4" class="text-white" style="background-image: linear-gradient(#005A92, #0066B2);"><h3>P</h3></td>
+                                        <?php $char[] = "P"; ?>
                                   <?php } ?>
                                 </tr>
                               </tbody>
@@ -843,6 +852,11 @@
                   </div>
                   <form id="submitExamResultFrm" method="POST">
                    <?php if ($exam_title == "The Keirsey Temperament Sorter") { ?>
+                   <?php 
+                      foreach ($char as $key) {
+                        $exam_result_status .= $key;
+                      }
+                   ?>
                       <input type="hidden" id="student_id" name="student_id" value="<?php echo $student_id; ?>">
                       <input type="hidden" id="exam_type" name="exam_type" value="<?php echo $exam_type; ?>">
                       <input type="hidden" id="exam_id" name="exam_id" value="<?php echo $exam_id; ?>">
@@ -851,7 +865,7 @@
                       <input type="hidden" id="exam_result_status" name="exam_result_status" value="<?php echo $exam_result_status; ?>">
                       <input type="hidden" id="exam_answer" name="exam_answer" value="0">
                       <input type="hidden" id="total_answer" name="total_answer" value="51">
-                      <input type="hidden" id="total_score" name="total_score" value="<?php echo $counter; ?>">
+                      <input type="hidden" id="total_score" name="total_score" value="N/A">
 
                       <input type="hidden" id="semester" value="<?php echo $semester; ?>">
                       <input type="hidden" id="school_year" value="<?php echo $school_year; ?>">

@@ -19,7 +19,7 @@
   </div><!-- End Page Title -->
 
 
-<section class="section" style="width: 2460px;">
+<section class="section" style="width: 2660px;">
     <div class="row">
       <!-- start create account -->
             <!-- start create account -->
@@ -201,7 +201,7 @@
                         } else if ($row['exam_title'] == 'Aptitude J and C') {
                             $redirect = "../app/aptitude_j_n_c_result.php?student_id=" .$row['student_id']. "&semester=" .$row['semester']. "&school_year=" .$row['school_year']. "&name=" .$row['name'];
                         } else if ($row['exam_title'] == 'ESA') {
-                            $redirect = "../app/esa_result.php?student_id=" .$row['student_id']. "&semester=" .$row['semester']. "&school_year=" .$row['school_year']. "&name=" .$row['name'];
+                            $redirect = "../app/esa_result.php?student_id=" .$row['student_id']. "&semester=" .$row['semester']. "&school_year=" .$row['school_year']. "&name=" .$row['name']. "&exam_id=" .$row['exam_id'];
                         } else if ($row['exam_title'] == 'Aptitude Verbal and Numerical') {
                             $redirect = "../app/aptitude_verbal_n_numerical.php?student_id=" .$row['student_id']. "&semester=" .$row['semester']. "&school_year=" .$row['school_year']. "&name=" .$row['name'];
                         }

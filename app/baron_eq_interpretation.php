@@ -380,13 +380,136 @@ if(isset($_POST['button_counseling'])) {
           <div class="card rounded-0">
             <div class="card-body">
               <br/>
-              <div class="text-center"><h2>Data Interpretation</h2></div>
+              <div class="text-center"><h2>Remarks</h2></div>
+              <div class="row-mb-3">
+                <div class="col-lg-12">
+                      <table class="table table-bordered mb-5 text-center">
+                        <thead>
+                          <tr>
+                            <td class="text-white" style="background-image: linear-gradient(#005A92, #0066B2);">Types</td>
+                            <td class="text-white" style="background-image: linear-gradient(#005A92, #0066B2);">Score</td>
+                            <td class="text-white" style="background-image: linear-gradient(#005A92, #0066B2);">Remarks</td>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <?php 
+                            if ($total_a >= 45 && $total_a <= 50) {
+                              $remarks = "Enhanced Skills";
+                            } elseif ($total_a >= 32 && $total_a <= 44) {
+                              $remarks = "Effective functioning";
+                            } elseif ($total_a >= 0 && $total_a <= 31) {
+                              $remarks = "Area of enrichment";
+                            }
+                          ?>
+                          <tr>
+                            <td>A</td>
+                            <td><?php echo $total_a; ?></td>
+                            <td><?php echo $remarks; ?>
+                          </tr>
+
+                          <?php 
+                            if ($total_b >= 45 && $total_b <= 50) {
+                              $remarks = "Enhanced Skills";
+                            } elseif ($total_b >= 32 && $total_b <= 44) {
+                              $remarks = "Effective functioning";
+                            } elseif ($total_b >= 0 && $total_b <= 31) {
+                              $remarks = "Area of enrichment";
+                            }
+                          ?>
+                          <tr>
+                            <td>B</td>
+                            <td><?php echo $total_b; ?></td>
+                            <td><?php echo $remarks; ?>
+                          </tr>
+
+                          <?php 
+                            if ($total_c >= 45 && $total_c <= 50) {
+                              $remarks = "Enhanced Skills";
+                            } elseif ($total_c >= 32 && $total_c <= 44) {
+                              $remarks = "Effective functioning";
+                            } elseif ($total_c >= 0 && $total_c <= 31) {
+                              $remarks = "Area of enrichment";
+                            }
+                          ?>
+                          <tr>
+                            <td>C</td>
+                            <td><?php echo $total_c; ?></td>
+                            <td><?php echo $remarks; ?>
+                          </tr>
+
+
+                          <?php 
+                            if ($total_d >= 45 && $total_d <= 50) {
+                              $remarks = "Enhanced Skills";
+                            } elseif ($total_d >= 32 && $total_d <= 44) {
+                              $remarks = "Effective functioning";
+                            } elseif ($total_d >= 0 && $total_d <= 31) {
+                              $remarks = "Area of enrichment";
+                            }
+                          ?>
+                          <tr>
+                            <td>D</td>
+                            <td><?php echo $total_d; ?></td>
+                            <td><?php echo $remarks; ?>
+                          </tr>
+
+                          <?php 
+                            if ($total_e >= 45 && $total_e <= 50) {
+                              $remarks = "Enhanced Skills";
+                            } elseif ($total_e >= 32 && $total_e <= 44) {
+                              $remarks = "Effective functioning";
+                            } elseif ($total_e >= 0 && $total_e <= 31) {
+                              $remarks = "Area of enrichment";
+                            }
+                          ?>
+                          <tr>
+                            <td>E</td>
+                            <td><?php echo $total_e; ?></td>
+                            <td><?php echo $remarks; ?>
+                          </tr>
+
+                          <?php 
+                            if ($overall_total >= 45 && $overall_total <= 50) {
+                              $remarks = "Enhanced Skills";
+                            } elseif ($overall_total >= 32 && $overall_total <= 44) {
+                              $remarks = "Effective functioning";
+                            } elseif ($overall_total >= 0 && $overall_total <= 31) {
+                              $remarks = "Area of enrichment";
+                            }
+                          ?>
+                          <tr>
+                            <td>F</td>
+                            <td><?php echo $overall_total; ?></td>
+                            <td><?php echo $remarks; ?>
+                          </tr>
+
+
+                          <?php 
+                            if ($total_g >= 45 && $total_g <= 50) {
+                              $remarks = "Enhanced Skills";
+                            } elseif ($total_g >= 32 && $total_g <= 44) {
+                              $remarks = "Effective functioning";
+                            } elseif ($total_g >= 0 && $total_g <= 31) {
+                              $remarks = "Area of enrichment";
+                            }
+                          ?>
+                          <tr>
+                            <td>G</td>
+                            <td><?php echo $total_g; ?></td>
+                            <td><?php echo $remarks; ?>
+                          </tr>
+                        </tbody>
+                      </table>
+                </div>
+              </div>
+              <hr/>
+              <div class="text-center"><h2>Interpretation</h2></div>
               <hr/>
                   <div class="row mb-3">
                     <div class="col-lg-6">
                       <table class="table table-bordered mb-5 text-center">
                         <thead>
-                          <tr><td>A</td></tr>
+                          <tr><td class="text-white" style="background-image: linear-gradient(#005A92, #0066B2);">A</td></tr>
                           <tr>
                             <td></td>
                             <td>31 and below</td<>
@@ -400,7 +523,7 @@ if(isset($_POST['button_counseling'])) {
                           <tr>
                             <td></td>
                             <td>45 > 50</td<>
-                            <td>Enhancement Skills</td<>
+                            <td>Enhanced Skills</td<>
                           </tr>
                         </thead>
                       </table>
@@ -408,7 +531,7 @@ if(isset($_POST['button_counseling'])) {
                     <div class="col-lg-6">
                     <table class="table table-bordered mb-5 text-center">
                         <thead>
-                          <tr><td>D</td></tr>
+                          <tr><td class="text-white" style="background-image: linear-gradient(#005A92, #0066B2);">D</td></tr>
                           <tr>
                             <td></td>
                             <td>18 - 23</td<>
@@ -422,7 +545,7 @@ if(isset($_POST['button_counseling'])) {
                           <tr>
                             <td></td>
                             <td>32  > 35</td<>
-                            <td>Enhancement Skills</td<>
+                            <td>Enhanced Skills</td<>
                           </tr>
                         </thead>
                       </table>
@@ -431,7 +554,7 @@ if(isset($_POST['button_counseling'])) {
                     <div class="col-lg-6">
                       <table class="table table-bordered mb-5 text-center">
                         <thead>
-                          <tr><td>B</td></tr>
+                          <tr><td class="text-white" style="background-image: linear-gradient(#005A92, #0066B2);">B</td></tr>
                           <tr>
                             <td></td>
                             <td>27 - 34</td<>
@@ -445,7 +568,7 @@ if(isset($_POST['button_counseling'])) {
                           <tr>
                             <td></td>
                             <td>46 > 50</td<>
-                            <td>Enhancement Skills</td<>
+                            <td>Enhanced Skills</td<>
                           </tr>
                         </thead>
                       </table>
@@ -453,7 +576,7 @@ if(isset($_POST['button_counseling'])) {
                     <div class="col-lg-6">
                     <table class="table table-bordered mb-5 text-center">
                         <thead>
-                          <tr><td>E</td></tr>
+                          <tr><td class="text-white" style="background-image: linear-gradient(#005A92, #0066B2);">E</td></tr>
                           <tr>
                             <td></td>
                             <td>26 - 33</td<>
@@ -467,7 +590,7 @@ if(isset($_POST['button_counseling'])) {
                           <tr>
                             <td></td>
                             <td>46  > 50</td<>
-                            <td>Enhancement Skills</td<>
+                            <td>Enhanced Skills</td<>
                           </tr>
                         </thead>
                       </table>
@@ -476,7 +599,7 @@ if(isset($_POST['button_counseling'])) {
                     <div class="col-lg-6">
                       <table class="table table-bordered mb-5 text-center">
                         <thead>
-                          <tr><td>C</td></tr>
+                          <tr><td class="text-white" style="background-image: linear-gradient(#005A92, #0066B2);">C</td></tr>
                           <tr>
                             <td></td>
                             <td>17 - 22</td<>
@@ -490,7 +613,7 @@ if(isset($_POST['button_counseling'])) {
                           <tr>
                             <td></td>
                             <td>36 > 40</td<>
-                            <td>Enhancement Skills</td<>
+                            <td>Enhanced Skills</td<>
                           </tr>
                         </thead>
                       </table>
@@ -498,7 +621,7 @@ if(isset($_POST['button_counseling'])) {
                     <div class="col-lg-6">
                     <table class="table table-bordered mb-5 text-center">
                         <thead>
-                          <tr><td>F</td></tr>
+                          <tr><td class="text-white" style="background-image: linear-gradient(#005A92, #0066B2);">F</td></tr>
                           <tr>
                             <td></td>
                             <td>25 - 30</td<>
@@ -512,7 +635,7 @@ if(isset($_POST['button_counseling'])) {
                           <tr>
                             <td></td>
                             <td>40  > 43</td<>
-                            <td>Enhancement Skills</td<>
+                            <td>Enhanced Skills</td<>
                           </tr>
                         </thead>
                       </table>
@@ -523,7 +646,7 @@ if(isset($_POST['button_counseling'])) {
                     <div class="col-lg-6">
                     <table class="table table-bordered mb-5 text-center">
                         <thead>
-                          <tr><td>G</td></tr>
+                          <tr><td class="text-white" style="background-image: linear-gradient(#005A92, #0066B2);">G</td></tr>
                           <tr>
                             <td></td>
                             <td>6 - 8</td<>
@@ -537,7 +660,7 @@ if(isset($_POST['button_counseling'])) {
                           <tr>
                             <td></td>
                             <td>18  > 21</td<>
-                            <td>Enhancement Skills</td<>
+                            <td>Enhanced Skills</td<>
                           </tr>
                         </thead>
                       </table>

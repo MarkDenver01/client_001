@@ -66,7 +66,7 @@
                
           }
 
-          } else {
+          }   else {
             $grades = $row['grades'];
             $exam_results = $row['exam_result'];
           }
