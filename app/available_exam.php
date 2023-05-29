@@ -809,33 +809,33 @@
                             <table class="table table-bordered table-hover text-nowrap text-center" id="tableList">
                               <thead>
                                 <tr>
-                                  <td class="bg-success text-white"></td>
-                                  <td>a</td>
-                                  <td>b</td>
-                                  <td class="bg-success text-white"></td>
-                                  <td>a</td>
-                                  <td>b</td>
-                                  <td class="bg-success text-white"></td>
-                                  <td>a</td>
-                                  <td>b</td>
-                                  <td class="bg-success text-white"></td>
-                                  <td>a</td>
-                                  <td>b</td>
-                                  <td class="bg-success text-white"></td>
-                                  <td>a</td>
-                                  <td>b</td>
-                                  <td class="bg-success text-white"></td>
-                                  <td>a</td>
-                                  <td>b</td>
-                                  <td class="bg-success text-white"></td>
-                                  <td>a</td>
-                                  <td>b</td>
+                                  <td  style="background-image: linear-gradient(#996515, #996515);" class="text-white"></td>
+                                  <td  style="background-image: linear-gradient(#996515, #996515);" class="text-white">a</td>
+                                  <td  style="background-image: linear-gradient(#996515, #996515);" class="text-white">b</td>
+                                  <td  style="background-image: linear-gradient(#996515, #996515);" class="text-white"></td>
+                                  <td  style="background-image: linear-gradient(#996515, #996515);" class="text-white">a</td>
+                                  <td  style="background-image: linear-gradient(#996515, #996515);" class="text-white">b</td>
+                                  <td  style="background-image: linear-gradient(#996515, #996515);" class="text-white"></td>
+                                  <td  style="background-image: linear-gradient(#996515, #996515);" class="text-white">a</td>
+                                  <td  style="background-image: linear-gradient(#996515, #996515);" class="text-white">b</td>
+                                  <td  style="background-image: linear-gradient(#996515, #996515);" class="text-white"></td>
+                                  <td  style="background-image: linear-gradient(#996515, #996515);" class="text-white">a</td>
+                                  <td  style="background-image: linear-gradient(#996515, #996515);" class="text-white">b</td>
+                                  <td  style="background-image: linear-gradient(#996515, #996515);" class="text-white"></td>
+                                  <td  style="background-image: linear-gradient(#996515, #996515);" class="text-white">a</td>
+                                  <td  style="background-image: linear-gradient(#996515, #996515);" class="text-white">b</td>
+                                  <td  style="background-image: linear-gradient(#996515, #996515);" class="text-white"></td>
+                                  <td  style="background-image: linear-gradient(#996515, #996515);" class="text-white">a</td>
+                                  <td  style="background-image: linear-gradient(#996515, #996515);" class="text-white">b</td>
+                                  <td  style="background-image: linear-gradient(#996515, #996515);" class="text-white"></td>
+                                  <td  style="background-image: linear-gradient(#996515, #996515);" class="text-white">a</td>
+                                  <td  style="background-image: linear-gradient(#996515, #996515);" class="text-white">b</td>
                                 </tr>
                               </thead>
                               <tbody>
                                 <tr>
 
-                                  <th class="bg-success text-white">1</th>
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">1</th>
                                   <td>
                                     <div class="btn-group">                                   
                                       <label class="btn btn-light" for="rbo_k_1_a">
@@ -851,7 +851,7 @@
                                     </div>
                                   </td>
 
-                                  <th class="bg-success text-white">2</th>
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">2</th>
                                   <td>
                                     <div class="btn-group">                                   
                                       <label class="btn btn-light" for="rbo_k_2_a">
@@ -867,89 +867,90 @@
                                     </div>
                                   </td>
 
-                                  <th class="bg-success text-white">3</th>
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">3</th>
                                   <td>
                                     <div class="btn-group">                                   
-                                      <label class="btn btn-light" for="rbo_k_2_a">
-                                        <input type="radio" name="rbo_k_2" id="rbo_k_2_a" value="a"></input>
+                                      <label class="btn btn-light" for="rbo_k_3_a">
+                                        <input type="radio" name="rbo_k_3" id="rbo_k_3_a" value="a"></input>
                                       </label>    
                                     </div>
                                   </td>
                                   <td>
                                     <div class="btn-group">                                   
-                                      <label class="btn btn-light" for="rbo_k_2_b">
-                                        <input type="radio" name="rbo_k_2" id="rbo_k_2_b" value="b"></input>
-                                      </label>    
-                                    </div>
-                                  </td>
-
-                                  <th class="bg-success text-white">4</th>
-                                  <td>
-                                    <div class="btn-group">                                   
-                                      <label class="btn btn-light" for="rbo_k_2_a">
-                                        <input type="radio" name="rbo_k_2" id="rbo_k_2_a" value="a"></input>
-                                      </label>    
-                                    </div>
-                                  </td>
-                                  <td>
-                                    <div class="btn-group">                                   
-                                      <label class="btn btn-light" for="rbo_k_2_b">
-                                        <input type="radio" name="rbo_k_2" id="rbo_k_2_b" value="b"></input>
+                                      <label class="btn btn-light" for="rbo_k_3_b">
+                                        <input type="radio" name="rbo_k_3" id="rbo_k_3_b" value="b"></input>
                                       </label>    
                                     </div>
                                   </td>
 
-                                  <th class="bg-success text-white">5</th>
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">4</th>
                                   <td>
                                     <div class="btn-group">                                   
-                                      <label class="btn btn-light" for="rbo_k_2_a">
-                                        <input type="radio" name="rbo_k_2" id="rbo_k_2_a" value="a"></input>
+                                      <label class="btn btn-light" for="rbo_k_4_a">
+                                        <input type="radio" name="rbo_k_4" id="rbo_k_4_a" value="a"></input>
                                       </label>    
                                     </div>
                                   </td>
                                   <td>
                                     <div class="btn-group">                                   
-                                      <label class="btn btn-light" for="rbo_k_2_b">
-                                        <input type="radio" name="rbo_k_2" id="rbo_k_2_b" value="b"></input>
-                                      </label>    
-                                    </div>
-                                  </td>
-
-                                  <th class="bg-success text-white">6</th>
-                                  <td>
-                                    <div class="btn-group">                                   
-                                      <label class="btn btn-light" for="rbo_k_2_a">
-                                        <input type="radio" name="rbo_k_2" id="rbo_k_2_a" value="a"></input>
-                                      </label>    
-                                    </div>
-                                  </td>
-                                  <td>
-                                    <div class="btn-group">                                   
-                                      <label class="btn btn-light" for="rbo_k_2_b">
-                                        <input type="radio" name="rbo_k_2" id="rbo_k_2_b" value="b"></input>
+                                      <label class="btn btn-light" for="rbo_k_4_b">
+                                        <input type="radio" name="rbo_k_4" id="rbo_k_4_b" value="b"></input>
                                       </label>    
                                     </div>
                                   </td>
 
-                                  <th class="bg-success text-white">7</th>
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">5</th>
                                   <td>
                                     <div class="btn-group">                                   
-                                      <label class="btn btn-light" for="rbo_k_2_a">
-                                        <input type="radio" name="rbo_k_2" id="rbo_k_2_a" value="a"></input>
+                                      <label class="btn btn-light" for="rbo_k_5_a">
+                                        <input type="radio" name="rbo_k_5" id="rbo_k_5_a" value="a"></input>
                                       </label>    
                                     </div>
                                   </td>
                                   <td>
                                     <div class="btn-group">                                   
-                                      <label class="btn btn-light" for="rbo_k_2_b">
-                                        <input type="radio" name="rbo_k_2" id="rbo_k_2_b" value="b"></input>
+                                      <label class="btn btn-light" for="rbo_k_5_b">
+                                        <input type="radio" name="rbo_k_5" id="rbo_k_5_b" value="b"></input>
                                       </label>    
                                     </div>
                                   </td>
 
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">6</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_6_a">
+                                        <input type="radio" name="rbo_k_6" id="rbo_k_6_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_6_b">
+                                        <input type="radio" name="rbo_k_6" id="rbo_k_6_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">7</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_7_a">
+                                        <input type="radio" name="rbo_k_7" id="rbo_k_7_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_7_b">
+                                        <input type="radio" name="rbo_k_7" id="rbo_k_7_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
                                 </tr>
+
                                 <tr>
-                                  <td>8</td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">8</th>
                                   <td>
                                     <div class="btn-group">                                   
                                       <label class="btn btn-light" for="rbo_k_8_a">
@@ -964,6 +965,1031 @@
                                       </label>    
                                     </div>
                                   </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">9</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_9_a">
+                                        <input type="radio" name="rbo_k_9" id="rbo_k_9_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_9_b">
+                                        <input type="radio" name="rbo_k_9" id="rbo_k_9_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">10</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_10_a">
+                                        <input type="radio" name="rbo_k_10" id="rbo_k_10_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_10_b">
+                                        <input type="radio" name="rbo_k_10" id="rbo_k_10_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">11</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_11_a">
+                                        <input type="radio" name="rbo_k_11" id="rbo_k_11_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_11_b">
+                                        <input type="radio" name="rbo_k_11" id="rbo_k_11_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">12</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_12_a">
+                                        <input type="radio" name="rbo_k_12" id="rbo_k_12_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_12_b">
+                                        <input type="radio" name="rbo_k_12" id="rbo_k_12_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">13</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_13_a">
+                                        <input type="radio" name="rbo_k_13" id="rbo_k_13_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_13_b">
+                                        <input type="radio" name="rbo_k_13" id="rbo_k_13_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">14</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_14_a">
+                                        <input type="radio" name="rbo_k_14" id="rbo_k_14_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_14_b">
+                                        <input type="radio" name="rbo_k_14" id="rbo_k_14_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                </tr>
+ 
+                                <tr>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">15</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_15_a">
+                                        <input type="radio" name="rbo_k_15" id="rbo_k_15_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_15_b">
+                                        <input type="radio" name="rbo_k_15" id="rbo_k_15_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">16</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_16_a">
+                                        <input type="radio" name="rbo_k_16" id="rbo_k_16_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_16_b">
+                                        <input type="radio" name="rbo_k_16" id="rbo_k_16_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">17</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_17_a">
+                                        <input type="radio" name="rbo_k_17" id="rbo_k_17_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_17_b">
+                                        <input type="radio" name="rbo_k_17" id="rbo_k_17_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">18</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_18_a">
+                                        <input type="radio" name="rbo_k_18" id="rbo_k_18_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_18_b">
+                                        <input type="radio" name="rbo_k_18" id="rbo_k_18_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">19</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_19_a">
+                                        <input type="radio" name="rbo_k_19" id="rbo_k_19_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_19_b">
+                                        <input type="radio" name="rbo_k_19" id="rbo_k_19_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">20</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_20_a">
+                                        <input type="radio" name="rbo_k_20" id="rbo_k_20_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_20_b">
+                                        <input type="radio" name="rbo_k_20" id="rbo_k_20_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">21</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_21_a">
+                                        <input type="radio" name="rbo_k_21" id="rbo_k_21_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_21_b">
+                                        <input type="radio" name="rbo_k_21" id="rbo_k_21_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                </tr>
+
+                                <tr>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">22</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_22_a">
+                                        <input type="radio" name="rbo_k_22" id="rbo_k_22_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_22_b">
+                                        <input type="radio" name="rbo_k_22" id="rbo_k_22_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">23</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_23_a">
+                                        <input type="radio" name="rbo_k_23" id="rbo_k_23_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_23_b">
+                                        <input type="radio" name="rbo_k_23" id="rbo_k_23_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">24</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_24_a">
+                                        <input type="radio" name="rbo_k_24" id="rbo_k_24_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_24_b">
+                                        <input type="radio" name="rbo_k_24" id="rbo_k_24_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">25</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_25_a">
+                                        <input type="radio" name="rbo_k_25" id="rbo_k_25_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_25_b">
+                                        <input type="radio" name="rbo_k_25" id="rbo_k_25_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">26</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_26_a">
+                                        <input type="radio" name="rbo_k_26" id="rbo_k_26_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_26_b">
+                                        <input type="radio" name="rbo_k_26" id="rbo_k_26_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">27</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_27_a">
+                                        <input type="radio" name="rbo_k_27" id="rbo_k_27_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_27_b">
+                                        <input type="radio" name="rbo_k_27" id="rbo_k_27_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">28</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_28_a">
+                                        <input type="radio" name="rbo_k_28" id="rbo_k_28_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_28_b">
+                                        <input type="radio" name="rbo_k_28" id="rbo_k_28_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                </tr>
+                                
+                                <tr>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">29</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_29_a">
+                                        <input type="radio" name="rbo_k_29" id="rbo_k_29_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_29_b">
+                                        <input type="radio" name="rbo_k_29" id="rbo_k_29_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th  style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">30</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_30_a">
+                                        <input type="radio" name="rbo_k_30" id="rbo_k_30_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_30_b">
+                                        <input type="radio" name="rbo_k_30" id="rbo_k_30_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th  style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">31</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_31_a">
+                                        <input type="radio" name="rbo_k_31" id="rbo_k_31_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_31_b">
+                                        <input type="radio" name="rbo_k_31" id="rbo_k_31_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">32</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_32_a">
+                                        <input type="radio" name="rbo_k_32" id="rbo_k_32_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_32_b">
+                                        <input type="radio" name="rbo_k_32" id="rbo_k_32_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">33</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_33_a">
+                                        <input type="radio" name="rbo_k_33" id="rbo_k_33_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_33_b">
+                                        <input type="radio" name="rbo_k_33" id="rbo_k_33_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">34</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_34_a">
+                                        <input type="radio" name="rbo_k_34" id="rbo_k_34_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_34_b">
+                                        <input type="radio" name="rbo_k_34" id="rbo_k_34_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">35</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_35_a">
+                                        <input type="radio" name="rbo_k_35" id="rbo_k_35_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_35_b">
+                                        <input type="radio" name="rbo_k_35" id="rbo_k_35_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                </tr>
+
+                                <tr>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">36</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_36_a">
+                                        <input type="radio" name="rbo_k_36" id="rbo_k_36_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_36_b">
+                                        <input type="radio" name="rbo_k_36" id="rbo_k_36_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">37</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_37_a">
+                                        <input type="radio" name="rbo_k_37" id="rbo_k_37_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_37_b">
+                                        <input type="radio" name="rbo_k_37" id="rbo_k_37_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">38</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_38_a">
+                                        <input type="radio" name="rbo_k_38" id="rbo_k_38_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_38_b">
+                                        <input type="radio" name="rbo_k_38" id="rbo_k_38_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">39</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_39_a">
+                                        <input type="radio" name="rbo_k_39" id="rbo_k_39_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_39_b">
+                                        <input type="radio" name="rbo_k_39" id="rbo_k_39_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">40</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_40_a">
+                                        <input type="radio" name="rbo_k_40" id="rbo_k_40_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_40_b">
+                                        <input type="radio" name="rbo_k_40" id="rbo_k_40_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">41</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_41_a">
+                                        <input type="radio" name="rbo_k_41" id="rbo_k_41_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_41_b">
+                                        <input type="radio" name="rbo_k_41" id="rbo_k_41_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">42</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_42_a">
+                                        <input type="radio" name="rbo_k_42" id="rbo_k_42_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_42_b">
+                                        <input type="radio" name="rbo_k_42" id="rbo_k_42_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                </tr>
+                                
+                                <tr>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">43</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_43_a">
+                                        <input type="radio" name="rbo_k_43" id="rbo_k_43_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_43_b">
+                                        <input type="radio" name="rbo_k_43" id="rbo_k_43_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">44</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_44_a">
+                                        <input type="radio" name="rbo_k_44" id="rbo_k_44_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_44_b">
+                                        <input type="radio" name="rbo_k_44" id="rbo_k_44_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">45</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_45_a">
+                                        <input type="radio" name="rbo_k_45" id="rbo_k_45_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_45_b">
+                                        <input type="radio" name="rbo_k_45" id="rbo_k_45_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">46</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_46_a">
+                                        <input type="radio" name="rbo_k_46" id="rbo_k_46_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_46_b">
+                                        <input type="radio" name="rbo_k_46" id="rbo_k_46_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">47</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_47_a">
+                                        <input type="radio" name="rbo_k_47" id="rbo_k_47_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_47_b">
+                                        <input type="radio" name="rbo_k_47" id="rbo_k_47_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">48</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_48_a">
+                                        <input type="radio" name="rbo_k_48" id="rbo_k_48_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_48_b">
+                                        <input type="radio" name="rbo_k_48" id="rbo_k_48_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">49</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_49_a">
+                                        <input type="radio" name="rbo_k_49" id="rbo_k_49_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_49_b">
+                                        <input type="radio" name="rbo_k_49" id="rbo_k_49_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                </tr>
+
+                                <tr>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">50</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_50_a">
+                                        <input type="radio" name="rbo_k_50" id="rbo_k_50_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_50_b">
+                                        <input type="radio" name="rbo_k_50" id="rbo_k_50_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">51</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_51_a">
+                                        <input type="radio" name="rbo_k_51" id="rbo_k_51_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_51_b">
+                                        <input type="radio" name="rbo_k_51" id="rbo_k_51_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">52</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_52_a">
+                                        <input type="radio" name="rbo_k_52" id="rbo_k_52_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_52_b">
+                                        <input type="radio" name="rbo_k_52" id="rbo_k_52_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">53</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_53_a">
+                                        <input type="radio" name="rbo_k_53" id="rbo_k_53_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_53_b">
+                                        <input type="radio" name="rbo_k_53" id="rbo_k_53_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">54</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_54_a">
+                                        <input type="radio" name="rbo_k_54" id="rbo_k_54_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_54_b">
+                                        <input type="radio" name="rbo_k_54" id="rbo_k_54_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">55</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_55_a">
+                                        <input type="radio" name="rbo_k_55" id="rbo_k_55_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_55_b">
+                                        <input type="radio" name="rbo_k_55" id="rbo_k_55_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">56</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_56_a">
+                                        <input type="radio" name="rbo_k_56" id="rbo_k_56_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_56_b">
+                                        <input type="radio" name="rbo_k_56" id="rbo_k_56_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                </tr>
+
+                                <tr>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">57</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_57_a">
+                                        <input type="radio" name="rbo_k_57" id="rbo_k_57_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_57_b">
+                                        <input type="radio" name="rbo_k_57" id="rbo_k_57_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">58</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_58_a">
+                                        <input type="radio" name="rbo_k_58" id="rbo_k_58_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_58_b">
+                                        <input type="radio" name="rbo_k_58" id="rbo_k_58_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">59</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_59_a">
+                                        <input type="radio" name="rbo_k_59" id="rbo_k_59_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_59_b">
+                                        <input type="radio" name="rbo_k_59" id="rbo_k_59_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">60</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_60_a">
+                                        <input type="radio" name="rbo_k_60" id="rbo_k_60_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_60_b">
+                                        <input type="radio" name="rbo_k_60" id="rbo_k_60_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">61</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_61_a">
+                                        <input type="radio" name="rbo_k_61" id="rbo_k_61_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_61_b">
+                                        <input type="radio" name="rbo_k_61" id="rbo_k_61_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">62</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_62_a">
+                                        <input type="radio" name="rbo_k_62" id="rbo_k_62_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_62_b">
+                                        <input type="radio" name="rbo_k_62" id="rbo_k_62_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">63</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_63_a">
+                                        <input type="radio" name="rbo_k_63" id="rbo_k_63_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_63_b">
+                                        <input type="radio" name="rbo_k_63" id="rbo_k_63_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                </tr>
+
+                                <tr>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">64</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_64_a">
+                                        <input type="radio" name="rbo_k_64" id="rbo_k_64_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_64_b">
+                                        <input type="radio" name="rbo_k_64" id="rbo_k_64_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">65</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_65_a">
+                                        <input type="radio" name="rbo_k_65" id="rbo_k_65_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_65_b">
+                                        <input type="radio" name="rbo_k_65" id="rbo_k_65_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">66</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_66_a">
+                                        <input type="radio" name="rbo_k_66" id="rbo_k_66_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_66_b">
+                                        <input type="radio" name="rbo_k_66" id="rbo_k_66_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">67</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_67_a">
+                                        <input type="radio" name="rbo_k_67" id="rbo_k_67_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_67_b">
+                                        <input type="radio" name="rbo_k_67" id="rbo_k_67_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">68</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_68_a">
+                                        <input type="radio" name="rbo_k_68" id="rbo_k_68_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_68_b">
+                                        <input type="radio" name="rbo_k_68" id="rbo_k_68_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">69</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_69_a">
+                                        <input type="radio" name="rbo_k_69" id="rbo_k_69_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_69_b">
+                                        <input type="radio" name="rbo_k_69" id="rbo_k_69_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
+                                  <th style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white">70</th>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_70_a">
+                                        <input type="radio" name="rbo_k_70" id="rbo_k_70_a" value="a"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <div class="btn-group">                                   
+                                      <label class="btn btn-light" for="rbo_k_70_b">
+                                        <input type="radio" name="rbo_k_70" id="rbo_k_70_b" value="b"></input>
+                                      </label>    
+                                    </div>
+                                  </td>
+
                                 </tr>
                               </tbody>
                             </table>
