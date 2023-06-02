@@ -61,9 +61,9 @@ if(isset($_POST['button_counseling'])) {
                   <table class="table table-hover table-bordered mb-5">
                     <thead>
                         <tr>
-                            <td><h5>Category</h5></td>
-                            <td><h5>Score</h5></td>
-                            <td><h5>Status</h5></td>
+                            <td style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" ><h5>Category</h5></td>
+                            <td style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" ><h5>Score</h5></td>
+                            <td style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" ><h5>Status</h5></td>
                         </tr>
                     </thead>
                     <tbody>                   
@@ -79,11 +79,17 @@ if(isset($_POST['button_counseling'])) {
                         while ($row = $result->fetch_assoc()) {
                             $exam_title = $row['exam_title']; 
                             $sampling = $row['total'] / 18;
+                            $check_total = $row['total_grades'];
+                            if ($check_total >= 25 && $check_total <= 40) {
+                              $remarks = "HIGH";
+                            } elseif ($check_monitor >= 0 && $check_total <= 24) {
+                              $remarks = "LOW";
+                            }
                     ?>
                         <tr>
                           <td><h5><?php echo $row['exam_category']; ?></h5></td>
-                          <td><h5><?php echo $row['grades']; ?></h5></td>
-                          <td><h5><?php echo $row['exam_result']; ?></h5></td>
+                          <td><h5><?php echo $row['total_grades']; ?></h5></td>
+                          <td><h5><?php echo $remarks; ?></h5></td>
                         </tr>          
                     <?php 
                         }
