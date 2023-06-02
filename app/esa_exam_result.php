@@ -266,6 +266,7 @@
                         </div>
                   <form id="submitExamResultFrm" method="POST">
                    <?php if ($exam_title == "ESA") { ?>
+                      <input type="hidden" id="student_id" name="student_id" value="<?php echo $student_id; ?>">
                       <input type="hidden" id="exam_type" name="exam_type" value="<?php echo $exam_type; ?>">
                       <input type="hidden" id="exam_id" name="exam_id" value="<?php echo $exam_id; ?>">
                       <input type="hidden" id="exam_title" name="exam_title" value="<?php echo $exam_title; ?>">

@@ -81,7 +81,7 @@ $(document).on('click', '#submitExamResultFrm', function() {
                         } else if (exam_title == 'Aptitude J and C') {
                             window.location.href="../app/aptitude_j_n_c_result.php?student_id="+student_id;
                         } else if (exam_title == 'ESA') {
-                            window.location.href="../app/esa_result.php?student_id="+student_id;
+                            window.location.href="../app/esa_result.php?student_id="+student_id+"&exam_id="+exam_id;
                         } else if (exam_title == 'Aptitude Verbal and Numerical') {
                             window.location.href="../app/aptitude_verbal_n_numerical.php?student_id="+student_id;
                         }
