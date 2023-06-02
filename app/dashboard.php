@@ -56,7 +56,17 @@ if($developer) {
 <script>
 		function printContent() {
 			var content = document.getElementById("print_content");
+      var button_print = document.getElementById("button_print");
+      var announement = document.getElementById("announcement");
+      var header = document.getElementById("header");
+
+      header.style.visibility = 'hidden';
+      button_print.style.visibility = 'hidden';
+      announcement.style.visibility = 'hidden';
 			window.print(content);
+      header.style.visibility = 'visible';
+      button_print.style.visibility = 'visible';
+      announcement.style.visibility = 'visible';
 		}
 	</script>
 <?php include('../footer.php'); ?>
