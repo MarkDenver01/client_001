@@ -31,7 +31,10 @@
 
     $sqlCheck = $db->query("SELECT * FROM counseling_appointment WHERE student_id ='$id' AND date(appointment_date) = '$date_appointment_formatted' AND time_counseling = '$time_picker'");
    
-if ($sqlCheck->num_rows > 0) {
+if ($sqlExist) {
+    $session->message('w', 'Sorry! You are not allow to do multiple appointments.');
+    redirect('./counseling', false);
+} elseif ($sqlCheck->num_rows > 0) {
     $session->message('w', 'Time slot not available. Please check other time.');
     redirect('./counseling', false);
 } else {
@@ -206,7 +209,7 @@ if ($sqlCheck->num_rows > 0) {
                     <br/>
                     <label for="yourNewPassword" class="form-label">Date of Counseling</label>
                     <div class="input-group has-validation">
-                      <input class="form-control new_password rounded-0" type="date" name="date_counseling" id="yourNewPassword" required>
+                      <input class="form-control new_password rounded-0" type="date" name="date_counseling" id="date_counseling" required>
                     </div>
                     <br/>
                     <!-- <label for="yourNewPassword" class="form-label">Time</label>
@@ -215,15 +218,9 @@ if ($sqlCheck->num_rows > 0) {
                     </div> -->
 
                     <label for="student_year" class="form-label">TIme</label>
-                    <select id="student_year" name="time_counseling" class="form-select rounded-0" aria-label="Default select example">
-                                <option selected>Select Time</option>
-                                <option value="8:30 - 9:30">8:30 - 9:30</option>
-                                <option value="9:30 - 10:30">9:30 - 10:30</option>
-                                <option value="10:30 - 11:30">10:30 - 11:30</option>
-                                <option value="01:00 - 02:00">01:00 - 02:00</option>
-                                <option value="02:00 - 03:00">02:00 - 03:00</option>
-                                <option value="03:00 - 04:00">03:00 - 04:00</option>
-                              </select>
+                        <select id="time_counseling" name="time_counseling" class="form-select rounded-0" aria-label="Default select example">
+                          <option selected>Select Time</option>
+                        </select>
 
                     <label for="present_address" class="col-md-4 col-lg-6 col-form-label">Message</label>
                       <div class="col-md-8 col-lg-12">
@@ -253,5 +250,19 @@ if ($sqlCheck->num_rows > 0) {
     
     </div>
 </section>
+<script>
+  $(document).ready(function() {
+    $('#date_counseling').on('change', function() {
+        $.ajax({
+          type: 'POST',
+          url: './ajax/counseling_appointment_ajax.php',
+          data: {date_counseling: $('#date_counseling').val()},
+          success: function(html) {
+            $('#time_counseling').html(html);
+          } 
+        })
+      });
 
+  });
+</script>
 <?php include('../footer.php'); ?>
