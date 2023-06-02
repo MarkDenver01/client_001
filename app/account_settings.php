@@ -73,7 +73,7 @@
                     
                   </div>
                   <div class="col-6">
-                    <button name="button_change" class="btn btn-primary w-100 rounded-0" type="submit">Change Password</button>
+                    <button name="button_change" class="btn btn-primary w-100 rounded-pill" type="submit">Change Password</button>
                   </div>
                   <div class="col-3">
                   </div>

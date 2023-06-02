@@ -172,8 +172,8 @@
 
 
                     <div class="text-center">
-                      <button style="" type="submit" name="button_save" class="btn btn-primary rounded-0 w-25">Save Changes</button>
-                      <button type="submit" name="button_back" class="btn btn-danger rounded-0 w-25">Back</button>
+                      <button style="" type="submit" name="button_save" class="btn btn-primary rounded-pill w-25">Save Changes</button>
+                      <button type="submit" name="button_back" class="btn btn-danger rounded-pill w-25">Back</button>
                     </div>
                   </form><!-- End Profile Edit Form -->
                 </div>

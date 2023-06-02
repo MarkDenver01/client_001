@@ -62,7 +62,7 @@
                       </div>
                   </div>
                   <div class="text-left">
-                    <button name="button_academic" type="submit" class="btn btn-primary rounded-0">Submit</button>
+                    <button name="button_academic" type="submit" class="btn btn-primary rounded-pill">Submit</button>
                   </div>
                 </form><!-- End floating Labels Form -->
 

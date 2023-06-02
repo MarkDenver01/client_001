@@ -38,7 +38,7 @@
                   </div>
 
                   <div class="col-4">
-                    <button name ="button_submit" class="btn btn-success w-100 rounded-0" type="submit">Submit</button>
+                    <button name ="button_submit" class="btn btn-success w-100 rounded-pill" type="submit">Submit</button>
                   </div>
                   <div class="col-8">
                     <h6><b><?php

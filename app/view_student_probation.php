@@ -69,7 +69,7 @@
                         ?>
                     </select>
                     <br/>
-                    <button name="button_filter" type="submit" class="btn btn-secondary text-white rounded-0 btn-sm w-100"><i class="bi bi-search"></i> </button>
+                    <button name="button_filter" type="submit" class="btn btn-secondary text-white rounded-pill btn-sm w-100"><i class="bi bi-search"></i> </button>
                 </div>
                 <div class="col-sm-4">
                     <select id="exam_description" name="course" class="form-select rounded-0" aria-label="Default select example">
@@ -190,7 +190,7 @@
                     </tbody>
                   </table>
                   <!-- End Table with hoverable rows -->
-                  <button name="button_print" onClick="window.print()" class="btn btn-danger text-white rounded-0 btn-sm" style="width: 150px;"><i class="bi bi-print"></i> Print</button>
+                  <button name="button_print" onClick="window.print()" class="btn btn-danger text-white rounded-pill btn-sm" style="width: 150px;"><i class="bi bi-print"></i> Print</button>
 
 
 

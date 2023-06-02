@@ -2826,7 +2826,7 @@ if (isset($_POST["button_update"])) {
 
                                 <div class="text-center">
                                     <br/>
-                                    <input type="submit" name="button_update" class="btn btn-primary rounded-0" value="Update Answer"></input>
+                                    <input type="submit" name="button_update" class="btn btn-primary rounded-pill" value="Update Answer"></input>
                                 </div>
 
                             </div>

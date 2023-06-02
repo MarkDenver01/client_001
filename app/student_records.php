@@ -59,7 +59,7 @@
                         ?>
                       </select>
                       <br/>
-                      <button name="button_filter" type="submit" class="btn btn-secondary text-white rounded-0 btn-sm w-100"><i class="bi bi-search"></i> </button>
+                      <button name="button_filter" type="submit" class="btn btn-secondary text-white rounded-pill btn-sm w-100"><i class="bi bi-search"></i> </button>
                     </div>
                     <div class="col-sm-3">
                       <select id="semester" name="semester" class="form-select rounded-0" aria-label="Default select example">
@@ -173,7 +173,7 @@
                         <td scope="row" class="text-center" ><?php echo $filtered['exam_result']; ?></td> -->
                         <td scope="row" class="text-center" ><?php echo $filtered['examinee_status']; ?></td>
                         <td>
-                            <a href="<?php echo $redirect; ?>" type="submit" class="btn btn-success text-white rounded-0 btn-sm w-100"><i class="bi bi-print"></i> View result</a>
+                            <a href="<?php echo $redirect; ?>" type="submit" class="btn btn-success text-white rounded-pill btn-sm w-100"><i class="bi bi-print"></i> View result</a>
                         </td>
                       </tr>
 
@@ -226,7 +226,7 @@
                         <td scope="row" class="text-center" ><?php echo $row['exam_result']; ?></td> -->
                         <td scope="row" class="text-center" ><?php echo $row['examinee_status']; ?></td>
                         <td>
-                            <a href="<?php echo $redirect; ?>" type="submit" class="btn btn-success text-white rounded-0 btn-sm w-100"><i class="bi bi-print"></i> View result</a>
+                            <a href="<?php echo $redirect; ?>" type="submit" class="btn btn-success text-white rounded-pill btn-sm w-100"><i class="bi bi-print"></i> View result</a>
                       </td>
                       </tr>
                     <?php
@@ -238,7 +238,7 @@
                   </table>
                   <!-- End Table with hoverable rows -->
            
-                 <button name="button_print" onClick="window.print()" class="btn btn-danger text-white rounded-0 btn-sm" style="width: 150px;"><i class="bi bi-print"></i> Print</button>
+                 <button name="button_print" onClick="window.print()" class="btn btn-danger text-white rounded-pill btn-sm" style="width: 150px;"><i class="bi bi-print"></i> Print</button>
 
 
                 </div>

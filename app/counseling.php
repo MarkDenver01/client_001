@@ -238,7 +238,7 @@ if ($sqlCheck->num_rows > 0) {
                     
                   </div>
                   <div class="col-6">
-                    <button name="button_apply" class="btn btn-primary w-100 rounded-0" type="submit">Submit</button>
+                    <button name="button_apply" class="btn btn-primary w-100 rounded-pill" type="submit">Submit</button>
                   </div>
                   <div class="col-3">
                   </div>

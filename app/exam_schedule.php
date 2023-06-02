@@ -146,8 +146,8 @@ if (isset($_POST['button_schedule'])) {
 
                  <br/>
                  <div class="text-center">
-                   <button type="submit" name="button_schedule" class="btn btn-danger rounded-0">Schedule</button>
-                   <button type="submit" name="button_view" class="btn btn-success rounded-0">View Schedule</button>
+                   <button type="submit" name="button_schedule" class="btn btn-danger rounded-pill">Schedule</button>
+                   <button type="submit" name="button_view" class="btn btn-success rounded-pill">View Schedule</button>
                  </div>
 
                </div>

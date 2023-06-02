@@ -101,7 +101,7 @@
  
                             <br/>
                             <div class="text-center">
-                              <button name="button_exam"  type="submit" class="btn btn-primary btn-lg rounded-0 w-75">Upload Exam</button>
+                              <button name="button_exam"  type="submit" class="btn btn-primary btn-lg rounded-pill w-75">Upload Exam</button>
                             </div>
 
                           </div>

@@ -876,7 +876,7 @@
                       <input type="hidden" id="email_address" value="<?php echo $email_address; ?>">
                       <input type="hidden" id="student_year" value="<?php echo $student_year; ?>">
                   <?php } ?>
-                    <a href="" class="btn btn-success rounded-0 w-100 btn-lg" name="button_submit" type="submit">Submit</a>
+                    <a href="" class="btn btn-success rounded-pill w-100 btn-lg" name="button_submit" type="submit">Submit</a>
                   </form>
                   </div>
               </div>

@@ -3539,7 +3539,7 @@
                   <div class="row">
                     <div class="col-lg-12">
                      <div class="text-center">
-                        <button id="submitAnswerFrmBtn" name="submit" type="submit" class="btn btn-success btn-lg rounded-0 w-100">Submit</button>      
+                        <button id="submitAnswerFrmBtn" name="submit" type="submit" class="btn btn-success btn-lg rounded-pill w-100">Submit</button>      
                       </div>
                     </div>
                     <br/>
@@ -3547,7 +3547,7 @@
                     <br/>
                     <div class="col-lg-12">
                       <div class="text-center">
-                       <button id="resetExamFrm" name="button_start" class="btn btn-danger rounded-0 btn-lg w-100">Reset</button>     
+                       <button id="resetExamFrm" name="button_start" class="btn btn-danger rounded-pill btn-lg w-100">Reset</button>     
                       </div>
                     </div>
                   </div>

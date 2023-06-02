@@ -42,10 +42,10 @@
                   </div>
 
                   <div class="col-6">
-                    <button name="button_change" class="btn btn-primary w-100 rounded-0" type="submit">Change Password</button>
+                    <button name="button_change" class="btn btn-primary w-100 rounded-pill" type="submit">Change Password</button>
                   </div>
                   <div class="col-6">
-                    <button class="btn btn-danger w-100 rounded-0" type="submit">Back</button>
+                    <button class="btn btn-danger w-100 rounded-pill" type="submit">Back</button>
                   </div>
                 </form>
               </div>
