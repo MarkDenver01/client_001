@@ -274,6 +274,10 @@
                               $total_answer = "20";
                             } elseif ($exam_desc == "World Comparison") {
                               $total_answer = "100";
+                            } elseif ($exam_desc == "Making marks Part 1") {
+                              $total_answer = "1";
+                            } elseif ($exam_desc == "Making marks Part 2") {
+                              $total_answer = "1";
                             }
                             $counter = $counter + 1;
                           }
@@ -588,6 +592,7 @@
                       <input type="hidden" id="start_date" value="<?php echo date('Y-md h:i:s A'); ?>">
                       <input type="hidden" id="email_address" value="<?php echo $email_address; ?>">
                       <input type="hidden" id="student_year" value="<?php echo $student_year; ?>">
+                      <input type="hidden" id="exam_result_status" name="exam_result_status" value="<?php echo $exam_result_status; ?>">
                   <?php } elseif ($exam_title == "BarOn EQ-i:S") { ?>
                     <input type="hidden" id="student_id" name="student_id" value="<?php echo $student_id; ?>">
                       <input type="hidden" id="exam_type" name="exam_type" value="<?php echo $exam_type; ?>">

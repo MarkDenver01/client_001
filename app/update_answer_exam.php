@@ -263,7 +263,31 @@ if (isset($_POST["button_update"])) {
             }
 
            
-        } elseif ($created['exam_description'] == 'BarOn EQ-i:S') {
+        } elseif ($created['exam_description'] == 'Making marks Part 1') {
+
+            foreach ($_REQUEST['answer'] as $key => $value) {
+                $value = $value['items'];
+                $sql = $db->query("INSERT INTO marking_marks_pt_1(correct_items) VALUES('$value')");
+            }
+            if ($sql) {
+                redirect('./view_exam', false);
+            } else {
+                redirect('./view_exam', false);
+            }
+
+        } elseif ($created['exam_description'] == 'Making marks Part 2') {
+
+          foreach ($_REQUEST['answer'] as $key => $value) {
+              $value = $value['items'];
+              $sql = $db->query("INSERT INTO marking_marks_pt_2(correct_items) VALUES('$value')");
+          }
+          if ($sql) {
+              redirect('./view_exam', false);
+          } else {
+              redirect('./view_exam', false);
+          }
+
+      } elseif ($created['exam_description'] == 'BarOn EQ-i:S') {
 
             foreach ($_REQUEST['answer'] as $key => $value) {
                 $value = $value['items'];
@@ -1439,7 +1463,26 @@ if (isset($_POST["button_update"])) {
                   
                   </div>                 
                 </div>
-
+                <?php } elseif ($created['student_year'] == 'First Year' && $created['exam_title'] == 'OASIS 3' && $created['exam_description'] == 'Making marks Part 1') { ?>
+                  <div class="row">
+                    <div class="col-xl-6">
+                      <label for="fullName" class="col-md-4 col-lg-12 col-form-label">Item no. 1</label>
+                        <div class="col-md-8 col-lg-9">
+                          <input name="answer[m_item_no_1][items]" type="text" class="form-control rounded-0" id="fullName" value="" >
+                        </div>
+                    </div>
+                    <div class="col-xl-6"></div>
+                  </div>
+                <?php } elseif ($created['student_year'] == 'First Year' && $created['exam_title'] == 'OASIS 3' && $created['exam_description'] == 'Making marks Part 2') { ?>
+                  <div class="row">
+                    <div class="col-xl-6">
+                      <label for="fullName" class="col-md-4 col-lg-12 col-form-label">Item no. 2</label>
+                        <div class="col-md-8 col-lg-9">
+                          <input name="answer[m_item_no_2][items]" type="text" class="form-control rounded-0" id="fullName" value="" >
+                        </div>
+                    </div>
+                    <div class="col-xl-6"></div>
+                  </div>
                 <?php } elseif ($created['student_year'] == 'Second Year' && $created['exam_title'] == 'BarOn EQ-i:S') { ?>
 
                 <div class="row">
