@@ -73,9 +73,9 @@
 
                 <div class="text-left">
                   <?php if (empty($id)) { ?>
-                    <button name="button_submit" type="submit" class="btn btn-primary rounded-0">Submit</button>
+                    <button name="button_submit" type="submit" class="btn btn-primary rounded-pill">Submit</button>
                   <?php } else { ?>
-                    <button name="button_repost" type="submit" class="btn btn-success rounded-0">Repost</button>
+                    <button name="button_repost" type="submit" class="btn btn-success rounded-pill">Repost</button>
                   <?php } ?>
                   
                 </div>

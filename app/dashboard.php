@@ -21,7 +21,7 @@ if($developer) {
 <main id="main" class="main">
   <div class="pagetitle">
     <div class="row">
-      <div class="col-lg-2">
+      <div class="col-lg-12">
         <h1>Dashboard</h1>
         <nav>
           <ol class="breadcrumb">
@@ -30,10 +30,10 @@ if($developer) {
           </ol>
         </nav>
       </div>
-      <div class="col-lg-10">
+      <div class="col-lg-12">
         <div class="row">
           <div class="col-lg-12">
-            <div class="alert alert-primary alert-dismissible fade show text-left rounded-0" role="alert" style="height:50px;">
+            <div style="background-image: linear-gradient(#90caf9, #64b5f6);"class="alert alert-primary alert-dismissible fade show text-left rounded-pill text-white border-light text-center" role="alert" style="height:50px;">
               <b>SEMESTER: &nbsp;&nbsp;</b><?php echo $_SESSION['key_session']['academic_semester']; ?><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SCHOOL YEAR: &nbsp;&nbsp;</b><?php echo $_SESSION['key_session']['academic_school_year']; ?>
             </div>
           </div>

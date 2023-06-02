@@ -72,9 +72,9 @@
                 </div> 
                 <div class="text-left">
                   <?php  if (empty($id)) { ?>
-                    <button name="button_submit" type="submit" class="btn btn-primary rounded-0">Add Course</button>
+                    <button name="button_submit" type="submit" class="btn btn-primary rounded-pill">Add Course</button>
                   <?php  } else { ?>
-                    <button name="button_submit" type="submit" class="btn btn-primary rounded-0">Update Course</button>
+                    <button name="button_submit" type="submit" class="btn btn-primary rounded-pill">Update Course</button>
                   <?php } ?>
                   
                 </div>

@@ -15,6 +15,8 @@
     $school_year = $_GET['school_year'];
     $student_name = $_GET['name'];
     $exam_id = $_GET['exam_id'];
+    $course = $_GET['course'];
+    $student_year = $_GET['student_year'];
   } else {
     $student_id = $_SESSION['key_session']['student_id'];
     $semester = $_SESSION['key_session']['academic_semester'];
@@ -22,6 +24,10 @@
     $student_name = $_SESSION['key_session']['name'];
     $exam_id = $_GET['exam_id'];
   }
+
+  $data_x_graph = array();
+  $data_y_graph = array();
+  $data_remarks = array();
 ?>
 <?php 
 if (isset($_POST['button_upload'])) {
@@ -55,7 +61,7 @@ if(isset($_POST['button_counseling'])) {
         <!-- center -->
         <div class="col-sm-7">
           <div class="card rounded-0">
-            <div class="card-body">
+            <div class="card-body" id="print_content">
               <br/>
               <div class="text-center"><h2>RESULT</h2></div>
               <hr/>
@@ -81,6 +87,10 @@ if(isset($_POST['button_counseling'])) {
                                      } elseif ($score_1 >= 0.00 && $score_1 <= 2.99) {
                                       $remarks = "Need thorough improvement";
                                      }
+
+                                     $data_x_graph[] = "Written Communications";
+                                     $data_y_graph[] = $score_1;
+                                     $data_remarks[] = $remarks;
                                 ?>
                                 <tr>
                                   <thead>
@@ -116,6 +126,10 @@ if(isset($_POST['button_counseling'])) {
                                     } elseif ($score_2 >= 0.00 && $score_2 <= 2.99) {
                                      $remarks = "Need thorough improvement";
                                     }
+
+                                    $data_x_graph[] = "Negotiating & Persuading";
+                                    $data_y_graph[] = $score_2;
+                                    $data_remarks[] = $remarks;
                                 ?>
 
                                 <tr>
@@ -152,6 +166,10 @@ if(isset($_POST['button_counseling'])) {
                                     } elseif ($score_3 >= 0.00 && $score_3 <= 2.99) {
                                      $remarks = "Need thorough improvement";
                                     }
+
+                                    $data_x_graph[] = "Verbal Communication";
+                                    $data_y_graph[] = $score_3;
+                                    $data_remarks[] = $remarks;
                                 ?>
 
                                 <tr>
@@ -188,6 +206,10 @@ if(isset($_POST['button_counseling'])) {
                                     } elseif ($score_4 >= 0.00 && $score_4 <= 2.99) {
                                      $remarks = "Need thorough improvement";
                                     }
+
+                                    $data_x_graph[] = "Co-operating";
+                                    $data_y_graph[] = $score_4;
+                                    $data_remarks[] = $remarks;
                                 ?>
 
                                 <tr>
@@ -224,6 +246,10 @@ if(isset($_POST['button_counseling'])) {
                                     } elseif ($score_5 >= 0.00 && $score_5 <= 2.99) {
                                      $remarks = "Need thorough improvement";
                                     }
+
+                                    $data_x_graph[] = "Investigating & Analyzing";
+                                    $data_y_graph[] = $score_5;
+                                    $data_remarks[] = $remarks;
                                 ?>
 
                                 <tr>
@@ -260,6 +286,10 @@ if(isset($_POST['button_counseling'])) {
                                     } elseif ($score_6 >= 0.00 && $score_6 <= 2.99) {
                                      $remarks = "Need thorough improvement";
                                     }
+
+                                    $data_x_graph[] = "Leadership";
+                                    $data_y_graph[] = $score_6;
+                                    $data_remarks[] = $remarks;
                                 ?>
 
                                 <tr>
@@ -296,6 +326,10 @@ if(isset($_POST['button_counseling'])) {
                                     } elseif ($score_7 >= 0.00 && $score_7 <= 2.99) {
                                      $remarks = "Need thorough improvement";
                                     }
+
+                                    $data_x_graph[] = "Planning & Organizing";
+                                    $data_y_graph[] = $score_7;
+                                    $data_remarks[] = $remarks;
                                 ?>
 
                                 <tr>
@@ -332,6 +366,10 @@ if(isset($_POST['button_counseling'])) {
                                     } elseif ($score_8 >= 0.00 && $score_8 <= 2.99) {
                                      $remarks = "Need thorough improvement";
                                     }
+
+                                    $data_x_graph[] = "Numeracy";
+                                    $data_y_graph[] = $score_8;
+                                    $data_remarks[] = $remarks;
                                 ?>
 
                                 <tr>
@@ -359,6 +397,24 @@ if(isset($_POST['button_counseling'])) {
         <div class="col-sm-5">
           <div class="card rounded-0">
             <div class="card-body">
+              <br/>
+              <?php  if ($_SESSION['key_session']['user_level'] == '1' || $_SESSION['key_session']['user_level'] == '2') { ?>
+                <label id="for_student_name" for="age" class="col-md-4 col-lg-3 col-form-label">Student Name</label>
+                  <div class="col-md-8 col-lg-12">
+                    <input id="student_name" type="text" class="form-control rounded-0" value="<?php echo $student_name; ?>">
+                  </div>
+                <br/>
+                <label id="for_school_year" for="age" class="col-md-4 col-lg-3 col-form-label">Year Level</label>
+                  <div class="col-md-8 col-lg-12">
+                    <input id="school_year" type="text" class="form-control rounded-0" value="<?php echo $student_year; ?>">
+                  </div>
+                <br/>
+                <label id="for_course" for="age" class="col-md-4 col-lg-3 col-form-label">Course</label>
+                  <div class="col-md-8 col-lg-12">
+                    <input id="course" type="text" class="form-control rounded-0" value="<?php echo $course; ?>">
+                  </div>
+                <br/>
+              <?php } ?>
               <br/>
               <div class="text-center"><h2>Interpretation</h2></div>
               <hr/>
@@ -389,7 +445,75 @@ if(isset($_POST['button_counseling'])) {
                     </tbody>
                   </table>
                         </div>
+                  <div class="col-lg-12">
+                  <br/>
+                    <div class="text-center"><h2>ESA - Data Visualization</h2></div>
+                    <hr/>
+              <div id="pieChart" style="min-height: 400px;" class="echart"></div>
+              <script>
+                document.addEventListener("DOMContentLoaded", () => {
+                  echarts.init(document.querySelector("#pieChart")).setOption({
+                    tooltip: {
+                      trigger: 'item'
+                    },
+                    series: [{
+                      type: 'pie',
+                      radius: '80%',
+                      data: [
+                        {
+                          value: '<?php echo $data_y_graph[0]; ?>',
+                          name: '<?php echo $data_x_graph[0]; ?> (<?php echo $data_remarks[0]; ?>) '
+                        },
+                        {
+                          value: '<?php echo $data_y_graph[1]; ?>',
+                          name: '<?php echo $data_x_graph[1]; ?> (<?php echo $data_remarks[1]; ?>)'
+                        },
+                        {
+                          value: '<?php echo $data_y_graph[2]; ?>',
+                          name: '<?php echo $data_x_graph[2]; ?> (<?php echo $data_remarks[2]; ?>)'
+                        },
+                        {
+                          value: '<?php echo $data_y_graph[3]; ?>',
+                          name: '<?php echo $data_x_graph[3]; ?> (<?php echo $data_remarks[3]; ?>)'
+                        },
+                        {
+                          value: '<?php echo $data_y_graph[4]; ?>',
+                          name: '<?php echo $data_x_graph[4]; ?> (<?php echo $data_remarks[4]; ?>)'
+                        },
+                        {
+                          value: '<?php echo $data_y_graph[5]; ?>',
+                          name: '<?php echo $data_x_graph[5]; ?> (<?php echo $data_remarks[5]; ?>)'
+                        },
+                        {
+                          value: '<?php echo $data_y_graph[6]; ?>',
+                          name: '<?php echo $data_x_graph[6]; ?> (<?php echo $data_remarks[6]; ?>)'
+                        },
+                        {
+                          value: '<?php echo $data_y_graph[7]; ?>',
+                          name: '<?php echo $data_x_graph[7]; ?> (<?php echo $data_remarks[7]; ?>)'
+                        },
+                        {
+                          value: '<?php echo $data_y_graph[8]; ?>',
+                          name: '<?php echo $data_x_graph[8]; ?> (<?php echo $data_remarks[8]; ?>)'
+                        }
+                      ],
+                      emphasis: {
+                        itemStyle: {
+                          shadowBlur: 10,
+                          shadowOffsetX: 0,
+                          shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                      }
+                    }]
+                  });
+                });
+              </script>
+              <!-- End Pie Chart -->
+                  </div>
                   </div> 
+                  <?php  if ($_SESSION['key_session']['user_level'] == '1' || $_SESSION['key_session']['user_level'] == '2') { ?>
+                    <button id="button_print" name="button_print" onClick="printContent()" class="btn text-white rounded-pill btn-lg w-100" style="background-image: linear-gradient(#3B7A57, #4B6F44);"><i class="bi bi-print"></i> Generate Report</button>
+                  <?php } ?> 
             </div>  
           </div>
         </div>
@@ -398,4 +522,32 @@ if(isset($_POST['button_counseling'])) {
     </section>
 
   </main><!-- End #main -->
+  <script>
+		function printContent() {
+			var content = document.getElementById("print_content");
+      var button_print = document.getElementById("button_print");
+      var top_header = document.getElementById("header");
+      var side_bar = document.getElementById("sidebar");
+      var for_student_name = document.getElementById("for_student_name");
+      var for_student_year = document.getElementById("for_student_yeare");
+      var for_course = document.getElementById("for_course");
+      var student_name = document.getElementById("student_name");
+      var school_year = document.getElementById("student_year");
+      var course = document.getElementById("course");
+
+      top_header.style.visibility ='hidden';
+      button_print.style.visibility = 'hidden';
+      side_bar.style.visibility = 'hidden';
+			window.print(content);
+      button_print.style.visibility = 'visible';
+      top_header.style.visibility ='visible';
+      side_bar.style.visibility = 'visible';
+      for_student_name.style.visibility = 'visible';
+      for_student_year.style.visibility = 'visible';
+      for_course.style.visibility = 'visible';
+      student_name.style.visibility = 'visible';
+      student_year.style.visibility = 'visible';
+      course.style.visibility = 'visible';
+		}
+	</script>
 <?php include('../footer.php'); ?>

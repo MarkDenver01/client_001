@@ -1,7 +1,7 @@
 <?php $announcements = display_announcement(); ?>
 <div class="col-lg-4">
   <?php  if ($_SESSION['key_session']['user_level'] == '1' || $_SESSION['key_session']['user_level'] == '2') { ?>
-    <button name="button_print" onClick="printContent()" class="btn text-white rounded-0 btn-lg w-100" style="background-image: linear-gradient(#3B7A57, #4B6F44);"><i class="bi bi-print"></i> Generate Report</button>
+    <button name="button_print" onClick="printContent()" class="btn text-white rounded-pill btn-lg w-100" style="background-image: linear-gradient(#3B7A57, #4B6F44);"><i class="bi bi-print"></i> Generate Report</button>
     <br/><br/>
   <?php } ?>
   <div class="card rounded-0">
