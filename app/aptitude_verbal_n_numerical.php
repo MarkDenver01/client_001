@@ -325,9 +325,9 @@ if(isset($_POST['button_counseling'])) {
                   new Chart(document.querySelector('#barChart'), {
                     type: 'bar',
                     data: {
-                      labels: ['<?php echo $data_x_graph[0]; ?>', '<?php echo $data_x_graph[1]; ?>'],
+                      labels: ['<?php echo $data_x_graph[0]; ?> (<?php echo $data_remarks[0]; ?>)', '<?php echo $data_x_graph[1]; ?> (<?php echo $data_remarks[1]; ?>)'],
                       datasets: [{
-                        label: 'Total Score: <?php echo $total_score; ?>',
+                        label: '(Total Score: <?php echo $total_score; ?>)',
                         data: ['<?php echo $data_y_graph[0]; ?>', '<?php echo $data_y_graph[1]; ?>'],
                         backgroundColor: [
                           'rgba(255, 99, 132, 0.2)',
