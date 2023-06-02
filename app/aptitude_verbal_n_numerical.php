@@ -14,6 +14,8 @@
     $school_year = $_GET['school_year'];
     $student_name = $_GET['name'];
     $exam_id = $_GET['exam_id'];
+    $course = $_GET['course'];
+    $student_year = $_GET['student_year'];
   } else {
     $student_id = $_SESSION['key_session']['student_id'];
     $semester = $_SESSION['key_session']['academic_semester'];
@@ -21,6 +23,10 @@
     $student_name = $_SESSION['key_session']['name'];
     $exam_id = $_GET['exam_id'];
   }
+
+  $data_x_graph = array();
+  $data_y_graph = array();
+  $data_remarks = array();
 ?>
 <?php 
 if (isset($_POST['button_upload'])) {
@@ -54,7 +60,7 @@ if(isset($_POST['button_counseling'])) {
         <!-- center -->
         <div class="col-sm-6">
           <div class="card rounded-0">
-            <div class="card-body">
+            <div class="card-body" id="print_content">
               <br/>
               <div class="text-center"><h2>RESULT</h2></div>
               <hr/>
@@ -84,6 +90,8 @@ if(isset($_POST['button_counseling'])) {
                                         }
                                       }
                                       $linguistics = $counter_l;
+                                      $data_x_graph[] = "Linguistics";
+                                      $data_y_graph[] = $linguistics;
 
                                     $counter_q = 0;
                                     $sql = "SELECT * FROM examinee_answer_v2 WHERE student_id ='$student_id' AND exam_id ='$exam_id' 
@@ -99,6 +107,8 @@ if(isset($_POST['button_counseling'])) {
                                          }
                                       }
                                       $quantitative = $counter_q;
+                                      $data_x_graph[] = "Quantitative";
+                                      $data_y_graph[] = $quantitative;
 
                                     $total_score = $linguistics + $quantitative;
 
@@ -137,6 +147,9 @@ if(isset($_POST['button_counseling'])) {
                                 } elseif ($total_score >= 0 && $total_score <= 26) {
                                     $exam_result_status = "Low";
                                 }
+
+                                  $data_remarks[] = $remarks_l;
+                                  $data_remarks[] = $remarks_q;
                                   ?>
                                   <tr>
                                     <td><h3>Linguistics (verbal)</h3></td>
@@ -167,7 +180,25 @@ if(isset($_POST['button_counseling'])) {
           <div class="card rounded-0">
             <div class="card-body">
               <br/>
-              <div class="text-center"><h2>Data Visualization</h2></div>
+              <?php  if ($_SESSION['key_session']['user_level'] == '1' || $_SESSION['key_session']['user_level'] == '2') { ?>
+                <label id="for_student_name" for="age" class="col-md-4 col-lg-3 col-form-label">Student Name</label>
+                  <div class="col-md-8 col-lg-12">
+                    <input id="student_name" type="text" class="form-control rounded-0" value="<?php echo $student_name; ?>">
+                  </div>
+                <br/>
+                <label id="for_school_year" for="age" class="col-md-4 col-lg-3 col-form-label">Year Level</label>
+                  <div class="col-md-8 col-lg-12">
+                    <input id="school_year" type="text" class="form-control rounded-0" value="<?php echo $student_year; ?>">
+                  </div>
+                <br/>
+                <label id="for_course" for="age" class="col-md-4 col-lg-3 col-form-label">Course</label>
+                  <div class="col-md-8 col-lg-12">
+                    <input id="course" type="text" class="form-control rounded-0" value="<?php echo $course; ?>">
+                  </div>
+                <br/>
+              <?php } ?>
+              <br/>
+              <div class="text-center"><h2>Data Interpretation</h2></div>
               <hr/>
                   <div class="row mb-3">
                     <div class="col-lg-4">
@@ -283,6 +314,58 @@ if(isset($_POST['button_counseling'])) {
                       </tbody>
                       </table>
                     </div>
+                    <div class="col-lg-12">
+                  <br/>
+                    <div class="text-center"><h2>Aptitude Verbal and Numerical - Data Visualization</h2></div>
+                    <hr/>
+                                  <!-- Bar Chart -->
+              <canvas id="barChart" style="max-height: 400px;"></canvas>
+              <script>
+                document.addEventListener("DOMContentLoaded", () => {
+                  new Chart(document.querySelector('#barChart'), {
+                    type: 'bar',
+                    data: {
+                      labels: ['<?php echo $data_x_graph[0]; ?>', '<?php echo $data_x_graph[1]; ?>'],
+                      datasets: [{
+                        label: 'Total Score: <?php echo $total_score; ?>',
+                        data: ['<?php echo $data_y_graph[0]; ?>', '<?php echo $data_y_graph[1]; ?>'],
+                        backgroundColor: [
+                          'rgba(255, 99, 132, 0.2)',
+                          'rgba(255, 159, 64, 0.2)',
+                          'rgba(255, 205, 86, 0.2)',
+                          'rgba(75, 192, 192, 0.2)',
+                          'rgba(54, 162, 235, 0.2)',
+                          'rgba(153, 102, 255, 0.2)',
+                          'rgba(201, 203, 207, 0.2)'
+                        ],
+                        borderColor: [
+                          'rgb(255, 99, 132)',
+                          'rgb(255, 159, 64)',
+                          'rgb(255, 205, 86)',
+                          'rgb(75, 192, 192)',
+                          'rgb(54, 162, 235)',
+                          'rgb(153, 102, 255)',
+                          'rgb(201, 203, 207)'
+                        ],
+                        borderWidth: 1
+                      }]
+                    },
+                    options: {
+                      scales: {
+                        y: {
+                          beginAtZero: true
+                        }
+                      }
+                    }
+                  });
+                });
+              </script>
+              <!-- End Pie Chart -->
+                  </div>
+                  </div> 
+                  <?php  if ($_SESSION['key_session']['user_level'] == '1' || $_SESSION['key_session']['user_level'] == '2') { ?>
+                    <button id="button_print" name="button_print" onClick="printContent()" class="btn text-white rounded-pill btn-lg w-100" style="background-image: linear-gradient(#3B7A57, #4B6F44);"><i class="bi bi-print"></i> Generate Report</button>
+                  <?php } ?> 
                   </div> 
             </div>  
           </div>
@@ -292,4 +375,32 @@ if(isset($_POST['button_counseling'])) {
     </section>
 
   </main><!-- End #main -->
+  <script>
+		function printContent() {
+			var content = document.getElementById("print_content");
+      var button_print = document.getElementById("button_print");
+      var top_header = document.getElementById("header");
+      var side_bar = document.getElementById("sidebar");
+      var for_student_name = document.getElementById("for_student_name");
+      var for_student_year = document.getElementById("for_student_yeare");
+      var for_course = document.getElementById("for_course");
+      var student_name = document.getElementById("student_name");
+      var school_year = document.getElementById("student_year");
+      var course = document.getElementById("course");
+
+      top_header.style.visibility ='hidden';
+      button_print.style.visibility = 'hidden';
+      side_bar.style.visibility = 'hidden';
+			window.print(content);
+      button_print.style.visibility = 'visible';
+      top_header.style.visibility ='visible';
+      side_bar.style.visibility = 'visible';
+      for_student_name.style.visibility = 'visible';
+      for_student_year.style.visibility = 'visible';
+      for_course.style.visibility = 'visible';
+      student_name.style.visibility = 'visible';
+      student_year.style.visibility = 'visible';
+      course.style.visibility = 'visible';
+		}
+	</script>
 <?php include('../footer.php'); ?>

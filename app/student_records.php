@@ -125,8 +125,8 @@
                         <th scope="col" class="text-center" >Exam Type</th>
                         <th scope="col" class="text-center" >Exam Description</th>
                         <th scope="col" class="text-center" >Exam Category</th>
-                        <th scope="col" class="text-center" >Grades</th>
-                        <th scope="col" class="text-center" >Exam Result Status</th>
+                        <!-- <th scope="col" class="text-center" >Grades</th>
+                        <th scope="col" class="text-center" >Exam Result Status</th> -->
                         <th scope="col" class="text-center" >Examinee Status</th>
                         <th scope="col" class="text-center" >Action</th>
                       </tr>
@@ -169,8 +169,8 @@
                         <td scope="row" class="text-center" ><?php echo $filtered['exam_title']; ?></td>
                         <td scope="row" class="text-center" ><?php echo $filtered['exam_description']; ?></td>
                         <td scope="row" class="text-center" ><?php echo $filtered['exam_category']; ?></td>
-                        <td scope="row" class="text-center" ><?php echo $filtered['total_grades']; ?></td>
-                        <td scope="row" class="text-center" ><?php echo $filtered['exam_result']; ?></td>
+                        <!-- <td scope="row" class="text-center" ><?php echo $filtered['total_grades']; ?></td>
+                        <td scope="row" class="text-center" ><?php echo $filtered['exam_result']; ?></td> -->
                         <td scope="row" class="text-center" ><?php echo $filtered['examinee_status']; ?></td>
                         <td>
                             <a href="<?php echo $redirect; ?>" type="submit" class="btn btn-success text-white rounded-0 btn-sm w-100"><i class="bi bi-print"></i> View result</a>
@@ -204,7 +204,7 @@
                         } else if ($row['exam_title'] == 'ESA') {
                             $redirect = "../app/esa_result.php?student_id=" .$row['student_id']. "&semester=" .$row['semester']. "&school_year=" .$row['school_year']. "&name=" .$row['name']. "&exam_id=" .$row['exam_id']. "&course=" .$row['course']. "&student_year=" .$row['student_year'];
                         } else if ($row['exam_title'] == 'Aptitude Verbal and Numerical') {
-                            $redirect = "../app/aptitude_verbal_n_numerical.php?student_id=" .$row['student_id']. "&semester=" .$row['semester']. "&school_year=" .$row['school_year']. "&name=" .$row['name']. "&exam_id=" .$row['exam_id'];
+                            $redirect = "../app/aptitude_verbal_n_numerical.php?student_id=" .$row['student_id']. "&semester=" .$row['semester']. "&school_year=" .$row['school_year']. "&name=" .$row['name']. "&exam_id=" .$row['exam_id']. "&course=" .$row['course']. "&student_year=" .$row['student_year'];;
                         }
                     ?>
                       <tr class="text-success">
@@ -222,8 +222,8 @@
                         <td scope="row" class="text-center" ><?php echo $row['exam_title']; ?></td>
                         <td scope="row" class="text-center" ><?php echo $row['exam_description']; ?></td>
                         <td scope="row" class="text-center" ><?php echo $row['exam_category']; ?></td>
-                        <td scope="row" class="text-center" ><?php echo $row['total_grades']; ?></td>
-                        <td scope="row" class="text-center" ><?php echo $row['exam_result']; ?></td>
+                        <!-- <td scope="row" class="text-center" ><?php echo $row['total_grades']; ?></td>
+                        <td scope="row" class="text-center" ><?php echo $row['exam_result']; ?></td> -->
                         <td scope="row" class="text-center" ><?php echo $row['examinee_status']; ?></td>
                         <td>
                             <a href="<?php echo $redirect; ?>" type="submit" class="btn btn-success text-white rounded-0 btn-sm w-100"><i class="bi bi-print"></i> View result</a>
