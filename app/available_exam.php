@@ -195,6 +195,10 @@
                     $main_exam = 'spatial';
                   } elseif ($main_exam_id == 'Word Comparison') {
                     $main_exam = 'work_comparison';
+                  } elseif ($main_exam_id == 'Making marks Part 1') {
+                    $main_exam = 'marking_marks_pt_1';
+                  } elseif ($main_exam_id == 'Making marks Part 2') {
+                    $main_exam = 'marking_marks_pt_2';
                   } elseif ($main_exam_id == 'BarOn EQ-i:S') {
                     $main_exam = 'baron_eq';
                   } elseif ($main_exam_id == 'The Keirsey Temerament Sorter') {
@@ -426,6 +430,54 @@
                             </tbody>
                           </table>
 
+                        <?php } elseif ($main_exam_id == 'Making marks Part 1') { ?>
+                          <table class="table table-hover text-nowrap " id="tableList">
+                            <tbody>
+                              <?php $sql = $db->query("SELECT * FROM $main_exam"); ?>
+                              <?php if($sql->num_rows > 0) { ?>
+                              <?php $i = 1; ?>
+                              <?php while($row = $sql->fetch_assoc()) { ?>
+                              <tr>
+                                <td>
+                                <p><b>Answer No. <?php echo $i++; ?></b></p>
+                                  <div class="row">
+                                    <input type="hidden" name="answer[<?php echo ($i - 1); ?>][item_correct]" value="<?php echo $row['correct_items']; ?>">
+                                    <div class="col-md-8 col-lg-12">
+                                      <input name="answer[<?php echo ($i - 1); ?>][correct_items]" type="text" class="form-control rounded-0">
+                                    </div>
+                                  </div>
+                                </td>
+                              </tr>
+                              <?php } ?>
+                              <?php } else { ?>
+                              <?php  echo "Answer sheet not available."; ?>
+                              <?php } ?> 
+                            </tbody>
+                          </table>
+                        <?php } elseif ($main_exam_id == 'Making marks Part 2') { ?>
+                          <table class="table table-hover text-nowrap " id="tableList">
+                            <tbody>
+                              <?php $sql = $db->query("SELECT * FROM $main_exam"); ?>
+                              <?php if($sql->num_rows > 0) { ?>
+                              <?php $i = 1; ?>
+                              <?php while($row = $sql->fetch_assoc()) { ?>
+                              <tr>
+                                <td>
+                                <p><b>Answer No. <?php echo $i++; ?></b></p>
+                                <input type="hidden" name="answer[<?php echo ($i - 1); ?>][item_correct]" value="<?php echo $row['correct_items']; ?>">
+                                  <div class="row">
+                                    <div class="col-md-8 col-lg-12">
+                                      <input name="answer[<?php echo ($i - 1); ?>][correct_items]" type="text" class="form-control rounded-0">
+                                    </div>
+                                  </div>
+                                </td>
+                              </tr>
+                              <?php } ?>
+                              <?php } else { ?>
+                              <?php  echo "Answer sheet not available."; ?>
+                              <?php } ?> 
+                            </tbody>
+                          </table>
                         <?php } ?>
 
 
@@ -3539,7 +3591,7 @@
                   <div class="row">
                     <div class="col-lg-12">
                      <div class="text-center">
-                        <button id="submitAnswerFrmBtn" name="submit" type="submit" class="btn btn-success btn-lg rounded-0 w-100">Submit</button>      
+                        <button id="submitAnswerFrmBtn" name="submit" type="submit" class="btn btn-success btn-lg rounded-pill w-100">Submit</button>      
                       </div>
                     </div>
                     <br/>
@@ -3547,7 +3599,7 @@
                     <br/>
                     <div class="col-lg-12">
                       <div class="text-center">
-                       <button id="resetExamFrm" name="button_start" class="btn btn-danger rounded-0 btn-lg w-100">Reset</button>     
+                       <button id="resetExamFrm" name="button_start" class="btn btn-danger rounded-pill btn-lg w-100">Reset</button>     
                       </div>
                     </div>
                   </div>

@@ -49,7 +49,7 @@
                   </div>
 
                   <div class="col-12">
-                    <button class="btn btn-primary w-100 rounded-0" name="button_login" type="submit">Login</button>
+                    <button class="btn btn-primary w-100 rounded-pill" name="button_login" type="submit">Login</button>
                   </div>
                 </form>
               </div>

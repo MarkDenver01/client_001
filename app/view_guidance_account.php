@@ -77,7 +77,7 @@
             </div>
 
             <div class="text-center">
-              <button type="submit" name="button_create" class="btn btn-success rounded-0 w-25" >Create new account</button>
+              <button type="submit" name="button_create" class="btn btn-success rounded-pill w-25" >Create new account</button>
             </div>
           </form><!-- End floating Labels Form -->
           <!-- End General Form Elements -->

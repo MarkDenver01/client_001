@@ -266,6 +266,7 @@
                         </div>
                   <form id="submitExamResultFrm" method="POST">
                    <?php if ($exam_title == "ESA") { ?>
+                      <input type="hidden" id="student_id" name="student_id" value="<?php echo $student_id; ?>">
                       <input type="hidden" id="exam_type" name="exam_type" value="<?php echo $exam_type; ?>">
                       <input type="hidden" id="exam_id" name="exam_id" value="<?php echo $exam_id; ?>">
                       <input type="hidden" id="exam_title" name="exam_title" value="<?php echo $exam_title; ?>">
@@ -284,7 +285,7 @@
                       <input type="hidden" id="email_address" value="<?php echo $email_address; ?>">
                       <input type="hidden" id="student_year" value="<?php echo $student_year; ?>">
                   <?php } ?>
-                    <a href="" class="btn btn-success rounded-0 w-100 btn-lg" name="button_submit" type="submit">Submit</a>
+                    <a href="" class="btn btn-success rounded-pill w-100 btn-lg" name="button_submit" type="submit">Submit</a>
                   </form>
                   </div>
               </div>

@@ -37,8 +37,8 @@
 		          <div class="row">
         	      <div class="col-sm-2">
                   <form action="" method="POST">
-                    <button name="button_create" type="submit" class="btn btn-primary rounded-0 btn-sm"><i class="bx bxs-plus-circle"></i> Create Exam</button>
-					          <button name="button_reload" type="submit" class="btn btn-success btn-sm rounded-0"><i class="bx bx-refresh"></i> Reload</button>
+                    <button name="button_create" type="submit" class="btn btn-primary rounded-pill btn-sm"><i class="bx bxs-plus-circle"></i> Create Exam</button>
+					          <button name="button_reload" type="submit" class="btn btn-success btn-sm rounded-pill"><i class="bx bx-refresh"></i> Reload</button>
                   </form>
 			          </div>
                 
@@ -61,7 +61,7 @@
                         <option value="" selected>Select exam type</option>
                       </select>
                       <br/>
-                      <button name="button_filter" type="submit" class="btn btn-secondary text-white rounded-0 btn-sm w-100"><i class="bi bi-search"></i> </button>
+                      <button name="button_filter" type="submit" class="btn btn-secondary text-white rounded-pill btn-sm w-100"><i class="bi bi-search"></i> </button>
                     </div>
                     <div class="col-sm-4">
                       <select id="exam_description" name="exam_description" class="form-select rounded-0" aria-label="Default select example">

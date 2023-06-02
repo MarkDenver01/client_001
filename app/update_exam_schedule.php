@@ -144,7 +144,7 @@ if (isset($_POST['button_update'])) {
 
                  <br/>
                  <div class="text-center">
-                   <button type="submit" name="button_update" class="btn btn-danger rounded-0">Update</button>
+                   <button type="submit" name="button_update" class="btn btn-danger rounded-pill">Update</button>
                  </div>
 
                </div>

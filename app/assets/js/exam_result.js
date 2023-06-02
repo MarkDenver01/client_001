@@ -75,15 +75,15 @@ $(document).on('click', '#submitExamResultFrm', function() {
                         } else if (exam_title == 'OASIS 3') {
                             window.location.href="../app/oasis_result.php?student_id="+student_id;
                         } else if (exam_title == 'BarOn EQ-i:S') {
-                            window.location.href="../app/baron_eq_interpretation.php?student_id="+student_id;
+                            window.location.href="../app/baron_eq_interpretation.php?student_id="+student_id+"&exam_id="+exam_id;
                         } else if (exam_title == 'The Keirsey Temperament Sorter') {
                             window.location.href="../app/keirsey_temp_intrepretation.php?student_id="+student_id;
                         } else if (exam_title == 'Aptitude J and C') {
                             window.location.href="../app/aptitude_j_n_c_result.php?student_id="+student_id;
                         } else if (exam_title == 'ESA') {
-                            window.location.href="../app/esa_result.php?student_id="+student_id;
+                            window.location.href="../app/esa_result.php?student_id="+student_id+"&exam_id="+exam_id;
                         } else if (exam_title == 'Aptitude Verbal and Numerical') {
-                            window.location.href="../app/aptitude_verbal_n_numerical.php?student_id="+student_id;
+                            window.location.href="../app/aptitude_verbal_n_numerical.php?student_id="+student_id+"&exam_id="+exam_id;
                         }
                     } else  if(data.res == "failed") {
                         Swal.fire(

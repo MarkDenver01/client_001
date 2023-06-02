@@ -55,7 +55,7 @@
     <li class="nav-item">
       <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
         <i class="ri-map-pin-user-fill"></i>
-        <span>Manage Accounts</span><i class="bi bi-chevron-down ms-auto"></i>
+        <span>Manage User's Account</span><i class="bi bi-chevron-down ms-auto"></i>
       </a>
       <ul id="forms-nav" class="nav-content collapsed" data-bs-parent="#sidebar-nav">
         <li>

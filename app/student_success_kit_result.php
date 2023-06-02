@@ -9,18 +9,21 @@
 <?php CHECK_EXAM_AVAILABILITY(); ?>
 <?php global $db; ?>
 <?php  
-
-  if (isset($_SESSION['key_session']['user_level'])) {
-      $user_level = $_SESSION['key_session']['user_level'];
-      if ($user_level != '3') {
-        $student_id = $_GET['student_id'];
-      } else {
-        $student_id = $_SESSION['key_session']['student_id'];
-      }
-  }
+  if (!isset($_SESSION['key_session']['student_id'])) {
+    $student_id = $_GET['student_id'];
+    $semester = $_GET['semester'];
+    $school_year = $_GET['school_year'];
+    $student_name = $_GET['name'];
+    $course = $_GET['course'];
+    $student_year = $_GET['student_year'];
+  } else {
+    $student_id = $_SESSION['key_session']['student_id'];
     $semester = $_SESSION['key_session']['academic_semester'];
     $school_year = $_SESSION['key_session']['academic_school_year']; 
     $student_name = $_SESSION['key_session']['name'];
+  }
+
+ 
 ?>
 <?php 
 
@@ -51,7 +54,7 @@ if(isset($_POST['button_counseling'])) {
         <!-- center -->
         <div class="col-sm-5">
           <div class="card rounded-0">
-            <div class="card-body">
+            <div class="card-body" id="print_content">
               <br/>
               <div class="text-center"><h2>RESULT</h2></div>
               <hr/>
@@ -61,9 +64,9 @@ if(isset($_POST['button_counseling'])) {
                   <table class="table table-hover table-bordered mb-5">
                     <thead>
                         <tr>
-                            <td><h5>Category</h5></td>
-                            <td><h5>Score</h5></td>
-                            <td><h5>Status</h5></td>
+                            <td style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" ><h5>Category</h5></td>
+                            <td style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" ><h5>Score</h5></td>
+                            <td style="background-image: linear-gradient(#4B3621, #4B3621);" class="text-white" ><h5>Status</h5></td>
                         </tr>
                     </thead>
                     <tbody>                   
@@ -79,11 +82,17 @@ if(isset($_POST['button_counseling'])) {
                         while ($row = $result->fetch_assoc()) {
                             $exam_title = $row['exam_title']; 
                             $sampling = $row['total'] / 18;
+                            $check_total = $row['total_grades'];
+                            if ($check_total >= 25 && $check_total <= 40) {
+                              $remarks = "HIGH";
+                            } elseif ($check_monitor >= 0 && $check_total <= 24) {
+                              $remarks = "LOW";
+                            }
                     ?>
                         <tr>
                           <td><h5><?php echo $row['exam_category']; ?></h5></td>
-                          <td><h5><?php echo $row['grades']; ?></h5></td>
-                          <td><h5><?php echo $row['exam_result']; ?></h5></td>
+                          <td><h5><?php echo $row['total_grades']; ?></h5></td>
+                          <td><h5><?php echo $remarks; ?></h5></td>
                         </tr>          
                     <?php 
                         }
@@ -115,7 +124,7 @@ if(isset($_POST['button_counseling'])) {
           </div>
           <?php } else if($user_level == '3') { ?>
         <div class="card rounder-0">
-            <div class="card-body">
+            <div class="card-body"  id="upload_grades">
               <br/>
               <div class="row">
                     <div class="col-lg-12">
@@ -132,6 +141,24 @@ if(isset($_POST['button_counseling'])) {
 
           <div class="card rounded-0">
             <div class="card-body">
+            <br/>
+              <?php  if ($_SESSION['key_session']['user_level'] == '1' || $_SESSION['key_session']['user_level'] == '2') { ?>
+                <label id="for_student_name" for="age" class="col-md-4 col-lg-3 col-form-label">Student Name</label>
+                  <div class="col-md-8 col-lg-12">
+                    <input id="student_name" type="text" class="form-control rounded-0" value="<?php echo $student_name; ?>">
+                  </div>
+                <br/>
+                <label id="for_school_year" for="age" class="col-md-4 col-lg-3 col-form-label">Year Level</label>
+                  <div class="col-md-8 col-lg-12">
+                    <input id="school_year" type="text" class="form-control rounded-0" value="<?php echo $student_year; ?>">
+                  </div>
+                <br/>
+                <label id="for_course" for="age" class="col-md-4 col-lg-3 col-form-label">Course</label>
+                  <div class="col-md-8 col-lg-12">
+                    <input id="course" type="text" class="form-control rounded-0" value="<?php echo $course; ?>">
+                  </div>
+                <br/>
+              <?php } ?>
               <br/>
               <div class="text-center"><h2>Data Visualization</h2></div>
               <hr/>
@@ -156,12 +183,12 @@ if(isset($_POST['button_counseling'])) {
                                       $check_monitor = true;
                                       $msg = "HIGH";
                                     break;
-                                  case $data >= 0 and $data <= 20:
+                                  case $data >= 0 and $data <= 24:
                                       $check_monitor = false;
                                       $msg = "LOW";
                                     break;
                                     default:
-                                      $msg = "Not in range";
+                                    break;
                                 }
                             ?>    
                             <tr>
@@ -277,7 +304,11 @@ if(isset($_POST['button_counseling'])) {
                             });
                           });
                           </script>
+                          <br/>
                           <!-- End Line CHart -->
+                          <?php  if ($_SESSION['key_session']['user_level'] == '1' || $_SESSION['key_session']['user_level'] == '2') { ?>
+                            <button id="button_print" name="button_print" onClick="printContent()" class="btn text-white rounded-pill btn-lg w-100" style="background-image: linear-gradient(#3B7A57, #4B6F44);"><i class="bi bi-print"></i> Generate Report</button>
+                          <?php } ?> 
                         </div>
                   </div>                
             </div>  
@@ -288,4 +319,36 @@ if(isset($_POST['button_counseling'])) {
     </section>
 
   </main><!-- End #main -->
+
+  <script>
+		function printContent() {
+			var content = document.getElementById("print_content");
+      var button_print = document.getElementById("button_print");
+      var top_header = document.getElementById("header");
+      var side_bar = document.getElementById("sidebar");
+      var for_student_name = document.getElementById("for_student_name");
+      var for_student_year = document.getElementById("for_student_yeare");
+      var for_course = document.getElementById("for_course");
+      var student_name = document.getElementById("student_name");
+      var school_year = document.getElementById("student_year");
+      var course = document.getElementById("course");
+
+
+      top_header.style.visibility ='hidden';
+      button_print.style.visibility = 'hidden';
+      side_bar.style.visibility = 'hidden';
+
+			window.print(content);
+
+      button_print.style.visibility = 'visible';
+      top_header.style.visibility ='visible';
+      side_bar.style.visibility = 'visible';
+      for_student_name.style.visibility = 'visible';
+      for_student_year.style.visibility = 'visible';
+      for_course.style.visibility = 'visible';
+      student_name.style.visibility = 'visible';
+      student_year.style.visibility = 'visible';
+      course.style.visibility = 'visible';
+		}
+	</script>
 <?php include('../footer.php'); ?>

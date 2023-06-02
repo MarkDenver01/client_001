@@ -141,8 +141,8 @@ if (isset($_POST["button_update"])) {
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary rounded-0" data-bs-dismiss="modal">Close</button>
-        <input type="submit" name="button_update" class="btn btn-primary rounded-0" value="Update Account"></input>
+        <button type="button" class="btn btn-secondary rounded-pill" data-bs-dismiss="modal">Close</button>
+        <input type="submit" name="button_update" class="btn btn-primary rounded-pill" value="Update Account"></input>
       </div>
     </form><!-- End floating Labels Form -->
   </div>

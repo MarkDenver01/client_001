@@ -20,7 +20,7 @@
   </div><!-- End Page Title -->
 
 
-<section class="section" style="width: 2160px;">
+<section class="section" style="width: 2260px;">
     <div class="row">
       <!-- start create account -->
       <div class="card rounded-0 bg-light">
@@ -69,7 +69,7 @@
                         ?>
                     </select>
                     <br/>
-                    <button name="button_filter" type="submit" class="btn btn-secondary text-white rounded-0 btn-sm w-100"><i class="bi bi-search"></i> </button>
+                    <button name="button_filter" type="submit" class="btn btn-secondary text-white rounded-pill btn-sm w-100"><i class="bi bi-search"></i> </button>
                 </div>
                 <div class="col-sm-4">
                     <select id="exam_description" name="course" class="form-select rounded-0" aria-label="Default select example">
@@ -176,7 +176,7 @@
                         <td class="text-center" >
                             <a href="./upload_student_grade?student_id=<?php echo $student['id']; ?>" type="submit" class="btn text-white rounded-pill btn-sm" style="background-image: linear-gradient(#4B6F44, #006B3C); width:100px;"><i class="bi bi-print"></i> Upload</a>
                             <a href="./view_student_grade?student_id=<?php echo $student['id']; ?>" type="submit" class="btn text-white rounded-pill btn-sm" style="background-image: linear-gradient(#AB274F, #9F2B68); width:100px;"><i class="bi bi-print"></i> View</a>
-                            <?php if ($student['probation_status'] == 'not under probation') { ?>
+                            <?php if ( $student['probation_status'] == 'not under probation') { ?>
                               <a href="../includes/under_probation?student_id=<?php echo $student['id']; ?>&probation_status=<?php echo $student['probation_status']; ?>" type="submit" class="btn text-white rounded-pill btn-sm" style="background-image: linear-gradient(#654321, #81613C); width:150px;"><i class="bi bi-print"></i> Under probation</a>
                             <?php } elseif($student['probation_status'] == 'under probation') { ?>
                               <a href="../includes/under_probation?student_id=<?php echo $student['id']; ?>&probation_status=<?php echo $student['probation_status']; ?>" type="submit" class="btn text-white rounded-pill btn-sm" style="background-image: linear-gradient(#967117, #9F8170); width:150px;"><i class="bi bi-print"></i> Not under probation</a>
@@ -190,7 +190,7 @@
                     </tbody>
                   </table>
                   <!-- End Table with hoverable rows -->
-                  <button name="button_print" onClick="window.print()" class="btn btn-danger text-white rounded-0 btn-sm" style="width: 150px;"><i class="bi bi-print"></i> Print</button>
+                  <button name="button_print" onClick="window.print()" class="btn btn-danger text-white rounded-pill btn-sm" style="width: 150px;"><i class="bi bi-print"></i> Print</button>
 
 
 

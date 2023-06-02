@@ -320,7 +320,7 @@
 
        $sql = "INSERT INTO `student_info`(`student_no`, `name`,`email_address`,`course`
          ,`student_year`, `semester`,`school_year`,`gender`,`age`
-         ,`birth_date`,`present_address`)";
+         ,`birth_date`,`present_address`, `probation_status`)";
        $sql .= " VALUES ";
        $sql .= "(
          '{$student_no}',
@@ -333,7 +333,8 @@
          '{$gender}',
          '{$age}',
          '{$birth_date}',
-         '{$present_address}'
+         '{$present_address}',
+         'not under probation'
          )";
          $db->query($sql);
  }
@@ -830,13 +831,13 @@ function find_exam_menu($student_year, $semester, $school_year, $exam_title) {
 function insert_academic_settings(array $data) {
   global $db;
   $sql ="INSERT INTO academic_settings(semester, school_year) ";
-  $sql .="VALUES('" .$data['semester']. "','" .$data['school_year']. "')";
+  $sql .="VALUES('" .$data['academic_semester']. "','" .$data['academic_school_year']. "')";
   $db->query($sql);
 }
 
 function update_academic_settings(array $data) {
   global $db;
-  $sql = "UPDATE academic_settings SET semester='" .$data['semester']. "', school_year ='" .$data['school_year']. "' WHERE id ='1'";
+  $sql = "UPDATE academic_settings SET semester='" .$data['academic_semester']. "', school_year ='" .$data['academic_school_year']. "' WHERE id ='1'";
   $db->query($sql);
 }
 

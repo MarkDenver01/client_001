@@ -35,7 +35,7 @@ if ($sqlCheck->num_rows > 0) {
     $session->message('w', 'Time slot not available. Please check other time.');
     redirect('./counseling', false);
 } else {
-  $sqlInsert = $db->query("INSERT INTO counseling_appointment(student_id, student_no, student_name, appointment_date, time_counseling, slots_available) VALUES('$id', '$student_no', '$name', '$date_time_picker','$time_picker','1')");
+  $sqlInsert = $db->query("INSERT INTO counseling_appointment(student_id, student_no, student_name, appointment_date, time_counseling, slots_available) VALUES('$id', '$student_no', '$name', '$date_appointment_formatted','$time_picker','1')");
   if ($sqlInsert) {
     $sqlUpdate = $db->query("UPDATE examinee SET counselor_notify_status ='Counseling' WHERE student_id='$id'");
 
@@ -238,7 +238,7 @@ if ($sqlCheck->num_rows > 0) {
                     
                   </div>
                   <div class="col-6">
-                    <button name="button_apply" class="btn btn-primary w-100 rounded-0" type="submit">Submit</button>
+                    <button name="button_apply" class="btn btn-primary w-100 rounded-pill" type="submit">Submit</button>
                   </div>
                   <div class="col-3">
                   </div>

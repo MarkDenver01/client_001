@@ -36,8 +36,8 @@
             <form action="" method="POST">
 		          <div class="row">
                 <div class="col-sm-2">
-                    <button name="button_schedule" type="submit" class="btn btn-primary btn-sm rounded-0"><i class="bx bx-refresh"></i> Add Schedule</button>
-					          <button name="button_reload" type="submit" class="btn btn-success btn-sm rounded-0"><i class="bx bx-refresh"></i> Reload</button>
+                    <button name="button_schedule" type="submit" class="btn btn-primary btn-sm rounded-pill"><i class="bx bx-refresh"></i> Add Schedule</button>
+					          <button name="button_reload" type="submit" class="btn btn-success btn-sm rounded-pill"><i class="bx bx-refresh"></i> Reload</button>
                 </div>
                 
 			          <div class="form-group col-sm-10 text-center">
@@ -59,7 +59,7 @@
                         <option value="" selected>Select exam type</option>
                       </select>
                       <br/>
-                      <button name="button_filter" type="submit" class="btn btn-secondary text-white rounded-0 btn-sm w-100"><i class="bi bi-search"></i> </button>
+                      <button name="button_filter" type="submit" class="btn btn-secondary text-white rounded-pill btn-sm w-100"><i class="bi bi-search"></i> </button>
                     </div>
                     <div class="col-sm-4">
                       <select id="exam_description" name="exam_description" class="form-select rounded-0" aria-label="Default select example">

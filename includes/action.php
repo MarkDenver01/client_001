@@ -1274,15 +1274,19 @@ function set_academic($semester, $start_school_year, $end_school_year) {
     $school_year = $_POST[$start_school_year]. "-" .$_POST[$end_school_year];
 
     $data = array(
-      "semester" => $semester,
-      "school_year" => $school_year
+      "academic_semester" => $semester,
+      "academic_school_year" => $school_year
     );
 
     $is_check = check_academic();
     if ($is_check) {
       update_academic_settings($data);
+      $_SESSION['key_session']['academic_semester'] = $data['academic_semester'];
+      $_SESSION['key_session']['academic_school_year'] = $data['academic_school_year'];
     } else {
       insert_academic_settings($data);
+      $_SESSION['key_session']['academic_semester'] = $data['academic_semester'];
+      $_SESSION['key_session']['academic_school_year'] = $data['academic_school_year'];
     }
     $session->message('s', 'Semester and school year has been set.');
     redirect('./set_academic_settings', false);
