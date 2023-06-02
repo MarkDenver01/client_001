@@ -320,7 +320,7 @@
 
        $sql = "INSERT INTO `student_info`(`student_no`, `name`,`email_address`,`course`
          ,`student_year`, `semester`,`school_year`,`gender`,`age`
-         ,`birth_date`,`present_address`)";
+         ,`birth_date`,`present_address`, `probation_status`)";
        $sql .= " VALUES ";
        $sql .= "(
          '{$student_no}',
@@ -333,7 +333,8 @@
          '{$gender}',
          '{$age}',
          '{$birth_date}',
-         '{$present_address}'
+         '{$present_address}',
+         'not under probation'
          )";
          $db->query($sql);
  }

@@ -32,7 +32,7 @@
           <form class="row g-3" method="POST" action="">
             <div class="col-lg-12">
               <div class="row">
-              <div class="col-sm-2">
+              <div class="col-sm-2" id="filter">
                     <select id="student_year" name="student_year" class="form-select rounded-0" aria-label="Default select example">
                         <option selected>Select Year Level</option>
                         <option value="First Year">First Year</option>
@@ -169,7 +169,7 @@
                     </tbody>
                   </table>
                   <!-- End Table with hoverable rows -->
-                  <button name="button_print" onClick="window.print()" class="btn btn-danger text-white rounded-pill btn-sm" style="width: 150px;"><i class="bi bi-print"></i> Print</button>
+                  <button id="button_print" name="button_print" onClick="printContent()" class="btn btn-danger text-white rounded-pill btn-sm" style="width: 150px;"><i class="bi bi-print"></i> Print</button>
                 </div>
               </div>
 
@@ -177,7 +177,7 @@
             </div>
 
             <div class="text-center">
-              <button type="submit" name="button_create" class="btn btn-success rounded-pill w-25">Create new account</button>
+              <button type="submit" id="button_create" name="button_create" class="btn btn-success rounded-pill w-25">Create new account</button>
             </div>
           </form><!-- End floating Labels Form -->
           <!-- End General Form Elements -->
@@ -187,4 +187,24 @@
       <!-- end create account -->
     </div>
 </section>
+
+<script>
+		function printContent() {
+			var content = document.getElementById("print_content");
+      var button_print = document.getElementById("button_print");
+      var button_create = document.getElementById("button_create");
+      var header = document.getElementById("header");
+      var filter = document.getElementById("filter");
+
+      header.style.visibility = 'hidden';
+      button_print.style.visibility = 'hidden';
+      button_create.style.visibility = 'hidden';
+      filter.style.visibility = 'hidden';
+			window.print(content);
+      header.style.visibility = 'visible';
+      button_print.style.visibility = 'visible';
+      button_create.style.visibility = 'visible';
+      filter.style.visibility = 'visible';
+		}
+	</script>
 <?php include('../footer.php'); ?>
