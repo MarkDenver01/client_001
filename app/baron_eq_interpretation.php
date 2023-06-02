@@ -13,6 +13,7 @@
     $school_year = $_SESSION['key_session']['academic_school_year']; 
     $student_name = $_SESSION['key_session']['name'];
     $exam_title = $_GET['exam_title'];
+    $exam_id = $_GET['exam_id'];
 ?>
 <?php 
 if (isset($_POST['button_upload'])) {
