@@ -102,7 +102,7 @@ if(isset($_POST['button_counseling'])) {
 
                                     $total_score = $linguistics + $quantitative;
 
-                                  if ($linguistics >= 39 && $linguistics <= 43) {
+                                  if ($linguistics >= 39 && $linguistics <= 50) {
                                       $remarks_l = "Superior";
                                   } elseif ($linguistics >= 31 && $linguistics <= 38) {
                                       $remarks_l = "Above Average";
@@ -114,7 +114,7 @@ if(isset($_POST['button_counseling'])) {
                                       $remarks_l = "Low";
                                   }
 
-                                  if ($quantitative >= 28 && $quantitative <= 30) {
+                                  if ($quantitative >= 28 && $quantitative <= 40) {
                                       $remarks_q = "Superior";
                                   } elseif ($quantitative >= 22 && $quantitative <= 27) {
                                       $remarks_q = "Above Average";
@@ -126,7 +126,7 @@ if(isset($_POST['button_counseling'])) {
                                       $remarks_q = "Low";
                                   }
                                   
-                                if ($total_score >= 63 && $total_score <= 68) {
+                                if ($total_score >= 63 && $total_score <= 84) {
                                     $exam_result_status = "Superior";
                                 } elseif ($total_score >= 50 && $total_score <= 62) {
                                     $exam_result_status = "Above Average";
@@ -201,7 +201,7 @@ if(isset($_POST['button_counseling'])) {
                           <td>Above Average</td>
                         </tr>
                         <tr>
-                          <td>38 - 43</td>
+                          <td>38 - 43 and above</td>
                           <td>Superior</td>
                         </tr>
                       </tbody>
@@ -239,7 +239,7 @@ if(isset($_POST['button_counseling'])) {
                           <td>Above Average</td>
                         </tr>
                         <tr>
-                          <td>28</td>
+                          <td>28 and above</td>
                           <td>Superior</td>
                         </tr>
                       </tbody>
@@ -277,7 +277,7 @@ if(isset($_POST['button_counseling'])) {
                           <td>Above Average</td>
                         </tr>
                         <tr>
-                          <td>63 - 68</td>
+                          <td>63 - 68 and above</td>
                           <td>Superior</td>
                         </tr>
                       </tbody>
