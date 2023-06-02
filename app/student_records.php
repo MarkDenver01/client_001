@@ -196,7 +196,7 @@
                         } else if ($row['exam_title'] == 'OASIS 3') {
                             $redirect = "../app/oasis_result.php?student_id=" .$row['student_id'];
                         } else if($row['exam_title'] == 'BarOn EQ-i:S') {
-                            $redirect = "../app/baron_eq_interpretation.php?student_id=" .$row['student_id']. "&semester=" .$row['semester']. "&school_year=" .$row['school_year']. "&name=" .$row['name'];
+                            $redirect = "../app/baron_eq_interpretation.php?student_id=" .$row['student_id']. "&semester=" .$row['semester']. "&school_year=" .$row['school_year']. "&name=" .$row['name']. "&course=" .$row['course']. "&student_year=" .$row['student_year'];
                         } else if ($row['exam_title'] == 'The Keirsey Temperament Sorter') {
                             $redirect = "../app/keirsey_temp_intrepretation.php?student_id=" .$row['student_id']. "&semester=" .$row['semester']. "&school_year=" .$row['school_year']. "&name=" .$row['name'];
                         } else if ($row['exam_title'] == 'Aptitude J and C') {
