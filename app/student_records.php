@@ -138,20 +138,20 @@
                       foreach ($filterData as $filtered) { ?>
                       <?php 
                       
-                        if ($filtered['exam_title'] == 'Student Success Kit') {
-                            $redirect = "../app/student_success_kit_result.php?student_id=" .$filtered['student_id'];
-                        } else if ($filtered['exam_title'] == 'OASIS 3') {
-                            $redirect = "../app/oasis_result.php?student_id=" .$filtered['student_id'];
-                        } else if($filtered['exam_title'] == 'BarOn EQ-i:S') {
-                            $redirect = "../app/baron_eq_interpretation.php?student_id=" .$filtered['student_id'];
-                        } else if ($filtered['exam_title'] == 'The Keirsey Temperament Sorter') {
-                            $redirect = "../app/keirsey_temp_intrepretation.php?student_id=" .$filtered['student_id'];
-                        } else if ($filtered['exam_title'] == 'Aptitude J and C') {
-                            $redirect = "../app/aptitude_j_n_c_result.php?student_id=" .$filtered['student_id'];
-                        } else if ($filtered['exam_title'] == 'ESA') {
-                            $redirect = "../app/esa_result.php?student_id=" .$filtered['student_id'];
-                        } else if ($filtered['exam_title'] == 'Aptitude Verbal and Numerical') {
-                            $redirect = "../app/aptitude_verbal_n_numerical.php?student_id=" .$filtered['student_id'];
+                        if ($row['exam_title'] == 'Student Success Kit') {
+                            $redirect = "../app/student_success_kit_result.php?student_id=" .$row['student_id']. "&semester=" .$row['semester']. "&school_year=" .$row['school_year']. "&name=" .$row['name']. "&course=" .$row['course']. "&student_year=" .$row['student_year'];;
+                        } else if ($row['exam_title'] == 'OASIS 3') {
+                            $redirect = "../app/oasis_result.php?student_id=" .$row['student_id'];
+                        } else if($row['exam_title'] == 'BarOn EQ-i:S') {
+                            $redirect = "../app/baron_eq_interpretation.php?student_id=" .$row['student_id']. "&semester=" .$row['semester']. "&school_year=" .$row['school_year']. "&name=" .$row['name']. "&course=" .$row['course']. "&student_year=" .$row['student_year'];
+                        } else if ($row['exam_title'] == 'The Keirsey Temperament Sorter') {
+                            $redirect = "../app/keirsey_temp_intrepretation.php?student_id=" .$row['student_id']. "&semester=" .$row['semester']. "&school_year=" .$row['school_year']. "&name=" .$row['name'];
+                        } else if ($row['exam_title'] == 'Aptitude J and C') {
+                            $redirect = "../app/aptitude_j_n_c_result.php?student_id=" .$row['student_id']. "&semester=" .$row['semester']. "&school_year=" .$row['school_year']. "&name=" .$row['name']. "&course=" .$row['course']. "&student_year=" .$row['student_year'];
+                        } else if ($row['exam_title'] == 'ESA') {
+                            $redirect = "../app/esa_result.php?student_id=" .$row['student_id']. "&semester=" .$row['semester']. "&school_year=" .$row['school_year']. "&name=" .$row['name']. "&exam_id=" .$row['exam_id']. "&course=" .$row['course']. "&student_year=" .$row['student_year'];
+                        } else if ($row['exam_title'] == 'Aptitude Verbal and Numerical') {
+                            $redirect = "../app/aptitude_verbal_n_numerical.php?student_id=" .$row['student_id']. "&semester=" .$row['semester']. "&school_year=" .$row['school_year']. "&name=" .$row['name']. "&exam_id=" .$row['exam_id']. "&course=" .$row['course']. "&student_year=" .$row['student_year'];
                         }
                       ?>
 
@@ -192,7 +192,7 @@
                         while($row = $result->fetch_assoc()) {
           
                         if ($row['exam_title'] == 'Student Success Kit') {
-                            $redirect = "../app/student_success_kit_result.php?student_id=" .$row['student_id'];
+                          $redirect = "../app/student_success_kit_result.php?student_id=" .$row['student_id']. "&semester=" .$row['semester']. "&school_year=" .$row['school_year']. "&name=" .$row['name']. "&course=" .$row['course']. "&student_year=" .$row['student_year'];;
                         } else if ($row['exam_title'] == 'OASIS 3') {
                             $redirect = "../app/oasis_result.php?student_id=" .$row['student_id'];
                         } else if($row['exam_title'] == 'BarOn EQ-i:S') {
