@@ -13,12 +13,18 @@
       $semester = $_GET['semester'];
       $school_year = $_GET['school_year'];
       $student_name = $_GET['name'];
+      $student_year = $_GET['student_year'];
+      $course = $_GET['course'];
     } else {
       $student_id = $_SESSION['key_session']['student_id'];
       $semester = $_SESSION['key_session']['academic_semester'];
       $school_year = $_SESSION['key_session']['academic_school_year']; 
       $student_name = $_SESSION['key_session']['name'];
     }
+
+    $data_x_graph = array();
+    $data_y_graph = array();
+    $data_remarks = array();
 ?>
 <?php 
 if (isset($_POST['button_upload'])) {
@@ -47,12 +53,12 @@ if(isset($_POST['button_counseling'])) {
       </nav>
     </div><!-- End Page Title -->
 
-    <section class="section profile" style="width: 2160px;">
+    <section class="section profile" style="width: 1960px;">
       <div class="row">
         <!-- center -->
         <div class="col-sm-5">
           <div class="card rounded-0">
-            <div class="card-body">
+            <div class="card-body" id="print_content">
               <br/>
               <div class="text-center"><h2>RESULT</h2></div>
               <hr/>
@@ -76,6 +82,8 @@ if(isset($_POST['button_counseling'])) {
                         while ($row = $result->fetch_assoc()) {
                             $exam_title = $row['exam_title']; 
                             $test = $row['total_score'];
+                            $data_x_graph[] = $row['exam_category'];
+                            $data_y_graph[] = $row['total_score'];
                     ?>
                         <tr>
                           <td><h5><?php echo $row['exam_category']; ?></h5></td>
@@ -115,8 +123,26 @@ if(isset($_POST['button_counseling'])) {
         <div class="col-sm-7">
           <div class="card rounded-0">
             <div class="card-body">
+            <br/>
+              <?php  if ($_SESSION['key_session']['user_level'] == '1' || $_SESSION['key_session']['user_level'] == '2') { ?>
+                <label id="for_student_name" for="age" class="col-md-4 col-lg-3 col-form-label">Student Name</label>
+                  <div class="col-md-8 col-lg-12">
+                    <input id="student_name" type="text" class="form-control rounded-0" value="<?php echo $student_name; ?>">
+                  </div>
+                <br/>
+                <label id="for_school_year" for="age" class="col-md-4 col-lg-3 col-form-label">Year Level</label>
+                  <div class="col-md-8 col-lg-12">
+                    <input id="school_year" type="text" class="form-control rounded-0" value="<?php echo $student_year; ?>">
+                  </div>
+                <br/>
+                <label id="for_course" for="age" class="col-md-4 col-lg-3 col-form-label">Course</label>
+                  <div class="col-md-8 col-lg-12">
+                    <input id="course" type="text" class="form-control rounded-0" value="<?php echo $course; ?>">
+                  </div>
+                <br/>
+              <?php } ?>
               <br/>
-              <div class="text-center"><h2>Data Visualization</h2></div>
+              <div class="text-center"><h2>Data Interpretation</h2></div>
               <hr/>
                   <div class="row mb-3">
                     <div class="col-lg-12">
@@ -202,12 +228,12 @@ if(isset($_POST['button_counseling'])) {
                           <td>
                             <br/>
                             <br/>
-                            <h3>1 - 3</h3>
+                            <h5>1 - 3</h5>
                           </td>
                           <td>
                             <br/>
                             <br/>
-                            <h3>LOW</h3>
+                            <h5>LOW</h5>
                           </td>
                           <td>
                             Respondents having POOR as their rank were not able to pass the test also.<br/> Having the lowest scores, we can say that
@@ -218,9 +244,9 @@ if(isset($_POST['button_counseling'])) {
                         </tr>     
                         <tr>
                           <td> <br/>
-                            <br/><h3>4 - 7</h3></td>
+                            <br/><h5>4 - 7</h5></td>
                           <td> <br/>
-                            <br/><h3>BELOW AVERAGE</h3></td>
+                            <br/><h5>BELOW AVERAGE</h5></td>
                           <td>
                             Respondents having BELOW AVERAGE as their rank were not able to pass the test. <br/>
                             They are having a little difficulty in comprehending and understanding the given texts.<br/>
@@ -231,9 +257,9 @@ if(isset($_POST['button_counseling'])) {
                         </tr>   
                         <tr>
                           <td><br/>
-                            <br/><h3>8 - 15</h3></td>
+                            <br/><h5>8 - 15</h5></td>
                           <td><br/>
-                            <br/><h3>AVERAGE</h3></td>
+                            <br/><h5>AVERAGE</h5></td>
                           <td>
                             Respondents having AVERAGE as their rank were able to pass the test. <br/>
                             They got a score which is not very high and which is not very low either.<br/>
@@ -243,9 +269,9 @@ if(isset($_POST['button_counseling'])) {
                         </tr>  
                         <tr>
                           <td><br/>
-                            <br/><h3>16 - 20</h3></td>
+                            <br/><h5>16 - 20</h5></td>
                           <td><br/>
-                            <br/><h3>ABOVE AVERAGE</h3></td>
+                            <br/><h5>ABOVE AVERAGE</h5></td>
                           <td>
                             Respondents having ABOVE AVERAGE as their rank were good and were able to understand <br/>
                             the test well also. They got a high score as well, meaning that they were able to <br/>
@@ -254,9 +280,9 @@ if(isset($_POST['button_counseling'])) {
                         </tr>  
                         <tr>
                           <td><br/>
-                            <br/><h3>21 - 25</h3></td>
+                            <br/><h5>21 - 25</h5></td>
                           <td><br/>
-                            <br/><h3>SUPERIOR</h3></td>
+                            <br/><h5>SUPERIOR</h5></td>
                           <td>
                             Respondents having SUPERIOR as their rank posses an excellent understanding of the given test.<br/>
                             They were able to fully grasp the essence of the paragraphs and sentences<br/>
@@ -268,7 +294,58 @@ if(isset($_POST['button_counseling'])) {
                     </tbody>
                   </table>
                       </div>
+                  <div class="col-lg-12">
+                  <br/>
+                    <div class="text-center"><h2>Aptidude J and C - Data Visualization</h2></div>
+                    <hr/>
+                                  <!-- Bar Chart -->
+              <canvas id="barChart" style="max-height: 400px;"></canvas>
+              <script>
+                document.addEventListener("DOMContentLoaded", () => {
+                  new Chart(document.querySelector('#barChart'), {
+                    type: 'bar',
+                    data: {
+                      labels: ['<?php echo $data_x_graph[0]; ?>', '<?php echo $data_x_graph[1]; ?>', '<?php echo $data_x_graph[2]; ?>', '<?php echo $data_x_graph[3]; ?>'],
+                      datasets: [{
+                        label: 'Aptitude J and C',
+                        data: ['<?php echo $data_y_graph[0]; ?>', '<?php echo $data_y_graph[1]; ?>', '<?php echo $data_y_graph[2]; ?>', '<?php echo $data_y_graph[3]; ?>'],
+                        backgroundColor: [
+                          'rgba(255, 99, 132, 0.2)',
+                          'rgba(255, 159, 64, 0.2)',
+                          'rgba(255, 205, 86, 0.2)',
+                          'rgba(75, 192, 192, 0.2)',
+                          'rgba(54, 162, 235, 0.2)',
+                          'rgba(153, 102, 255, 0.2)',
+                          'rgba(201, 203, 207, 0.2)'
+                        ],
+                        borderColor: [
+                          'rgb(255, 99, 132)',
+                          'rgb(255, 159, 64)',
+                          'rgb(255, 205, 86)',
+                          'rgb(75, 192, 192)',
+                          'rgb(54, 162, 235)',
+                          'rgb(153, 102, 255)',
+                          'rgb(201, 203, 207)'
+                        ],
+                        borderWidth: 1
+                      }]
+                    },
+                    options: {
+                      scales: {
+                        y: {
+                          beginAtZero: true
+                        }
+                      }
+                    }
+                  });
+                });
+              </script>
+              <!-- End Bar CHart -->
                   </div>
+                  </div>
+                  <?php  if ($_SESSION['key_session']['user_level'] == '1' || $_SESSION['key_session']['user_level'] == '2') { ?>
+                    <button id="button_print" name="button_print" onClick="printContent()" class="btn text-white rounded-pill btn-lg w-100" style="background-image: linear-gradient(#3B7A57, #4B6F44);"><i class="bi bi-print"></i> Generate Report</button>
+                  <?php } ?> 
             </div>  
           </div>
         </div>
@@ -277,4 +354,32 @@ if(isset($_POST['button_counseling'])) {
     </section>
 
   </main><!-- End #main -->
+  <script>
+		function printContent() {
+			var content = document.getElementById("print_content");
+      var button_print = document.getElementById("button_print");
+      var top_header = document.getElementById("header");
+      var side_bar = document.getElementById("sidebar");
+      var for_student_name = document.getElementById("for_student_name");
+      var for_student_year = document.getElementById("for_student_yeare");
+      var for_course = document.getElementById("for_course");
+      var student_name = document.getElementById("student_name");
+      var school_year = document.getElementById("student_year");
+      var course = document.getElementById("course");
+
+      top_header.style.visibility ='hidden';
+      button_print.style.visibility = 'hidden';
+      side_bar.style.visibility = 'hidden';
+			window.print(content);
+      button_print.style.visibility = 'visible';
+      top_header.style.visibility ='visible';
+      side_bar.style.visibility = 'visible';
+      for_student_name.style.visibility = 'visible';
+      for_student_year.style.visibility = 'visible';
+      for_course.style.visibility = 'visible';
+      student_name.style.visibility = 'visible';
+      student_year.style.visibility = 'visible';
+      course.style.visibility = 'visible';
+		}
+	</script>
 <?php include('../footer.php'); ?>
