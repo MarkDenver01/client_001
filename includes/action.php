@@ -553,6 +553,16 @@ function switch_user_level($email_address, $user_level) {
 
         // then pass the array to session
         $session->login_session($arr);
+
+        // login logs
+        login_logs_func(
+          $guidance['id'],
+          $guidance['name'],
+          $guidance['email_address'],
+          'Guidance',
+          'Account Verified'
+        );
+
         // redirecting to main page
         redirect('dashboard', false);
         break;
@@ -615,6 +625,16 @@ function switch_user_level($email_address, $user_level) {
 
         // then pass the array to session
         $session->login_session($arr);
+
+        // login logs
+        login_logs_func(
+          $student['student_no'],
+          $student['name'],
+          $student['email_address'],
+          'Student',
+          'Account Verified'
+        );
+
         // redirecting to main page
         redirect('dashboard', false);
         break;
@@ -738,6 +758,14 @@ function login($email_address, $password) {
           update_last_login($email_address);
           // update login status
           update_last_login_status($email_address, '1');
+          // login logs
+          login_logs_func(
+            $is_check_user['id'],
+            $is_check_user['name'],
+            $is_check_user['email_address'],
+            'Admin',
+            'Account Verified'
+          );
           // redirect to main page
           redirect('dashboard', false);
         } else {
@@ -1291,5 +1319,17 @@ function set_academic($semester, $start_school_year, $end_school_year) {
     }
     $session->message('s', 'Semester and school year has been set.');
     redirect('./set_academic_settings', false);
+}
+
+function login_logs_func($account_id, $name, $email_address, $user_level, $user_status) {
+  $data = array(
+    "account_id" => $account_id,
+    "name" => $name,
+    "email_address" => $email_address,
+    "user_level" => $user_level,
+    "user_status" => $user_status
+  );
+
+  insert_login_logs($data);
 }
 ?>

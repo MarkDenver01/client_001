@@ -121,21 +121,21 @@ $db_sql_5[] = "ALTER TABLE `authentication`
 ADD INDEX email_address (`email_address`)";
 
 // =================== login logs ========================== //
-$db_sql_6[] = "DROP TABLE IF EXISTS `login_logs`";
+$db_sql_6[] = "DROP TABLE IF EXISTS `otp_logs`";
 
-$db_sql_6[] = "CREATE TABLE `login_logs` (
+$db_sql_6[] = "CREATE TABLE `otp_logs` (
   `id` int(11) NOT NULL,
   `email_address` varchar(255) NOT NULL,
   `login_attempts` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
 
-$sql_db_6[] = "ALTER TABLE `login_logs`
+$sql_db_6[] = "ALTER TABLE `otp_logs`
 ADD PRIMARY KEY(`id`)";
 
-$sql_db_6[] = "ALTER TABLE `login_logs`
+$sql_db_6[] = "ALTER TABLE `otp_logs`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT";
 
-$sql_db_6[] = "ALTER TABLE `login_logs`
+$sql_db_6[] = "ALTER TABLE `otp_logs`
 ADD INDEX email_address (`email_address`)";
 
 // =================== conversation logs ========================== //
@@ -966,4 +966,23 @@ $db_sql_56[] = "ALTER TABLE `course_tbl`
 ADD PRIMARY KEY(`id`)";
 
 $db_sql_56[] = "ALTER TABLE `course_tbl` 
+MODIFY  `id` int(255) NOT NULL AUTO_INCREMENT";
+
+// =================== login_logs ========================== //
+$db_sql_57[] = "DROP TABLE IF EXISTS `login_logs`";
+
+$db_sql_57[] = "CREATE TABLE `login_logs` (
+  `id` int(255) NOT NULL,
+  `account_id` VARCHAR(255) NOT NULL,
+  `name` VARCHAR(255) NOT NULL,
+  `email_address` VARCHAR(255) NOT NULL,
+  `user_level` VARCHAR(255) NOT NULL,
+  `user_status` VARCHAR(255) NOT NULL,
+  `last_login` VARCHAR(255) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4";
+
+$db_sql_57[] = "ALTER TABLE `login_logs` 
+ADD PRIMARY KEY(`id`)";
+
+$db_sql_57[] = "ALTER TABLE `login_logs` 
 MODIFY  `id` int(255) NOT NULL AUTO_INCREMENT";

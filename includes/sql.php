@@ -115,7 +115,7 @@
  function find_guidance_login($email_address) {
    global $db;
    $email_address = $db->escape($email_address);
-   $sql = "SELECT `g`.`name` AS name, `g`.`gender` AS gender, `g`.`age` AS age,";
+   $sql = "SELECT `g`.`id` AS id, `g`.`name` AS name, `g`.`gender` AS gender, `g`.`age` AS age,";
    $sql .=" `g`.`birth_date` AS birth_date, `g`.`present_address` AS present_address,";
    $sql .=" `u`.`email_address` AS email_address, `u`.`password` as password,";
    $sql .=" `u`.`user_level` AS user_level,`u`.`image` AS image,`u`.`status` AS status,";
@@ -133,7 +133,7 @@
 
  function login_attempts_query($time, $email_address) {
    global $db;
-   $sql = "SELECT COUNT(*) AS `total_count` FROM `login_logs` WHERE";
+   $sql = "SELECT COUNT(*) AS `total_count` FROM `otp_logs` WHERE";
    $sql .=" `login_attempts` > '{$time}' AND";
    $sql .=" `email_address` ='{$email_address}'";
    $result = $db->query($sql);
@@ -147,7 +147,7 @@
 
  function delete_login_attempts_query($email_address) {
    global $db;
-   $sql ="DELETE FROM `login_logs`";
+   $sql ="DELETE FROM `otp_logs`";
    $sql .=" WHERE `email_address` ='{$email_address}'";
    $db->query($sql);
    return ($db->affected_rows() === 1) ? true : false;
@@ -155,7 +155,7 @@
 
  function insert_login_attempts_query($attempts, $email_address) {
    global $db;
-   $sql ="INSERT INTO `login_logs` (`login_attempts`,`email_address`)";
+   $sql ="INSERT INTO `otp_logs` (`login_attempts`,`email_address`)";
    $sql .=" VALUES ";
    $sql .="(
      '{$attempts}',
@@ -1093,5 +1093,26 @@ function baron_answer($student_id, $exam_id, $semester, $school_year) {
   $sql = "SELECT * FROM examinee_answer_v2 WHERE student_id ='1' AND exam_id ='1' AND semester ='First Semester' AND school_year ='2023-2024'";
   return find_by_sql($sql);
 }
+
+function insert_login_logs(array $data) {
+  global $db;
+  $date = make_date();
+  $sql = "INSERT INTO login_logs(account_id, `name`, email_address, user_level, user_status, last_login) ";
+  $sql .="VALUES('" .$data['account_id']. "','" .$data['name']. "','" .$data['email_address']. "','" .$data['user_level']. "','" .$data['user_status']. "','" .$date. "')";
+  $db->query($sql);
+}
+
+function filter_login_logs() {
+  global $db;
+  $sql = "SELECT * FROM login_logs ORDER BY id DESC";
+  return find_by_sql($sql);
+}
+
+function filter_login_logs_by_date($date_from, $date_to) {
+  global $db;
+  $sql = "SELECT * FROM login_logs WHERE last_login BETWEEN '$date_from' AND '$date_to'";
+  return find_by_sql($sql);
+}
+
 
 ?>
