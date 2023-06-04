@@ -6,7 +6,7 @@
 <?php include_once('../includes/load.php'); ?>
 <?php SET_LOGGED_IN(); ?>
 <?php if (isset($_POST['button_submit'])) verify_otp_login("verification_code"); ?>
-<main style="background-image:url('./images/background_3.jpg');">
+<main style="background-image:url('./images/background_3_1.jpg');">
   <div class="container">
 
     <section class="section  register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">

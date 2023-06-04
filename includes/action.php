@@ -632,60 +632,61 @@ function verify_otp_login($one_time_password) {
   validate_fields($req_fields);
   if(empty($errors)) {
     $time = time() - 30; // get 30 secs
-    $attempts = login_attempts_query($time, $email_address);
-    if ($attempts == 3) {
-      $session->message("w","To many failed login attempts. Please login after 30 secs.");
-      redirect('send_otp', false);
-    } else {
-        if (is_otp_expired($email_address, $otp)) {
-          $current_login = find_by_otp_login($email_address, $otp);
-          if ($current_login) {
-            if ($current_login['is_logged_in'] == '0') {
-              $is_verified = update_auth_verification($email_address, $otp);
-              if ($is_verified == '1') {
-                  $is_current_user = find_current_user_by_otp($email_address, $password);
-                  $check = false;
-                  if ($is_current_user['user_level'] == '2' || $is_current_user['user_level'] == '3') {
-                    $check = true;
-                  }
-                  if ($check) {
-                    delete_login_attempts_query($email_address);
-                    switch_user_level(
-                      $email_address,
-                      $is_current_user['user_level']
-                    );
-                  } else {
-                    $session->message("d", "Invalid email or OTP");
-                    redirect('send_otp', false);
-                  }
+    // $attempts = login_attempts_query($time, $email_address);
+    // if ($attempts == 3) {
+    //   $session->message("w","To many failed login attempts. Please login after 30 secs.");
+    //   redirect('send_otp', false);
+    // } else {
 
+    // }
+    if (is_otp_expired($email_address, $otp)) {
+      $current_login = find_by_otp_login($email_address, $otp);
+      if ($current_login) {
+        if ($current_login['is_logged_in'] == '0') {
+          $is_verified = update_auth_verification($email_address, $otp);
+          if ($is_verified == '1') {
+              $is_current_user = find_current_user_by_otp($email_address, $password);
+              $check = false;
+              if ($is_current_user['user_level'] == '2' || $is_current_user['user_level'] == '3') {
+                $check = true;
+              }
+              if ($check) {
+                //delete_login_attempts_query($email_address);
+                switch_user_level(
+                  $email_address,
+                  $is_current_user['user_level']
+                );
               } else {
-                $session->message("d", "OTP already used recently.");
+                $session->message("d", "Invalid email or OTP");
                 redirect('send_otp', false);
               }
-            } else {
-              redirect('../app/dashboard', false);
-            }
+
           } else {
-            $session->message("d", "Email address or OTP not exist.");
+            $session->message("d", "OTP already used recently.");
             redirect('send_otp', false);
           }
         } else {
-          $attempts++;
-          $remain_attempts =  3 - $attempts;
-
-          if ($remain_attempts == 0) {
-            $session->message("w","To many failed login attempts. Please login after 30 secs.");
-            $session->attempt_login("d", $attempts);
-          }  else {
-            $session->message("d","Incorrect OTP.");
-            $session->attempt_login("d", $attempts);
-          }
-          $try_time = time();
-          // TODO insert_login_attempts_query($try_time, $email_address);
-          redirect('send_otp', false);
+          redirect('../app/dashboard', false);
+        }
+      } else {
+        $session->message("d", "Email address or OTP not exist.");
+        redirect('send_otp', false);
       }
-    }
+    } else {
+      $attempts++;
+      $remain_attempts =  3 - $attempts;
+
+      if ($remain_attempts == 0) {
+        $session->message("w","To many failed login attempts. Please login after 30 secs.");
+        $session->attempt_login("d", $attempts);
+      }  else {
+        $session->message("d","Incorrect OTP.");
+        $session->attempt_login("d", $attempts);
+      }
+      $try_time = time();
+      // TODO insert_login_attempts_query($try_time, $email_address);
+      redirect('send_otp', false);
+  }
   } else {
     $session->message("d", $errors);
     redirect('send_otp', false);

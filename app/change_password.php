@@ -4,7 +4,7 @@
 <?php if(isset($_POST['button_change'])) change_password(
   "new_password",
   "confirm_password"); ?>
-<main style="background-image:url('./images/background_3.jpg');">
+<main style="background-image:url('./images/background_3_1.jpg');">
   <div class="container">
 
     <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
