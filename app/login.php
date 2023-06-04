@@ -2,7 +2,7 @@
 <?php SET_LOGGED_IN(); ?>
 <?php include('../header.php'); ?>
 <?php if (isset($_POST['button_login'])) login("email_address", "password"); ?>
-<main style="background-image:url('./images/background_3.jpg');">
+<main style="background-image:url('./images/background_3_1.jpg'); object-fit: cover;">
   <div class="container">
 
     <section class="section  register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
@@ -15,7 +15,7 @@
               <div class="card-body">
 
                 <div class="pt-4 pb-2">
-                  <h5 class="card-title text-center pb-0 fs-4">CESLICAM Login Portal</h5>
+                  <h5 class="card-title text-center pb-0 fs-4">TestyLCCT</h5>
                   <p class="text-center small">Enter your account</p>
                   <?php echo display_message($msg); ?>
                 </div>

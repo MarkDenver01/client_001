@@ -68,6 +68,11 @@
             <i class="bi bi-circle"></i><span>Guidance account</span>
           </a>
         </li>
+        <li>
+          <a href="./login_logs">
+            <i class="bi bi-circle"></i><span>Login History</span>
+          </a>
+        </li>
       </ul>
     </li><!-- End Dashboard Nav -->
 
